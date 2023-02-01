@@ -53,7 +53,7 @@ let processValidation = async function () {
 
   errors = undefined;
   if (!syblars) {
-      url = "http://139.179.50.45:" + port + "/sbgnml?edges=true";
+      url = "http://localhost:" + port + "/sbgnml?edges=true";
   } else { // NOTE: If you are using the service with a different hostname, please change below accordingly
       url = "http://syblars.cs.bilkent.edu.tr/sbgnml?edges=true";
   }
