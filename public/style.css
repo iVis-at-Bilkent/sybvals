@@ -1,0 +1,167 @@
+body {
+   color: #56423E !important;
+}
+
+.ui.header {
+   color: #56423E !important;
+}
+
+.ui.basic.label {
+   color: #56423E !important;
+   background: none #efefef;
+   border-radius: .28571429rem !important;
+ 
+}
+
+.ui.basic.label:hover {
+   color: #56423E !important;
+   background: none #ffffff !important;
+   border-radius: .28571429rem !important;  
+}
+
+.ui.form {
+  color: #56423E !important;
+}
+
+.ui.form select {
+  color: #56423E !important;
+}
+
+.input-file {
+  color: #56423E !important;  
+}
+
+.ui.accordion .title:not(.ui){
+  color: #56423E !important;
+}
+
+label {
+  font-size: 14px !important;
+  color: #56423E !important;
+}
+
+.radio-label {
+  font-size: .85714286rem !important;
+  padding-top: 1px;
+}
+
+#informationModal:hover {
+  cursor: pointer;
+}
+
+#imageSettingsDefault:hover {
+  cursor: pointer;
+}
+
+.option-label {
+  margin-right: .85714286em;
+}
+
+#layoutSettingsDefault:hover {
+  cursor: pointer;
+}
+
+#querySettingsDefault:hover {
+  cursor: pointer;
+}
+
+#about {
+  color: #d67664 !important
+}
+
+#imageSettingsDefault:hover {
+  background-color: #eaeaea !important;
+  border-radius: 3px;
+}
+
+#downloadJSON:hover {
+  background-color: #eaeaea !important;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#downloadImage:hover {
+  background-color: #eaeaea !important;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+select:required:invalid {
+  color: gray;
+}
+
+option[value=""][disabled] {
+  display: none;
+}
+
+option {
+  color: #56423E !important;
+}
+
+.ui.mini.modal {
+  width: 340px !important;
+  top: 200px !important;
+}
+
+.ui.mini.modal.large {
+  width: 372px !important;
+}
+
+.ui.mini.modal.small {
+  width: 308px !important;
+}
+
+.ui.tiny.form.tinier {
+  width: 67.45px;
+}
+
+.sample.six.wide.field {
+  width: 32.5%!important;
+}
+
+
+.layoutTable th { 
+  padding-left: 1em !important;
+}
+
+.layoutTable td { 
+  border-top: 0px !important; 
+  padding: 0.2em 1.3em !important;
+}
+
+.centered{
+  border-top: 0px !important; 
+  padding: 0.2em 1.3em !important;
+  text-align: center !important; 
+}
+
+.ui.form input {
+  padding-right: 0.7em !important;
+  padding-left: 0.7em !important;
+}
+
+.layout-option-buttons td {
+  border-top: 1px solid rgba(34,36,38,.1) !important;
+  padding: 0.75em 4em !important;
+  margin-top: 2px;
+}
+
+.ui.small.modal.information {
+  top: 200px !important;
+}
+
+#applyValidation {
+  background-color: #d67664 ;
+}
+
+#applyValidation:hover{
+  background-color: #f2711c !important;
+}
+
+.ui.labeled.button {
+  background-color: #efefef !important;
+}
+
+#imageModal {
+  width: auto;
+}
