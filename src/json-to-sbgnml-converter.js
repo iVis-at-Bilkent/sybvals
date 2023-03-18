@@ -1,4 +1,3 @@
-
 var libsbgnjs = require('libsbgn.js');
 var renderExtension = libsbgnjs.render;
 var annot = libsbgnjs.annot;
@@ -9,7 +8,7 @@ var xml2js = require('xml2js');
 var mapPropertiesBuilder = new xml2js.Builder({rootName: "mapProperties"});
 var compoundExtensionBuilder = new xml2js.Builder({rootName: "extraInfo"});
 var textUtilities = require('./text-utilities');
-var { elementUtilities } = require('./element-utilities');
+var { elementUtilities } = require('./element-utilities.js');
 
 const jsonToSbgnml = {};
 
@@ -584,3 +583,6 @@ const jsonToSbgnml = {};
 module.exports = {
   jsonToSbgnml
 };
+
+
+

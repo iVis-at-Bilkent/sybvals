@@ -1,6 +1,6 @@
 var libsbgnjs = require('libsbgn.js');
 var parseString = require('xml2js').parseString;
-const { elementUtilities } = require('./element-utilities');
+const { elementUtilities } = require('./element-utilities.js');
 const { optionUtilities } = require('./option-utilities');
 // var classes = require('./classes');
 
@@ -1061,6 +1061,7 @@ sbgnmlToJson.applyStyle = function (renderInformation, nodes, edges) {
 };
 
 sbgnmlToJson.mapPropertiesToObj = function () {
+  var self = this;
   if (this.map.extension && this.map.extension.has('mapProperties')) { // render extension was found
     var xml = this.map.extension.get('mapProperties');
     var obj;
@@ -1284,7 +1285,8 @@ sbgnmlToJson.convert = function (xmlObject, xmlString, urlParams) {
   //  console.log(elementUtilities.getDefaultProperties(type));
   //});
 
-  //console.log(cytoscapeJsGraph);
+  console.log(cytoscapeJsGraph);
+  cytoscapeJsGraph.nodes.forEach(node => {console.log(node.data);});
   //console.log( elementUtilities.nodeTypes);
   return cytoscapeJsGraph;
 };
@@ -1312,3 +1314,7 @@ sbgnmlToJson.getCompoundPadding = function () {
 module.exports = {
   sbgnmlToJson
 };
+
+
+
+
