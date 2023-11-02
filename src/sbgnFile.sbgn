@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+  <map language="process description">
+    <glyph id="nwtN_b615b4b6-8dea-47ea-bfa2-91653343c18d" class="not">
+      <label text="&#xA;(1)&#xA;(2)"/>
+      <bbox x="1200.5736534416499" y="227.59247247691076" w="30" h="30"/>
+      <port id="nwtN_b615b4b6-8dea-47ea-bfa2-91653343c18d.1" x="1200.5736534416499" y="242.59247247691076"/>
+      <port id="nwtN_b615b4b6-8dea-47ea-bfa2-91653343c18d.2" x="1230.5736534416499" y="242.59247247691076"/>
+    </glyph>
+    <glyph id="nwtN_bcaf5c0b-e969-438e-b8f7-02dc695575ed" class="complex">
+      <extension>
+        <extraInfo>
+          <w>44</w>
+          <h>44</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
+      <bbox x="1108.9953688266646" y="365.01852469334244" w="44" h="44"/>
+    </glyph>
+    <glyph id="nwtN_bcaf5c0b-e969-438e-b8f7-02dc695575ef" class="complex">
+      <extension>
+        <extraInfo>
+          <w>44</w>
+          <h>44</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
+      <bbox x="1008.9953688266646" y="365.01852469334244" w="44" h="44"/>
+    </glyph>
+    <arc id="nwtE_c0aac4f9-caf8-49a2-90a9-d37b01dda440" class="logic arc" source="nwtN_bcaf5c0b-e969-438e-b8f7-02dc695575ed" target="nwtN_b615b4b6-8dea-47ea-bfa2-91653343c18d.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_c0aac4f9-caf8-49a2-90a9-d37b01dda441" class="logic arc" source="nwtN_bcaf5c0b-e969-438e-b8f7-02dc695575ef" target="nwtN_b615b4b6-8dea-47ea-bfa2-91653343c18d.2">
+      <start/>
+      <end/>
+    </arc>
+  </map>
+</sbgn>

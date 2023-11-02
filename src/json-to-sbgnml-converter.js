@@ -317,7 +317,7 @@ const jsonToSbgnml = {};
 
     }
    
-/*     //add port information
+     //add port information
     var ports = node._private.data.ports;
     for(var i = 0 ; i < ports.length ; i++){
        var orientation = ports[i].x === 0 ? 'vertical' : 'horizontal';
@@ -329,8 +329,9 @@ const jsonToSbgnml = {};
        var y = node._private.position.y + ports[i].y * ( node.height() / ratio ) / 100;
 
        glyph.addPort(new libsbgnjs.Port({id: ports[i].id, x: x, y: y}));
-    } */
-/*     //add state and info box information
+    } 
+     //add state and info box information
+     if( node._private.data.statesandinfos != undefined)
     for(var i = 0 ; i < node._private.data.statesandinfos.length ; i++){
        var boxGlyph = node._private.data.statesandinfos[i];
        var statesandinfosId = boxGlyph.id;
@@ -340,7 +341,7 @@ const jsonToSbgnml = {};
        else if(boxGlyph.clazz === "unit of information"){
            glyph.addGlyphMember(this.addInfoBoxGlyph(boxGlyph, statesandinfosId, node));
        }
-    } */
+    } 
     // check for annotations
     if (node.data('annotations') && !$.isEmptyObject(node.data('annotations'))) {
        var extension = self.getOrCreateExtension(glyph);
