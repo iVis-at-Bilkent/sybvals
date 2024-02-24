@@ -2,6 +2,9 @@ var libsbgnjs = require('libsbgn.js');
 var parseString = require('xml2js').parseString;
 const { elementUtilities } = require('./element-utilities.js');
 const { optionUtilities } = require('./option-utilities');
+const  sbgnmlToCytoscape  = require('sbgnml-to-cytoscape');
+const c = require('saxon-js');
+
 // var classes = require('./classes');
 
 const sbgnmlToJson = {};
@@ -438,8 +441,33 @@ sbgnmlToJson.addCytoscapeJsNode = function (ele, jsonArray, parent, compartments
 
   // add id information
   nodeObj.id = ele.id;
+  nodeObj.unitsOfInformation = [];
+  nodeObj.stateVariables = [];
+  var childNodes = ele.glyphMembers;
+
+  if( ele.id === "glyph25")
+  console.log( ele );
+  //while(1);
+
+  for( let i = 0; i < childNodes.length; i++){
+    if( ele.id === "glyph25")
+        console.log( "child " + childNodes[i]);
+    if( childNodes[i].class_ === "state variable"){
+        nodeObj.stateVariables.push(childNodes[i]);
+        console.log(childNodes[i]);
+        //while(1);
+    }
+    if( childNodes[i].class_ === "unit of information"){
+        nodeObj.unitsOfInformation.push(childNodes[i]);
+        //while(1);
+    }
+  }
   // add node bounding box information
   nodeObj.bbox = self.bboxProp(ele);
+  //nodeObj.unitsOfInformation = [];
+  console.log(sbgnmlToCytoscape);
+  //nodeObj.stateVariables = sbgnmlToCytoscape.getStateVars(nodeObj);
+
 
   if (ele.minWidth) {
     nodeObj.minWidth = ele.minWidth;
@@ -1285,8 +1313,8 @@ sbgnmlToJson.convert = function (xmlObject, xmlString, urlParams) {
   //  console.log(elementUtilities.getDefaultProperties(type));
   //});
 
-  console.log(cytoscapeJsGraph);
-  cytoscapeJsGraph.nodes.forEach(node => {console.log(node.data);});
+  //console.log(cytoscapeJsGraph);
+  //cytoscapeJsGraph.nodes.forEach(node => {console.log(node.data);});
   //console.log( elementUtilities.nodeTypes);
   return cytoscapeJsGraph;
 };

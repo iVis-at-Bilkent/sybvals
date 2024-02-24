@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>SyBLaRS Demo</title>
+    <title>SyBVaFS Demo</title>
 
     <!-- Semantic UI -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
@@ -57,7 +57,12 @@
                   <a class="ui basic label">
                     Open File...
                   </a>
-                </div>             
+                </div>     
+                 <!-- <div class="ui labeled button" id="save-sbgn" tabindex="0">
+                  <a class="ui basic label">
+                    Save Sbgn...
+                  </a>
+                </div>    -->         
               </div>
             </div>
             <input id="file-input" type="file" style="display:none" />
@@ -109,8 +114,8 @@
                 <div class="seven wide field">
                   <div class="field">
                     <select id="colorScheme">
-                      <option value="bluescale">Bluescale</option>
                       <option value="greyscale">Greyscale</option>
+                      <option value="bluescale">Bluescale</option>
                       <option value="red_blue">Red-Blue</option>
                       <option value="green_brown">Green-Brown</option>
                       <option value="purple_brown">Purple-Brown</option>
@@ -133,13 +138,13 @@
                 <!-- </div> -->
               </div>
               <div class="inline fields">
-                <span class="add-on layout-text option-label" title="Error highlight color"> Highlight: </span>
+                <!--<span class="add-on layout-text option-label" title="Error highlight color"> Highlight: </span>
                 <div class="two wide field">
                   <input type="color" id="highlightColor" value="#ff0000">
-                </div>
+                </div> -->
                 <span class="add-on layout-text option-label" title="Underlay padding used to highlight elements"> Highlight Width: </span>
                 <div class="two wide field">
-                  <input type="number" id="highlightWidth" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : 0" value="10" min="1">
+                  <input type="number" id="highlightWidth" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : 0" value="5" min="1">
                 </div>
               </div>
             </div>
@@ -149,7 +154,7 @@
         <div class="row" style="padding-bottom: 0; padding-top: 20px">
           <div class="center aligned column">
             <button id="applyValidation" class="ui primary button">Validate</button>
-            <button id="fixFormatErrors" class="ui primary button">Validate</button>
+            <button id="fixFormatErrors" class="ui primary button" disabled = "true" >Fix Errors</button>
           </div>
           <!--<div class="center aligned column">
             <button id="fixFormatErrors" class="ui primary button">Validate</button>
@@ -157,19 +162,55 @@
         </div>
         <div class="ui divider"></div>
         <div class="two column row" style="padding-bottom: 0; padding-top: 0">
-          <div class="seven wide column" style="margin-top: 11.5px">
+          <div class="seven wide column" style="margin-top: 11.5px;" >
+            <div style = "display: flex;height: 25px;">
             <div class="ui form">
-              <div class="field">
+              <div class="field"  style = "display: flex;">
+                
                 <div class="inline fields">
                   <h3 class="ui header" style="margin-bottom: -3px; margin-right: 7.5px">Errors</h3>
-                  <img class="ui image" id="downloadJSON" src="img/download.svg" title="Download JSON file" style="height: 25px; width: 25px; padding: 2.5px">
-                </div>
-                <div class="ui divider"></div>
-                <div id="errorsArea">
-                </div>
+                  <img class="ui image" id="downloadJSON" src="img/download.svg" title="Download JSON file" style="height: 25px; width: 25px; padding: 2.5px" />
+                  <!--<img class="ui image" id="downloadJSON" src="img/download.svg" title="Download JSON file" style="height: 25px; width: 25px; padding: 2.5px" />
+                  <div style="margin-bottom: -10px; margin-right: 7.5px">Errors</div> -->
+                 
+
+                  <!--<img class="ui image" id="downloadSBGN" src="img/download.svg" title="Download JSON file" style="height: 25px; width: 25px; padding: 2.5px" />
+                  <label class="ui header" style="margin-bottom: 0px; margin-left: 7.5px; font-size: 14px;">SBGNML</label> -->
+
+
               </div>
+              <!-- <div class="field"  style = "display: flex; margin-bottom: 10px; margin-left: 312px;right: 0px;">  -->
+              <div class="inline fields" style = "margin-left: 308px;align-items: right; position: relative;text-align: right;">
+                 <img class="ui image" id="downloadJSON" src="img/download.svg" title="Download JSON file" style="height: 25px; width: 25px; padding: 2.5px" />
+                 
+                  <label class="ui header" style="margin-bottom: 0px; margin-left: 7.5px; font-size: 14px;">SBGNML</label>
+
+                <!--<img class="ui image" id="downloadSBGN" src="img/download.svg" title="Download JSON file" style="height: 25px; width: 25px; padding: 2.5px" />
+                <!-- <label class="ui header" style="margin-bottom: 0px; margin-left: 7.5px; font-size: 14px;">SBGNML</label> -->
+                <!--<div style="margin-bottom: -10px; margin-right: 7.5px">Errors</div> -->
+
             </div>
+            </div>    
           </div>
+          </div>
+           <!-- <div class = "ui form" style ="right:0px;">
+                <div class = "field" >
+                <div class="inline fields"> 
+                <img  id="downloadSBGN" src="img/download.svg" title="Download SBGN file" style="height: 25px; width: 25px; padding: 2.5px" />
+                <h3  style="margin-bottom: -3px; margin-left: 7.5px; margin-right: 7.5px;" >SBGNML</h3>
+                <img  id="downloadSBGN" src="img/download.svg" title="Download SBGN file" style="height: 25px; width: 25px; padding: 2.5px" />
+
+               </div>
+              </div>
+              </div> -->
+                  <div class="ui divider"></div>
+
+          <div id="errorsArea" style = "overflow: scroll; max-height: 348px;"></div>
+
+
+
+              </div>
+              <div class="ui divider"></div>
           <div class="nine wide centered column" style="margin-top: 11.5px">
             <div class="ui form">
               <div class="field">
@@ -177,7 +218,8 @@
                   <h3 class="ui header" style="margin-bottom: -3px; margin-right: 7.5px">Image</h3>
                   <img class="ui image" id="downloadImage" src="img/download.svg" title="Download image" style="height: 25px; width: 25px; padding: 2.5px;"> 
                 </div>
-                <div id="imageArea" class="ui segment" style="width: auto; height: 348px; margin-top: -3px; padding: 0px;">
+                <div id="imageArea"class="ui segment" style="width: auto; height: 348px; margin-top: -3px; padding: 0px;"
+                >
                   <img style="cursor:pointer; padding: 0px !important;" class="ui centered huge image" id="resultImage">
                 </div>
               </div>

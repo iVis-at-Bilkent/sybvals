@@ -10,6 +10,8 @@ let fileType;
 let nodeData; // object keeps node ids and labels 
 let areNodesInProcess;
 let errors;
+let errorHighlightColors = ['#1e90ff', '#ff0000', '#b0b000', '#006400', '#0000ff', '#257359', '#c71585', '#fd713d'];
+let currentSbgn;
 
 let setFileContent = function (fileName) {
     let span = document.getElementById('file-name');
@@ -49,11 +51,128 @@ $("#save-file-json").on("click", function (e) {
     saveAs(blob, filename);
 });
 
+let applyErrorFix = async function(){
+  errors = undefined;
+  let url = "";
+  url = "http://localhost:" + port + "/fixError?errorFixing=true";
+  imageFormat = $('#formatRadios').find('[name="format"]:checked').val();
+
+  let options = {
+    imageOptions: {
+      format: imageFormat,
+      background: !$('#transparent').is(':checked') ? $('#imageBackground').val() : "transparent",
+      width: parseInt($('#imageWidth').val()),
+      height: parseInt($('#imageHeight').val()),
+      color: $('#colorScheme').val(),
+      highlightColor: $('#highlightColor').val(),
+      highlightWidth: $('#highlightWidth').val()
+    }
+  };
+
+  let data = graphData + JSON.stringify(options); 
+  
+  const settings = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'text/plain'
+    },
+    body: data
+  };
+  console.log("fix request sent");
+  let res = await fetch(url, settings)
+          .then(response => response.json())
+          .then(result => {
+            return result;
+          })
+          .catch(e => {
+            let errorContent = document.getElementById("errorContent");
+            errorContent.innerHTML = "<b>Sorry! Cannot process the given file!</b><br><br>Error detail:<br>" + e;
+            $('#errorModal').modal({inverted: true}).modal('show');
+          });
+    currentSbgn = res.sbgn;
+    $("#applyValidation").prop('disabled', false);
+    $("#fixFormatErrors").removeClass("loading");
+    $("#fixFormatErrors").prop('disabled', true);
+          if(!res.errorMessage && (res.errors !== undefined || res.image !== undefined)) {
+            $("#errorsArea").empty();
+            //$("#errorsArea").css( {'max-height' : '100px', 'overflow':scroll, 'background-color' : 'lightblue'} );
+            // get error info
+            errors = res.errors;
+            console.log( errors );
+            if(errors.length > 0) {
+              res.errors.forEach((error ) => {
+                let errorNo = $('<div class="ui item"> <b>Error No:</b> ' + error.errorNo + '</div>');
+                errorNo.append('<img src = "img/checkbox.png" style="margin-left : 363px; height: 20px; width: 20px;" />');
+                let errorPattern = $('<div class="ui item"> <b>Pattern:</b> ' + error.pattern + '</div>');
+                let errorRole = $('<div class="ui item"> <b>Role:</b> ' + error.role + '</div>');
+                let errorText = $('<div class="ui item"> <b>Message:</b> ' + error.text + '</div>');
+                let errorStatus = $('<div class="ui item"> <b>Status:</b> ' + (error.status !== undefined ? error.status : "unknown") + '</div>');
+                let list = $('<div class="ui list">' );
+                let fixExplanation = $('<div class="ui item"> <b>Fix explanation:</b> ' + (error.explanation !== undefined ?
+                error.explanation : "No explanation") + '</div>');
+                //let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo +  '" style = "border = 10px solid ' +  errorHighlightColors[(error.errorNo - 1) % 8] + '">');
+                let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo +  '">');
+                list.append(errorNo);
+                list.append(errorPattern);
+                list.append(errorRole);
+                list.append(errorText);
+                list.append(errorStatus);
+                list.append(fixExplanation);
+                errorRectangle.append(list);
+                list.css({'margin' : '2px'});
+                list.css({'margin-bottom': '5px'});
+                list.css({'margin-left' : '5px'});
+                if( error.errorNo === errors.length ){
+                  list.css({ 'margin-bottom': '5px'});
+                }
+                errorRectangle.append('</div>');
+                console.log( error.errorNo);
+                console.log( document.getElementById("errorNo1") !== undefined ? document.getElementById("errorNo1")?.style : undefined);
+                const errorString = "#errorNo" + error.errorNo;
+                $("#errorsArea").append(errorRectangle);
+                let uiDivider = $('<div class="ui divider"></div>');
+                uiDivider.css({'margin' : '0rem 0'});
+                $("#errorsArea").append(uiDivider);
+                 console.log(errorString);
+                console.log( $(errorString).css('border') );
+                $(errorString ).css({'border' : '3px solid' , 'border-color' : errorHighlightColors[(error.errorNo -1) % 8 ] });
+                $(errorString).css({'margin-right': '10px'});
+                console.log( $(errorString).css('border') );
+              });
+              //$("#errorsArea").css( {'max-height' : '100px', 'overflow':scroll, 'background-color' : '#fd713d'} );
+            }
+            else {
+              $("#errorsArea").text('Map is valid!');
+            }
+
+            // get image info
+            blobData = saveImage(res["imageErrorsHighlighted"], imageFormat, document.getElementById("file-name").innerHTML);
+            let urlCreator = window.URL || window.webkitURL;
+            let imageUrl = urlCreator.createObjectURL(blobData);
+            $("#imageArea").css("height", parseInt($('#imageHeight').val()) * parseInt($('#imageArea').css('width')) / (parseInt($('#imageWidth').val())));
+            $("#resultImage").attr("src", imageUrl);
+          }
+          else {
+            if(res.errorMessage) {
+              let errorContent = document.getElementById("errorContent");
+              errorContent.innerHTML = res.errorMessage;
+              $('#errorModal').modal({inverted: true}).modal('show');
+            }
+            else {
+              let errorContent = document.getElementById("errorContent");
+              errorContent.innerHTML = "<b>Sorry! Cannot process the given file!</b>";
+              $('#errorModal').modal({inverted: true}).modal('show');
+            }
+          }
+
+}
+
 let processValidation = async function () {
 
   errors = undefined;
   if (!syblars) {
-      url = "http://localhost:" + port + "/sbgnml?edges=true";
+      url = "http://localhost:" + port + "/validation?edges=true";
   } else { // NOTE: If you are using the service with a different hostname, please change below accordingly
       url = "http://syblars.cs.bilkent.edu.tr/sbgnml?edges=true";
   }
@@ -96,6 +215,8 @@ let processValidation = async function () {
 
   $("#applyValidation").removeClass("loading");
   $("#applyValidation").css("background-color", "#d67664");
+  $("#fixFormatErrors").prop('disabled', false);
+  currentSbgn = res.sbgn;
 
   if(!res.errorMessage && (res.errors !== undefined || res.image !== undefined)) {
     $("#errorsArea").empty();
@@ -108,12 +229,27 @@ let processValidation = async function () {
         let errorRole = $('<div class="ui item"> <b>Role:</b> ' + error.role + '</div>');
         let errorText = $('<div class="ui item"> <b>Message:</b> ' + error.text + '</div>');
         let list = $('<div class="ui list">');
+        //let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo +  '" style = "border = 10px solid ' +  errorHighlightColors[(error.errorNo - 1) % 8] + '">');
+        let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo +  '">');
         list.append(errorNo);
         list.append(errorPattern);
         list.append(errorRole);
         list.append(errorText);
-        $("#errorsArea").append(list);
-        $("#errorsArea").append('<div class="ui divider"></div>');
+        errorRectangle.append(list);
+        errorRectangle.append('</div>');
+        list.css({'margin': '2px'});
+        console.log( error.errorNo);
+        console.log( document.getElementById("errorNo1") !== undefined ? document.getElementById("errorNo1")?.style : undefined);
+        const errorString = "#errorNo" + error.errorNo;
+        $("#errorsArea").append(errorRectangle);
+        let uiDivider = $('<div class="ui divider"></div>');
+        uiDivider.css({'margin' : '0rem 0'});
+        $("#errorsArea").append(uiDivider);
+        console.log(errorString);
+        console.log( $(errorString).css('border') );
+        $(errorString).css({'border' : '3px solid' , 'border-color' : errorHighlightColors[(error.errorNo -1) % 8 ] });
+        $(errorString).css({'margin-right': '10px'});
+        console.log( $(errorString).css('border') );
       });
     }
     else {
@@ -140,12 +276,61 @@ let processValidation = async function () {
   }
 };
 
+function dragElement(elmnt){
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  document.getElementById("resultImage").onmousedown = dragMouseDown;
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+   function closeDragElement() {
+    /* stop moving when mouse button is released:  <div className = {this.props.showChat ? "ChatBox" : "ChatBoxHidden"}  style={this.state.styles} onMouseDown={this._dragStart} onMouseMove={this._dragging} onMouseUp={this._dragEnd}>
+    */
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+
+$('#resultImage').mouseenter(function(){
+  console.log("mouseEnter");
+   dragElement(document.getElementById("resultImage"));
+});
+
+$('#resultImage').mousedown(function(){
+  console.log("mouseDown");
+   dragElement(document.getElementById("resultImage"));
+})
+
 $('#applyValidation').click(function(){
 
   if(graphData !== undefined && !areNodesInProcess) {
-    processValidation();
     $("#applyValidation").addClass("loading");
     $("#applyValidation").css("background-color", "#f2711c");
+    processValidation();
+    /*$("#applyValidation").addClass("loading");
+    $("#applyValidation").css("background-color", "#f2711c");*/
   }
   else {
     $("#file-type").html("You must first load an SBGNML file!");
@@ -153,9 +338,17 @@ $('#applyValidation').click(function(){
 
 });
 
+$('#downloadSBGN').click( function(){
+  var blob = new Blob([currentSbgn], {
+    type: "text/plain;charset=utf-8;",
+  });
+  saveAs(blob, "currentSbgn.sbgn");
+
+}
+);
 $('#downloadJSON').click(function(){
 
-  if(errors.length > 0) {
+  /*if(errors.length > 0) {
     let jsonText = JSON.stringify(errors, null, 2);
 
     if(jsonText != "") {
@@ -167,7 +360,7 @@ $('#downloadJSON').click(function(){
       filename = filename.substring(0, filename.lastIndexOf('.')) + ".json";
       saveAs(blob, filename);
     }
-  }
+  }*/
 });
 
 $('#downloadImage').click(function(){
@@ -255,6 +448,13 @@ $("#transparent").change(function() {
     else {
       $("#imageBackground").attr("disabled", false);
     }
+});
+
+$("#fixFormatErrors").click(function (){
+  $("#applyValidation").prop('disabled', true);
+  $("#fixFormatErrors").addClass("loading");
+  //$("#fixFormatErrors").css("background-color", "#d67664");
+  applyErrorFix();
 });
 
 /* // prevent imageWidth and imageHeight to get negative values
@@ -517,6 +717,14 @@ $("#sampleType").change(function() {
   let graph = loadSample("samples/" + currentSample);
   $("#file-input").trigger("change", [graph]);
   document.getElementById("file-name").innerHTML = currentSample;
+});
+
+$("#save-sbgn").click(function(){
+  
+  var blob = new Blob([currentSbgn], {
+    type: "text/plain;charset=utf-8;",
+  });
+  saveAs(blob, "currentSbgn.sbgn");
 });
 
 $("#resultImage").on("click", function (e) {

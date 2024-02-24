@@ -319,7 +319,7 @@ const jsonToSbgnml = {};
    
      //add port information
     var ports = node._private.data.ports;
-    for(var i = 0 ; i < ports.length ; i++){
+    for(var i = 0 ; ports && i < ports.length ; i++){
        var orientation = ports[i].x === 0 ? 'vertical' : 'horizontal';
        // This is the ratio of the area occupied for ports over the whole shape
        var ratio = orientation === 'vertical' ? Math.abs(ports[i].y) / 50 : Math.abs(ports[i].x) / 50;
@@ -331,17 +331,30 @@ const jsonToSbgnml = {};
        glyph.addPort(new libsbgnjs.Port({id: ports[i].id, x: x, y: y}));
     } 
      //add state and info box information
-     if( node._private.data.statesandinfos != undefined)
-    for(var i = 0 ; i < node._private.data.statesandinfos.length ; i++){
-       var boxGlyph = node._private.data.statesandinfos[i];
+     //if( node._private.data.statesandinfos != undefined)
+    for(var i = 0 ; i < node._private.data.unitsOfInformation.length ; i++){
+       var boxGlyph = node._private.data.unitsOfInformation[i];
        var statesandinfosId = boxGlyph.id;
-       if(boxGlyph.clazz === "state variable"){
-           glyph.addGlyphMember(this.addStateBoxGlyph(boxGlyph, statesandinfosId, node));
-       }
-       else if(boxGlyph.clazz === "unit of information"){
+       glyph.addGlyphMember(this.addInfoBoxGlyph(boxGlyph, statesandinfosId, node));
+       //if(boxGlyph.class === "state variable"){
+         
+       /*}
+       else if(boxGlyph.class === "unit of information"){
            glyph.addGlyphMember(this.addInfoBoxGlyph(boxGlyph, statesandinfosId, node));
-       }
+       }*/
     } 
+    for(var i = 0 ; i < node._private.data.stateVariables.length ; i++){
+      var boxGlyph = node._private.data.stateVariables[i];
+      var statesandinfosId = boxGlyph.id;
+      /*if(boxGlyph.class === "state variable"){
+          glyph.addGlyphMember(this.addStateBoxGlyph(boxGlyph, statesandinfosId, node));
+            
+      }*/
+      glyph.addGlyphMember(this.addStateBoxGlyph(boxGlyph, statesandinfosId, node));
+      //else if(boxGlyph.class === "unit of information"){
+        
+      //}
+   } 
     // check for annotations
     if (node.data('annotations') && !$.isEmptyObject(node.data('annotations'))) {
        var extension = self.getOrCreateExtension(glyph);
@@ -380,7 +393,7 @@ const jsonToSbgnml = {};
     }
 
     // add info for hidden nodes
-    if(node.hidden()) {
+    /*if(node.hidden()) {
        sbgnvizExtString += "<hidden/>";
        hasNewtExt = true;
     }
@@ -395,7 +408,7 @@ const jsonToSbgnml = {};
     if(hasNewtExt) {
        var extension = self.getOrCreateExtension(glyph);
        extension.add("<sbgnviz>"+sbgnvizExtString+"</sbgnviz>");
-    }
+    }*/
 
     // current glyph is done
     glyphList.push(glyph);
@@ -553,7 +566,7 @@ const jsonToSbgnml = {};
   jsonToSbgnml.addInfoBoxGlyph = function (node, id, mainGlyph) {
       var glyph = new libsbgnjs.Glyph({id: id, class_: 'unit of information'});
       var label = new libsbgnjs.Label();
-      if(typeof node.label.text != 'undefined')
+      if(node.label !== null && typeof node.label.text != 'undefined')
           label.text = node.label.text;
       glyph.setLabel(label);
       glyph.setBbox(this.addStateAndInfoBbox(mainGlyph, node));

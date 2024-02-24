@@ -300,8 +300,8 @@ elementUtilities.isAFArcClass = function (ele) {
       var sourceclass = source.data('class');
       var targetclass = target.data('class');
       var mapType = elementUtilities.getMapType();
-      console.log(mapType);
-      console.log(elementUtilities[mapType]);
+      //console.log(mapType);
+      //console.log(elementUtilities[mapType]);
       var edgeConstraints = elementUtilities[mapType].connectivityConstraints[edgeclass];
 
       if (mapType == "AF"){
@@ -468,7 +468,7 @@ elementUtilities.reverseEdge = function(edge){
      target: oldSource
   });
   console.log("Fixed edge after fixing");
-  console.log(edge.data());
+  //console.log(edge.data());
 
 /*   if(Array.isArray(segmentPoints)){
     segmentPoints.reverse();
@@ -521,8 +521,8 @@ elementUtilities.addEdge = function (source, target, edgeParams,cy, id, visibili
 
   var sourceNode = cy.getElementById(source); // The original source node
   var targetNode = cy.getElementById(target); // The original target node
-  var sourceHasPorts = sourceNode.data('ports').length === 2;
-  var targetHasPorts = targetNode.data('ports').length === 2;
+  var sourceHasPorts = sourceNode.data('ports') !== undefined && sourceNode.data('ports').length === 2;
+  var targetHasPorts = targetNode.data('ports') !== undefined && targetNode.data('ports').length === 2;
   // The portsource and porttarget variables
   var portsource;
   var porttarget;
@@ -703,7 +703,7 @@ elementUtilities.canHaveSBGNCardinality = function (ele) {
 };
 
 elementUtilities.addNode = function (x, y, nodeParams, id, parent, visibility,cy) {
-  console.log("new node");
+  //console.log("new node");
   if (typeof nodeParams != 'object'){
     var sbgnclass = nodeParams;
   } else {
@@ -1111,6 +1111,62 @@ elementUtilities.getDefaultInfoboxStyle = function( nodeClass, infoboxType ) {
 
   return infoboxStyle;
 };
+elementUtilities.getCyShape = function (ele) {
+  var _class = ele.data('class');
+  // Get rid of rectangle postfix to have the actual node class
+  if (_class.endsWith(' multimer')) {
+      _class = _class.replace(' multimer', '');
+  }
+
+  if (_class == 'compartment') {
+      return 'compartment';
+  }
+  if (_class == 'phenotype') {
+      return 'hexagon';
+  }
+  if (_class == 'perturbing agent' || _class == 'tag') {
+      return 'polygon';
+  }
+  if (_class == 'SIF macromolecule') {
+      return 'macromolecule';
+  }
+  if (_class == 'SIF simple chemical') {
+      return 'simple chemical';
+  }
+
+  if (_class.startsWith('BA')){
+      return 'biological activity';
+  }
+
+  if (_class == 'submap' || _class == 'topology group'){
+      return 'rectangle';
+  }
+
+  // We need to define new node shapes with their class names for these nodes
+  if (_class == 'source and sink' || _class == 'nucleic acid feature' || _class == 'macromolecule'
+          || _class == 'simple chemical' || _class == 'complex' || _class == 'biological activity' ) {
+      return _class;
+  }
+
+  // These shapes can have ports. If they have ports we represent them by polygons, else they are represented by ellipses or rectangles
+  // conditionally.
+ /* if ( this.canHavePorts(_class) ) {
+
+    if (graphUtilities.portsEnabled === true && ele.data('ports').length === 2) {
+      return 'polygon'; // The node has ports represent it by polygon
+    }
+    else if (_class == 'process' || _class == 'omitted process' || _class == 'uncertain process') {
+      return 'rectangle'; // If node has no port and has one of these classes it should be in a rectangle shape
+    }
+
+    return 'ellipse'; // Other nodes with no port should be in an ellipse shape
+  }*/
+
+  // The remaining nodes are supposed to be in ellipse shape
+  return 'ellipse';
+};
+
+
 
 elementUtilities.getDefaultProperties = function( sbgnclass ) {
   if ( sbgnclass == undefined ) {
