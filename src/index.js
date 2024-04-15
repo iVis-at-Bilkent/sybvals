@@ -19,7 +19,7 @@
   let snap = cytosnap();
   let currentSbgn;
 
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 3400;
 
   // to serve the html
   const path = require("path");

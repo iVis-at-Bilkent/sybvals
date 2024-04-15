@@ -54,7 +54,12 @@ $("#save-file-json").on("click", function (e) {
 let applyErrorFix = async function(){
   errors = undefined;
   let url = "";
+  if( !syblars){
   url = "http://localhost:" + port + "/fixError?errorFixing=true";
+  }
+  else {
+      url = "http://ivis.cs.bilkent.edu.tr:3400/fixError?errorFixing=true";
+  }
   imageFormat = $('#formatRadios').find('[name="format"]:checked').val();
 
   let options = {
@@ -102,22 +107,27 @@ let applyErrorFix = async function(){
             console.log( errors );
             if(errors.length > 0) {
               res.errors.forEach((error ) => {
-                let errorNo = $('<div class="ui item"> <b>Error No:</b> ' + error.errorNo + '</div>');
-                errorNo.append('<img src = "img/checkbox.png" style="margin-left : 363px; height: 20px; width: 20px;" />');
+                let imgSource = error.status === "solved" ? "img/checkbox.png" : "img/close.png";
+                let errorNo = $('<div style = "display : flex;" />');
+               // let errorNo = $('<img src = "' + imgSource +  '" style=" height: 20px; width: 20px;" />');
+                //let errorNo = $('<div class="ui item"> <b>Error No:</b> ' + error.errorNo + '</div>');
+                //errorNo.append('<img src = "' + imgSource +  '" style="margin-left : 363px; height: 20px; width: 20px;" />');
+                errorNo.append('<img src = "' + imgSource +  '" style=" height: 20px; width: 20px;" />');
+                errorNo.append('<div class="ui item" style = "margin-left : 5px;"> <b>Error No:</b> ' + error.errorNo + '</div>');
                 let errorPattern = $('<div class="ui item"> <b>Pattern:</b> ' + error.pattern + '</div>');
                 let errorRole = $('<div class="ui item"> <b>Role:</b> ' + error.role + '</div>');
                 let errorText = $('<div class="ui item"> <b>Message:</b> ' + error.text + '</div>');
                 let errorStatus = $('<div class="ui item"> <b>Status:</b> ' + (error.status !== undefined ? error.status : "unknown") + '</div>');
                 let list = $('<div class="ui list">' );
                 let fixExplanation = $('<div class="ui item"> <b>Fix explanation:</b> ' + (error.explanation !== undefined ?
-                error.explanation : "No explanation") + '</div>');
+                error.explanation : "-") + '</div>');
                 //let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo +  '" style = "border = 10px solid ' +  errorHighlightColors[(error.errorNo - 1) % 8] + '">');
                 let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo +  '">');
                 list.append(errorNo);
-                list.append(errorPattern);
                 list.append(errorRole);
+                list.append(errorPattern);
                 list.append(errorText);
-                list.append(errorStatus);
+                //list.append(errorStatus);
                 list.append(fixExplanation);
                 errorRectangle.append(list);
                 list.css({'margin' : '2px'});
@@ -172,9 +182,10 @@ let processValidation = async function () {
 
   errors = undefined;
   if (!syblars) {
+      console.log( "request before " + port );
       url = "http://localhost:" + port + "/validation?edges=true";
   } else { // NOTE: If you are using the service with a different hostname, please change below accordingly
-      url = "http://syblars.cs.bilkent.edu.tr/sbgnml?edges=true";
+      url = "http://ivis.cs.bilkent.edu.tr:3400/validation?edges=true";
   }
 
   imageFormat = $('#formatRadios').find('[name="format"]:checked').val();

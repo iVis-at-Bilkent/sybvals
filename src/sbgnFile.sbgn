@@ -5,7 +5,7 @@
       <extension>
         <extraInfo>
           <w>921.7491938838532</w>
-          <h>1276.9691972897863</h>
+          <h>1143.4691972897863</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -15,7 +15,7 @@
         </extraInfo>
       </extension>
       <label text="neuron"/>
-      <bbox x="257" y="49.5" w="941.7491938838532" h="1296.9691972897863"/>
+      <bbox x="257" y="183" w="941.7491938838532" h="1163.4691972897863"/>
     </glyph>
     <glyph id="glyph1" class="compartment" compartmentRef="glyph0">
       <extension>
@@ -551,7 +551,7 @@
       <port id="glyph68.2" x="640" y="335"/>
       <port id="glyph68.1" x="640" y="305"/>
     </glyph>
-    <glyph id="b6769d7e-7ff6-11a0-2620-b71d9cf91ded" class="macromolecule" compartmentRef="glyph0">
+    <glyph id="b6769d7e-7ff6-11a0-2620-b71d9cf91ded" class="macromolecule">
       <label text="Cav1&#xA;(1)"/>
       <bbox x="545.295935898724" y="149.66365023097822" w="70" h="35"/>
       <glyph id="b6769d7e-7ff6-11a0-2620-b71d9cf91ded_0" class="unit of information">
@@ -559,26 +559,26 @@
         <bbox x="900.4897787919874" y="192.15013218393335" w="23.3447265625" h="12"/>
       </glyph>
     </glyph>
-    <glyph id="glyph19" class="perturbing agent" compartmentRef="glyph0">
+    <glyph id="glyph19" class="perturbing agent">
       <label text="depolarization&#xA;(2)"/>
       <bbox x="651" y="60.5" w="70" h="35"/>
-    </glyph>
-    <glyph id="glyph48" class="simple chemical" compartmentRef="glyph0">
-      <label text="Ca++&#xA;(3)"/>
-      <bbox x="907" y="60.5" w="40" h="40"/>
-    </glyph>
-    <glyph id="364697a4-255c-6c48-1fed-a8e91a24fc67" class="macromolecule" compartmentRef="glyph0">
-      <label text="Cav1&#xA;(4)&#xA;(1)"/>
-      <bbox x="767.3008014066335" y="149.66365023097822" w="70" h="35"/>
-      <glyph id="364697a4-255c-6c48-1fed-a8e91a24fc67_0" class="unit of information">
-        <label text="open"/>
-        <bbox x="1276.0499607721315" y="192.15013218393335" w="22.24609375" h="12"/>
-      </glyph>
     </glyph>
     <glyph id="glyph67" class="process">
       <bbox x="671" y="139" w="30" h="30"/>
       <port id="glyph67.1" x="671" y="154"/>
       <port id="glyph67.2" x="701" y="154"/>
+    </glyph>
+    <glyph id="glyph48" class="simple chemical">
+      <label text="Ca++&#xA;(3)"/>
+      <bbox x="907" y="60.5" w="40" h="40"/>
+    </glyph>
+    <glyph id="364697a4-255c-6c48-1fed-a8e91a24fc67" class="macromolecule">
+      <label text="Cav1&#xA;(4)"/>
+      <bbox x="767.3008014066335" y="149.66365023097822" w="70" h="35"/>
+      <glyph id="364697a4-255c-6c48-1fed-a8e91a24fc67_0" class="unit of information">
+        <label text="open"/>
+        <bbox x="1276.0499607721315" y="192.15013218393335" w="22.24609375" h="12"/>
+      </glyph>
     </glyph>
     <glyph id="glyph69" class="process">
       <bbox x="912" y="139" w="30" h="30"/>

@@ -163,7 +163,13 @@ option {
 #applyValidation:hover{
   background-color: #f2711c !important;
 }
+#fixFormatErrors {
+  background-color: #d67664 ;
+}
 
+#fixFormatErrors:hover{
+  background-color: #f2711c !important;
+}
 .ui.labeled.button {
   background-color: #efefef !important;
 }
