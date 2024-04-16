@@ -76,7 +76,7 @@
     for( let i = 0; i < connectedEdges.size(); i++ ){
       if( distanceBetween( ele, connectedEdges[i].source())  < shortestDistance){
         shortestDistance = distanceBetween( ele, connectedEdges[i].source());
-        console.log( "distance : " + shortestDistance);
+        //console.log( "distance : " + shortestDistance);
         closestEdge = connectedEdges[i];
         //console.log( connectedEdges[i].source().id() + " " + connectedEdges[i].target().id() );
       }
@@ -89,9 +89,9 @@
 
   // middleware to manage the formats of files
   app.use((req, res, next) => {
-    console.log(req.query.errorFixing);
+    //console.log(req.query.errorFixing);
     if( req.query.errorFixing === true ){
-      console.log("error fixingtrue");
+      //console.log("error fixingtrue");
       //while(1);
       next();
     }
@@ -179,8 +179,8 @@
         
         //data = cyJsonData;
         data = convertSBGNtoCytoscape(data);
-        console.log( cyJsonData.nodes );
-        console.log( data.nodes);
+        //console.log( cyJsonData.nodes );
+        //console.log( data.nodes);
         data.nodes.forEach((node) => {
         //  console.log(node.data);
           //  console.log( node.data.id);
@@ -213,10 +213,10 @@
   // POST :format?clusters=true
   app.post('/validation', (req, res,next) => {
     let size = 30;
-    console.log("validationnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
-    console.log(req.query.errorFixing);
+    //console.log("validationnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+    //console.log(req.query.errorFixing);
     if( req.query.errorFixing !== undefined && req.query.errorFixing === true){
-      console.log("pass to error fixing");
+      //console.log("pass to error fixing");
       //while(1);
       return next();
     }
@@ -690,7 +690,7 @@
     let ret = {};
 
     ret['errors'] = errors;
-    console.log( errors );
+    //console.log( errors );
 
     let bgColors = [];
     //console.log(colorScheme);
@@ -1603,10 +1603,10 @@
   app.post('/fixError', (req, res) => { 
 
     let ret = {};
-    console.log(errors);
-    console.log(errors.length);
+    //console.log(errors);
+    //console.log(errors.length);
     //console.log(cy);
-    console.log(req.query);
+    //console.log(req.query);
     ret['errors'] = errors;
     ret["imageErrorsHighlighted"] = imageErrorsHighlighted;
     //console.log(errors);
@@ -1619,19 +1619,19 @@
       errors[i].errorNo = i + 1;
     }
     currentErrors = errors;
-    console.log(errors);
-    console.log(errors.length);
+    //console.log(errors);
+    //console.log(errors.length);
     while( check < errors.length ) {
       errors[check].status = "unsolved";
       let errorFixParam = {};
       errorFixParam.errorCode = errors[check].pattern;
       let ele = cy.getElementById(errors[check].role);
-      console.log(check + " " +  numberOfUnsolvedErrors );
-      console.log( currentErrors[numberOfUnsolvedErrors] );
-      console.log( errors[check]);
+      //console.log(check + " " +  numberOfUnsolvedErrors );
+      //console.log( currentErrors[numberOfUnsolvedErrors] );
+      //console.log( errors[check]);
       if( currentErrors[numberOfUnsolvedErrors].text[0] !== errors[check].text[0] 
         || currentErrors[numberOfUnsolvedErrors].pattern !== errors[check].pattern || currentErrors[numberOfUnsolvedErrors].role !== errors[check].role){
-        console.log( "not equal");
+        //console.log( "not equal");
         errors[check].status = "solved";
         check++;
         continue;
@@ -1661,7 +1661,7 @@
         errorFixParam.nodes = []; 
         let selectedEdge = connectedEdges[check]; // 0 is default, it should be decided later.
         selectedEdge = findClosestNode(ele, connectedEdges);
-        console.log("closest edge selected : " + selectedEdge);
+        //console.log("closest edge selected : " + selectedEdge);
         for( let i = 0; i < connectedEdges.size(); i++){
           if( selectedEdge.id() != connectedEdges[i].id() ){
              errorFixParam.nodes.push(connectedEdges[i].source());
@@ -1721,10 +1721,10 @@
             var eles =  cy.elements('[id="' + id + '"]');
             errorFixParam.node = eles; 
             var edges = cy.nodes('[id = "' + id +'"]').connectedEdges();
-            console.log("pd10103 edges");
+           // console.log("pd10103 edges");
             //console.log(edges.data());
             var addedNodeNum = edges.length;
-            console.log(edges.length);
+            //console.log(edges.length);
             /*var promptInvalidEdge = function(){
                 appUtilities.promptInvalidEdgeWarning.render();
             }*/
@@ -1798,7 +1798,7 @@
       
       else if( errors[check].pattern == "pd10126"){
         let connectedEdges = ele.connectedEdges().filter('[class="logic arc"]');
-        console.log("connected edges" + connectedEdges.size());
+        //console.log("connected edges" + connectedEdges.size());
         errorFixParam.edges = []; 
         errorFixParam.nodes = []; 
         let selectedEdge = connectedEdges[0]; // 0 is default, it should be decided later.
@@ -2003,14 +2003,14 @@
         }
       }
       check++;
-      console.log(errors.length);
+      //console.log(errors.length);
     }
   
       let styleSheet = stylesheetForSbgn();
     //console.log( styleSheet);
             highlightErrors( currentErrors, cy);
 
-    console.log( "after return " + errors.length);
+    //console.log( "after return " + errors.length);
     let colorScheme = imageOptions.color || "white";
     let stylesheet = adjustStylesheet('sbgnml', colorScheme);
 
@@ -2035,7 +2035,7 @@
           ret['errors'] = errors;
           ret['sbgn'] = currentSbgn;
           console.log("before return ");
-          console.log( errors);
+          //console.log( errors);
           return res.status(200).send(ret);
           console.log("after return");
         }).then(function () {
@@ -2069,8 +2069,8 @@
     //console.log("dadasdsdsdsddsdsadsdsdsdsaasd");
 
     function fixError(errorFixParam) {
-      console.log("error fixing started");
-      console.log(errorFixParam.errorCode );
+      //console.log("error fixing started");
+      //console.log(errorFixParam.errorCode );
       //console.log(cy);
       var errorCode = errorFixParam.errorCode;
       var result = {};
@@ -2092,7 +2092,7 @@
         });
 
         errorFixParam.newEdges.forEach(function(newEdge){          
-          console.log(newEdge);
+          //console.log(newEdge);
           var newwEdge = elementUtilities.addEdge(newEdge.source,newEdge.target,newEdge.class,cy);
          // elementUtilities.reverseEdge(newwEdge);
         });
@@ -2103,8 +2103,8 @@
         });
 
         errorFixParam.node.remove();
-        console.log("Number of nodes after fix :" + cy.nodes().length);
-        console.log("Number of edges after fix :" + cy.edges().length);
+        //console.log("Number of nodes after fix :" + cy.nodes().length);
+        //console.log("Number of edges after fix :" + cy.edges().length);
 
       }
       if( errorCode == "pd10105" || errorCode == "pd10106"){

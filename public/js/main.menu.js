@@ -84,7 +84,7 @@ let applyErrorFix = async function(){
     },
     body: data
   };
-  console.log("fix request sent");
+  //console.log("fix request sent");
   let res = await fetch(url, settings)
           .then(response => response.json())
           .then(result => {
@@ -104,7 +104,7 @@ let applyErrorFix = async function(){
             //$("#errorsArea").css( {'max-height' : '100px', 'overflow':scroll, 'background-color' : 'lightblue'} );
             // get error info
             errors = res.errors;
-            console.log( errors );
+            //console.log( errors );
             if(errors.length > 0) {
               res.errors.forEach((error ) => {
                 let imgSource = error.status === "solved" ? "img/checkbox.png" : "img/close.png";
@@ -137,18 +137,18 @@ let applyErrorFix = async function(){
                   list.css({ 'margin-bottom': '5px'});
                 }
                 errorRectangle.append('</div>');
-                console.log( error.errorNo);
-                console.log( document.getElementById("errorNo1") !== undefined ? document.getElementById("errorNo1")?.style : undefined);
+                //console.log( error.errorNo);
+                //console.log( document.getElementById("errorNo1") !== undefined ? document.getElementById("errorNo1")?.style : undefined);
                 const errorString = "#errorNo" + error.errorNo;
                 $("#errorsArea").append(errorRectangle);
                 let uiDivider = $('<div class="ui divider"></div>');
                 uiDivider.css({'margin' : '0rem 0'});
                 $("#errorsArea").append(uiDivider);
-                 console.log(errorString);
-                console.log( $(errorString).css('border') );
+                // console.log(errorString);
+                //console.log( $(errorString).css('border') );
                 $(errorString ).css({'border' : '3px solid' , 'border-color' : errorHighlightColors[(error.errorNo -1) % 8 ] });
-                $(errorString).css({'margin-right': '10px'});
-                console.log( $(errorString).css('border') );
+                $(errorString).css({'margin-right': '7px'});
+                //console.log( $(errorString).css('border') );
               });
               //$("#errorsArea").css( {'max-height' : '100px', 'overflow':scroll, 'background-color' : '#fd713d'} );
             }
@@ -182,7 +182,7 @@ let processValidation = async function () {
 
   errors = undefined;
   if (!syblars) {
-      console.log( "request before " + port );
+      //console.log( "request before " + port );
       url = "http://localhost:" + port + "/validation?edges=true";
   } else { // NOTE: If you are using the service with a different hostname, please change below accordingly
       url = "http://ivis.cs.bilkent.edu.tr:3400/validation?edges=true";
@@ -226,7 +226,9 @@ let processValidation = async function () {
 
   $("#applyValidation").removeClass("loading");
   $("#applyValidation").css("background-color", "#d67664");
-  $("#fixFormatErrors").prop('disabled', false);
+  if( res.errors.length > 0 ){
+      $("#fixFormatErrors").prop('disabled', false);
+  }
   currentSbgn = res.sbgn;
 
   if(!res.errorMessage && (res.errors !== undefined || res.image !== undefined)) {
@@ -249,18 +251,18 @@ let processValidation = async function () {
         errorRectangle.append(list);
         errorRectangle.append('</div>');
         list.css({'margin': '2px'});
-        console.log( error.errorNo);
-        console.log( document.getElementById("errorNo1") !== undefined ? document.getElementById("errorNo1")?.style : undefined);
+        //console.log( error.errorNo);
+        //console.log( document.getElementById("errorNo1") !== undefined ? document.getElementById("errorNo1")?.style : undefined);
         const errorString = "#errorNo" + error.errorNo;
         $("#errorsArea").append(errorRectangle);
         let uiDivider = $('<div class="ui divider"></div>');
         uiDivider.css({'margin' : '0rem 0'});
         $("#errorsArea").append(uiDivider);
-        console.log(errorString);
-        console.log( $(errorString).css('border') );
+        //console.log(errorString);
+        //console.log( $(errorString).css('border') );
         $(errorString).css({'border' : '3px solid' , 'border-color' : errorHighlightColors[(error.errorNo -1) % 8 ] });
-        $(errorString).css({'margin-right': '10px'});
-        console.log( $(errorString).css('border') );
+        $(errorString).css({'margin-right': '7px'});
+        //console.log( $(errorString).css('border') );
       });
     }
     else {
@@ -325,12 +327,12 @@ function dragElement(elmnt){
 
 
 $('#resultImage').mouseenter(function(){
-  console.log("mouseEnter");
+  //console.log("mouseEnter");
    dragElement(document.getElementById("resultImage"));
 });
 
 $('#resultImage').mousedown(function(){
-  console.log("mouseDown");
+  //console.log("mouseDown");
    dragElement(document.getElementById("resultImage"));
 })
 
@@ -359,7 +361,7 @@ $('#downloadSBGN').click( function(){
 );
 $('#downloadJSON').click(function(){
 
-  /*if(errors.length > 0) {
+  if(errors.length > 0) {
     let jsonText = JSON.stringify(errors, null, 2);
 
     if(jsonText != "") {
@@ -371,7 +373,7 @@ $('#downloadJSON').click(function(){
       filename = filename.substring(0, filename.lastIndexOf('.')) + ".json";
       saveAs(blob, filename);
     }
-  }*/
+  }
 });
 
 $('#downloadImage').click(function(){
@@ -444,12 +446,12 @@ $("#imageSettingsDefault").on("click", function (e) {
    $("#imageWidth").val(1280);
    $("#imageHeight").val(720);
    $("#color").val("#9ecae1");
-   $("#colorScheme").val("bluescale");
+   $("#colorScheme").val("greyscale");
    $("#imageBackground").val("#ffffff");
    $("#imageBackground").attr("disabled", true);
    $("#transparent").prop("checked", true);
    $("#highlightColor").val("#ff0000");
-   $("#highlightWidth").val(10);
+   $("#highlightWidth").val(5);
 });
 
 $("#transparent").change(function() {

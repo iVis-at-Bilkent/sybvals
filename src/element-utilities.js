@@ -455,7 +455,7 @@ elementUtilities.reverseEdge = function(edge){
   var oldPortSource = edge.data("portsource");
   var oldPortTarget = edge.data("porttarget");
   // var segmentPoints = edge.segmentPoints();
-  console.log( oldSource + " " + oldTarget + " " + oldPortSource + " " + oldPortTarget );
+  //console.log( oldSource + " " + oldTarget + " " + oldPortSource + " " + oldPortTarget );
 
   edge.data().source = oldTarget;
   edge.data().target = oldSource;
@@ -467,7 +467,7 @@ elementUtilities.reverseEdge = function(edge){
      source: oldTarget,
      target: oldSource
   });
-  console.log("Fixed edge after fixing");
+  //console.log("Fixed edge after fixing");
   //console.log(edge.data());
 
 /*   if(Array.isArray(segmentPoints)){

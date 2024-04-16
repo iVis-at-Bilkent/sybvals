@@ -454,7 +454,7 @@ sbgnmlToJson.addCytoscapeJsNode = function (ele, jsonArray, parent, compartments
         console.log( "child " + childNodes[i]);
     if( childNodes[i].class_ === "state variable"){
         nodeObj.stateVariables.push(childNodes[i]);
-        console.log(childNodes[i]);
+        //console.log(childNodes[i]);
         //while(1);
     }
     if( childNodes[i].class_ === "unit of information"){
@@ -465,7 +465,7 @@ sbgnmlToJson.addCytoscapeJsNode = function (ele, jsonArray, parent, compartments
   // add node bounding box information
   nodeObj.bbox = self.bboxProp(ele);
   //nodeObj.unitsOfInformation = [];
-  console.log(sbgnmlToCytoscape);
+  //console.log(sbgnmlToCytoscape);
   //nodeObj.stateVariables = sbgnmlToCytoscape.getStateVars(nodeObj);
 
 
