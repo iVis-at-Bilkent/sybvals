@@ -1,8 +1,8 @@
 var libsbgnjs = require('libsbgn.js');
 var renderExtension = libsbgnjs.render;
 var annot = libsbgnjs.annot;
-// var pkgVersion = require('../../package.json').version; // need info about sbgnviz to put in xml
-// var pkgName = require('../../package.json').name;
+var pkgVersion ="6.1.0"; // need info about sbgnviz to put in xml
+var pkgName = "sbgnviz";
 var prettyprint = require('pretty-data').pd;
 var xml2js = require('xml2js');
 var mapPropertiesBuilder = new xml2js.Builder({rootName: "mapProperties"});
@@ -123,9 +123,12 @@ const jsonToSbgnml = {};
   };
 
   jsonToSbgnml.createSbgnml = function(filename, version, renderInfo, mapProperties, nodes, edges, cy) {
+    console.log( renderInfo);
+  console.log( mapProperties);
     var jsObj = jsonToSbgnml.buildJsObj(filename, version, renderInfo, mapProperties, nodes, edges, cy);
     return jsonToSbgnml.buildString({sbgn: jsObj});
   }
+  
 
   // Copies and extends buildString() of https://github.com/sbgn/libsbgn.js/blob/master/src/utilities.js
   jsonToSbgnml.buildString = function(obj) {
@@ -201,12 +204,12 @@ const jsonToSbgnml = {};
       
         // populate list of background images
         var listOfBackgroundImages = new renderExtension.ListOfBackgroundImages();
-        if(!(Object.keys(experimentalDataOverlay.getParsedDataMap()).length > 0)){
+        //if(!(Object.keys(experimentalDataOverlay.getParsedDataMap()).length > 0)){
           for (var img in renderInfo.images) {
               var backgroundImage = new renderExtension.BackgroundImage({id: renderInfo.images[img], value: img});
               listOfBackgroundImages.addBackgroundImage(backgroundImage);
           }
-        }
+        //}
         renderInformation.setListOfBackgroundImages(listOfBackgroundImages);
 
       // populates styles

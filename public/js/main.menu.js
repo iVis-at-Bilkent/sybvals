@@ -107,7 +107,7 @@ let applyErrorFix = async function(){
             //console.log( errors );
             if(errors.length > 0) {
               res.errors.forEach((error ) => {
-                let imgSource = error.status === "solved" ? "img/checkbox.png" : "img/close.png";
+                let imgSource = error.status === "solved" ? "img/check-mark.png" : "img/cross.png";
                 let errorNo = $('<div style = "display : flex;" />');
                // let errorNo = $('<img src = "' + imgSource +  '" style=" height: 20px; width: 20px;" />');
                 //let errorNo = $('<div class="ui item"> <b>Error No:</b> ' + error.errorNo + '</div>');
@@ -136,6 +136,7 @@ let applyErrorFix = async function(){
                 if( error.errorNo === errors.length ){
                   list.css({ 'margin-bottom': '5px'});
                 }
+                errorRectangle.css({'margin-top': '2px'});
                 errorRectangle.append('</div>');
                 //console.log( error.errorNo);
                 //console.log( document.getElementById("errorNo1") !== undefined ? document.getElementById("errorNo1")?.style : undefined);
@@ -143,7 +144,7 @@ let applyErrorFix = async function(){
                 $("#errorsArea").append(errorRectangle);
                 let uiDivider = $('<div class="ui divider"></div>');
                 uiDivider.css({'margin' : '0rem 0'});
-                $("#errorsArea").append(uiDivider);
+                //$("#errorsArea").append(uiDivider);
                 // console.log(errorString);
                 //console.log( $(errorString).css('border') );
                 $(errorString ).css({'border' : '3px solid' , 'border-color' : errorHighlightColors[(error.errorNo -1) % 8 ] });
@@ -254,10 +255,11 @@ let processValidation = async function () {
         //console.log( error.errorNo);
         //console.log( document.getElementById("errorNo1") !== undefined ? document.getElementById("errorNo1")?.style : undefined);
         const errorString = "#errorNo" + error.errorNo;
+        errorRectangle.css({'margin-top':'2px'});
         $("#errorsArea").append(errorRectangle);
         let uiDivider = $('<div class="ui divider"></div>');
         uiDivider.css({'margin' : '0rem 0'});
-        $("#errorsArea").append(uiDivider);
+        //$("#errorsArea").append(uiDivider);
         //console.log(errorString);
         //console.log( $(errorString).css('border') );
         $(errorString).css({'border' : '3px solid' , 'border-color' : errorHighlightColors[(error.errorNo -1) % 8 ] });

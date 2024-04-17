@@ -1,11 +1,20 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <sbgn xmlns="http://sbgn.org/libsbgn/0.2">
   <map language="process description">
+    <extension>
+      <renderInformation 
+        xmlns="http://www.sbml.org/sbml/level3/version1/render/version1" id="renderInformation" program-name="sbgnviz" program-version="6.1.0">
+        <listOfColorDefinitions/>
+        <listOfBackgroundImages/>
+        <listOfStyles/>
+      </renderInformation>
+      <mapProperties>&lt;mapProperties&gt;&lt;compoundPadding&gt;0&lt;/compoundPadding&gt;&lt;extraCompartmentPadding&gt;14&lt;/extraCompartmentPadding&gt;&lt;extraComplexPadding&gt;10&lt;/extraComplexPadding&gt;&lt;arrowScale&gt;1.25&lt;/arrowScale&gt;&lt;showComplexName&gt;true&lt;/showComplexName&gt;&lt;dynamicLabelSize&gt;regular&lt;/dynamicLabelSize&gt;&lt;inferNestingOnLoad&gt;false&lt;/inferNestingOnLoad&gt;&lt;fitLabelsToNodes&gt;false&lt;/fitLabelsToNodes&gt;&lt;fitLabelsToInfoboxes&gt;false&lt;/fitLabelsToInfoboxes&gt;&lt;recalculateLayoutOnComplexityManagement&gt;true&lt;/recalculateLayoutOnComplexityManagement&gt;&lt;rearrangeOnComplexityManagement&gt;true&lt;/rearrangeOnComplexityManagement&gt;&lt;animateOnDrawingChanges&gt;true&lt;/animateOnDrawingChanges&gt;&lt;adjustNodeLabelFontSizeAutomatically&gt;false&lt;/adjustNodeLabelFontSizeAutomatically&gt;&lt;enablePorts&gt;true&lt;/enablePorts&gt;&lt;enableSIFTopologyGrouping&gt;false&lt;/enableSIFTopologyGrouping&gt;&lt;allowCompoundNodeResize&gt;false&lt;/allowCompoundNodeResize&gt;&lt;mapColorScheme&gt;opposed_purple_green2&lt;/mapColorScheme&gt;&lt;mapColorSchemeStyle&gt;gradient&lt;/mapColorSchemeStyle&gt;&lt;mapName&gt;CaM-CaMK dependent signaling to nucleus&lt;/mapName&gt;&lt;mapDescription&gt;Ma et al., Cell, 2014&lt;/mapDescription&gt;&lt;highlightColor&gt;#0B9BCD&lt;/highlightColor&gt;&lt;extraHighlightThickness&gt;2&lt;/extraHighlightThickness&gt;&lt;mapPD2AFConverted&gt;false&lt;/mapPD2AFConverted&gt;&lt;defaultInfoboxHeight&gt;12&lt;/defaultInfoboxHeight&gt;&lt;defaultInfoboxWidth&gt;30&lt;/defaultInfoboxWidth&gt;&lt;rearrangeAfterExpandCollapse&gt;true&lt;/rearrangeAfterExpandCollapse&gt;&lt;/mapProperties&gt;</mapProperties>
+    </extension>
     <glyph id="glyph0" class="compartment">
       <extension>
         <extraInfo>
           <w>921.7491938838532</w>
-          <h>1143.4691972897863</h>
+          <h>1276.9691972897863</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -15,7 +24,7 @@
         </extraInfo>
       </extension>
       <label text="neuron"/>
-      <bbox x="257" y="183" w="941.7491938838532" h="1163.4691972897863"/>
+      <bbox x="257" y="49.5" w="941.7491938838532" h="1296.9691972897863"/>
     </glyph>
     <glyph id="glyph1" class="compartment" compartmentRef="glyph0">
       <extension>
@@ -551,7 +560,7 @@
       <port id="glyph68.2" x="640" y="335"/>
       <port id="glyph68.1" x="640" y="305"/>
     </glyph>
-    <glyph id="b6769d7e-7ff6-11a0-2620-b71d9cf91ded" class="macromolecule">
+    <glyph id="b6769d7e-7ff6-11a0-2620-b71d9cf91ded" class="macromolecule" compartmentRef="glyph0">
       <label text="Cav1&#xA;(1)"/>
       <bbox x="545.295935898724" y="149.66365023097822" w="70" h="35"/>
       <glyph id="b6769d7e-7ff6-11a0-2620-b71d9cf91ded_0" class="unit of information">
@@ -559,26 +568,26 @@
         <bbox x="900.4897787919874" y="192.15013218393335" w="23.3447265625" h="12"/>
       </glyph>
     </glyph>
-    <glyph id="glyph19" class="perturbing agent">
+    <glyph id="glyph19" class="perturbing agent" compartmentRef="glyph0">
       <label text="depolarization&#xA;(2)"/>
       <bbox x="651" y="60.5" w="70" h="35"/>
     </glyph>
-    <glyph id="glyph67" class="process">
-      <bbox x="671" y="139" w="30" h="30"/>
-      <port id="glyph67.1" x="671" y="154"/>
-      <port id="glyph67.2" x="701" y="154"/>
-    </glyph>
-    <glyph id="glyph48" class="simple chemical">
+    <glyph id="glyph48" class="simple chemical" compartmentRef="glyph0">
       <label text="Ca++&#xA;(3)"/>
       <bbox x="907" y="60.5" w="40" h="40"/>
     </glyph>
-    <glyph id="364697a4-255c-6c48-1fed-a8e91a24fc67" class="macromolecule">
-      <label text="Cav1&#xA;(4)"/>
+    <glyph id="364697a4-255c-6c48-1fed-a8e91a24fc67" class="macromolecule" compartmentRef="glyph0">
+      <label text="Cav1&#xA;(4)&#xA;(1)"/>
       <bbox x="767.3008014066335" y="149.66365023097822" w="70" h="35"/>
       <glyph id="364697a4-255c-6c48-1fed-a8e91a24fc67_0" class="unit of information">
         <label text="open"/>
         <bbox x="1276.0499607721315" y="192.15013218393335" w="22.24609375" h="12"/>
       </glyph>
+    </glyph>
+    <glyph id="glyph67" class="process">
+      <bbox x="671" y="139" w="30" h="30"/>
+      <port id="glyph67.1" x="671" y="154"/>
+      <port id="glyph67.2" x="701" y="154"/>
     </glyph>
     <glyph id="glyph69" class="process">
       <bbox x="912" y="139" w="30" h="30"/>

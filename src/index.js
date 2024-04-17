@@ -145,6 +145,7 @@
         fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
         //while(1);
         data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
+        console.log( data[0] );
 
 
         let result = SaxonJS.transform({
@@ -163,6 +164,7 @@
         parseString(result, function (err, data) {
           parsedResult = data;
         });
+        //console.log( parsedResult );
         errors = [];
         if (parsedResult["svrl:schematron-output"]["svrl:failed-assert"] == undefined) {
         }
@@ -1556,7 +1558,9 @@
         }).then(function () {
           snap.stop();
       //   next();
-      let data = jsonToSbgnml.createSbgnml(undefined, undefined, undefined, undefined, undefined, undefined, cy);
+      console.log( sbgnmlToJson.map.extension);
+      console.log( sbgnmlToJson.map.extension.get('renderInformation'));
+      let data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension.get('renderInformation'), sbgnmlToJson.map.extension.get('mapProperties'),cy.nodes(), cy.edges(), cy);
       data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
       currentSbgn = data;
 
@@ -1725,9 +1729,7 @@
             //console.log(edges.data());
             var addedNodeNum = edges.length;
             //console.log(edges.length);
-            /*var promptInvalidEdge = function(){
-                appUtilities.promptInvalidEdgeWarning.render();
-            }*/
+         
             var nodeParams = {class : eles.data().class, language : eles.data().language};
             for (var i = 0 ; i<addedNodeNum;i++){ 
                  var edgeParams = {class : edges[i].data().class, language : edges[i].data().language};
@@ -1965,8 +1967,8 @@
       //console.log(cy.edges()[1].data());
       // console.log("AfterFix");
       //errors = [];
-
-      let data = jsonToSbgnml.createSbgnml(undefined, undefined, undefined, undefined, undefined, undefined, cy);
+      console.log(sbgnmlToJson.map.extension);
+      let data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension.get('renderInformation'), sbgnmlToJson.map.extension.get('mapProperties'),cy.nodes(), cy.edges(), cy);
       data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
       currentSbgn = data;
       
@@ -2041,7 +2043,7 @@
         }).then(function () {
           snap.stop();
       //   next();
-      let data = jsonToSbgnml.createSbgnml(undefined, undefined, undefined, undefined, undefined, undefined, cy);
+      let data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension.get('renderInformation'), sbgnmlToJson.map.extension.get('mapProperties'),cy.nodes(), cy.edges(), cy);
       data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
 
 
