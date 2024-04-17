@@ -100,6 +100,8 @@ let applyErrorFix = async function(){
     $("#fixFormatErrors").removeClass("loading");
     $("#fixFormatErrors").prop('disabled', true);
           if(!res.errorMessage && (res.errors !== undefined || res.image !== undefined)) {
+            document.getElementById("errorsField").innerText = "Errors (" + res.remainingErrors + ")";
+            $('#errorsField').css({width : '86px'});
             $("#errorsArea").empty();
             //$("#errorsArea").css( {'max-height' : '100px', 'overflow':scroll, 'background-color' : 'lightblue'} );
             // get error info
@@ -233,6 +235,8 @@ let processValidation = async function () {
   currentSbgn = res.sbgn;
 
   if(!res.errorMessage && (res.errors !== undefined || res.image !== undefined)) {
+    document.getElementById("errorsField").innerText = "Errors (" + res.remainingErrors + ")";
+    $('#errorsField').css({width : '86px'});
     $("#errorsArea").empty();
     // get error info
     errors = res.errors;
@@ -246,8 +250,8 @@ let processValidation = async function () {
         //let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo +  '" style = "border = 10px solid ' +  errorHighlightColors[(error.errorNo - 1) % 8] + '">');
         let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo +  '">');
         list.append(errorNo);
-        list.append(errorPattern);
         list.append(errorRole);
+        list.append(errorPattern);
         list.append(errorText);
         errorRectangle.append(list);
         errorRectangle.append('</div>');
@@ -429,9 +433,13 @@ $("body").on("change", "#file-input", function (e, fileObject) {
     reader.readAsText(file);
 
     $("#file-input").val(null);
+    document.getElementById("errorsField").innerText = "Errors";
+    $('#errorsField').css({width: '50px'});
 });
 
 $("#load-file").on("click", function (e) {
+    document.getElementById("errorsField").innerText = "Errors";
+    $('#errorsField').css({width: '50px'});
     $("#file-input").trigger('click');
 });
 

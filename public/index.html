@@ -42,7 +42,8 @@
               <div class="field">
              <!--   <label id="load-file" class="underline">Open File...</label> -->
                 <div class="inline fields">
-                  <label>Open Sample:</label>
+                  
+                  <label style=" font-size: 1em !important;">Open Sample:</label>
                   <div class="six wide field" style="width: 49%!important;">
                     <select required id="sampleType">
                       <option value="">Select...</option>
@@ -153,8 +154,8 @@
         <!-- <div class="ui divider"></div> -->
         <div class="row" style="padding-bottom: 0; padding-top: 20px">
           <div class="center aligned column">
-            <button id="applyValidation" class="ui primary button">Validate</button>
-            <button id="fixFormatErrors" class="ui primary button" disabled = "true">Fix Errors</button>
+            <button id="applyValidation" class="ui primary button">Validate Map</button>
+            <button id="fixFormatErrors" class="ui primary button" disabled = "true">Resolve Errors</button>
           </div>
           <!--<div class="center aligned column">
             <button id="fixFormatErrors" class="ui primary button">Validate</button>
@@ -167,9 +168,9 @@
             <div class="ui form">
               <div class="field"  style = "display: flex;">
                 
-                <div class="inline fields">
-                  <h3 class="ui header" style="margin-bottom: -3px; margin-right: 7.5px">Errors</h3>
-                  <img class="ui image" id="downloadJSON" src="img/download.svg" title="Download JSON file" style="height: 25px; width: 25px; padding: 2.5px" />
+                <div class="inline fields" style = "width : 130px;">
+                  <h3 class="ui header" id = "errorsField" style="margin-bottom: -3px; margin-right: 7.5px;">Errors</h3>
+                  <img class="ui image" id = "downloadJSON" src="img/download.svg" title="Download as JSON file" style="height: 25px; width: 25px; padding: 2.5px" />
                   <!--<img class="ui image" id="downloadJSON" src="img/download.svg" title="Download JSON file" style="height: 25px; width: 25px; padding: 2.5px" />
                   <div style="margin-bottom: -10px; margin-right: 7.5px">Errors</div> -->
                  
@@ -180,8 +181,8 @@
 
               </div>
               <!-- <div class="field"  style = "display: flex; margin-bottom: 10px; margin-left: 312px;right: 0px;">  -->
-              <div class="inline fields" style = "margin-left: 308px;align-items: right; position: relative;text-align: right;">
-                 <img class="ui image" id="downloadSBGN" src="img/download.svg" title="Download SBGNML file" style="height: 25px; width: 25px; padding: 2.5px" />
+              <div class="inline fields" style = "left : 240px;float : right;align-items: right; position: relative;text-align: right;">
+                 <img class="ui image" id="downloadSBGN" src="img/download.svg" title="Download map as SBGNML file" style="height: 25px; width: 25px; padding: 2.5px" />
                  
                   <label class="ui header" style="margin-bottom: 0px; margin-left: 7.5px; font-size: 14px;">SBGNML</label>
 
@@ -216,7 +217,7 @@
               <div class="field">
                 <div class="inline fields">
                   <h3 class="ui header" style="margin-bottom: -3px; margin-right: 7.5px">Image</h3>
-                  <img class="ui image" id="downloadImage" src="img/download.svg" title="Download image" style="height: 25px; width: 25px; padding: 2.5px;"> 
+                  <img class="ui image" id="downloadImage" src="img/download.svg" title="Download map as image" style="height: 25px; width: 25px; padding: 2.5px;"> 
                 </div>
                 <div id="imageArea"class="ui segment" style="width: auto; height: 348px; margin-top: -3px; padding: 0px;"
                 >
@@ -229,7 +230,7 @@
         <div class="ui divider"></div>
         <div class="row" style="padding-bottom: 0; padding-top: 0; font-size: 13px;">
           <div class="center aligned column">
-            Copyright © 2023 - present by 
+            Copyright © 2024 - present by 
             <a href="https://www.cs.bilkent.edu.tr/~ivis/" target="_blank">
              Bilkent i-Vis Research Lab.
             </a> All rights reserved. 

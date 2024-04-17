@@ -692,6 +692,7 @@
     let ret = {};
 
     ret['errors'] = errors;
+    ret['remainingErrors'] = errors.length;
     //console.log( errors );
 
     let bgColors = [];
@@ -2036,6 +2037,7 @@
           //next();
           ret['errors'] = errors;
           ret['sbgn'] = currentSbgn;
+          ret['remainingErrors'] = numberOfUnsolvedErrors;
           console.log("before return ");
           //console.log( errors);
           return res.status(200).send(ret);
