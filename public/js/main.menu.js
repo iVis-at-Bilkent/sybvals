@@ -101,7 +101,8 @@ let applyErrorFix = async function(){
     $("#fixFormatErrors").prop('disabled', true);
           if(!res.errorMessage && (res.errors !== undefined || res.image !== undefined)) {
             document.getElementById("errorsField").innerText = "Errors (" + res.remainingErrors + ")";
-            $('#errorsField').css({width : '86px'});
+            let errorWidth = 86 - ( res.remainingErrors % 10 === res.remainingErrors) * 10;
+            $('#errorsField').css({width : errorWidth + 'px'});
             $("#errorsArea").empty();
             //$("#errorsArea").css( {'max-height' : '100px', 'overflow':scroll, 'background-color' : 'lightblue'} );
             // get error info
@@ -115,7 +116,7 @@ let applyErrorFix = async function(){
                 //let errorNo = $('<div class="ui item"> <b>Error No:</b> ' + error.errorNo + '</div>');
                 //errorNo.append('<img src = "' + imgSource +  '" style="margin-left : 363px; height: 20px; width: 20px;" />');
                 errorNo.append('<img src = "' + imgSource +  '" style=" height: 20px; width: 20px;" />');
-                errorNo.append('<div class="ui item" style = "margin-left : 5px;"> <b>Error No:</b> ' + error.errorNo + '</div>');
+                errorNo.append('<div class="ui item" style = "margin-left : 5px;"> <b>Error </b> ' + error.errorNo + '</div>');
                 let errorPattern = $('<div class="ui item"> <b>Pattern:</b> ' + error.pattern + '</div>');
                 let errorRole = $('<div class="ui item"> <b>Role:</b> ' + error.role + '</div>');
                 let errorText = $('<div class="ui item"> <b>Message:</b> ' + error.text + '</div>');
@@ -130,7 +131,9 @@ let applyErrorFix = async function(){
                 list.append(errorPattern);
                 list.append(errorText);
                 //list.append(errorStatus);
-                list.append(fixExplanation);
+                if( error.explanation !== undefined ){
+                    list.append(fixExplanation);
+                }
                 errorRectangle.append(list);
                 list.css({'margin' : '2px'});
                 list.css({'margin-bottom': '5px'});
@@ -236,13 +239,14 @@ let processValidation = async function () {
 
   if(!res.errorMessage && (res.errors !== undefined || res.image !== undefined)) {
     document.getElementById("errorsField").innerText = "Errors (" + res.remainingErrors + ")";
-    $('#errorsField').css({width : '86px'});
+    let errorWidth = 86 - ( res.remainingErrors % 10 === res.remainingErrors) * 10;
+    $('#errorsField').css({width : errorWidth + 'px'});
     $("#errorsArea").empty();
     // get error info
     errors = res.errors;
     if(errors.length > 0) {
       res.errors.forEach((error) => {
-        let errorNo = $('<div class="ui item"> <b>Error No:</b> ' + error.errorNo + '</div>');
+        let errorNo = $('<div class="ui item"> <b>Error </b> ' + error.errorNo + '</div>');
         let errorPattern = $('<div class="ui item"> <b>Pattern:</b> ' + error.pattern + '</div>');
         let errorRole = $('<div class="ui item"> <b>Role:</b> ' + error.role + '</div>');
         let errorText = $('<div class="ui item"> <b>Message:</b> ' + error.text + '</div>');
@@ -461,7 +465,7 @@ $("#imageSettingsDefault").on("click", function (e) {
    $("#imageBackground").attr("disabled", true);
    $("#transparent").prop("checked", true);
    $("#highlightColor").val("#ff0000");
-   $("#highlightWidth").val(5);
+   $("#highlightWidth").val(10);
 });
 
 $("#transparent").change(function() {

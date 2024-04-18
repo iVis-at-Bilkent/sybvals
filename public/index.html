@@ -43,7 +43,7 @@
              <!--   <label id="load-file" class="underline">Open File...</label> -->
                 <div class="inline fields">
                   
-                  <label style=" font-size: 1em !important;">Open Sample:</label>
+                  <label style=" font-size: 14px !important;">Open Sample:</label>
                   <div class="six wide field" style="width: 49%!important;">
                     <select required id="sampleType">
                       <option value="">Select...</option>
@@ -55,7 +55,7 @@
                   </div>
                 </div>
                 <div class="ui labeled button" id="load-file" tabindex="0">
-                  <a class="ui basic label">
+                  <a class="ui basic label" style = "font-size: 14px !important;">
                     Open File...
                   </a>
                 </div>     
@@ -145,7 +145,7 @@
                 </div> -->
                 <span class="add-on layout-text option-label" title="Underlay padding used to highlight elements"> Highlight Width: </span>
                 <div class="two wide field">
-                  <input type="number" id="highlightWidth" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : 0" value="5" min="1">
+                  <input type="number" id="highlightWidth" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : 0" value="10" min="1">
                 </div>
               </div>
             </div>
@@ -169,7 +169,7 @@
               <div class="field"  style = "display: flex;">
                 
                 <div class="inline fields" style = "width : 130px;">
-                  <h3 class="ui header" id = "errorsField" style="margin-bottom: -3px; margin-right: 7.5px;">Errors</h3>
+                  <h3 class="ui header" id = "errorsField" style="margin-bottom: -2px !important; margin-right: 7.5px;">Errors</h3>
                   <img class="ui image" id = "downloadJSON" src="img/download.svg" title="Download as JSON file" style="height: 25px; width: 25px; padding: 2.5px" />
                   <!--<img class="ui image" id="downloadJSON" src="img/download.svg" title="Download JSON file" style="height: 25px; width: 25px; padding: 2.5px" />
                   <div style="margin-bottom: -10px; margin-right: 7.5px">Errors</div> -->
@@ -184,7 +184,7 @@
               <div class="inline fields" style = "left : 240px;float : right;align-items: right; position: relative;text-align: right;">
                  <img class="ui image" id="downloadSBGN" src="img/download.svg" title="Download map as SBGNML file" style="height: 25px; width: 25px; padding: 2.5px" />
                  
-                  <label class="ui header" style="margin-bottom: 0px; margin-left: 7.5px; font-size: 14px;">SBGNML</label>
+                  <label class="ui header" style="margin-bottom: 1px !important; margin-left: 7.5px; font-size: 14px;">SBGNML</label>
 
                 <!--<img class="ui image" id="downloadSBGN" src="img/download.svg" title="Download JSON file" style="height: 25px; width: 25px; padding: 2.5px" />
                 <!-- <label class="ui header" style="margin-bottom: 0px; margin-left: 7.5px; font-size: 14px;">SBGNML</label> -->
@@ -212,14 +212,14 @@
 
               </div>
               <div class="ui divider"></div>
-          <div class="nine wide centered column" style="margin-top: 11.5px">
+          <div class="nine wide centered column" style="margin-top: 8.5px">
             <div class="ui form">
               <div class="field">
                 <div class="inline fields">
                   <h3 class="ui header" style="margin-bottom: -3px; margin-right: 7.5px">Image</h3>
                   <img class="ui image" id="downloadImage" src="img/download.svg" title="Download map as image" style="height: 25px; width: 25px; padding: 2.5px;"> 
                 </div>
-                <div id="imageArea"class="ui segment" style="width: auto; height: 348px; margin-top: -3px; padding: 0px;"
+                <div id="imageArea"class="ui segment" style="width: auto; height: 348px; margin-top: 0px; padding: 0px;"
                 >
                   <img style="cursor:pointer; padding: 0px !important;" class="ui centered huge image" id="resultImage">
                 </div>

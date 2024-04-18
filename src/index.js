@@ -43,7 +43,7 @@
     height: 720,
     color: 'greyscale',
     highlightColor: '#ff0000',
-    highlightWidth: 10
+    highlightWidth: 30
   };
 
   const $ = jQuery = require('jquery')(window);
@@ -242,7 +242,7 @@
       height: 720,
       color: 'greyscale',
       highlightColor: '#ff0000',
-      highlightWidth: 10
+      highlightWidth: 30
     };
 
     if (options.imageOptions) {
@@ -1657,7 +1657,7 @@
         else{ 
         errors[check].status = "solved";
         ele.move({"parent": listedNodes[0].data().id});
-        errors[check].explanation = "This bug is fixed by placing " + errors[check].role + " inside " + listedNodes[0].data().id + ".";
+        errors[check].explanation = "Fixed by " + errors[check].role + " inside " + listedNodes[0].data().id + ".";
         }
       }
       else if( errors[check].pattern == "pd10126"){
