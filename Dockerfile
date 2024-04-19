@@ -1,12 +1,12 @@
-FROM node:14.18.0
+FROM node:14.20.1
 
 # install git
 RUN apt-get update
 RUN apt-get install -y git
 
 # clone the repository
-RUN git clone https://github.com/iVis-at-Bilkent/syblars.git
-WORKDIR syblars
+RUN git clone https://github.com/iVis-at-Bilkent/sbgn-validation-service.git
+WORKDIR sbgn-validation-service
 
 # install dependencies
 RUN npm install
