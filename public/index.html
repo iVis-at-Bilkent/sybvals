@@ -257,22 +257,25 @@
           ABOUT
         </div>
         <div class="scrolling content" style="text-align: justify;">
-          <b>Systems Biology Layout & Rendering Service (SyBLaRS)</b> is a web service to lay out graphs in SBGNML, SBML, GraphML and JSON 
-          formats and produce corresponding images of the layouts with an option to highlight results from various graph queries in the backend. 
+          <b>Systems Biology Validation Service (SyBValS)</b> is a web service to validate the graphs in SBGNML 
+          formats and produce corresponding images of the graph with an option to highlight errors in SBGML format from various graph queries in the backend.
+          After validating graphs, the errors in the graph are resolved and service produces corresponding image for the graoh after resolution.
           This page presents a sample client-side demo for SyBLaRS. <br><br>
           To use the demo, please follow these steps:
           <ul>
-            <li>Open a file in one of the following formats: SBGNML, SBML, GraphML or JSON (or open one of the sample files)</li>
+            <li>Open a file in one of the following formats: SBGNML(or open one of the sample files)</li>
             <li>Select a layout style and modify corresponding layout options as desired</li>
             <li>Select an image format and image options as desired</li>
             <li>Select a query type and query options as desired if you want to highlight a subgraph of interest</li>
-            <li>Click on "Apply Layout" button</li>
-            <li>Now you can view/download layout info in "JSON" field and corresponding image in "Image" field</li>
+            <li>Click on "Validate Layout" button</li>
+            <li>Now you can view/download layout info in "JSON" field and corresponding image in "Image" field for Validated Map</li>
+            <li>Click on "Resolve Errors" button</li>
+            <li>Now you can view/download layout info in "JSON" field and corresponding image in "Image" field for the Map after error resolving</li>
           </ul>
 		  
-          <p class="address-text">
+          <!-- <p class="address-text">
             A video illustrating how to use this demo can be found on <a href="https://youtu.be/dr1gqSR8OGM" target="_blank">YouTube</a>. 
-          </p> 		  
+          </p> 		   -->
 			
             Here are the notations used for
             <div class="ui accordion">
@@ -283,27 +286,13 @@
               <div class="content">
                 <img class="image" src="https://raw.githubusercontent.com/iVis-at-Bilkent/syblars/main/img/SBGNML_stylesheet.svg" width="700px">
               </div>
-              <div class="title">
-                <i class="dropdown icon"></i>
-                SBML Stylesheet
-              </div>
-              <div class="content">
-                <img class="image" src="https://raw.githubusercontent.com/iVis-at-Bilkent/syblars/main/img/SBML_stylesheet.svg" width="700px">
-              </div>
-              <div class="title">
-                <i class="dropdown icon"></i>
-                GraphML & JSON Stylesheet
-              </div>
-              <div class="content">
-                <img class="image" src="https://raw.githubusercontent.com/iVis-at-Bilkent/syblars/main/img/GraphML&JSON_stylesheet.svg" width="700px">
-              </div>
             </div> 
 			<p style="margin-bottom: 7px"></p>
           <p class="address-text">
-            The source code of the service together with further details/help can be found <a href="https://github.com/iVis-at-Bilkent/syblars" target="_blank">here</a>. 
+            The source code of the service together with further details/help can be found <a href="https://github.com/iVis-at-Bilkent/sbgn-validation-service" target="_blank">here</a>. 
           </p>          
           <p class="address-text">
-            See <a href="https://github.com/iVis-at-Bilkent/syblars#credits" target="_blank">here</a> for third-party libraries used.
+            See <a href="https://github.com/iVis-at-Bilkent/sbgn-validation-service#credits" target="_blank">here</a> for third-party libraries used.
           </p>          
         </div>
         <div class="actions">

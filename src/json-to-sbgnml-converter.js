@@ -123,8 +123,8 @@ const jsonToSbgnml = {};
   };
 
   jsonToSbgnml.createSbgnml = function(filename, version, renderInfo, mapProperties, nodes, edges, cy) {
-    console.log( renderInfo);
-  console.log( mapProperties);
+    //console.log( renderInfo);
+  //console.log( mapProperties);
     var jsObj = jsonToSbgnml.buildJsObj(filename, version, renderInfo, mapProperties, nodes, edges, cy);
     return jsonToSbgnml.buildString({sbgn: jsObj});
   }

@@ -48,6 +48,30 @@
 
   const $ = jQuery = require('jquery')(window);
 
+  function postProcessForLayouts(cy){
+    let processNodes = cy.nodes('[class = "process"]');
+    for( let i = 0; i < processNodes.length;i++){
+      //console.log( i );
+      //console.log( processNodes[i] );
+      let compartment;
+      let connectedNodes = processNodes[i].connectedEdges().map(edge => (edge.source() == processNodes[i] ? edge.target() : edge.source()));
+      for( let j = 0; j < connectedNodes.length; j++){
+        //console.log( connectedNodes[j].parent().id());
+        if( compartment === undefined ){
+          compartment = connectedNodes[j].parent();
+        }
+        if( compartment !== -1 && compartment.id() != connectedNodes[j].parent().id() ){
+          compartment = -1;
+        }
+      }
+      if( compartment !== -1 ){
+        processNodes[i].move({"parent": compartment.id()});
+      }
+    }
+
+
+  }
+
   // for fcose
   const fcose = require('cytoscape-fcose');
   cytoscape.use(fcose);
@@ -145,7 +169,7 @@
         fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
         //while(1);
         data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
-        console.log( data[0] );
+        //console.log( data[0] );
 
 
         let result = SaxonJS.transform({
@@ -1559,8 +1583,8 @@
         }).then(function () {
           snap.stop();
       //   next();
-      console.log( sbgnmlToJson.map.extension);
-      console.log( sbgnmlToJson.map.extension.get('renderInformation'));
+      //console.log( sbgnmlToJson.map.extension);
+      //console.log( sbgnmlToJson.map.extension.get('renderInformation'));
       let data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension.get('renderInformation'), sbgnmlToJson.map.extension.get('mapProperties'),cy.nodes(), cy.edges(), cy);
       data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
       currentSbgn = data;
@@ -1968,7 +1992,7 @@
       //console.log(cy.edges()[1].data());
       // console.log("AfterFix");
       //errors = [];
-      console.log(sbgnmlToJson.map.extension);
+      //console.log(sbgnmlToJson.map.extension);
       let data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension.get('renderInformation'), sbgnmlToJson.map.extension.get('mapProperties'),cy.nodes(), cy.edges(), cy);
       data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
       currentSbgn = data;
@@ -2016,7 +2040,7 @@
     //console.log( "after return " + errors.length);
     let colorScheme = imageOptions.color || "white";
     let stylesheet = adjustStylesheet('sbgnml', colorScheme);
-
+    postProcessForLayouts(cy);
     try {
      //next();
 
