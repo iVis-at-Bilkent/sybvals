@@ -1,3 +1,4 @@
+
 // This is for using the service with a hostname other than localhost
 syblars = !(location.hostname === "localhost");
 
@@ -365,15 +366,25 @@ $('#downloadSBGN').click( function(){
   var blob = new Blob([currentSbgn], {
     type: "text/plain;charset=utf-8;",
   });
-  saveAs(blob, "currentSbgn.sbgn");
+  if( document.getElementById("file-name").innerHTML !== ""){
+      saveAs(blob,  document.getElementById("file-name").innerHTML);
+  }
 
 }
 );
 $('#downloadJSON').click(function(){
-
+  
+  errors.forEach( error => {
+    if( Array.isArray(error.text) ){
+      error.text = error.text[0];
+      error.text = error.text.substr(0, error.text.length - 4);
+    }
+    else {
+      error.text = error.text.substr(0, error.text.length - 1);
+    }    
+  });
   if(errors.length > 0) {
     let jsonText = JSON.stringify(errors, null, 2);
-
     if(jsonText != "") {
       let blob = new Blob([jsonText], {
           type: "application/json;charset=utf-8;"
@@ -401,6 +412,7 @@ $("body").on("change", "#file-input", function (e, fileObject) {
     let file = fileInput.files[0] || fileObject;
     let reader = new FileReader();
     setFileContent(file.name);
+    console.log( file.name);
     reader.onload = async function (e) {
         $("#file-type").html('');
         if(!fileObject)
@@ -722,6 +734,7 @@ function loadXMLDoc(fileName) {
 }
 
 function loadSample(fileName){
+  console.log(fileName);
 	let xmlResponse = loadXMLDoc(fileName);
   let fileObj;
   
@@ -751,7 +764,7 @@ $("#save-sbgn").click(function(){
   var blob = new Blob([currentSbgn], {
     type: "text/plain;charset=utf-8;",
   });
-  saveAs(blob, "currentSbgn.sbgn");
+  saveAs(blob,  document.getElementById("file-name").innerHTML);
 });
 
 $("#resultImage").on("click", function (e) {
