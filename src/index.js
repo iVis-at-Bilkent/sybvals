@@ -1731,6 +1731,7 @@ app.post('/fixError', (req, res) => {
       }
       if (connectedEdges.length !== 0) {
         errors[check].status = "solved";
+        errors[check].explanation = "Edge between " + ele.id() + " and " + selectedEdge.source().id() + " is kept."
         fixError(errorFixParam);
       }
       else
@@ -1767,6 +1768,7 @@ app.post('/fixError', (req, res) => {
         errorFixParam.edge = ele;
         errorFixParam.portsource = selectedNode.id();
         errors[check].status = "solved";
+        errors[check].explanation = "Arc " + ele.id() + " is connected to " + selectedNode.id() + ".";
         fixError(errorFixParam);
       }
       else
@@ -1842,6 +1844,7 @@ app.post('/fixError', (req, res) => {
         errorFixParam.oldEdges.push(edges[i]);
       }
       errors[check].status = "solved";
+      errors[check].explanation = "Source and sink glyph(" + eles.id() + ") is splitted for each consumption arc.";
       fixError(errorFixParam);
     }
     else if (errors[check].pattern == "pd10101") {
@@ -1849,6 +1852,7 @@ app.post('/fixError', (req, res) => {
       if (elementUtilities.isEPNClass(targetTmp)) {
         errorFixParam.edge = ele;
         fixError(errorFixParam);
+        errors[check].explanation = "Source and target of consumption arc(" + ele.id() + ") have been swapped.";
         errors[check].status = "solved";
       }
       else
@@ -1899,20 +1903,22 @@ app.post('/fixError', (req, res) => {
       errorFixParam.newEdge = { source: source.id(), target: target.id(), edgeParams: edgeParams };
       fixError(errorFixParam);
       errors[check].status = "solved";
+      errors[check].explanation = "The arc(" + ele.id() + ") has a target reference to " + target.id() + ".";
     }
     else if (errors[check].pattern == "pd10111") {
       errorFixParam.edges = [];
       let connectedEdges = cy.edges('[source =  "' + ele.id() + '"]');
       console.log(connectedEdges.length);
       if (connectedEdges.length !== 0) {
-        let selectedEdgeId = connectedEdges[0].id(); // default , the selection of edge will be determined later.
+        let selectedEdge = connectedEdges[0]; // default , the selection of edge will be determined later.
         for (let i = 0; i < connectedEdges.size(); i++) {
-          if (connectedEdges[i].id() != selectedEdgeId) {
+          if (connectedEdges[i].id() != selectedEdge.id() ) {
             errorFixParam.edges.push(connectedEdges[i]);
           }
         }
         fixError(errorFixParam);
         errors[check].status = "solved";
+        errors[check].explanation = "Arc between " + ele.id() + " and " + selectedEdge.target.id() + " is kept."; 
       }
       else
         numberOfUnsolvedErrors++;
@@ -1921,14 +1927,16 @@ app.post('/fixError', (req, res) => {
       var connectedEdges = ele.connectedEdges().filter('[class="consumption"]');
       errorFixParam.nodes = [];
       errorFixParam.edges = [];
-      selectedEdge = connectedEdges[0].id(); // default selection, it will be determined. closest one will be kept. 
+      selectedEdge = connectedEdges[0]; // default selection, it will be determined. closest one will be kept. 
       for (let i = 0; i < connectedEdges.size(); i++) {
-        if (connectedEdges[i].id() != selectedEdge) {
+        if (connectedEdges[i].id() != selectedEdge.id()) {
           errorFixParam.nodes.push(connectedEdges[i].source().id() == ele.id() ? connectedEdges[i].target() : connectedEdges[i].source());
           errorFixParam.edges.push(connectedEdges[i]);
         }
       }
       fixError(errorFixParam);
+      errors[check].explanation = "The arc between dissocation glyph(" + ele.id() + ") and consumption glyph(" + (selectedEdge.source().id() === ele.id() ? 
+      selectedEdge.target().id() : selectedEdge.source().id()) + ") is kept."; 
       errors[check].status = "solved";
     }
     else if (errors[check].pattern == "pd10108") {
@@ -1936,16 +1944,18 @@ app.post('/fixError', (req, res) => {
 
       // choose deleted edges and nodes each here when the deletion method is determined
 
-      let selectedEdge = connectedEdges[0].id();
+      let selectedEdge = connectedEdges[0];
 
       errorFixParam.edges = [];
       errorFixParam.nodes = [];
       for (let i = 0; i < connectedEdges.size(); i++) {
-        if (connectedEdges[i].id() != selectedEdge) {
+        if (connectedEdges[i].id() != selectedEdge.id()) {
           errorFixParam.edges.push(connectedEdges[i]);
           errorFixParam.nodes.push(connectedEdges[i].source().id() == ele.id() ? connectedEdges[i].target() : connectedEdges[i].source());
         }
         fixError(errorFixParam);
+        errors[check].explanation = "The arc between assocation glyph(" + ele.id() + ") and production glyph(" + (selectedEdge.source().id() === ele.id() ? 
+        selectedEdge.target().id() : selectedEdge.source().id()) + ") is kept."; 
         errors[check].status = "solved";
       }
 
@@ -1984,6 +1994,7 @@ app.post('/fixError', (req, res) => {
       errorFixParam.portsource = selectedNode.id();
       fixError(errorFixParam);
       errors[check].status = "solved";
+      errors[check].explanation = "Modulation arc(" + ele.id() + ") has a source reference to " + selectedNode.id() + ".";
     }
 
     else if (errors[check].pattern == "pd10125") {
@@ -2010,8 +2021,8 @@ app.post('/fixError', (req, res) => {
       errorFixParam.edge = ele;
       errorFixParam.portsource = selectedNode.id();
       fixError(errorFixParam);
-      errors[check].status = "solved";
-    }
+      errors[check].status = "solved";   
+     }
 
     else if (errors[check].pattern == "pd10105" || errors[check].pattern == "pd10106") {
       let sourceNode = ele.source();
@@ -2020,6 +2031,7 @@ app.post('/fixError', (req, res) => {
         errorFixParam.edge = ele;
         fixError(errorFixParam);
         errors[check].status = "solved";
+        errors[check].explanation = "The source and target of production arc(" + ele.id() + ") have been swapped.";
       }
     }
 
