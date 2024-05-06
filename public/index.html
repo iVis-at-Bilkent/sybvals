@@ -258,19 +258,17 @@
         </div>
         <div class="scrolling content" style="text-align: justify;">
           <b>Systems Biology Validation Service (SyBValS)</b> is a web service to validate the graphs in SBGNML 
-          formats and produce corresponding images of the graph with an option to highlight errors in SBGML format from various graph queries in the backend.
-          After validating graphs, the errors in the graph are resolved and service produces corresponding image for the graoh after resolution.
-          This page presents a sample client-side demo for SyBLaRS. <br><br>
+          format and produce corresponding images of the graph with an option to highlight errors in the backend.
+          After validating graphs, the errors in the graph can be resolved and service produces corresponding image for the graoh after resolution.
+          This page presents a sample client-side demo for SyBValS. <br><br>
           To use the demo, please follow these steps:
           <ul>
-            <li>Open a file in one of the following formats: SBGNML(or open one of the sample files)</li>
-            <li>Select a layout style and modify corresponding layout options as desired</li>
+            <li>Open a file in SBGNML format (or open one of the sample files)</li>
             <li>Select an image format and image options as desired</li>
-            <li>Select a query type and query options as desired if you want to highlight a subgraph of interest</li>
-            <li>Click on "Validate Layout" button</li>
-            <li>Now you can view/download layout info in "JSON" field and corresponding image in "Image" field for Validated Map</li>
-            <li>Click on "Resolve Errors" button</li>
-            <li>Now you can view/download layout info in "JSON" field and corresponding image in "Image" field for the Map after error resolving</li>
+            <li>Click on "Validate Map" button to apply validation</li>
+            <li>Now you can view/download error info in "Errors" field and corresponding image in "Image" field for validated map</li>
+            <li>Click on "Resolve Errors" button to resolve errors</li>
+            <li>Now you can view/download the updated error info in "Errors" field and corresponding image in "Image" field for the map after resolving errors. You can also download the SBGNML file after errors are resolved.</li>
           </ul>
 		  
           <!-- <p class="address-text">
