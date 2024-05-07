@@ -59,7 +59,7 @@ let applyErrorFix = async function(){
   url = "http://localhost:" + port + "/fixError?errorFixing=true";
   }
   else {
-      url = "http://ivis.cs.bilkent.edu.tr:3400/fixError?errorFixing=true";
+      url = "http://sybvals.cs.bilkent.edu.tr/fixError?errorFixing=true";
   }
   imageFormat = $('#formatRadios').find('[name="format"]:checked').val();
 
@@ -192,7 +192,7 @@ let processValidation = async function () {
       //console.log( "request before " + port );
       url = "http://localhost:" + port + "/validation?edges=true";
   } else { // NOTE: If you are using the service with a different hostname, please change below accordingly
-      url = "http://ivis.cs.bilkent.edu.tr:3400/validation?edges=true";
+      url = "http://sybvals.cs.bilkent.edu.tr/validation?edges=true";
   }
 
   imageFormat = $('#formatRadios').find('[name="format"]:checked').val();
