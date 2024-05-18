@@ -101,14 +101,18 @@ let applyErrorFix = async function(){
     $("#fixFormatErrors").removeClass("loading");
     $("#fixFormatErrors").prop('disabled', true);
           if(!res.errorMessage && (res.errors !== undefined || res.image !== undefined)) {
-            document.getElementById("errorsField").innerText = "Errors (" + res.remainingErrors + ")";
+            document.getElementById("errorsField").innerText = res.remainingErrors > 0 ? "Errors (" + res.remainingErrors + ")" : "Errors (none)";
             let errorWidth = 86 - ( res.remainingErrors % 10 === res.remainingErrors) * 10;
+            if( res.remainingErrors === 0){
+              errorWidth = 140;
+            }
             $('#errorsField').css({width : errorWidth + 'px'});
             $("#errorsArea").empty();
             //$("#errorsArea").css( {'max-height' : '100px', 'overflow':scroll, 'background-color' : 'lightblue'} );
             // get error info
             errors = res.errors;
             //console.log( errors );
+            let numberOfUnsolvedErrors = 0;
             if(errors.length > 0) {
               res.errors.forEach((error ) => {
                 let imgSource = error.status === "solved" ? "img/check-mark.png" : "img/cross.png";
@@ -153,7 +157,11 @@ let applyErrorFix = async function(){
                 //$("#errorsArea").append(uiDivider);
                 // console.log(errorString);
                 //console.log( $(errorString).css('border') );
-                $(errorString ).css({'border' : '3px solid' , 'border-color' : errorHighlightColors[(error.errorNo -1) % 8 ] });
+                $(errorString ).css({'border' : '3px solid' , 'border-color' : error.status === "unsolved" ? errorHighlightColors[ numberOfUnsolvedErrors % 8 ]
+                 : "grey" });
+                 if( error.status == "unsolved"){
+                  numberOfUnsolvedErrors++;
+                }
                 $(errorString).css({'margin-right': '7px'});
                 //console.log( $(errorString).css('border') );
               });
@@ -239,8 +247,13 @@ let processValidation = async function () {
   currentSbgn = res.sbgn;
 
   if(!res.errorMessage && (res.errors !== undefined || res.image !== undefined)) {
-    document.getElementById("errorsField").innerText = "Errors (" + res.remainingErrors + ")";
+    //document.getElementById("errorsField").innerText = "Errors (" + res.remainingErrors + ")";
+    document.getElementById("errorsField").innerText = res.remainingErrors > 0 ? "Errors (" + res.remainingErrors + ")" : "Errors (none)";
     let errorWidth = 86 - ( res.remainingErrors % 10 === res.remainingErrors) * 10;
+    if( res.remainingErrors === 0){
+      errorWidth = 140;
+    }
+    //let errorWidth = 86 - ( res.remainingErrors % 10 === res.remainingErrors) * 10;
     $('#errorsField').css({width : errorWidth + 'px'});
     $("#errorsArea").empty();
     // get error info

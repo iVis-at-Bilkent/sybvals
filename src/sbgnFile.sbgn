@@ -276,16 +276,6 @@
         </glyph>
       </glyph>
     </glyph>
-    <glyph id="glyph27" class="process" compartmentRef="glyph1">
-      <bbox x="1032.1022972413107" y="619.0457032900716" w="15" h="15"/>
-      <port id="glyph27.1" x="1039.6022972413107" y="619.0457032900716"/>
-      <port id="glyph27.2" x="1039.6022972413107" y="634.0457032900716"/>
-    </glyph>
-    <glyph id="glyph28" class="process" compartmentRef="glyph1">
-      <bbox x="1114.103277706198" y="689.7153723217443" w="15" h="15"/>
-      <port id="glyph28.1" x="1129.103277706198" y="697.2153723217443"/>
-      <port id="glyph28.2" x="1114.103277706198" y="697.2153723217443"/>
-    </glyph>
     <glyph id="glyph22" class="source and sink" compartmentRef="glyph1">
       <bbox x="1056.9163417549303" y="876.3069034826349" w="25" h="25"/>
     </glyph>
@@ -307,6 +297,11 @@
       <label text="Hsp70"/>
       <bbox x="949.364189360105" y="656.5195962733725" w="70" h="35"/>
     </glyph>
+    <glyph id="glyph27" class="process" compartmentRef="glyph1">
+      <bbox x="1032.1022972413107" y="619.0457032900716" w="15" h="15"/>
+      <port id="glyph27.1" x="1039.6022972413107" y="619.0457032900716"/>
+      <port id="glyph27.2" x="1039.6022972413107" y="634.0457032900716"/>
+    </glyph>
     <glyph id="glyph40" class="macromolecule multimer" compartmentRef="glyph1">
       <label text="Sis1"/>
       <bbox x="1008.1868915515513" y="717.6819707828051" w="74" h="36"/>
@@ -314,6 +309,11 @@
         <label text="N:2"/>
         <bbox x="1752.8202801553048" y="956.2964556298299" w="31" h="16"/>
       </glyph>
+    </glyph>
+    <glyph id="glyph28" class="process" compartmentRef="glyph1">
+      <bbox x="1114.103277706198" y="689.7153723217443" w="15" h="15"/>
+      <port id="glyph28.1" x="1129.103277706198" y="697.2153723217443"/>
+      <port id="glyph28.2" x="1114.103277706198" y="697.2153723217443"/>
     </glyph>
     <glyph id="glyph15" class="macromolecule" compartmentRef="glyph1">
       <label text="E3(San1)"/>
@@ -461,7 +461,7 @@
       <start/>
       <end/>
     </arc>
-    <arc id="nwtE_699bebf0-4356-495a-a410-399e98a0487a" class="logic arc" source="glyph15" target="glyph23">
+    <arc id="nwtE_2b1de4b1-c9ce-468e-a019-22eedb02515c" class="logic arc" source="glyph15" target="glyph23">
       <start/>
       <end/>
     </arc>
@@ -473,7 +473,7 @@
       <start/>
       <end/>
     </arc>
-    <arc id="nwtE_942f9a73-5e29-41c6-9098-6d7f78b58b04" class="logic arc" source="glyph6" target="glyph23">
+    <arc id="nwtE_ee26b0aa-26bc-4453-9321-930a17ba9403" class="logic arc" source="glyph6" target="glyph23">
       <start/>
       <end/>
     </arc>
