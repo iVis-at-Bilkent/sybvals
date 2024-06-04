@@ -173,7 +173,19 @@ option {
 .ui.labeled.button {
   background-color: #efefef !important;
 }
+#resultImage {
+  resize: both;
+  overflow: auto;
+}
+#imageArea {
+  resize: both;
+  overflow: auto;
+  direction: ltr;
+  
+}
 
 #imageModal {
-  width: auto;
+  width: 600px;
+  height: 600px;
+  z-index: 500;
 }

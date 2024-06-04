@@ -206,13 +206,13 @@
               </div> -->
                   <div class="ui divider"></div>
 
-          <div id="errorsArea" style = "overflow-x: hidden;  overflow-y: scroll; max-height: 348px;"></div>
+          <div id="errorsArea" style = "overflow-x: hidden;  overflow-y: scroll; max-height: 348px;z-index: 1000;"></div>
 
 
 
               </div>
               <div class="ui divider"></div>
-          <div class="nine wide centered column" style="margin-top: 8.5px">
+          <div class="nine wide centered column" style="margin-top: 8.5px" id = "sbgnImageUI">
             <div class="ui form">
               <div class="field">
                 <div class="inline fields">
@@ -221,7 +221,7 @@
                 </div>
                 <div id="imageArea"class="ui segment" style="width: auto; height: 348px; margin-top: 0px; padding: 0px;"
                 >
-                  <img style="cursor:pointer; padding: 0px !important;" class="ui centered huge image" id="resultImage">
+                  <img style="cursor:pointer; padding: 0px !important;" class="ui centered huge image"  id="resultImage1">
                 </div>
               </div>
             </div>
@@ -250,7 +250,13 @@
           <span id="errorContent"></span>
         </div>
       </div>
-      
+      --<div id = "draggableImageArea" style = "display: none;">
+      <img class="ui image" id="closeImageBox" src="img/cross.png" title="Download map as image" style="height: 25px; width: 25px; padding: 2.5px;"> 
+    <div id="imageArea"class="ui segment" style="width: auto; height: 648px; margin-top: 0px; padding: 0px;resize: both;"
+    >
+      <img style=" padding: 0px !important;width: 1600px;height: 900px;" class="ui centered huge image" id="resultImage" >
+      </div>
+      </div>
       <div id="information-modal" class="ui small modal information" >
         <i class="close icon"></i>
         <div class="ui center aligned header" id="about">

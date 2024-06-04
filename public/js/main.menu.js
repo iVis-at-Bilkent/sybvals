@@ -177,6 +177,8 @@ let applyErrorFix = async function(){
             let imageUrl = urlCreator.createObjectURL(blobData);
             $("#imageArea").css("height", parseInt($('#imageHeight').val()) * parseInt($('#imageArea').css('width')) / (parseInt($('#imageWidth').val())));
             $("#resultImage").attr("src", imageUrl);
+            $("#resultImage1").attr("src", imageUrl);
+
           }
           else {
             if(res.errorMessage) {
@@ -298,6 +300,8 @@ let processValidation = async function () {
     let imageUrl = urlCreator.createObjectURL(blobData);
     $("#imageArea").css("height", parseInt($('#imageHeight').val()) * parseInt($('#imageArea').css('width')) / (parseInt($('#imageWidth').val())));
     $("#resultImage").attr("src", imageUrl);
+    $("#resultImage1").attr("src", imageUrl);
+
   }
   else {
     if(res.errorMessage) {
@@ -315,14 +319,18 @@ let processValidation = async function () {
 
 function dragElement(elmnt){
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  document.getElementById("resultImage").onmousedown = dragMouseDown;
+  document.getElementById("draggableImageArea").onmousedown = dragMouseDown;
+  //document.getElementById("draggableImageArea").onmousemove = elementDrag; 
 
   function dragMouseDown(e) {
     e = e || window.event;
+
     e.preventDefault();
     // get the mouse cursor position at startup:
     pos3 = e.clientX;
     pos4 = e.clientY;
+    console.log( e);
+    console.log( pos3 + " " + pos4);
     document.onmouseup = closeDragElement;
     // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
@@ -331,7 +339,9 @@ function dragElement(elmnt){
   function elementDrag(e) {
     e = e || window.event;
     e.preventDefault();
+    console.log( e);
     // calculate the new cursor position:
+    if( pos3 !== 0 && pos4 !== 0){
     pos1 = pos3 - e.clientX;
     pos2 = pos4 - e.clientY;
     pos3 = e.clientX;
@@ -339,26 +349,49 @@ function dragElement(elmnt){
     // set the element's new position:
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    console.log( elmnt.offsetTop + " " + elmnt.offsetLeft);
+    }
   }
 
-   function closeDragElement() {
+   function closeDragElement(e) {
     /* stop moving when mouse button is released:  <div className = {this.props.showChat ? "ChatBox" : "ChatBoxHidden"}  style={this.state.styles} onMouseDown={this._dragStart} onMouseMove={this._dragging} onMouseUp={this._dragEnd}>
     */
+    console.log( e);
     document.onmouseup = null;
     document.onmousemove = null;
   }
 }
 
+function onMouseDrag({ movementX, movementY }) {
+  console.log( "drag");
+  //return ;
+  let getContainerStyle = document.getElementById("draggableImageArea").style;
+  console.log( getContainerStyle);
+  let leftValue = parseInt(getContainerStyle.left);
+  let topValue = parseInt(getContainerStyle.top);
+  console.log( leftValue + " " + topValue);
+  document.getElementById("draggableImageArea").style.left = `${leftValue + movementX}px`;
+  document.getElementById("draggableImageArea").style.top = `${topValue + movementY}px`;
+}
 
-$('#resultImage').mouseenter(function(){
-  //console.log("mouseEnter");
-   dragElement(document.getElementById("resultImage"));
+document.getElementById("draggableImageArea").addEventListener("mousedown", () => {
+  console.log("event listener added");
+  document.getElementById("draggableImageArea").addEventListener("mousemove", onMouseDrag);
+});
+document.getElementById("draggableImageArea").addEventListener("mouseup", () => {
+  console.log("event listener removed");
+  document.getElementById("draggableImageArea").removeEventListener("mousemove", onMouseDrag);
 });
 
-$('#resultImage').mousedown(function(){
-  //console.log("mouseDown");
-   dragElement(document.getElementById("resultImage"));
-})
+/*$('#draggableImageArea').mouseenter(function(){
+  console.log("mouseEnter");
+   dragElement(document.getElementById("draggableImageArea"));
+});
+
+$('#draggableImageArea').mousedown(function(){
+  console.log("mouseDown");
+   dragElement(document.getElementById("draggableImageArea"));
+})*/
 
 $('#applyValidation').click(function(){
 
@@ -385,6 +418,14 @@ $('#downloadSBGN').click( function(){
 
 }
 );
+$('#closeImageBox').click( function(){
+   document.getElementById("draggableImageArea").style.display = "none";
+   document.getElementById("sbgnImageUI").style.display = "inline";
+
+}
+);
+
+
 $('#downloadJSON').click(function(){
   
   errors.forEach( error => {
@@ -445,11 +486,15 @@ $("body").on("change", "#file-input", function (e, fileObject) {
           $("#color").attr("disabled", false);
           $("#errorsArea").empty();
           $("#resultImage").attr("src", null);
+          $("#resultImage1").attr("src", null);
+
           graphData = undefined;
           errors = undefined
         }
         $("#errorsArea").empty();
+        $("#resultImage1").attr("src", null);
         $("#resultImage").attr("src", null);
+
         $("#layoutTab").css("pointer-events", "all");
         $("#layoutTab").removeClass("disabled");
         $("#imageTab").css("pointer-events", "all");
@@ -780,11 +825,18 @@ $("#save-sbgn").click(function(){
   saveAs(blob,  document.getElementById("file-name").innerHTML);
 });
 
-$("#resultImage").on("click", function (e) {
+$("#resultImage1").on("click", function (e) {
   let imageContent = document.getElementById("imageContent");
-  let imageSource = document.getElementById("resultImage").src;
+  let imageSource = document.getElementById("resultImage1").src;
   imageContent.src = imageSource;
   let imageTitle = document.getElementById("imageTitle"); 
   imageTitle.innerHTML = document.getElementById("file-name").innerHTML;
-  $('#imageModal').modal({inverted: true}).modal('show');
+  document.getElementById("draggableImageArea").style.display = "inline";
+  document.getElementById("draggableImageArea").style.position = "absolute";
+  document.getElementById("draggableImageArea").style.top = "400px";
+  document.getElementById("draggableImageArea").style.left = "850px";
+  document.getElementById("sbgnImageUI").style.display = "none";
+
+
+  //$('#imageModal').modal({inverted: true}).modal('show');
 });
