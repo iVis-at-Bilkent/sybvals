@@ -13,6 +13,8 @@ let areNodesInProcess;
 let errors;
 let errorHighlightColors = ['#1e90ff', '#ff0000', '#b0b000', '#006400', '#0000ff', '#257359', '#c71585', '#fd713d'];
 let currentSbgn;
+let cy;
+let aspectRatio; 
 
 let setFileContent = function (fileName) {
     let span = document.getElementById('file-name');
@@ -241,12 +243,23 @@ let processValidation = async function () {
             $('#errorModal').modal({inverted: true}).modal('show');
           });
 
+  /*cy = cytoscape({styleEnabled: true});  
+    console.log(res.cyjson);
+  cy.add(res.cyjson);
+  console.log(cy);
+   let pngContent = cy.png({ scale: 3, full: true });*/
+
+  //saveImage(pngContent, "png", document.getElementById("file-name").innerHTML);
   $("#applyValidation").removeClass("loading");
   $("#applyValidation").css("background-color", "#d67664");
   if( res.errors.length > 0 ){
       $("#fixFormatErrors").prop('disabled', false);
   }
+  aspectRatio = res.aspectRatio;
   currentSbgn = res.sbgn;
+  console.log( aspectRatio );
+  //document.getElementById("imageAreaSmall").style.aspectRatio =  aspectRatio;
+  console.log( res.image);
 
   if(!res.errorMessage && (res.errors !== undefined || res.image !== undefined)) {
     //document.getElementById("errorsField").innerText = "Errors (" + res.remainingErrors + ")";
@@ -298,9 +311,18 @@ let processValidation = async function () {
     blobData = saveImage(res["imageErrorsHighlighted"], imageFormat, document.getElementById("file-name").innerHTML);
     let urlCreator = window.URL || window.webkitURL;
     let imageUrl = urlCreator.createObjectURL(blobData);
+    var img = new Image();
+    img.src = imageUrl;
+    aspectRatio = img.naturalWidth / img.naturalHeight;
     $("#imageArea").css("height", parseInt($('#imageHeight').val()) * parseInt($('#imageArea').css('width')) / (parseInt($('#imageWidth').val())));
+    //$("#imageArea").css("height", parseInt($('#imageArea').css('width')) / aspectRatio);
+    //$("#resultImage1").css("height", parseInt($('#imageArea').css('width')) / aspectRatio);
     $("#resultImage").attr("src", imageUrl);
     $("#resultImage1").attr("src", imageUrl);
+    //$("#resultImage1").attr("aspect-ratio", aspectRatio);
+    
+    document.getElementById("resultImage1").style.aspectRatio = aspectRatio;
+
 
   }
   else {
@@ -370,17 +392,19 @@ function onMouseDrag({ movementX, movementY }) {
   let leftValue = parseInt(getContainerStyle.left);
   let topValue = parseInt(getContainerStyle.top);
   console.log( leftValue + " " + topValue);
+  if(leftValue+ movementX > 0 && leftValue + movementX < 1000)
   document.getElementById("draggableImageArea").style.left = `${leftValue + movementX}px`;
+  if(topValue+ movementY > 0 && topValue + movementY < 800)
   document.getElementById("draggableImageArea").style.top = `${topValue + movementY}px`;
 }
 
-document.getElementById("draggableImageArea").addEventListener("mousedown", () => {
+document.getElementById("dragImage").addEventListener("mousedown", () => {
   console.log("event listener added");
-  document.getElementById("draggableImageArea").addEventListener("mousemove", onMouseDrag);
+  document.getElementById("dragImage").addEventListener("mousemove", onMouseDrag);
 });
-document.getElementById("draggableImageArea").addEventListener("mouseup", () => {
+document.getElementById("dragImage").addEventListener("mouseup", () => {
   console.log("event listener removed");
-  document.getElementById("draggableImageArea").removeEventListener("mousemove", onMouseDrag);
+  document.getElementById("dragImage").removeEventListener("mousemove", onMouseDrag);
 });
 
 /*$('#draggableImageArea').mouseenter(function(){
@@ -452,7 +476,11 @@ $('#downloadJSON').click(function(){
 });
 
 $('#downloadImage').click(function(){
-  
+  console.log("image download");
+  //let pngContent = cy.png({ scale: 3, full: true });
+
+  //saveImage(pngContent, "png", document.getElementById("file-name").innerHTML);
+  console.log(blobData);
   if(blobData !== undefined) {
     let filename = document.getElementById("file-name").innerHTML;
     filename = filename.substring(0, filename.lastIndexOf('.')) + "." + imageFormat;
@@ -828,13 +856,23 @@ $("#save-sbgn").click(function(){
 $("#resultImage1").on("click", function (e) {
   let imageContent = document.getElementById("imageContent");
   let imageSource = document.getElementById("resultImage1").src;
+  console.log( imageSource.width + " " + imageSource.height );
+  console.log( imageSource );
+  var img = new Image();
+  img.src = imageSource;
+  console.log( img.naturalHeight + " " + img.naturalWidth);
   imageContent.src = imageSource;
+  console.log( document.getElementById("resultImage1").width + " " + document.getElementById("resultImage1").height );
   let imageTitle = document.getElementById("imageTitle"); 
   imageTitle.innerHTML = document.getElementById("file-name").innerHTML;
   document.getElementById("draggableImageArea").style.display = "inline";
   document.getElementById("draggableImageArea").style.position = "absolute";
   document.getElementById("draggableImageArea").style.top = "400px";
   document.getElementById("draggableImageArea").style.left = "850px";
+  document.getElementById("draggableImageArea").style.aspectRatio = aspectRatio;
+  document.getElementById("draggableImageArea").style.width = "900px";
+  document.getElementById("draggableImageArea").style.height = (600/ aspectRatio) + "px";
+  //document.getElementById("imageArea").style.aspectRatio = aspectRatio;
   document.getElementById("sbgnImageUI").style.display = "none";
 
 

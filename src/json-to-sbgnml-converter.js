@@ -26,6 +26,7 @@ const jsonToSbgnml = {};
     var mapType = ( mapProperties && mapProperties.mapType ) || elementUtilities.mapType;
     this.nodes = nodes || cy.nodes();
     this.edges = edges || cy.edges();
+    //console.log( mapProperties[0]);
 
 /*     var collapsedChildren = elementUtilities.getAllCollapsedChildrenRecursively(this.nodes);
     this.allCollapsedNodes = collapsedChildren.filter("node");
@@ -79,6 +80,13 @@ const jsonToSbgnml = {};
        if (mapProperties) {
            delete mapProperties.experimentDescription;
            var xml = mapPropertiesBuilder.buildObject(mapProperties);
+           xml = xml.replace(/<mapProperties>/g, "");
+           xml = xml.substring( 0, xml.length-16);
+           xml= xml.replace( /&lt;/g, "<");
+           xml = xml.replace( /&gt;/g, ">");
+
+           //console.log(xml);
+
            map.extension.add(xml);
        }
 

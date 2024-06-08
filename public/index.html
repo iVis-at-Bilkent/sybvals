@@ -197,7 +197,7 @@
            <!-- <div class = "ui form" style ="right:0px;">
                 <div class = "field" >
                 <div class="inline fields"> 
-                <img  id="downloadSBGN" src="img/download.svg" title="Download SBGN file" style="height: 25px; width: 25px; padding: 2.5px" />
+                <igmg  id="downloadSBGN" src="img/download.svg" title="Download SBGN file" style="height: 25px; width: 25px; padding: 2.5px" />
                 <h3  style="margin-bottom: -3px; margin-left: 7.5px; margin-right: 7.5px;" >SBGNML</h3>
                 <img  id="downloadSBGN" src="img/download.svg" title="Download SBGN file" style="height: 25px; width: 25px; padding: 2.5px" />
 
@@ -219,9 +219,9 @@
                   <h3 class="ui header" style="margin-bottom: -3px; margin-right: 7.5px">Image</h3>
                   <img class="ui image" id="downloadImage" src="img/download.svg" title="Download map as image" style="height: 25px; width: 25px; padding: 2.5px;"> 
                 </div>
-                <div id="imageArea"class="ui segment" style="width: auto; height: 348px; margin-top: 0px; padding: 0px;"
+                <div id="imageArea"class="ui segment" style=" overflow:hidden; width: auto; height: 348px;margin-top: 0px; padding: 0px;"
                 >
-                  <img style="cursor:pointer; padding: 0px !important;" class="ui centered huge image"  id="resultImage1">
+                  <img style="overflow:hidden; cursor:pointer; padding: 0px !important;" class="ui centered huge image"  id="resultImage1" >
                 </div>
               </div>
             </div>
@@ -250,11 +250,14 @@
           <span id="errorContent"></span>
         </div>
       </div>
-      --<div id = "draggableImageArea" style = "display: none;">
-      <img class="ui image" id="closeImageBox" src="img/cross.png" title="Download map as image" style="height: 25px; width: 25px; padding: 2.5px;"> 
-    <div id="imageArea"class="ui segment" style="width: auto; height: 648px; margin-top: 0px; padding: 0px;resize: both;"
+      <div id = "draggableImageArea" style = "display: none;aspect-ratio: 16 / 9;">
+        <div style = " display: flex;">
+      <img class="ui image" id="closeImageBox" src="img/cross.png" title="Download map as image" style="height: 45px; width: 45px; padding: 2.5px;"> 
+      <img class="ui image" id="dragImage" src="img/drag-and-drop.png" title="Download map as image" style="margin-left: 30px; height: 45px; width: 45px; padding: 2.5px;"> 
+      </div>
+    <div id="imageArea"class="ui segment" style="width:100%; aspect-ratio: 16 / 9; margin-top: 0px; overflow: hidden; padding: 0px;resize:var(aspect-ratio)"
     >
-      <img style=" padding: 0px !important;width: 1600px;height: 900px;" class="ui centered huge image" id="resultImage" >
+      <img style=" padding: 0px !important;width:100%;;resize:both;aspect-ratio: 16 / 9;" class="ui centered huge image" id="resultImage" >
       </div>
       </div>
       <div id="information-modal" class="ui small modal information" >
@@ -263,9 +266,9 @@
           ABOUT
         </div>
         <div class="scrolling content" style="text-align: justify;">
-          <b>Systems Biology Validation Service (SyBValS)</b> is a web service to validate the graphs in SBGNML 
+            Systems Biology Validation Service (SyBValS) is a web service to validate the graphs in SBGNML 
           format and produce corresponding images of the graph with an option to highlight errors in the backend.
-          After validating graphs, the errors in the graph can be resolved and service produces corresponding image for the graoh after resolution.
+          After validating graphs, the errors in the graph can be resolved and service produces corresponding image for the graph after resolution.
           This page presents a sample client-side demo for SyBValS. <br><br>
           To use the demo, please follow these steps:
           <ul>
@@ -284,8 +287,8 @@
             Here are the notations used for
             <div class="ui accordion">
               <div class="title">
-                <i class="dropdown icon"></i>
-                SBGNML Stylesheet
+                <!--<i class="dropdown icon"></i> -->
+                  &nbsp;SBGNML Stylesheet
               </div>
               <div class="content">
                 <img class="image" src="https://raw.githubusercontent.com/iVis-at-Bilkent/syblars/main/img/SBGNML_stylesheet.svg" width="700px">
@@ -994,6 +997,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.1/underscore-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.0/backbone-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+    <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
 
     <script src="js/queries.js"></script>
     <script src="js/layouts.js"></script>

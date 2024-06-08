@@ -1096,6 +1096,7 @@ sbgnmlToJson.mapPropertiesToObj = function () {
     parseString(xml, function (err, result) {
       obj = result;
     });
+    console.log( "parsed obj \n" + obj);
     return obj;
   } else {
 

@@ -8,7 +8,6 @@ const sbgnviz = require('sbgnviz');
 const convertSBGNtoCytoscape = require('sbgnml-to-cytoscape'); // to support sbgnml type of input
 const { adjustStylesheet } = require('./stylesheet');
 const { stylesheetForSbgn } = require('./stylesheetNewt');
-
 const { jsonToSbgnml } = require('./json-to-sbgnml-converter');
 const { sbgnmlToJson } = require('./sbgnml-to-json-converter');
 const { elementUtilities } = require('./element-utilities');
@@ -18,6 +17,7 @@ const cytosnap = require('cytosnap');
 cytosnap.use(['cytoscape-fcose'], { sbgnStylesheet: 'cytoscape-sbgn-stylesheet', layoutUtilities: 'cytoscape-layout-utilities', svg: 'cytoscape-svg' });
 let snap = cytosnap();
 let currentSbgn;
+let dims;
 
 const port = process.env.PORT || 3400;
 
@@ -48,6 +48,14 @@ let imageOptions = {
 
 const $ = jQuery = require('jquery')(window);
 
+function base64_encode(file) {
+  // read binary data
+  var bitmap;
+  bitmap = fs.readFileSync(file);
+  // convert binary data to base64 encoded string
+  return new Buffer(bitmap).toString('base64');
+}
+
 function postProcessForLayouts(cy) {
   let processNodes = cy.nodes('[class = "process",class = "uncertain process"]', '[class = "uncertain process"]');
   for (let i = 0; i < processNodes.length; i++) {
@@ -71,6 +79,72 @@ function postProcessForLayouts(cy) {
 
 
 }
+  async function  cropImage(image){
+    /*var img = new Image(),
+    $canvas = $("<canvas>"),
+    canvas = $canvas[0],
+    context;
+    const gm = require('gm'); */
+    /*blobData = saveImage(image, imageOptions.format, "adasd");
+    let urlCreator = window.URL || window.webkitURL;
+    let imageUrl = urlCreator.createObjectURL(blobData);*/
+    image = image.replace(/^data:image\/png;base64,/,"");
+    const buffer = Buffer.from(image,"base64");
+    //image = image.replace(/^data:image\/png;base64,/,"");
+    //fs.unlinkSync('./src/1.png');
+    //fs.unlinkSync('./src/out.png');
+     await trimm(buffer);//fs.writeFileSync('./src/1.png', buffer)
+    //console.log(image);
+
+
+    // Import the image 
+     /*gm('./src/1.png') 
+  
+   // Invoke trim function 
+    .trim() 
+  
+    // Process and Write the image 
+    .write("trim1.png", function (err) { 
+     if (!err) console.log('done'); 
+     }); */
+     //trimImage("1.png", "out.png");
+     //fs.unlinkSync( "./src/out.png");
+     //var dims;
+
+    await imageTrim().then(response => {console.log(response + " succesfully done");  
+      //console.log(dimensions.width, dimensions.height);
+      /*sizeOf("./src/out.png", async function (err, dimensions) {
+      //await console.log(dimensions.width, dimensions.height);
+      width = dimensions.width;height = dimensions.height;
+      dims = dimensions;
+   })*/
+      
+      
+   });;/*trimImage("./src/1.png", "./src/out.png", async function (err)  {
+      if (err) {
+        console.log(err);
+        return 2;
+      }
+      else {
+        await sizeOf("./src/out.png", async function (err, dimensions) {
+          /*console.log(dimensions.width, dimensions.height);
+          width = dimensions.width;height = dimensions.height;
+          dims = dimensions;
+          console.log( "no error " + dims );
+          return dims;
+       });
+      }
+      });*/
+      //for( let i = 0; i < 1000000000000; i++);
+     
+     //await console.log( dims.width + " " + dims.height );
+      //fs.unlinkSync("./src/out.png");
+     console.log("sdasdasdas");
+     await console.log( dims);
+     return dims;
+      
+     
+  };
 
 // for fcose
 const fcose = require('cytoscape-fcose');
@@ -237,7 +311,7 @@ app.use((req, res, next) => {
 // whether to include edges in the output or not
 // POST :format?edges=true 
 // POST :format?clusters=true
-app.post('/validation', (req, res, next) => {
+ app.post('/validation', async (req, res, next) => {
   let size = 30;
   //console.log("validationnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
   //console.log(req.query.errorFixing);
@@ -259,7 +333,7 @@ app.post('/validation', (req, res, next) => {
     headless: true
   });
 
-  let imageOptions = {
+  /*let imageOptions = {
     format: 'png',
     background: 'transparent',
     width: 1280,
@@ -267,7 +341,7 @@ app.post('/validation', (req, res, next) => {
     color: 'greyscale',
     highlightColor: '#ff0000',
     highlightWidth: 30
-  };
+  };*/
 
   if (options.imageOptions) {
     $.extend(imageOptions, options.imageOptions);
@@ -1557,6 +1631,8 @@ return Math.max(parseFloat(ele.data('width')) + 2, 3);
   let styleSheet = stylesheetForSbgn();
   //console.log( styleSheet);
   postProcessForLayouts(cy);
+  //console.log(cy.json());
+  //while(1);
   try {
     //next();
 
@@ -1573,15 +1649,61 @@ return Math.max(parseFloat(ele.data('width')) + 2, 3);
         height: imageOptions.height,
         background: imageOptions.background
       }).then(function (result) {
-        ret["imageErrorsHighlighted"] = result.image;
-        //next();
+        let image = result.image;
+        ret["imageErrorsHighlighted"] = (result.image);
+        //cropImage(result.image).then(response => {console.log("sdsdas");});
+        /*image = image.replace(/^data:image\/png;base64,/,"");
+        const buffer = Buffer.from(image,"base64");
+        //image = image.replace(/^data:image\/png;base64,/,"");
+        //fs.unlinkSync('./src/1.png');
+        //fs.unlinkSync('./src/out.png');
+        trimm(buffer);//fs.writeFileSync('./src/1.png', buffer)
+        fs.writeFileSync('./src/1.png', buffer);*/
+        /*trimImage("./src/1.png", "./src/out.png", async function (err)  {
+          if (err) {
+            console.log(err);
+            return 2;
+          }
+          else {
+            await sizeOf("./src/out.png", async function (err, dimensions) {
+              /*console.log(dimensions.width, dimensions.height);
+              width = dimensions.width;height = dimensions.height;
+              dims = dimensions;
+              console.log( "no error " + dims );
+              return dims;
+           });
+          }
+          }) 
+          console.log( "timeout started");*/
+
+         /*sizeOf("./src/out.png", async function (err, dimensions) {
+            //await console.log(dimensions.width, dimensions.height);
+            width = dimensions.width;height = dimensions.height;
+            dims = dimensions;
+         });*/
+         setTimeout(()=>{console.log( "before getting dimension");
+         /*sizeOf("./src/out.png", function (err, dimensions) {
+          //await console.log(dimensions.width, dimensions.height);
+          console.log( "timeot and try to get width and height");
+          width = dimensions.width;height = dimensions.height;
+          dims = dimensions;
+       })*/
+
+        //ret["imageErrorsHighlighted"]  = base64_encode('./src/out.png');//console.log(ret["imageErrorsHighlighted"]);
+        //let img = new Image();
+        //ret["aspectRatio"] = dims.width / dims.height;
+        let width, height;
+       
         ret['errors'] = errors;
         ret['sbgn'] = currentSbgn;
+        ret['cyjson'] = cy.elements().jsons();
         /*let data = jsonToSbgnml.createSbgnml(undefined, undefined, undefined, undefined, undefined, undefined, cy);
         data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
         currentSbgn = data;*/
         //while(1);
-        return res.status(200).send(ret);
+        //fs.unlinkSync('./src/1.png');
+        //fs.unlinkSync('./src/out.png');
+        return res.status(200).send(ret)}, 0);
       }).then(function () {
         snap.stop();
         //   next();
@@ -2150,6 +2272,7 @@ app.post('/fixError', (req, res) => {
         background: imageOptions.background
       }).then(function (result) {
         ret["imageErrorsHighlighted"] = result.image;
+        console.log(result.image.width + " " + result.image.height);
         //next();
         ret['errors'] = errors;
         ret['sbgn'] = currentSbgn;
