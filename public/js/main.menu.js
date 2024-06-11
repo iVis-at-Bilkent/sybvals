@@ -15,6 +15,7 @@ let errorHighlightColors = ['#1e90ff', '#ff0000', '#b0b000', '#006400', '#0000ff
 let currentSbgn;
 let cy;
 let aspectRatio; 
+let fullGraph = false;
 
 let setFileContent = function (fileName) {
     let span = document.getElementById('file-name');
@@ -73,7 +74,8 @@ let applyErrorFix = async function(){
       height: parseInt($('#imageHeight').val()),
       color: $('#colorScheme').val(),
       highlightColor: $('#highlightColor').val(),
-      highlightWidth: $('#highlightWidth').val()
+      highlightWidth: $('#highlightWidth').val(),
+      fullGraph: fullGraph
     }
   };
 
@@ -217,7 +219,8 @@ let processValidation = async function () {
       height: parseInt($('#imageHeight').val()),
       color: $('#colorScheme').val(),
       highlightColor: $('#highlightColor').val(),
-      highlightWidth: $('#highlightWidth').val()
+      highlightWidth: $('#highlightWidth').val(),
+      fullGraph: fullGraph
     }
   };
 
@@ -314,6 +317,7 @@ let processValidation = async function () {
     var img = new Image();
     img.src = imageUrl;
     aspectRatio = img.naturalWidth / img.naturalHeight;
+    console.log( aspectRatio);
     $("#imageArea").css("height", parseInt($('#imageHeight').val()) * parseInt($('#imageArea').css('width')) / (parseInt($('#imageWidth').val())));
     //$("#imageArea").css("height", parseInt($('#imageArea').css('width')) / aspectRatio);
     //$("#resultImage1").css("height", parseInt($('#imageArea').css('width')) / aspectRatio);
@@ -341,7 +345,9 @@ let processValidation = async function () {
 
 function dragElement(elmnt){
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  document.getElementById("draggableImageArea").onmousedown = dragMouseDown;
+  document.getElementById("resultImage").onmousedown = dragMouseDown;
+
+  //document.getElementById("draggableImageArea").onmousedown = dragMouseDown;
   //document.getElementById("draggableImageArea").onmousemove = elementDrag; 
 
   function dragMouseDown(e) {
@@ -378,9 +384,18 @@ function dragElement(elmnt){
    function closeDragElement(e) {
     /* stop moving when mouse button is released:  <div className = {this.props.showChat ? "ChatBox" : "ChatBoxHidden"}  style={this.state.styles} onMouseDown={this._dragStart} onMouseMove={this._dragging} onMouseUp={this._dragEnd}>
     */
-    console.log( e);
+    console.log( "closeDrag" + e);
+    document.onmousedown = null;
     document.onmouseup = null;
     document.onmousemove = null;
+    /*document.getElementById("dragImage").onmouseup = null;
+    document.getElementById("dragImage").onmousemove = null;
+    document.getElementById("dragImage").onmousedown = null;
+    document.getElementById("dragImage").onmousemove = null;
+    document.getElementById("draggableImageArea").onmouseup = null;
+    document.getElementById("draggableImageArea").onmousemove = null;
+    document.getElementById("draggableImageArea").onmousedown = null;
+    document.getElementById("draggableImageArea").onmousemove = null;*/
   }
 }
 
@@ -398,24 +413,24 @@ function onMouseDrag({ movementX, movementY }) {
   document.getElementById("draggableImageArea").style.top = `${topValue + movementY}px`;
 }
 
-document.getElementById("dragImage").addEventListener("mousedown", () => {
+/*document.getElementById("dragImage").addEventListener("mousedown", () => {
   console.log("event listener added");
   document.getElementById("dragImage").addEventListener("mousemove", onMouseDrag);
 });
 document.getElementById("dragImage").addEventListener("mouseup", () => {
   console.log("event listener removed");
   document.getElementById("dragImage").removeEventListener("mousemove", onMouseDrag);
-});
+});*/
 
-/*$('#draggableImageArea').mouseenter(function(){
+$('#draggableImageArea').mouseenter(function(){
   console.log("mouseEnter");
    dragElement(document.getElementById("draggableImageArea"));
 });
 
-$('#draggableImageArea').mousedown(function(){
+$('#dragImage').mousedown(function(){
   console.log("mouseDown");
-   dragElement(document.getElementById("draggableImageArea"));
-})*/
+   //dragElement(document.getElementById("draggableImageArea"));
+})
 
 $('#applyValidation').click(function(){
 
@@ -451,6 +466,7 @@ $('#closeImageBox').click( function(){
 
 
 $('#downloadJSON').click(function(){
+  if( errors !== undefined ){
   
   errors.forEach( error => {
     if( Array.isArray(error.text) ){
@@ -472,6 +488,7 @@ $('#downloadJSON').click(function(){
       filename = filename.substring(0, filename.lastIndexOf('.')) + ".json";
       saveAs(blob, filename);
     }
+  }
   }
 });
 
@@ -573,6 +590,11 @@ $("#transparent").change(function() {
     else {
       $("#imageBackground").attr("disabled", false);
     }
+});
+$("#full-graph").change(function() {
+  fullGraph = this.checked ? true : false;
+  document.getElementById("imageWidth").disabled = this.checked ? true : false;
+  document.getElementById("imageHeight").disabled = this.checked ? true : false;
 });
 
 $("#fixFormatErrors").click(function (){
@@ -862,19 +884,37 @@ $("#resultImage1").on("click", function (e) {
   img.src = imageSource;
   console.log( img.naturalHeight + " " + img.naturalWidth);
   imageContent.src = imageSource;
+  aspectRatio = img.naturalWidth / img.naturalHeight;
   console.log( document.getElementById("resultImage1").width + " " + document.getElementById("resultImage1").height );
   let imageTitle = document.getElementById("imageTitle"); 
   imageTitle.innerHTML = document.getElementById("file-name").innerHTML;
-  document.getElementById("draggableImageArea").style.display = "inline";
+  console.log( aspectRatio);
+  //$( "#draggableImageArea" ).resizable({containment: "#resultImage"}).draggable({ cursor: "move",containment: "#draggableImageArea"      });
   document.getElementById("draggableImageArea").style.position = "absolute";
   document.getElementById("draggableImageArea").style.top = "400px";
   document.getElementById("draggableImageArea").style.left = "850px";
   document.getElementById("draggableImageArea").style.aspectRatio = aspectRatio;
   document.getElementById("draggableImageArea").style.width = "900px";
-  document.getElementById("draggableImageArea").style.height = (600/ aspectRatio) + "px";
+  document.getElementById("draggableImageArea").style.height = (900/ aspectRatio + 40) + "px";
+  document.getElementById("resultImage").style.aspectRatio = aspectRatio;
+  document.getElementById("imageAreaPopUp").style.aspectRatio = aspectRatio;
+
+
   //document.getElementById("imageArea").style.aspectRatio = aspectRatio;
+  document.getElementById("draggableImageArea").style.display = "inline";
+
   document.getElementById("sbgnImageUI").style.display = "none";
 
 
   //$('#imageModal').modal({inverted: true}).modal('show');
+});
+$("#resultImage").on("click", function (e) {
+  //document.getElementById("resultImage").addEventListener("mousemove", onMouseDrag);
+  });
+
+
+  //$('#imageModal').modal({inverted: true}).modal('show');
+document.getElementById("resultImage").addEventListener("mouseup", () => {
+  console.log("event listener removed");
+  //document.getElementById("resultImage").removeEventListener("mousemove", onMouseDrag);
 });

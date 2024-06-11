@@ -97,6 +97,9 @@
                 <img class="ui image" id="imageSettingsDefault" title="Reset to default" src="img/settings.svg" style="height: 25px; width: 25px; margin-left: 30px; margin-top: 0px; float: right; padding: 2.5px">
               </div>
               <div class="inline fields">
+                <input type="checkbox" id='full-graph'>
+                  <!-- <label class="radio-label">Transparent</label> -->
+                <span class="add-on layout-text option-label" style="margin-left: 6px;"> Auto </span>
                 <span class="add-on layout-text option-label" title="Desired image width"> Width: </span>
                 <div class="two wide field">
                   <input type="number" id="imageWidth" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : 0" value="1280" min="1">
@@ -250,14 +253,14 @@
           <span id="errorContent"></span>
         </div>
       </div>
-      <div id = "draggableImageArea" style = "display: none;aspect-ratio: 16 / 9;">
-        <div style = " display: flex;">
-      <img class="ui image" id="closeImageBox" src="img/cross.png" title="Download map as image" style="height: 45px; width: 45px; padding: 2.5px;"> 
-      <img class="ui image" id="dragImage" src="img/drag-and-drop.png" title="Download map as image" style="margin-left: 30px; height: 45px; width: 45px; padding: 2.5px;"> 
-      </div>
-    <div id="imageArea"class="ui segment" style="width:100%; aspect-ratio: 16 / 9; margin-top: 0px; overflow: hidden; padding: 0px;resize:var(aspect-ratio)"
+      <div id = "draggableImageArea" style = "display: none;aspect-ratio: 16 / 9;cursor:move;resize: both;overflow:hidden;">
+        <div style = " display: flex;cursor: move;" id = "dragImage">
+      <img class="ui image" id="closeImageBox" src="img/cross.png" title="Download map as image" style="height: 25px; width: 25px; padding: 2.5px;"> 
+      <!-- <img class="ui image" src="img/drag-and-drop.png" title="Download map as image" style="margin-left: 30px; height: 45px; width: 45px; padding: 2.5px;"> 
+      --> </div>
+    <div id="imageAreaPopUp"class="ui segment" style="height:auto;width:100%; aspect-ratio: 16 / 9; margin-top: 0px;resize: none; overflow: hidden; padding: 0px;"
     >
-      <img style=" padding: 0px !important;width:100%;;resize:both;aspect-ratio: 16 / 9;" class="ui centered huge image" id="resultImage" >
+      <img style=" padding: 0px !important;height:auto; width:100%;;aspect-ratio: 16 / 9;resize:none" class="ui centered huge image" id="resultImage" >
       </div>
       </div>
       <div id="information-modal" class="ui small modal information" >
@@ -266,18 +269,18 @@
           ABOUT
         </div>
         <div class="scrolling content" style="text-align: justify;">
-            Systems Biology Validation Service (SyBValS) is a web service to validate the graphs in SBGNML 
-          format and produce corresponding images of the graph with an option to highlight errors in the backend.
-          After validating graphs, the errors in the graph can be resolved and service produces corresponding image for the graph after resolution.
+            Systems Biology Validation Service (SyBValS) is a web service to validate the maps in SBGNML 
+          format and to produce graphical images of the map with an option to highlight errors.
+          After validating maps, if desired, SyBValS will resolved these errors when possible, again producing an image of the map after any fixes.
           This page presents a sample client-side demo for SyBValS. <br><br>
           To use the demo, please follow these steps:
           <ul>
-            <li>Open a file in SBGNML format (or open one of the sample files)</li>
-            <li>Select an image format and image options as desired</li>
-            <li>Click on "Validate Map" button to apply validation</li>
-            <li>Now you can view/download error info in "Errors" field and corresponding image in "Image" field for validated map</li>
-            <li>Click on "Resolve Errors" button to resolve errors</li>
-            <li>Now you can view/download the updated error info in "Errors" field and corresponding image in "Image" field for the map after resolving errors. You can also download the SBGNML file after errors are resolved.</li>
+            <li>Open a file in SBGNML format (or open one of the sample files),</li>
+            <li>Select an image format and change any image options as desired,</li>
+            <li>Click on "Validate Map" button to apply validation on the map,</li>
+            <li>Now you can view/download error information under the "Errors" tab and corresponding image in the "Image" image for the validated map,</li>
+            <li>If desired, click on "Resolve Errors" button to resolve errors when possible,</li>
+            <li>Now you can view/download the updated error info in "Errors" field and corresponding image under the "Image" tab for the map after resolving errors. You can also download the SBGNML file after errors are resolved.</li>
           </ul>
 		  
           <!-- <p class="address-text">
@@ -1002,6 +1005,12 @@
     <script src="js/queries.js"></script>
     <script src="js/layouts.js"></script>
     <script src="js/main.menu.js"></script>
+    <script>
+     /*  $( function() {
+              $( "#draggableImageArea" ).resizable();
+              handle: "#resultImage"
+            } );*/
+    </script>
     
   </body>
 

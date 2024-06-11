@@ -43,7 +43,8 @@ let imageOptions = {
   height: 720,
   color: 'greyscale',
   highlightColor: '#ff0000',
-  highlightWidth: 30
+  highlightWidth: 30,
+  fullGraph: false
 };
 
 const $ = jQuery = require('jquery')(window);
@@ -1647,7 +1648,8 @@ return Math.max(parseFloat(ele.data('width')) + 2, 3);
         quality: 100,
         width: imageOptions.width,
         height: imageOptions.height,
-        background: imageOptions.background
+        background: imageOptions.background,
+        fullGraph: imageOptions.fullGraph
       }).then(function (result) {
         let image = result.image;
         ret["imageErrorsHighlighted"] = (result.image);
@@ -1806,6 +1808,7 @@ app.post('/fixError', (req, res) => {
   //console.log(errors);
   //console.log(errors.length);
   while (check < errors.length) {
+    console.log( "check point " + numberOfUnsolvedErrors + " " + currentErrors.length);
     errors[check].status = "unsolved";
     let errorFixParam = {};
     errorFixParam.errorCode = errors[check].pattern;
@@ -1813,8 +1816,8 @@ app.post('/fixError', (req, res) => {
     //console.log(check + " " +  numberOfUnsolvedErrors );
     //console.log( currentErrors[numberOfUnsolvedErrors] );
     //console.log( errors[check]);
-    if (currentErrors[numberOfUnsolvedErrors].text[0] !== errors[check].text[0]
-      || currentErrors[numberOfUnsolvedErrors].pattern !== errors[check].pattern || currentErrors[numberOfUnsolvedErrors].role !== errors[check].role) {
+    if ( currentErrors.length == 0 || (currentErrors[numberOfUnsolvedErrors].text[0] !== errors[check].text[0]
+      || currentErrors[numberOfUnsolvedErrors].pattern !== errors[check].pattern || currentErrors[numberOfUnsolvedErrors].role !== errors[check].role)) {
       //console.log( "not equal");
       errors[check].status = "solved";
       check++;
@@ -2157,6 +2160,9 @@ app.post('/fixError', (req, res) => {
         errors[check].explanation = "The source and target of production arc have been swapped.";
       }
     }
+    else {
+      numberOfUnsolvedErrors++;
+    }
 
     // console.log(errors);
     //fixError(errorFixParam);
@@ -2269,7 +2275,8 @@ app.post('/fixError', (req, res) => {
         quality: 100,
         width: imageOptions.width,
         height: imageOptions.height,
-        background: imageOptions.background
+        background: imageOptions.background,
+        fullGraph: imageOptions.fullGraph
       }).then(function (result) {
         ret["imageErrorsHighlighted"] = result.image;
         console.log(result.image.width + " " + result.image.height);
