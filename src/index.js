@@ -2258,7 +2258,7 @@ app.post('/fixError', (req, res) => {
   postProcessForLayouts(cy);
   for( let i = 0; i < errors.length ; i++ ){
     if( errors[i].status == "solved" && errors[i].explanation === undefined ){
-      errors[i].explanation = "Fix of another error triggered fix of this error."
+      errors[i].explanation = "Fix of another error resolved this error.."
     }
   }
   try {

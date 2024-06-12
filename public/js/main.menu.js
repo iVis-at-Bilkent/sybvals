@@ -56,6 +56,8 @@ $("#save-file-json").on("click", function (e) {
 });
 
 let applyErrorFix = async function(){
+  document.getElementById("draggableImageArea").style.display = "none";
+  document.getElementById("sbgnImageUI").style.display = "inline";
   errors = undefined;
   let url = "";
   if( !syblars){
@@ -172,6 +174,9 @@ let applyErrorFix = async function(){
               //$("#errorsArea").css( {'max-height' : '100px', 'overflow':scroll, 'background-color' : '#fd713d'} );
             }
             else {
+              $("#errorsArea").css('overflow', 'hidden');
+              document.getElementById("errorsArea").style.overflow = "hidden";
+
               $("#errorsArea").text('Map is valid!');
             }
 
@@ -179,7 +184,7 @@ let applyErrorFix = async function(){
             blobData = saveImage(res["imageErrorsHighlighted"], imageFormat, document.getElementById("file-name").innerHTML);
             let urlCreator = window.URL || window.webkitURL;
             let imageUrl = urlCreator.createObjectURL(blobData);
-            $("#imageArea").css("height", parseInt($('#imageHeight').val()) * parseInt($('#imageArea').css('width')) / (parseInt($('#imageWidth').val())));
+            //$("#imageArea").css("height", parseInt($('#imageHeight').val()) * parseInt($('#imageArea').css('width')) / (parseInt($('#imageWidth').val())));
             $("#resultImage").attr("src", imageUrl);
             $("#resultImage1").attr("src", imageUrl);
 
@@ -200,6 +205,8 @@ let applyErrorFix = async function(){
 }
 
 let processValidation = async function () {
+  document.getElementById("draggableImageArea").style.display = "none";
+  document.getElementById("sbgnImageUI").style.display = "inline";
 
   errors = undefined;
   if (!syblars) {
@@ -318,7 +325,7 @@ let processValidation = async function () {
     img.src = imageUrl;
     aspectRatio = img.naturalWidth / img.naturalHeight;
     console.log( aspectRatio);
-    $("#imageArea").css("height", parseInt($('#imageHeight').val()) * parseInt($('#imageArea').css('width')) / (parseInt($('#imageWidth').val())));
+    //$("#imageArea").css("height", parseInt($('#imageHeight').val()) * parseInt($('#imageArea').css('width')) / (parseInt($('#imageWidth').val())));
     //$("#imageArea").css("height", parseInt($('#imageArea').css('width')) / aspectRatio);
     //$("#resultImage1").css("height", parseInt($('#imageArea').css('width')) / aspectRatio);
     $("#resultImage").attr("src", imageUrl);
@@ -345,7 +352,7 @@ let processValidation = async function () {
 
 function dragElement(elmnt){
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  document.getElementById("resultImage").onmousedown = dragMouseDown;
+  document.getElementById("dragImage").onmousedown = dragMouseDown;
 
   //document.getElementById("draggableImageArea").onmousedown = dragMouseDown;
   //document.getElementById("draggableImageArea").onmousemove = elementDrag; 
@@ -532,6 +539,8 @@ $("body").on("change", "#file-input", function (e, fileObject) {
           $("#errorsArea").empty();
           $("#resultImage").attr("src", null);
           $("#resultImage1").attr("src", null);
+          document.getElementById("draggableImageArea").style.display = "none";
+          document.getElementById("sbgnImageUI").style.display = "inline";
 
           graphData = undefined;
           errors = undefined
@@ -539,6 +548,8 @@ $("body").on("change", "#file-input", function (e, fileObject) {
         $("#errorsArea").empty();
         $("#resultImage1").attr("src", null);
         $("#resultImage").attr("src", null);
+        document.getElementById("draggableImageArea").style.display = "none";
+        document.getElementById("sbgnImageUI").style.display = "inline";
 
         $("#layoutTab").css("pointer-events", "all");
         $("#layoutTab").removeClass("disabled");
@@ -581,6 +592,7 @@ $("#imageSettingsDefault").on("click", function (e) {
    $("#transparent").prop("checked", true);
    $("#highlightColor").val("#ff0000");
    $("#highlightWidth").val(10);
+   $("#fullGraph").prop("checked", false);
 });
 
 $("#transparent").change(function() {
@@ -876,6 +888,21 @@ $("#save-sbgn").click(function(){
 });
 
 $("#resultImage1").on("click", function (e) {
+  function resize() {
+    console.log("enterred")
+    var height = parseInt(document.getElementById("resultImage").width);
+    console.log( height);
+    document.getElementById("draggableImageArea").style.width = (height + 18) + "px";
+    document.getElementById("draggableImageArea").style.height =     1.10 * parseInt(document.getElementById("draggableImageArea").style.width) /aspectRatio + "px";
+
+
+    /*$('.parent-div').css({
+      minWidth: height,
+      maxWidth: height,
+    })*/
+  }
+  
+ 
   let imageContent = document.getElementById("imageContent");
   let imageSource = document.getElementById("resultImage1").src;
   console.log( imageSource.width + " " + imageSource.height );
@@ -898,9 +925,12 @@ $("#resultImage1").on("click", function (e) {
   document.getElementById("draggableImageArea").style.height = (900/ aspectRatio + 40) + "px";
   document.getElementById("resultImage").style.aspectRatio = aspectRatio;
   document.getElementById("imageAreaPopUp").style.aspectRatio = aspectRatio;
+  document.getElementById("dragRegion").innerHTML = document.getElementById("file-name").innerHTML
 
 
   //document.getElementById("imageArea").style.aspectRatio = aspectRatio;
+  //resize();
+  //setInterval(resize, 20);
   document.getElementById("draggableImageArea").style.display = "inline";
 
   document.getElementById("sbgnImageUI").style.display = "none";
