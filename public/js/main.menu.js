@@ -592,7 +592,10 @@ $("#imageSettingsDefault").on("click", function (e) {
    $("#transparent").prop("checked", true);
    $("#highlightColor").val("#ff0000");
    $("#highlightWidth").val(10);
-   $("#fullGraph").prop("checked", false);
+   $("#full-graph").prop("checked", false);
+   document.getElementById("imageWidth").disabled = false;
+  document.getElementById("imageHeight").disabled = false;
+   console.log( document.getElementById("fullGraph"));
 });
 
 $("#transparent").change(function() {
