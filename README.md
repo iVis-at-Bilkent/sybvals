@@ -69,7 +69,7 @@ The notations used for these formats:
 
 SBGNML Stylesheet
 -------------------------
-<a href="https://raw.githubusercontent.com/iVis-at-Bilkent/sbgn-validation-service/main/img/SBGNML_stylesheet.svg" title="SBGNML stylesheet"><img src="img/SBGNML_stylesheet.jpg"></a>
+<a href="https://raw.githubusercontent.com/iVis-at-Bilkent/sbgn-validation-service/main/img/SBGNML_stylesheet.svg" title="SBGNML stylesheet"><img width="500" src="img/SBGNML_stylesheet.svg"></a>
 
 ## Usage
 
