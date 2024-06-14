@@ -64,6 +64,11 @@ function postProcessForLayouts(cy) {
     //console.log( processNodes[i].id() );
     let compartment;
     let connectedNodes = processNodes[i].connectedEdges().map(edge => (edge.source() == processNodes[i] ? edge.target() : edge.source()));
+    //console.log( processNodes[i].parent().data().class );
+    if( processNodes[i].parent() !== undefined && processNodes[i].parent().data("class") === "compartment"){
+      console.log( "is entered");
+      continue;
+    }
     for (let j = 0; j < connectedNodes.length; j++) {
       //console.log( connectedNodes[j].parent().label);
       if (compartment === undefined) {
@@ -278,21 +283,24 @@ app.use((req, res, next) => {
         }
       }
 
-      //data = cyJsonData;
-      data = convertSBGNtoCytoscape(data);
+      data = cyJsonData;
+      //data = convertSBGNtoCytoscape(data);
+      
+     // while(1);
       //console.log( cyJsonData.nodes );
       //console.log( data.nodes);
       data.nodes.forEach((node) => {
-        //  console.log(node.data);
+      /*if( node.data('label') === "Ca2+" )
+         console.log(node.data());*/
         //  console.log( node.data.id);
       });
       // data = sbgnmlToJson.convert(xml,data);
       data = cyJsonData;
+       //console.log(data);
       // console.log(data);
-      // console.log(data);
-      data.nodes.forEach((node) => {
+      data["nodes"].forEach((node) => {
         //if( node.data.class == 'process')
-        //console.log(node.data.class);
+        //console.log(node["data"].label + " " + node["data"].parent);
       });
       //  console.log( node.data.id);
       data.nodes.forEach((node) => {
@@ -370,10 +378,15 @@ app.use((req, res, next) => {
     if (node["data"].bbox) {
       node["position"] = { x: node["data"].bbox.x, y: node["data"].bbox.y };
     }
+    console.log(node["data"].label + " " + node["data"].parent);
+
   });
   //console.log("ziyaaaaaaaaaaaaaaaaaaaaaaaa");
   try {
     cy.add(data);
+    cy.nodes().forEach( node => {
+      //console.log( node.data());
+    })
   }
   catch (e) {
     let date = new Date()
@@ -1639,6 +1652,10 @@ return Math.max(parseFloat(ele.data('width')) + 2, 3);
   postProcessForLayouts(cy);
   //console.log(cy.json());
   highlightErrors(errors, cy,imageOptions);
+  
+  cy.nodes().forEach( node => {
+    //console.log( node.data());
+  })
 
   //while(1);
   try {

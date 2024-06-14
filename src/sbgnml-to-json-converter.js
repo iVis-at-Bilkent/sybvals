@@ -117,16 +117,16 @@ sbgnmlToJson.bboxProp = function (ele) {
 
   } else {
 
-    /*  var styles;
+      var styles;
       if (this.map.extension && this.map.extension.has('renderInformation')) { // render extension was found
         styles = this.map.extension.get('renderInformation').listOfStyles;
         if(styles  !== undefined){
           styles = styles.styles;
         }
       }
-*/
-    /*  var compoundPadding = parseFloat(mapProperties.compoundPadding);
-      var extraCompartmentPadding = parseFloat(mapProperties.extraCompartmentPadding); */
+
+      var compoundPadding = parseFloat(mapProperties.compoundPadding);
+      var extraCompartmentPadding = parseFloat(mapProperties.extraCompartmentPadding); 
 
 
     var padding = this.calculateElementPadding(ele);
@@ -342,7 +342,7 @@ sbgnmlToJson.findChildNode = function (ele, childTagName) {
   return nodes.length > 0 ? nodes[0] : undefined;
 };
 
-/*   sbgnmlToJson.stateAndInfoProp = function (ele, parent) {
+   sbgnmlToJson.stateAndInfoProp = function (ele, parent) {
     var self = this;
     var parentBbox = parent.bbox;
     var stateAndInfoArray = [];
@@ -397,7 +397,7 @@ sbgnmlToJson.findChildNode = function (ele, childTagName) {
     }
 
     return stateAndInfoArray;
-  }; */
+  }; 
 
 sbgnmlToJson.getDefaultStateAndInfoStyle = function (gylph, parentClass) {
   return elementUtilities.getDefaultInfoboxStyle(parentClass, gylph.class_);
@@ -406,10 +406,13 @@ sbgnmlToJson.getDefaultStateAndInfoStyle = function (gylph, parentClass) {
 sbgnmlToJson.addParentInfoToNode = function (ele, nodeObj, parent, compartments) {
   var self = this;
   var compartmentRef = ele.compartmentRef;
+  //if( nodeObj.label === "Ca2+")
+  //console.log(nodeObj  + " par " + parent + " ref " + compartmentRef);
 
   var inferNestingOnLoad = options.inferNestingOnLoad;
   inferNestingOnLoad = typeof inferNestingOnLoad === 'function' ? inferNestingOnLoad.call() : inferNestingOnLoad;
 
+  
   if (parent) {
     nodeObj.parent = parent;
   } else if (compartmentRef) {
@@ -432,6 +435,8 @@ sbgnmlToJson.addParentInfoToNode = function (ele, nodeObj, parent, compartments)
       }
     }
   }
+
+  
 };
 
 sbgnmlToJson.addCytoscapeJsNode = function (ele, jsonArray, parent, compartments) {

@@ -68,6 +68,11 @@
       <label text="Nucleus"/>
       <bbox x="361.4704117739145" y="252.75000000000003" w="817.5295882260855" h="323.49999999999994"/>
     </glyph>
+    <glyph id="f82eccc1-2bc9-bf87-08ab-1f26c4ad1e5d" class="process" compartmentRef="nwtN_31dec67c-8c37-40ec-bfad-d038cf1dc815">
+      <bbox x="694.8571428571429" y="424.63839285714295" w="14.28571428571422" h="14.28571428571422"/>
+      <port id="f82eccc1-2bc9-bf87-08ab-1f26c4ad1e5d.1" x="694.8571428571429" y="431.78125000000006"/>
+      <port id="f82eccc1-2bc9-bf87-08ab-1f26c4ad1e5d.2" x="709.1428571428571" y="431.78125000000006"/>
+    </glyph>
     <glyph id="275a0119-f0d3-237f-170f-c94f9eca909c" class="complex" compartmentRef="nwtN_31dec67c-8c37-40ec-bfad-d038cf1dc815">
       <extension>
         <extraInfo>
@@ -132,6 +137,11 @@
         <bbox x="863" y="395.28125000000006" w="70" h="35"/>
       </glyph>
     </glyph>
+    <glyph id="93e171d7-e846-2f4e-b4af-cafdabb596dd" class="process" compartmentRef="nwtN_31dec67c-8c37-40ec-bfad-d038cf1dc815">
+      <bbox x="694.8571428571429" y="356.63839285714295" w="14.28571428571422" h="14.28571428571422"/>
+      <port id="93e171d7-e846-2f4e-b4af-cafdabb596dd.1" x="694.8571428571429" y="363.78125000000006"/>
+      <port id="93e171d7-e846-2f4e-b4af-cafdabb596dd.2" x="709.1428571428571" y="363.78125000000006"/>
+    </glyph>
     <glyph id="6f6a1c77-176d-7188-cdd5-048d3908a8b1" class="macromolecule" compartmentRef="nwtN_31dec67c-8c37-40ec-bfad-d038cf1dc815">
       <label text="Wee1"/>
       <bbox x="637" y="263.75000000000006" w="70" h="35"/>
@@ -139,40 +149,6 @@
         <state value="p"/>
         <bbox x="1070.375" y="344.7406250000001" w="16" h="12"/>
       </glyph>
-    </glyph>
-    <glyph id="7626c6b6-b0e0-b4b7-e5f3-f803fe319ef8" class="macromolecule" compartmentRef="nwtN_31dec67c-8c37-40ec-bfad-d038cf1dc815">
-      <label text="Wee1"/>
-      <bbox x="764" y="263.75000000000006" w="70" h="35"/>
-      <glyph id="7626c6b6-b0e0-b4b7-e5f3-f803fe319ef8_0" class="state variable">
-        <state/>
-        <bbox x="1284.6875" y="344.7406250000001" w="16" h="12"/>
-      </glyph>
-    </glyph>
-    <glyph id="35a3e0be-6e00-7a99-fca5-18ed65c2fac1" class="macromolecule" compartmentRef="nwtN_31dec67c-8c37-40ec-bfad-d038cf1dc815">
-      <label text="String"/>
-      <bbox x="573.75" y="521.25" w="70" h="35"/>
-      <glyph id="35a3e0be-6e00-7a99-fca5-18ed65c2fac1_0" class="state variable">
-        <state value="p"/>
-        <bbox x="963.640625" y="689.146875" w="16" h="12"/>
-      </glyph>
-    </glyph>
-    <glyph id="bf4e242a-2a4e-49c2-0bf4-9cc45e2eae34" class="macromolecule" compartmentRef="nwtN_31dec67c-8c37-40ec-bfad-d038cf1dc815">
-      <label text="String"/>
-      <bbox x="698.25" y="521.25" w="70" h="35"/>
-      <glyph id="bf4e242a-2a4e-49c2-0bf4-9cc45e2eae34_0" class="state variable">
-        <state/>
-        <bbox x="1173.734375" y="689.146875" w="16" h="12"/>
-      </glyph>
-    </glyph>
-    <glyph id="f82eccc1-2bc9-bf87-08ab-1f26c4ad1e5d" class="process" compartmentRef="nwtN_31dec67c-8c37-40ec-bfad-d038cf1dc815">
-      <bbox x="694.8571428571429" y="424.63839285714295" w="14.28571428571422" h="14.28571428571422"/>
-      <port id="f82eccc1-2bc9-bf87-08ab-1f26c4ad1e5d.1" x="694.8571428571429" y="431.78125000000006"/>
-      <port id="f82eccc1-2bc9-bf87-08ab-1f26c4ad1e5d.2" x="709.1428571428571" y="431.78125000000006"/>
-    </glyph>
-    <glyph id="93e171d7-e846-2f4e-b4af-cafdabb596dd" class="process" compartmentRef="nwtN_31dec67c-8c37-40ec-bfad-d038cf1dc815">
-      <bbox x="694.8571428571429" y="356.63839285714295" w="14.28571428571422" h="14.28571428571422"/>
-      <port id="93e171d7-e846-2f4e-b4af-cafdabb596dd.1" x="694.8571428571429" y="363.78125000000006"/>
-      <port id="93e171d7-e846-2f4e-b4af-cafdabb596dd.2" x="709.1428571428571" y="363.78125000000006"/>
     </glyph>
     <glyph id="8c6d3816-85c1-358b-5893-20995009088c" class="source and sink" compartmentRef="nwtN_31dec67c-8c37-40ec-bfad-d038cf1dc815">
       <bbox x="542" y="268.75000000000006" w="25" h="25"/>
@@ -182,10 +158,26 @@
       <port id="f5f91ced-d47f-07e1-03f4-9307020437ef.1" x="593.8571428571429" y="281.25000000000006"/>
       <port id="f5f91ced-d47f-07e1-03f4-9307020437ef.2" x="608.1428571428571" y="281.25000000000006"/>
     </glyph>
+    <glyph id="7626c6b6-b0e0-b4b7-e5f3-f803fe319ef8" class="macromolecule" compartmentRef="nwtN_31dec67c-8c37-40ec-bfad-d038cf1dc815">
+      <label text="Wee1"/>
+      <bbox x="764" y="263.75000000000006" w="70" h="35"/>
+      <glyph id="7626c6b6-b0e0-b4b7-e5f3-f803fe319ef8_0" class="state variable">
+        <state/>
+        <bbox x="1284.6875" y="344.7406250000001" w="16" h="12"/>
+      </glyph>
+    </glyph>
     <glyph id="9615ba87-e042-ef50-d78e-1ef00df34a6e" class="process" compartmentRef="nwtN_31dec67c-8c37-40ec-bfad-d038cf1dc815">
       <bbox x="730.8571428571429" y="274.10714285714295" w="14.28571428571422" h="14.28571428571422"/>
       <port id="9615ba87-e042-ef50-d78e-1ef00df34a6e.1" x="730.8571428571429" y="281.25000000000006"/>
       <port id="9615ba87-e042-ef50-d78e-1ef00df34a6e.2" x="745.1428571428571" y="281.25000000000006"/>
+    </glyph>
+    <glyph id="35a3e0be-6e00-7a99-fca5-18ed65c2fac1" class="macromolecule" compartmentRef="nwtN_31dec67c-8c37-40ec-bfad-d038cf1dc815">
+      <label text="String"/>
+      <bbox x="573.75" y="521.25" w="70" h="35"/>
+      <glyph id="35a3e0be-6e00-7a99-fca5-18ed65c2fac1_0" class="state variable">
+        <state value="p"/>
+        <bbox x="963.640625" y="689.146875" w="16" h="12"/>
+      </glyph>
     </glyph>
     <glyph id="0088e5e3-506d-b360-cc23-6ca191128211" class="source and sink" compartmentRef="nwtN_31dec67c-8c37-40ec-bfad-d038cf1dc815">
       <bbox x="480.25" y="526.25" w="25" h="25"/>
@@ -194,6 +186,14 @@
       <bbox x="532.1071428571429" y="531.6071428571429" w="14.28571428571422" h="14.28571428571422"/>
       <port id="d6a6f52d-8036-ba76-8a3e-dfa5dcd6d57e.1" x="532.1071428571429" y="538.75"/>
       <port id="d6a6f52d-8036-ba76-8a3e-dfa5dcd6d57e.2" x="546.3928571428571" y="538.75"/>
+    </glyph>
+    <glyph id="bf4e242a-2a4e-49c2-0bf4-9cc45e2eae34" class="macromolecule" compartmentRef="nwtN_31dec67c-8c37-40ec-bfad-d038cf1dc815">
+      <label text="String"/>
+      <bbox x="698.25" y="521.25" w="70" h="35"/>
+      <glyph id="bf4e242a-2a4e-49c2-0bf4-9cc45e2eae34_0" class="state variable">
+        <state/>
+        <bbox x="1173.734375" y="689.146875" w="16" h="12"/>
+      </glyph>
     </glyph>
     <glyph id="2785fbb1-18d0-0b2f-dcf2-968acc6869c0" class="process" compartmentRef="nwtN_31dec67c-8c37-40ec-bfad-d038cf1dc815">
       <bbox x="667.1071428571429" y="531.6071428571429" w="14.28571428571422" h="14.28571428571422"/>
@@ -282,36 +282,6 @@
       <label text="FZY"/>
       <clone/>
       <bbox x="958.759968437524" y="280.1659429932749" w="70" h="35"/>
-    </glyph>
-    <glyph id="nwtN_af68cdcd-f3e3-4438-9be7-e8feb28bb2e8" class="process" compartmentRef="nwtN_3ab42db3-7946-4642-a215-98b2f74f5061">
-      <bbox x="601.6071428571429" y="581.6071428571429" w="14.28571428571422" h="14.28571428571422"/>
-      <port id="nwtN_af68cdcd-f3e3-4438-9be7-e8feb28bb2e8.1" x="601.6071428571429" y="588.75"/>
-      <port id="nwtN_af68cdcd-f3e3-4438-9be7-e8feb28bb2e8.2" x="615.8928571428571" y="588.75"/>
-    </glyph>
-    <glyph id="473098ac-d338-8883-260a-cde1a50bf3fd" class="process" compartmentRef="nwtN_3ab42db3-7946-4642-a215-98b2f74f5061">
-      <bbox x="726.1071428571429" y="581.6071428571429" w="14.28571428571422" h="14.28571428571422"/>
-      <port id="473098ac-d338-8883-260a-cde1a50bf3fd.1" x="726.1071428571429" y="588.75"/>
-      <port id="473098ac-d338-8883-260a-cde1a50bf3fd.2" x="740.3928571428571" y="588.75"/>
-    </glyph>
-    <glyph id="nwtN_de28e025-a62b-4338-bd24-bff2474e60e7" class="process" compartmentRef="nwtN_3ab42db3-7946-4642-a215-98b2f74f5061">
-      <bbox x="508.35714285714283" y="225.52384794644416" w="14.285714285714334" h="14.285714285714334"/>
-      <port id="nwtN_de28e025-a62b-4338-bd24-bff2474e60e7.1" x="508.35714285714283" y="232.66670508930133"/>
-      <port id="nwtN_de28e025-a62b-4338-bd24-bff2474e60e7.2" x="522.6428571428571" y="232.66670508930133"/>
-    </glyph>
-    <glyph id="d5e9e70d-041e-e472-0470-6f7bf4af14a8" class="process" compartmentRef="nwtN_3ab42db3-7946-4642-a215-98b2f74f5061">
-      <bbox x="889.9612198084886" y="225.52384794644422" w="14.28571428571422" h="14.28571428571422"/>
-      <port id="d5e9e70d-041e-e472-0470-6f7bf4af14a8.1" x="889.9612198084886" y="232.66670508930133"/>
-      <port id="d5e9e70d-041e-e472-0470-6f7bf4af14a8.2" x="904.2469340942029" y="232.66670508930133"/>
-    </glyph>
-    <glyph id="nwtN_5010c400-6162-4548-b8d4-8c75ae15eb14" class="process" compartmentRef="nwtN_3ab42db3-7946-4642-a215-98b2f74f5061">
-      <bbox x="791.8571428571429" y="225.52384794644422" w="14.28571428571422" h="14.28571428571422"/>
-      <port id="nwtN_5010c400-6162-4548-b8d4-8c75ae15eb14.1" x="791.8571428571429" y="232.66670508930133"/>
-      <port id="nwtN_5010c400-6162-4548-b8d4-8c75ae15eb14.2" x="806.1428571428571" y="232.66670508930133"/>
-    </glyph>
-    <glyph id="4f47fd0c-d946-52ae-8192-41a7580a3bee" class="process" compartmentRef="nwtN_3ab42db3-7946-4642-a215-98b2f74f5061">
-      <bbox x="664.8571428571429" y="225.52384794644422" w="14.28571428571422" h="14.28571428571422"/>
-      <port id="4f47fd0c-d946-52ae-8192-41a7580a3bee.1" x="664.8571428571429" y="232.66670508930133"/>
-      <port id="4f47fd0c-d946-52ae-8192-41a7580a3bee.2" x="679.1428571428571" y="232.66670508930133"/>
     </glyph>
     <glyph id="nwtN_a2561374-b8e8-424c-b1ab-d9939f94408b" class="complex" compartmentRef="nwtN_3ab42db3-7946-4642-a215-98b2f74f5061">
       <extension>
@@ -468,6 +438,36 @@
     </glyph>
     <glyph id="53844cf9-beeb-858b-2abb-0d2d0cd2fbde" class="source and sink" compartmentRef="nwtN_3ab42db3-7946-4642-a215-98b2f74f5061">
       <bbox x="832.625" y="626.25" w="25" h="25"/>
+    </glyph>
+    <glyph id="nwtN_af68cdcd-f3e3-4438-9be7-e8feb28bb2e8" class="process" compartmentRef="nwtN_3ab42db3-7946-4642-a215-98b2f74f5061">
+      <bbox x="601.6071428571429" y="581.6071428571429" w="14.28571428571422" h="14.28571428571422"/>
+      <port id="nwtN_af68cdcd-f3e3-4438-9be7-e8feb28bb2e8.1" x="601.6071428571429" y="588.75"/>
+      <port id="nwtN_af68cdcd-f3e3-4438-9be7-e8feb28bb2e8.2" x="615.8928571428571" y="588.75"/>
+    </glyph>
+    <glyph id="473098ac-d338-8883-260a-cde1a50bf3fd" class="process" compartmentRef="nwtN_3ab42db3-7946-4642-a215-98b2f74f5061">
+      <bbox x="726.1071428571429" y="581.6071428571429" w="14.28571428571422" h="14.28571428571422"/>
+      <port id="473098ac-d338-8883-260a-cde1a50bf3fd.1" x="726.1071428571429" y="588.75"/>
+      <port id="473098ac-d338-8883-260a-cde1a50bf3fd.2" x="740.3928571428571" y="588.75"/>
+    </glyph>
+    <glyph id="nwtN_de28e025-a62b-4338-bd24-bff2474e60e7" class="process" compartmentRef="nwtN_3ab42db3-7946-4642-a215-98b2f74f5061">
+      <bbox x="508.35714285714283" y="225.52384794644416" w="14.285714285714334" h="14.285714285714334"/>
+      <port id="nwtN_de28e025-a62b-4338-bd24-bff2474e60e7.1" x="508.35714285714283" y="232.66670508930133"/>
+      <port id="nwtN_de28e025-a62b-4338-bd24-bff2474e60e7.2" x="522.6428571428571" y="232.66670508930133"/>
+    </glyph>
+    <glyph id="d5e9e70d-041e-e472-0470-6f7bf4af14a8" class="process" compartmentRef="nwtN_3ab42db3-7946-4642-a215-98b2f74f5061">
+      <bbox x="889.9612198084886" y="225.52384794644422" w="14.28571428571422" h="14.28571428571422"/>
+      <port id="d5e9e70d-041e-e472-0470-6f7bf4af14a8.1" x="889.9612198084886" y="232.66670508930133"/>
+      <port id="d5e9e70d-041e-e472-0470-6f7bf4af14a8.2" x="904.2469340942029" y="232.66670508930133"/>
+    </glyph>
+    <glyph id="nwtN_5010c400-6162-4548-b8d4-8c75ae15eb14" class="process" compartmentRef="nwtN_3ab42db3-7946-4642-a215-98b2f74f5061">
+      <bbox x="791.8571428571429" y="225.52384794644422" w="14.28571428571422" h="14.28571428571422"/>
+      <port id="nwtN_5010c400-6162-4548-b8d4-8c75ae15eb14.1" x="791.8571428571429" y="232.66670508930133"/>
+      <port id="nwtN_5010c400-6162-4548-b8d4-8c75ae15eb14.2" x="806.1428571428571" y="232.66670508930133"/>
+    </glyph>
+    <glyph id="4f47fd0c-d946-52ae-8192-41a7580a3bee" class="process" compartmentRef="nwtN_3ab42db3-7946-4642-a215-98b2f74f5061">
+      <bbox x="664.8571428571429" y="225.52384794644422" w="14.28571428571422" h="14.28571428571422"/>
+      <port id="4f47fd0c-d946-52ae-8192-41a7580a3bee.1" x="664.8571428571429" y="232.66670508930133"/>
+      <port id="4f47fd0c-d946-52ae-8192-41a7580a3bee.2" x="679.1428571428571" y="232.66670508930133"/>
     </glyph>
     <arc id="nwtE_a53e31a0-4482-4560-9c3c-1405b6991d53" class="production" source="d5e9e70d-041e-e472-0470-6f7bf4af14a8.1" target="89360553-bab4-532a-c6c7-624272c4e43b">
       <start/>
