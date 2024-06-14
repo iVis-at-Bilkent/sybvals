@@ -157,6 +157,7 @@ let applyErrorFix = async function(){
                 //console.log( error.errorNo);
                 //console.log( document.getElementById("errorNo1") !== undefined ? document.getElementById("errorNo1")?.style : undefined);
                 const errorString = "#errorNo" + error.errorNo;
+                if( error.pattern !== "pd10102")
                 $("#errorsArea").append(errorRectangle);
                 let uiDivider = $('<div class="ui divider"></div>');
                 uiDivider.css({'margin' : '0rem 0'});
@@ -303,6 +304,7 @@ let processValidation = async function () {
         //console.log( document.getElementById("errorNo1") !== undefined ? document.getElementById("errorNo1")?.style : undefined);
         const errorString = "#errorNo" + error.errorNo;
         errorRectangle.css({'margin-top':'2px'});
+        if( error.pattern !== "pd10102")
         $("#errorsArea").append(errorRectangle);
         let uiDivider = $('<div class="ui divider"></div>');
         uiDivider.css({'margin' : '0rem 0'});

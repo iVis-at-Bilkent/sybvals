@@ -1633,6 +1633,8 @@ return Math.max(parseFloat(ele.data('width')) + 2, 3);
   //console.log( styleSheet);
   postProcessForLayouts(cy);
   //console.log(cy.json());
+  highlightErrors(errors, cy,imageOptions);
+
   //while(1);
   try {
     //next();
@@ -2529,8 +2531,10 @@ function highlightErrors(errors, cy, imageOptions) {
   //console.log( errors);
   cy.nodes().forEach((node) => { node.removeData('highlightColor'); node.removeClass('highlight');/*node.removeData('label');*/ }
   );
-  cy.edges().forEach((edge) => { edge.removeData('highlightColor'); edge.removeClass('highlight');/*edge.removeData('label');*/ });
+  cy.edges().forEach((edge) => { edge.removeData('highlightColor'); edge.removeClass('path');/*edge.removeData('label');*/ });
   errors.forEach((errorData, i) => {
+    console.log( errorData.pattern);
+    if( errorData.pattern !== "pd10102"){
     let ele = cy.getElementById(errorData.role);
     if (ele.data('label')) {
       ele.data('label', ele.data('label') + "\n(" + (i + 1) + ")");
@@ -2538,10 +2542,16 @@ function highlightErrors(errors, cy, imageOptions) {
     else {
       ele.data('label', "\n(" + (i + 1) + ")");
     }
+    if( ele.isNode()){
     ele.addClass('highlight');
+    }
+    else {
+      ele.addClass('path');
+    }
     ele.data('highlightColor', errorHighlightColors[i % 8]);
     console.log( imageOptions.highlightWidth);
     ele.data('highlightWidth', imageOptions.highlightWidth);
+  }
   });
 }
 
