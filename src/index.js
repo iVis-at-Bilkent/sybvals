@@ -792,7 +792,12 @@ return Math.max(parseFloat(ele.data('width')) + 2, 3);
   let ret = {};
 
   ret['errors'] = errors;
-  ret['remainingErrors'] = errors.length;
+  let errorCount = 0;
+  errors.forEach( error => { 
+    if( error.pattern !== "pd10102"){
+      errorCount++;
+    }});
+  ret['remainingErrors'] = errorCount;
   //console.log( errors );
 
   let bgColors = [];
