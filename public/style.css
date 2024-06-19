@@ -189,3 +189,7 @@ option {
   height: 600px;
   z-index: 500;
 }
+
+#closeImageBox {
+  cursor: pointer;
+}

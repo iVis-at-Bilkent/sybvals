@@ -4,7 +4,6 @@ const cytoscape = require('cytoscape');
 const fs = require('fs');
 //const { Console } = require('node:console');
 const cors = require('cors');
-const sbgnviz = require('sbgnviz');
 const convertSBGNtoCytoscape = require('sbgnml-to-cytoscape'); // to support sbgnml type of input
 const { adjustStylesheet } = require('./stylesheet');
 const { stylesheetForSbgn } = require('./stylesheetNewt');
@@ -66,7 +65,7 @@ function postProcessForLayouts(cy) {
     let connectedNodes = processNodes[i].connectedEdges().map(edge => (edge.source() == processNodes[i] ? edge.target() : edge.source()));
     //console.log( processNodes[i].parent().data().class );
     if( processNodes[i].parent() !== undefined && processNodes[i].parent().data("class") === "compartment"){
-      console.log( "is entered");
+    //  console.log( "is entered");
       continue;
     }
     for (let j = 0; j < connectedNodes.length; j++) {
@@ -145,8 +144,8 @@ function postProcessForLayouts(cy) {
      
      //await console.log( dims.width + " " + dims.height );
       //fs.unlinkSync("./src/out.png");
-     console.log("sdasdasdas");
-     await console.log( dims);
+    // console.log("sdasdasdas");
+    // await console.log( dims);
      return dims;
       
      
@@ -207,7 +206,7 @@ app.use((req, res, next) => {
     options = '';
     data = '';
     errorMessage = undefined;
-
+    
     req.on('data', chunk => {
       body += chunk;
     })
@@ -378,7 +377,7 @@ app.use((req, res, next) => {
     if (node["data"].bbox) {
       node["position"] = { x: node["data"].bbox.x, y: node["data"].bbox.y };
     }
-    console.log(node["data"].label + " " + node["data"].parent);
+   // console.log(node["data"].label + " " + node["data"].parent);
 
   });
   //console.log("ziyaaaaaaaaaaaaaaaaaaaaaaaa");
@@ -1832,7 +1831,7 @@ app.post('/fixError', (req, res) => {
   //console.log(errors);
   //console.log(errors.length);
   while (check < errors.length) {
-    console.log( "check point " + numberOfUnsolvedErrors + " " + currentErrors.length);
+   // console.log( "check point " + numberOfUnsolvedErrors + " " + currentErrors.length);
     errors[check].status = "unsolved";
     let errorFixParam = {};
     errorFixParam.errorCode = errors[check].pattern;
@@ -2058,7 +2057,7 @@ app.post('/fixError', (req, res) => {
     else if (errors[check].pattern == "pd10111") {
       errorFixParam.edges = [];
       let connectedEdges = cy.edges('[source =  "' + ele.id() + '"]');
-      console.log(connectedEdges.length);
+   //   console.log(connectedEdges.length);
       if (connectedEdges.length !== 0) {
         let selectedEdge = connectedEdges[0]; // default , the selection of edge will be determined later.
         for (let i = 0; i < connectedEdges.size(); i++) {
@@ -2258,7 +2257,7 @@ app.post('/fixError', (req, res) => {
   if (parsedResult["svrl:schematron-output"]["svrl:failed-assert"] == undefined) {
   }
   else {
-    console.log( "last check");
+   // console.log( "last check");
     currentErrors = [];
     let errCount = parsedResult["svrl:schematron-output"]["svrl:failed-assert"].length;
     for (let i = 0; i < errCount; i++) {
@@ -2303,15 +2302,15 @@ app.post('/fixError', (req, res) => {
         fullGraph: imageOptions.fullGraph
       }).then(function (result) {
         ret["imageErrorsHighlighted"] = result.image;
-        console.log(result.image.width + " " + result.image.height);
+     //   console.log(result.image.width + " " + result.image.height);
         //next();
         ret['errors'] = errors;
         ret['sbgn'] = currentSbgn;
         ret['remainingErrors'] = numberOfUnsolvedErrors;
-        console.log("before return ");
+    //    console.log("before return ");
         //console.log( errors);
         return res.status(200).send(ret);
-        console.log("after return");
+      //  console.log("after return");
       }).then(function () {
         snap.stop();
         //   next();
@@ -2355,7 +2354,7 @@ function fixError(errorFixParam) {
   }
   if (errorCode == "pd10103" || errorCode == "pd10107") {
     errorFixParam.newNodes.forEach(function (newNode) {
-      console.log(newNode);
+   //   console.log(newNode);
       elementUtilities.addNode(newNode.x, newNode.y, newNode.class, newNode.id, undefined, "visible", cy);
       //console.log(cy.nodes()[0].data().id);
       //console.log(cy.nodes()[1].data().id);
@@ -2555,7 +2554,7 @@ function highlightErrors(errors, cy, imageOptions) {
   );
   cy.edges().forEach((edge) => { edge.removeData('highlightColor'); edge.removeClass('path');/*edge.removeData('label');*/ });
   errors.forEach((errorData, i) => {
-    console.log( errorData.pattern);
+  //  console.log( errorData.pattern);
     if( errorData.pattern !== "pd10102"){
     let ele = cy.getElementById(errorData.role);
     if (ele.data('label')) {
@@ -2571,7 +2570,7 @@ function highlightErrors(errors, cy, imageOptions) {
       ele.addClass('path');
     }
     ele.data('highlightColor', errorHighlightColors[i % 8]);
-    console.log( imageOptions.highlightWidth);
+   // console.log( imageOptions.highlightWidth);
     ele.data('highlightWidth', imageOptions.highlightWidth);
   }
   });
