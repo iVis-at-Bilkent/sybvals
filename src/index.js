@@ -2189,7 +2189,7 @@ app.post('/fixError', (req, res) => {
         fixError(errorFixParam);
         fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "The arc between assocation glyph and production glyph(" + (selectedEdge.source().id() === ele.id() ? 
         selectedEdge.target().id() : selectedEdge.source().id()) + ") is kept."; 
-        errors[check].status = "solved";
+        //errors[check].status = "solved";
       }
 
     }
@@ -2226,7 +2226,7 @@ app.post('/fixError', (req, res) => {
       errorFixParam.edge = ele;
       errorFixParam.portsource = selectedNode.id();
       fixError(errorFixParam);
-      errors[check].status = "solved";
+      //errors[check].status = "solved";
       fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "Modulation arc has a source reference to " + selectedNode.id() + ".";
     }
 
@@ -2254,7 +2254,7 @@ app.post('/fixError', (req, res) => {
       errorFixParam.edge = ele;
       errorFixParam.portsource = selectedNode.id();
       fixError(errorFixParam);
-      errors[check].status = "solved";   
+      //errors[check].status = "solved";   
      }
 
     else if (currentErrors[check].pattern == "pd10105" || currentErrors[check].pattern == "pd10106") {
@@ -2265,7 +2265,7 @@ app.post('/fixError', (req, res) => {
         console.log ("pd10105 is started to fix");
         errorFixParam.edge = ele;
         fixError(errorFixParam);
-        errors[check].status = "solved";
+        //errors[check].status = "solved";
         fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "The source and target of production arc have been swapped.";
       }
       else {
@@ -2654,12 +2654,15 @@ cy.nodes().forEach((node) => { node.removeData('highlightColor'); node.removeCla
   cy.edges().forEach((edge) => { edge.removeData('highlightColor'); edge.removeClass('path');/*edge.removeData('label');*/ });
   errors.forEach((errorData, i) => {
     if( unsolvedErrorInformation[errorData.pattern + errorData.role] !== true){
+      console.log( "solved Error")
       errorData.explanation = fixExplanation[errorData.pattern + errorData.role] ? fixExplanation[errorData.pattern + errorData.role] : "Fix of another error resolved this error.";
       errorData.status = "solved";
-      errorData.colorCode = "grey";
+      errorData.colorCode = "#808080";
+      let ele = cy.getElementById(errorData.role);
+      ele.data('highlightColor', "#808080");
     }
     //console.log( errorData.pattern);
-      
+    else {  
     let ele = cy.getElementById(errorData.role);
     if (ele.data('label')) {
       ele.data('label', ele.data('label') + "\n(" + (i + 1) + ")");
@@ -2686,6 +2689,7 @@ cy.nodes().forEach((node) => { node.removeData('highlightColor'); node.removeCla
     }
    // console.log( imageOptions.highlightWidth);
     ele.data('highlightWidth', imageOptions.highlightWidth);
+  }
   
   });
 }

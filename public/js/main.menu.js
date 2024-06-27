@@ -119,6 +119,7 @@ let applyErrorFix = async function () {
 		errors = res.errors;
 
 		let numberOfUnsolvedErrors = 0;
+		console.log( errors );
 		if (errors.length > 0) {
 			res.errors.forEach((error) => {
 				let imgSource = error.status === "solved" ? "img/check-mark.png" : "img/cross.png";
@@ -160,6 +161,7 @@ let applyErrorFix = async function () {
 				let uiDivider = $('<div class="ui divider"></div>');
 				uiDivider.css({ 'margin': '0rem 0' });
 				//$("#errorsArea").append(uiDivider);
+				console.log( error.colorCode);
 				$(errorString).css({
 					'border': '3px solid', 'border-color': error.colorCode/*error.status === "unsolved" ? errorHighlightColors[numberOfUnsolvedErrors % 8]
 						: "grey"*/
