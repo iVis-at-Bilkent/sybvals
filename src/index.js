@@ -255,7 +255,7 @@ app.use((req, res, next) => {
       data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
       //console.log( data[0] );
       data = cyJsonData;
-      //fs.unlinkSync('./src/sbgnFile.sbgn');
+      fs.unlinkSync('./src/sbgnFile.sbgn');
     
 
       cy = cytoscape({
@@ -283,7 +283,7 @@ app.use((req, res, next) => {
       data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
       data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
       currentSbgn = data;
-      //fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
+      fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
 
 
       let result = SaxonJS.transform({
