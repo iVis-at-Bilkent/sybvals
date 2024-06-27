@@ -29,6 +29,10 @@ const { JSDOM } = jsdom;
 const { window } = new JSDOM();
 const { document } = (new JSDOM('')).window;
 global.document = document;
+let unsolvedErrorInformation = {};
+let previousErrorCode = "";
+let previousErrorRole = "";
+let fixExplanation = {};
 
 const xml2js = require('xml2js');
 const SaxonJS = require('saxon-js');
@@ -153,6 +157,7 @@ function postProcessForLayouts(cy) {
 
 // for fcose
 const fcose = require('cytoscape-fcose');
+const { privateDecrypt } = require('crypto');
 cytoscape.use(fcose);
 
 // for logging
@@ -249,6 +254,36 @@ app.use((req, res, next) => {
       //while(1);
       data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
       //console.log( data[0] );
+      data = cyJsonData;
+      //fs.unlinkSync('./src/sbgnFile.sbgn');
+    
+
+      cy = cytoscape({
+        styleEnabled: true,
+        headless: true
+      });
+      let sbgnNodes = data["nodes"];
+      sbgnNodes.forEach(function (node) {
+        if (node["data"].bbox) {
+          node["position"] = { x: node["data"].bbox.x, y: node["data"].bbox.y };
+        }
+       // console.log(node["data"].label + " " + node["data"].parent);
+    
+      });
+      //console.log("ziyaaaaaaaaaaaaaaaaaaaaaaaa");
+      try {
+        cy.add(data);
+        cy.nodes().forEach( node => {
+          //console.log( node.data());
+        })
+      }catch(err){};
+
+      postProcessForLayouts(cy);
+
+      data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
+      data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
+      currentSbgn = data;
+      //fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
 
 
       let result = SaxonJS.transform({
@@ -321,6 +356,10 @@ app.use((req, res, next) => {
 // POST :format?clusters=true
  app.post('/validation', async (req, res, next) => {
   let size = 30;
+  unsolvedErrorInformation = {};
+  previousErrorCode = "";
+  previousErrorRole = "";
+  fixExplanation = {};
   //console.log("validationnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
   //console.log(req.query.errorFixing);
   if (req.query.errorFixing !== undefined && req.query.errorFixing === true) {
@@ -336,10 +375,7 @@ app.use((req, res, next) => {
     imageWanted = false;
   }
 
-  cy = cytoscape({
-    styleEnabled: true,
-    headless: true
-  });
+  
 
   /*let imageOptions = {
     format: 'png',
@@ -782,7 +818,7 @@ return Math.max(parseFloat(ele.data('width')) + 2, 3);
     }
     errorData.text = errorText;
   });
-  errors.forEach((errorData, i) => {
+  /*errors.forEach((errorData, i) => {
     let ele = cy.getElementById(errorData.role);
     if (ele.data('label')) {
       ele.data('label', ele.data('label') + "\n(" + (i + 1) + ")");
@@ -794,7 +830,7 @@ return Math.max(parseFloat(ele.data('width')) + 2, 3);
     ele.data('highlightColor', errorHighlightColors[i % 8]);
     //console.log( imageOptions.highlightWidth);
     ele.data('highlightWidth', imageOptions.highlightWidth);
-  });
+  });*/
 
   let colorScheme = imageOptions.color || "white";
   let stylesheet = adjustStylesheet('sbgnml', colorScheme);
@@ -1650,6 +1686,9 @@ return Math.max(parseFloat(ele.data('width')) + 2, 3);
   //console.log( styleSheet);
   postProcessForLayouts(cy);
   //console.log(cy.json());
+  errors.forEach( error => {
+    unsolvedErrorInformation[ error.pattern + error.role ] = true;
+  })
   highlightErrors(errors, cy,imageOptions);
   
   cy.nodes().forEach( node => {
@@ -1734,7 +1773,8 @@ return Math.max(parseFloat(ele.data('width')) + 2, 3);
         //   next();
         //console.log( sbgnmlToJson.map.extension);
         //console.log( sbgnmlToJson.map.extension.get('renderInformation'));
-        let data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension.get('renderInformation'), sbgnmlToJson.map.extension.get('mapProperties'), cy.nodes(), cy.edges(), cy);
+        data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
+
         data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
         currentSbgn = data;
 
@@ -1829,25 +1869,47 @@ app.post('/fixError', (req, res) => {
   }
   currentErrors = errors;
   //console.log(errors);
-  //console.log(errors.length);
-  while (check < errors.length) {
-   // console.log( "check point " + numberOfUnsolvedErrors + " " + currentErrors.length);
-    errors[check].status = "unsolved";
+  console.log(errors.length);
+  unsolvedErrorInformation = {};
+  previousErrorCode = "";
+  previousErrorRole = "";
+  fixExplanation = {};
+
+  while (check < currentErrors.length) {
+    let currentLength = currentErrors.length;
+    console.log( check + " " + currentErrors[check].pattern + " " + currentErrors[check].role + currentErrors.length);
+   /* if( currentErrors[check].pattern === previousErrorCode && currentErrors[check].role === previousErrorRole){
+        console.log( check + " not solved");
+        check++;
+        unsolvedErrorInformation[ previousErrorCode + previousErrorRole ] = true;
+        continue;
+    }*/
+    previousErrorCode = currentErrors[check].pattern;
+    previousErrorRole = currentErrors[check].role;
+    /*console.log( "check point " + numberOfUnsolvedErrors + " " + currentErrors.length + " " + currentErrors[numberOfUnsolvedErrors].pattern 
+    + " " +  currentErrors[numberOfUnsolvedErrors].role + " "  + errors[check].pattern);*/
+    if( currentErrors.length === 5){
+      console.log(currentErrors);
+    }
+    currentErrors[check].status = "unsolved";
     let errorFixParam = {};
-    errorFixParam.errorCode = errors[check].pattern;
-    let ele = cy.getElementById(errors[check].role);
-    //console.log(check + " " +  numberOfUnsolvedErrors );
+    errorFixParam.errorCode = currentErrors[check].pattern;
+    let ele = cy.getElementById(currentErrors[check].role);
+    console.log(check + " " +  numberOfUnsolvedErrors );
+    console.log( currentErrors.length);
     //console.log( currentErrors[numberOfUnsolvedErrors] );
     //console.log( errors[check]);
-    if ( currentErrors.length == 0 || (currentErrors[numberOfUnsolvedErrors].text[0] !== errors[check].text[0]
+    /*if ( currentErrors.length == 0 || (currentErrors[numberOfUnsolvedErrors].text[0] !== errors[check].text[0]
       || currentErrors[numberOfUnsolvedErrors].pattern !== errors[check].pattern || currentErrors[numberOfUnsolvedErrors].role !== errors[check].role)) {
       //console.log( "not equal");
       errors[check].status = "solved";
       check++;
       continue;
-    }
+    }*/
 
-    if (errors[check].pattern == "pd10112") {
+    
+
+    if (currentErrors[check].pattern == "pd10112") {
       var compartments = cy.nodes('[class= "compartment"]');
       var listedNodes = [];
       for (var i = 0; i < compartments.length; i++) {
@@ -1860,12 +1922,13 @@ app.post('/fixError', (req, res) => {
         numberOfUnsolvedErrors++;
       }
       else {
-        errors[check].status = "solved";
+        //currentErrors[check].status = "solved";
         ele.move({ "parent": listedNodes[0].data().id });
+        fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "Fixed by moving "  + " inside " + listedNodes[0].data().id + ".";
         errors[check].explanation = "Fixed by moving "  + " inside " + listedNodes[0].data().id + ".";
       }
     }
-    else if (errors[check].pattern == "pd10126") {
+    else if (currentErrors[check].pattern == "pd10126") {
       let connectedEdges = ele.connectedEdges().filter('[class="logic arc"]');
       errorFixParam.edges = [];
       errorFixParam.nodes = [];
@@ -1879,14 +1942,16 @@ app.post('/fixError', (req, res) => {
         }
       }
       if (connectedEdges.length !== 0) {
-        errors[check].status = "solved";
-        errors[check].explanation = "Edge between this node and " + selectedEdge.source().id() + " is kept."
+        //errors[check].status = "solved";
+        
+        //errors[check].explanation = "Edge between this node and " + selectedEdge.source().id() + " is kept."
+        fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] =  "Edge between this node and " + selectedEdge.source().id() + " is kept.";
         fixError(errorFixParam);
       }
       else
         numberOfUnsolvedErrors++;
     }
-    else if (errors[check].pattern == "pd10124") {
+    else if (currentErrors[check].pattern == "pd10124") {
       var sourcePosX = ele.source().position().x;
       var targetPosX = ele.target().position().x;
       var sourcePosY = ele.source().position().y;
@@ -1916,18 +1981,18 @@ app.post('/fixError', (req, res) => {
         errorFixParam.newSource = selectedNode.id();
         errorFixParam.edge = ele;
         errorFixParam.portsource = selectedNode.id();
-        errors[check].status = "solved";
-        errors[check].explanation = "Arc is connected to " + selectedNode.id() + ".";
+        //errors[check].status = "solved";
+        fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "Arc is connected to " + selectedNode.id() + ".";
         fixError(errorFixParam);
       }
       else
         numberOfUnsolvedErrors++;
     }
-    else if (errors[check].pattern == "pd10103" || errors[check].pattern == "pd10107") {
+    else if (currentErrors[check].pattern == "pd10103" || currentErrors[check].pattern == "pd10107") {
       errorFixParam.newEdges = [];
       errorFixParam.newNodes = [];
       errorFixParam.oldEdges = [];
-      var id = errors[0].role;
+      var id = currentErrors[check].role;
       var eles = cy.elements('[id="' + id + '"]');
       errorFixParam.node = eles;
       var edges = cy.nodes('[id = "' + id + '"]').connectedEdges();
@@ -1992,13 +2057,32 @@ app.post('/fixError', (req, res) => {
         }
         errorFixParam.oldEdges.push(edges[i]);
       }
-      errors[check].status = "solved";
-      errors[check].explanation = "Source and sink glyph is splitted for each consumption arc.";
+      //errors[check].status = "solved";
+      fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "Source and sink glyph is splitted for each consumption arc.";
       fixError(errorFixParam);
     }
-    else if (errors[check].pattern == "pd10101") {
+    else if (currentErrors[check].pattern == "pd10101" || currentErrors[check].pattern == "pd10102") {
       let targetTmp = ele.target();
+      let sourceTmp = ele.source();
+      console.log( "pd10102");
       if (elementUtilities.isEPNClass(targetTmp)) {
+        console.log( "pd10102 conditions satisfied");
+        errorFixParam.edge = ele;
+        fixError(errorFixParam);
+        fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "Source and target of consumption arc have been swapped.";
+       // errors[check].status = "solved";
+      }
+      else{
+        //errors[check].status = "unsolved";
+        numberOfUnsolvedErrors++;
+      }
+    }
+    /*else if (errors[check].pattern == "pd10102") {
+      let targetTmp = ele.target();
+      let sourceTmp = ele.source();
+      console.log( "pd10102");
+      if (elementUtilities.isEPNClass(sourceTmp)) {
+        console.log( "pd10102 conditions satisfied");
         errorFixParam.edge = ele;
         fixError(errorFixParam);
         errors[check].explanation = "Source and target of consumption arc have been swapped.";
@@ -2006,9 +2090,9 @@ app.post('/fixError', (req, res) => {
       }
       else
         numberOfUnsolvedErrors++;
-    }
+    }*/
 
-    else if (errors[check].pattern == "pd10126") {
+    else if (currentErrors[check].pattern == "pd10126") {
       let connectedEdges = ele.connectedEdges().filter('[class="logic arc"]');
       //console.log("connected edges" + connectedEdges.size());
       errorFixParam.edges = [];
@@ -2025,7 +2109,7 @@ app.post('/fixError', (req, res) => {
       fixError(errorFixParam);
       //console.log(cy.edges());
     }
-    else if (errors[check].pattern == "pd10125") {
+    else if (currentErrors[check].pattern == "pd10125") {
       var edgeParams = { class: ele.data().class, language: ele.data().language };
       var sourcePosX = ele.source().position().x;
       var targetPosX = ele.target().position().x;
@@ -2051,10 +2135,10 @@ app.post('/fixError', (req, res) => {
       errorFixParam.edge = ele;
       errorFixParam.newEdge = { source: source.id(), target: target.id(), edgeParams: edgeParams };
       fixError(errorFixParam);
-      errors[check].status = "solved";
-      errors[check].explanation = "The arc has a target reference to " + target.id() + ".";
+      //errors[check].status = "solved";
+      fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "The arc has a target reference to " + target.id() + ".";
     }
-    else if (errors[check].pattern == "pd10111") {
+    else if (currentErrors[check].pattern == "pd10111") {
       errorFixParam.edges = [];
       let connectedEdges = cy.edges('[source =  "' + ele.id() + '"]');
    //   console.log(connectedEdges.length);
@@ -2066,13 +2150,13 @@ app.post('/fixError', (req, res) => {
           }
         }
         fixError(errorFixParam);
-        errors[check].status = "solved";
-        errors[check].explanation = "Arc between this node and " + selectedEdge.target.id() + " is kept."; 
+        //errors[check].status = "solved";
+        fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "Arc between this node and " + selectedEdge.target.id() + " is kept."; 
       }
       else
         numberOfUnsolvedErrors++;
     }
-    else if (errors[check].pattern == "pd10104") {
+    else if (currentErrors[check].pattern == "pd10104") {
       var connectedEdges = ele.connectedEdges().filter('[class="consumption"]');
       errorFixParam.nodes = [];
       errorFixParam.edges = [];
@@ -2084,11 +2168,11 @@ app.post('/fixError', (req, res) => {
         }
       }
       fixError(errorFixParam);
-      errors[check].explanation = "The arc between dissocation glyph and consumption glyph(" + (selectedEdge.source().id() === ele.id() ? 
+      fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "The arc between dissocation glyph and consumption glyph(" + (selectedEdge.source().id() === ele.id() ? 
       selectedEdge.target().id() : selectedEdge.source().id()) + ") is kept."; 
-      errors[check].status = "solved";
+     // errors[check].status = "solved";
     }
-    else if (errors[check].pattern == "pd10108") {
+    else if (currentErrors[check].pattern == "pd10108") {
       let connectedEdges = ele.connectedEdges().filter('[class = "production"]');
 
       // choose deleted edges and nodes each here when the deletion method is determined
@@ -2103,13 +2187,13 @@ app.post('/fixError', (req, res) => {
           errorFixParam.nodes.push(connectedEdges[i].source().id() == ele.id() ? connectedEdges[i].target() : connectedEdges[i].source());
         }
         fixError(errorFixParam);
-        errors[check].explanation = "The arc between assocation glyph and production glyph(" + (selectedEdge.source().id() === ele.id() ? 
+        fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "The arc between assocation glyph and production glyph(" + (selectedEdge.source().id() === ele.id() ? 
         selectedEdge.target().id() : selectedEdge.source().id()) + ") is kept."; 
         errors[check].status = "solved";
       }
 
     }
-    else if (errors[check].pattern == "pd10109") {
+    else if (currentErrors[check].pattern == "pd10109") {
       var sourcePosX = ele.source().position().x;
       var targetPosX = ele.target().position().x;
       var sourcePosY = ele.source().position().y;
@@ -2143,10 +2227,10 @@ app.post('/fixError', (req, res) => {
       errorFixParam.portsource = selectedNode.id();
       fixError(errorFixParam);
       errors[check].status = "solved";
-      errors[check].explanation = "Modulation arc has a source reference to " + selectedNode.id() + ".";
+      fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "Modulation arc has a source reference to " + selectedNode.id() + ".";
     }
 
-    else if (errors[check].pattern == "pd10125") {
+    else if (currentErrors[check].pattern == "pd10125") {
       var sourcePosX = ele.source().position().x;
       var targetPosX = ele.target().position().x;
       var sourcePosY = ele.source().position().y;
@@ -2173,19 +2257,27 @@ app.post('/fixError', (req, res) => {
       errors[check].status = "solved";   
      }
 
-    else if (errors[check].pattern == "pd10105" || errors[check].pattern == "pd10106") {
+    else if (currentErrors[check].pattern == "pd10105" || currentErrors[check].pattern == "pd10106") {
       let sourceNode = ele.source();
       let targetNode = ele.target();
+      console.log( "pd10105 is entered");
       if (elementUtilities.isPNClass(targetNode) && elementUtilities.isEPNClass(sourceNode)) {
+        console.log ("pd10105 is started to fix");
         errorFixParam.edge = ele;
         fixError(errorFixParam);
         errors[check].status = "solved";
-        errors[check].explanation = "The source and target of production arc have been swapped.";
+        fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "The source and target of production arc have been swapped.";
+      }
+      else {
+        console.log( "unsolved count + 1");
+        numberOfUnsolvedErrors++;
       }
     }
     else {
+      console.log( "unsolved count + 1");
       numberOfUnsolvedErrors++;
     }
+    
 
     // console.log(errors);
     //fixError(errorFixParam);
@@ -2195,7 +2287,7 @@ app.post('/fixError', (req, res) => {
     // console.log("AfterFix");
     //errors = [];
     //console.log(sbgnmlToJson.map.extension);
-    let data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension.get('renderInformation'), sbgnmlToJson.map.extension.get('mapProperties'), cy.nodes(), cy.edges(), cy);
+    data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
     data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
     currentSbgn = data;
 
@@ -2229,10 +2321,14 @@ app.post('/fixError', (req, res) => {
         currentErrors.push(error);
       }
     }
-    check++;
+    if( currentLength == currentErrors.length) {
+      check++;
+      unsolvedErrorInformation[ previousErrorCode + previousErrorRole ] = true;
+    }
+    //check++;
     //console.log(errors.length);
   }
-  let data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension.get('renderInformation'), sbgnmlToJson.map.extension.get('mapProperties'), cy.nodes(), cy.edges(), cy);
+  data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
   data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
   currentSbgn = data;
 
@@ -2273,7 +2369,7 @@ app.post('/fixError', (req, res) => {
   let styleSheet = stylesheetForSbgn();
   //console.log( styleSheet);
   //console.log( imageOptions.highlightWidth);
-  highlightErrors(currentErrors, cy,imageOptions);
+  highlightErrors(errors, cy,imageOptions);
 
   //console.log( "after return " + errors.length);
   let colorScheme = imageOptions.color || "white";
@@ -2281,7 +2377,7 @@ app.post('/fixError', (req, res) => {
   postProcessForLayouts(cy);
   for( let i = 0; i < errors.length ; i++ ){
     if( errors[i].status == "solved" && errors[i].explanation === undefined ){
-      errors[i].explanation = "Fix of another error resolved this error.."
+      errors[i].explanation = "Fix of another error resolved this error."
     }
   }
   try {
@@ -2314,7 +2410,7 @@ app.post('/fixError', (req, res) => {
       }).then(function () {
         snap.stop();
         //   next();
-        let data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension.get('renderInformation'), sbgnmlToJson.map.extension.get('mapProperties'), cy.nodes(), cy.edges(), cy);
+        data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
         data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
 
 
@@ -2348,7 +2444,7 @@ function fixError(errorFixParam) {
   var errorCode = errorFixParam.errorCode;
   var result = {};
   result.errorCode = errorCode;
-  if (errorCode == "pd10101") {
+  if (errorCode == "pd10101" || errorCode == "pd10102") {
     elementUtilities.reverseEdge(errorFixParam.edge);
     //console.log(cy.edges().data());
   }
@@ -2550,12 +2646,20 @@ function addNode(x, y, nodeParams, id, parent, visibility) {
 function highlightErrors(errors, cy, imageOptions) {
   //console.log( errors.length );
   //console.log( errors);
-  cy.nodes().forEach((node) => { node.removeData('highlightColor'); node.removeClass('highlight');/*node.removeData('label');*/ }
+  let errorColor = {};
+  let counter = 0;
+
+cy.nodes().forEach((node) => { node.removeData('highlightColor'); node.removeClass('highlight');/*node.removeData('label');*/ }
   );
   cy.edges().forEach((edge) => { edge.removeData('highlightColor'); edge.removeClass('path');/*edge.removeData('label');*/ });
   errors.forEach((errorData, i) => {
-  //  console.log( errorData.pattern);
-    if( errorData.pattern !== "pd10102"){
+    if( unsolvedErrorInformation[errorData.pattern + errorData.role] !== true){
+      errorData.explanation = fixExplanation[errorData.pattern + errorData.role] ? fixExplanation[errorData.pattern + errorData.role] : "Fix of another error resolved this error.";
+      errorData.status = "solved";
+      errorData.colorCode = "grey";
+    }
+    //console.log( errorData.pattern);
+      
     let ele = cy.getElementById(errorData.role);
     if (ele.data('label')) {
       ele.data('label', ele.data('label') + "\n(" + (i + 1) + ")");
@@ -2569,10 +2673,20 @@ function highlightErrors(errors, cy, imageOptions) {
     else {
       ele.addClass('path');
     }
-    ele.data('highlightColor', errorHighlightColors[i % 8]);
+    if( errorColor[errorData.role] !== undefined ){
+    ele.data('highlightColor',errorColor[errorData.role] );
+    errorData.colorCode = errorColor[errorData.role];
+    }
+    else {
+      ele.data('highlightColor',errorHighlightColors[counter % 8] );
+      errorData.colorCode = errorHighlightColors[counter % 8];
+      errorColor[errorData.role] = errorHighlightColors[counter % 8];
+      counter++;
+   
+    }
    // console.log( imageOptions.highlightWidth);
     ele.data('highlightWidth', imageOptions.highlightWidth);
-  }
+  
   });
 }
 

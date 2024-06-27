@@ -155,14 +155,14 @@ let applyErrorFix = async function () {
 				errorRectangle.css({ 'margin-top': '2px' });
 				errorRectangle.append('</div>');
 				const errorString = "#errorNo" + error.errorNo;
-				if (error.pattern !== "pd10102")
+				//if (error.pattern !== "pd10102")
 					$("#errorsArea").append(errorRectangle);
 				let uiDivider = $('<div class="ui divider"></div>');
 				uiDivider.css({ 'margin': '0rem 0' });
 				//$("#errorsArea").append(uiDivider);
 				$(errorString).css({
-					'border': '3px solid', 'border-color': error.status === "unsolved" ? errorHighlightColors[numberOfUnsolvedErrors % 8]
-						: "grey"
+					'border': '3px solid', 'border-color': error.colorCode/*error.status === "unsolved" ? errorHighlightColors[numberOfUnsolvedErrors % 8]
+						: "grey"*/
 				});
 				if (error.status == "unsolved") {
 					numberOfUnsolvedErrors++;
@@ -301,14 +301,14 @@ let processValidation = async function () {
 				//console.log( document.getElementById("errorNo1") !== undefined ? document.getElementById("errorNo1")?.style : undefined);
 				const errorString = "#errorNo" + error.errorNo;
 				errorRectangle.css({ 'margin-top': '2px' });
-				if (error.pattern !== "pd10102")
+				//if (error.pattern !== "pd10102")
 					$("#errorsArea").append(errorRectangle);
 				let uiDivider = $('<div class="ui divider"></div>');
 				uiDivider.css({ 'margin': '0rem 0' });
 				//$("#errorsArea").append(uiDivider);
 				//console.log(errorString);
 				//console.log( $(errorString).css('border') );
-				$(errorString).css({ 'border': '3px solid', 'border-color': errorHighlightColors[(error.errorNo - 1) % 8] });
+				$(errorString).css({ 'border': '3px solid', 'border-color': error.colorCode /*errorHighlightColors[(error.errorNo - 1) % 8]*/ });
 				$(errorString).css({ 'margin-right': '7px' });
 				//console.log( $(errorString).css('border') );
 			});
