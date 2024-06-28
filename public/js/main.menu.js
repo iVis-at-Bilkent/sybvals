@@ -15,7 +15,7 @@ let errorHighlightColors = ['#1e90ff', '#ff0000', '#b0b000', '#006400', '#0000ff
 let currentSbgn;
 let cy;
 let aspectRatio;
-let fullGraph = false;
+let autoSize = false;
 
 let setFileContent = function (fileName) {
 	let span = document.getElementById('file-name');
@@ -77,7 +77,7 @@ let applyErrorFix = async function () {
 			color: $('#colorScheme').val(),
 			highlightColor: $('#highlightColor').val(),
 			highlightWidth: $('#highlightWidth').val(),
-			fullGraph: fullGraph
+			autoSize: autoSize
 		}
 	};
 
@@ -107,16 +107,22 @@ let applyErrorFix = async function () {
 	$("#fixFormatErrors").removeClass("loading");
 	$("#fixFormatErrors").prop('disabled', true);
 	if (!res.errorMessage && (res.errors !== undefined || res.image !== undefined)) {
-		document.getElementById("errorsField").innerText = res.remainingErrors > 0 ? "Errors (" + res.remainingErrors + ")" : "Errors (none)";
-		let errorWidth = 86 - (res.remainingErrors % 10 === res.remainingErrors) * 10;
-		if (res.remainingErrors === 0) {
+		errors = res.errors;
+		let remainingErrors = 0;
+		errors.forEach( error => {
+			if( error.status !== "solved"){
+				remainingErrors++;
+			}
+		});
+		document.getElementById("errorsField").innerText = remainingErrors > 0 ? "Errors (" + remainingErrors + ")" : "Errors (none)";
+		let errorWidth = 86 - (remainingErrors % 10 === remainingErrors) * 10;
+		if (remainingErrors === 0) {
 			errorWidth = 140;
 		}
 		$('#errorsField').css({ width: errorWidth + 'px' });
 		$("#errorsArea").empty();
 		//$("#errorsArea").css( {'max-height' : '100px', 'overflow':scroll, 'background-color' : 'lightblue'} );
 		// get error info
-		errors = res.errors;
 
 		let numberOfUnsolvedErrors = 0;
 		console.log( errors );
@@ -130,7 +136,7 @@ let applyErrorFix = async function () {
 				errorNo.append('<img src = "' + imgSource + '" style=" height: 20px; width: 20px;" />');
 				errorNo.append('<div class="ui item" style = "margin-left : 5px;"> <b>Error </b> ' + error.errorNo + '</div>');
 				let errorPattern = $('<div class="ui item"> <b>Pattern:</b> ' + error.pattern + '</div>');
-				let errorRole = $('<div class="ui item"> <b>Role:</b> ' + error.role + '</div>');
+				let errorRole = $('<div class="ui item"> <b>Role:</b> ' + error.label + '</div>');
 				let errorText = $('<div class="ui item"> <b>Message:</b> ' + error.text + '</div>');
 				let errorStatus = $('<div class="ui item"> <b>Status:</b> ' + (error.status !== undefined ? error.status : "unknown") + '</div>');
 				let list = $('<div class="ui list">');
@@ -181,7 +187,7 @@ let applyErrorFix = async function () {
 		}
 
 		// get image info
-		blobData = saveImage(res["imageErrorsHighlighted"], imageFormat, document.getElementById("file-name").innerHTML);
+		blobData = saveImage(res["image"], imageFormat, document.getElementById("file-name").innerHTML);
 		let urlCreator = window.URL || window.webkitURL;
 		let imageUrl = urlCreator.createObjectURL(blobData);
 		//$("#imageArea").css("height", parseInt($('#imageHeight').val()) * parseInt($('#imageArea').css('width')) / (parseInt($('#imageWidth').val())));
@@ -227,7 +233,7 @@ let processValidation = async function () {
 			color: $('#colorScheme').val(),
 			highlightColor: $('#highlightColor').val(),
 			highlightWidth: $('#highlightWidth').val(),
-			fullGraph: fullGraph
+			autoSize: autoSize
 		}
 	};
 
@@ -269,25 +275,31 @@ let processValidation = async function () {
 	currentSbgn = res.sbgn;
 	//console.log(aspectRatio);
 	//document.getElementById("imageAreaSmall").style.aspectRatio =  aspectRatio;
-	//console.log(res.image);
+	console.log(res.image);
 
 	if (!res.errorMessage && (res.errors !== undefined || res.image !== undefined)) {
+		let remainingErrors = 0;
+		errors = res.errors;
+		errors.forEach( error => {
+			if( error.status !== "solved"){
+				remainingErrors++;
+			}
+		});
 		//document.getElementById("errorsField").innerText = "Errors (" + res.remainingErrors + ")";
-		document.getElementById("errorsField").innerText = res.remainingErrors > 0 ? "Errors (" + res.remainingErrors + ")" : "Errors (none)";
-		let errorWidth = 86 - (res.remainingErrors % 10 === res.remainingErrors) * 10;
-		if (res.remainingErrors === 0) {
+		document.getElementById("errorsField").innerText = remainingErrors > 0 ? "Errors (" + remainingErrors + ")" : "Errors (none)";
+		let errorWidth = 86 - (remainingErrors % 10 === remainingErrors) * 10;
+		if (remainingErrors === 0) {
 			errorWidth = 140;
 		}
 		//let errorWidth = 86 - ( res.remainingErrors % 10 === res.remainingErrors) * 10;
 		$('#errorsField').css({ width: errorWidth + 'px' });
 		$("#errorsArea").empty();
 		// get error info
-		errors = res.errors;
 		if (errors.length > 0) {
 			res.errors.forEach((error) => {
 				let errorNo = $('<div class="ui item"> <b>Error </b> ' + error.errorNo + '</div>');
 				let errorPattern = $('<div class="ui item"> <b>Pattern:</b> ' + error.pattern + '</div>');
-				let errorRole = $('<div class="ui item"> <b>Role:</b> ' + error.role + '</div>');
+				let errorRole = $('<div class="ui item"> <b>Role:</b> ' + error.label + '</div>');
 				let errorText = $('<div class="ui item"> <b>Message:</b> ' + error.text + '</div>');
 				let list = $('<div class="ui list">');
 				//let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo +  '" style = "border = 10px solid ' +  errorHighlightColors[(error.errorNo - 1) % 8] + '">');
@@ -319,7 +331,7 @@ let processValidation = async function () {
 			$("#errorsArea").text('Map is valid!');
 		}
 		// get image info
-		blobData = saveImage(res["imageErrorsHighlighted"], imageFormat, document.getElementById("file-name").innerHTML);
+		blobData = saveImage(res["image"], imageFormat, document.getElementById("file-name").innerHTML);
 		let urlCreator = window.URL || window.webkitURL;
 		let imageUrl = urlCreator.createObjectURL(blobData);
 		var img = new Image();
@@ -587,7 +599,7 @@ $("#imageSettingsDefault").on("click", function (e) {
 	$("#transparent").prop("checked", true);
 	$("#highlightColor").val("#ff0000");
 	$("#highlightWidth").val(10);
-	$("#full-graph").prop("checked", false);
+	$("#auto-size-graph").prop("checked", false);
 	document.getElementById("imageWidth").disabled = false;
 	document.getElementById("imageHeight").disabled = false;
 	//console.log(document.getElementById("fullGraph"));
@@ -601,8 +613,8 @@ $("#transparent").change(function () {
 		$("#imageBackground").attr("disabled", false);
 	}
 });
-$("#full-graph").change(function () {
-	fullGraph = this.checked ? true : false;
+$("#auto-size-graph").change(function () {
+	autoSize = this.checked ? true : false;
 	document.getElementById("imageWidth").disabled = this.checked ? true : false;
 	document.getElementById("imageHeight").disabled = this.checked ? true : false;
 });

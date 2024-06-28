@@ -63,8 +63,6 @@ function base64_encode(file) {
 function postProcessForLayouts(cy) {
   let processNodes = cy.nodes('[class = "process",class = "uncertain process"]', '[class = "uncertain process"]');
   for (let i = 0; i < processNodes.length; i++) {
-    //console.log( i );
-    //console.log( processNodes[i].id() );
     let compartment;
     let connectedNodes = processNodes[i].connectedEdges().map(edge => (edge.source() == processNodes[i] ? edge.target() : edge.source()));
     //console.log( processNodes[i].parent().data().class );
@@ -88,72 +86,10 @@ function postProcessForLayouts(cy) {
 
 
 }
-  async function  cropImage(image){
-    /*var img = new Image(),
-    $canvas = $("<canvas>"),
-    canvas = $canvas[0],
-    context;
-    const gm = require('gm'); */
-    /*blobData = saveImage(image, imageOptions.format, "adasd");
-    let urlCreator = window.URL || window.webkitURL;
-    let imageUrl = urlCreator.createObjectURL(blobData);*/
-    image = image.replace(/^data:image\/png;base64,/,"");
-    const buffer = Buffer.from(image,"base64");
-    //image = image.replace(/^data:image\/png;base64,/,"");
-    //fs.unlinkSync('./src/1.png');
-    //fs.unlinkSync('./src/out.png');
-     await trimm(buffer);//fs.writeFileSync('./src/1.png', buffer)
-    //console.log(image);
-
-
-    // Import the image 
-     /*gm('./src/1.png') 
   
-   // Invoke trim function 
-    .trim() 
-  
-    // Process and Write the image 
-    .write("trim1.png", function (err) { 
-     if (!err) console.log('done'); 
-     }); */
-     //trimImage("1.png", "out.png");
-     //fs.unlinkSync( "./src/out.png");
-     //var dims;
-
-    await imageTrim().then(response => {console.log(response + " succesfully done");  
-      //console.log(dimensions.width, dimensions.height);
-      /*sizeOf("./src/out.png", async function (err, dimensions) {
-      //await console.log(dimensions.width, dimensions.height);
-      width = dimensions.width;height = dimensions.height;
-      dims = dimensions;
-   })*/
       
       
-   });;/*trimImage("./src/1.png", "./src/out.png", async function (err)  {
-      if (err) {
-        console.log(err);
-        return 2;
-      }
-      else {
-        await sizeOf("./src/out.png", async function (err, dimensions) {
-          /*console.log(dimensions.width, dimensions.height);
-          width = dimensions.width;height = dimensions.height;
-          dims = dimensions;
-          console.log( "no error " + dims );
-          return dims;
-       });
-      }
-      });*/
-      //for( let i = 0; i < 1000000000000; i++);
-     
-     //await console.log( dims.width + " " + dims.height );
-      //fs.unlinkSync("./src/out.png");
-    // console.log("sdasdasdas");
-    // await console.log( dims);
-     return dims;
-      
-     
-  };
+ 
 
 // for fcose
 const fcose = require('cytoscape-fcose');
@@ -170,7 +106,7 @@ let options;
 let data;
 let errors = [];
 let body;
-let imageErrorsHighlighted;
+let image;
 
 function distanceBetween(a, b) {
   let xDiff = a.position().x - b.position().y;
@@ -433,360 +369,7 @@ app.use((req, res, next) => {
   }
   //console.log("ziyaaaaaaaaaaaaaaaaaaaaaaaa");
 
-  var selectionColor = imageOptions.color || "white";
-  /*let stylesheetForSbgnn = cytoscape.stylesheet()
-  .selector('node')
-  .css({
-    /*'text-valign': 'center',
-    'text-halign': 'center',
-    'text-opacity': 1,
-    'opacity': 1,
-    'padding': 0,
-    'background-color': '#0000ff',
-    'shape': 'rectangle'
-  }); /*
-  .selector("node[class]")
-  .css({
-    'shape': function (ele) {
-      return elementUtilities.getCyShape(ele);
-    },
-    'content': function (ele) {
-      return elementUtilities.getElementContent(ele);
-    },
-    'font-size': function (ele) {
-      // If node labels are expected to be adjusted automatically or element cannot have label
-      // or ele.data('font-size') is not defined return elementUtilities.getLabelTextSize()
-      // else return ele.data('font-size')
-      var opt = options.adjustNodeLabelFontSizeAutomatically;
-      var adjust = typeof opt === 'function' ? opt() : opt;
-
-      if (!adjust && ele.data('font-size') != undefined) {
-        return ele.data('font-size');
-      }
-
-      return elementUtilities.getLabelTextSize(ele);
-    }
-  })
-  .selector("node[class][font-family]")
-  .style({
-    'font-family': function( ele ) {
-      return ele.data('font-family');
-    }
-  })
-  .selector("node[class][font-style]")
-  .style({
-    'font-style': function( ele ) {
-      return ele.data('font-style')
-    }
-  })
-  .selector("node[class][font-weight]")
-  .style({
-    'font-weight': function( ele ) {
-      return ele.data('font-weight');
-    }
-  })
-  .selector("node[class][color]")
-  .style({
-    'color': function( ele ) {
-      return ele.data('color');
-    }
-  })
-  .selector("node[class][background-color]")
-  .style({
-    'background-color': function( ele ) {
-      return ele.data('background-color');
-    }
-  })
-  .selector("node[class][background-opacity]")
-  .style({
-    'background-opacity': function( ele ) {
-      return ele.data('background-opacity');
-    }
-  })
-  .selector("node[class][border-width]")
-  .style({
-    'border-width': function( ele ) {
-      return ele.data('border-width');
-    }
-  })
-  .selector("node[class][border-color]")
-  .style({
-    'border-color': function( ele ) {
-      return ele.data('border-color');
-    }
-  })
-  .selector("node[class][text-wrap]")
-  .style({
-    'text-wrap': function (ele) {
-      var opt = options.fitLabelsToNodes;
-      var isFit = typeof opt === 'function' ? opt() : opt;
-      if (isFit) {
-        return 'ellipsis';
-      }
-      return ele.data('text-wrap');
-    }
-  })
-  .selector("node")
-  .style({
-    'text-max-width': function (ele) {
-      var opt = options.fitLabelsToNodes;
-      var isFit = typeof opt === 'function' ? opt() : opt;
-      if (isFit) {
-        return ele.width();
-      }
-      return '1000px';
-    },
-    'color': function(){
-      return "Red";
-    }
-  })
-  .selector("edge[class][line-color]")
-  .style({
-    'line-color': function( ele ) {
-      return ele.data('line-color');
-    },
-    'source-arrow-color': function( ele ) {
-      return ele.data('line-color');
-    },
-    'target-arrow-color': function( ele ) {
-      return ele.data('line-color');
-    }
-  })
-  .selector("edge[class][width]")
-  .style({
-    'width': function( ele ) {
-      return ele.data('width');
-    }
-  })
-  .selector("node[class='association'],[class='dissociation'],[class='and'],[class='or'],[class='not'],[class='process'],[class='omitted process'],[class='uncertain process']")
-  .css({
-    'shape-polygon-points': function(ele) {
-      if (graphUtilities.portsEnabled === true && ele.data('ports').length === 2) {
-        // We assume that the ports of the edge are symetric according to the node center so just checking one port is enough for us
-        var port = ele.data('ports')[0];
-        // If the ports are located above/below of the node then the orientation is 'vertical' else it is 'horizontal'
-        var orientation = port.x === 0 ? 'vertical' : 'horizontal';
-        // The half width of the actual shape discluding the ports
-        var shapeHW = orientation === 'vertical' ? 50 / Math.abs(port.y) : 50 / Math.abs(port.x);
-        // Get the class of the node
-        var _class = ele.data('class');
-        // If class is one of process, omitted process or uncertain process then the type of actual shape is 'rectangle' else it is 'circle'
-        var type = _class.endsWith('process') ? 'rectangle' : 'circle';
-
-        // Generate a polygon string with above parameters and return it
-        return generateShapeWithPortString(0.01, shapeHW, type, orientation);
-      }
-
-      // This element is not expected to have a poygonial shape (Because it does not have 2 ports) just return a trivial string here not to have a run time bug
-      return '-1 -1 1 1 1 0';
-    }
-  })
-  .selector("node[class='perturbing agent']")
-  .css({
-    'shape-polygon-points': '-1, -1,   -0.5, 0,  -1, 1,   1, 1,   0.5, 0, 1, -1'
-  })
-  .selector("node[class='tag']")
-  .css({
-    'shape-polygon-points': '-1, -1,   0.25, -1,   1, 0,    0.25, 1,    -1, 1'
-  })
-  .selector("node:parent[class^='complex']") // start with complex
-  .css({
-    'text-valign': 'bottom',
-    'text-halign': 'center',
-    'text-margin-y': elementUtilities.getComplexMargin,
-    'padding': elementUtilities.getComplexPadding,
-    'compound-sizing-wrt-labels' : 'exclude',
-  })
-  .selector("node[class='compartment']")
-  .css({
-    'text-valign': 'bottom',
-    'text-halign': 'center',
-    'text-margin-y' : -1 * options.extraCompartmentPadding,
-    'compound-sizing-wrt-labels' : 'exclude',
-  })
-  .selector("node:parent[class='compartment']")
-  .css({
-    'padding': function() {
-    return options.extraCompartmentPadding;
-      return graphUtilities.getCompoundPaddings() + options.extraCompartmentPadding;
-    }
-  })
-  .selector("node[class='submap']")
-  .css({
-    'text-valign': 'bottom',
-    'text-halign': 'center',
-    'text-margin-y' : -1 * options.extraCompartmentPadding,
-    'compound-sizing-wrt-labels' : 'exclude',
-  })
-  .selector("node:parent[class='submap'],[class='topology group']")
-  .css({
-    'padding': function() {
-      return graphUtilities.getCompoundPaddings() + options.extraCompartmentPadding;
-    }
-  })
-  .selector("node:childless[bbox]")
-  .css({
-    'width': 'data(bbox.w)',
-    'height': 'data(bbox.h)'
-  })
-  .selector("node:parent[minHeight]")
-  .css({
-    'min-height': function(ele) {
-    // if (graphUtilities.compoundSizesConsidered) {
-        return ele.data('minHeight');
-  //   }
-
-      return 0;
-    }
-  })
-  .selector("node:parent[minHeightBiasTop]")
-  .css({
-    'min-height-bias-top': function(ele) {
-      var min = parseFloat(ele.data('minHeightBiasTop'));
-      return (min >= 0 ? min : 100) + '%';
-    }
-  })
-  .selector("node:parent[minHeightBiasBottom]")
-  .css({
-    'min-height-bias-bottom': function(ele) {
-      var min = parseFloat(ele.data('minHeightBiasBottom'));
-      return (min >= 0 ? min : 100) + '%';
-    }
-  })
-  .selector("node:parent[minWidth]")
-  .css({
-    'min-width': function(ele) {
-      //if (graphUtilities.compoundSizesConsidered) {
-        return ele.data('minWidth');
-      //}
-
-      return 0;
-    }
-  })
-  .selector("node:parent[minWidthBiasLeft]")
-  .css({
-    'min-width-bias-left': function(ele) {
-      var min = parseFloat(ele.data('minWidthBiasLeft'));
-      return (min >= 0 ? min : 100) + '%';
-    }
-  })
-  .selector("node:parent[minWidthBiasRight]")
-  .css({
-    'min-width-bias-right': function(ele) {
-      var min = parseFloat(ele.data('minWidthBiasRight'));
-      return (min >= 0 ? min : 100) + '%';
-    }
-  })
-  .selector("node.cy-expand-collapse-collapsed-node")
-  .css({
-    'border-style': 'dashed'
-  })
-  .selector("node:selected")
-  .css({
-    'border-color': selectionColor,
-    'target-arrow-color': '#000',
-'text-outline-color': '#000',
-'border-width': function(ele){
-return Math.max(parseFloat(ele.data('border-width')) + 2, 3);
-}
-  })
-  .selector("node:active")
-  .css({
-    'background-opacity': 0.7, 'overlay-color': selectionColor,
-    'overlay-padding': '14'
-  })
-  .selector("edge")
-  .css({
-    'curve-style': 'bezier',
-    'target-arrow-fill': function(ele) {
-      return elementUtilities.getCyTargetArrowFill(ele);
-    },
-    'source-arrow-fill': 'hollow',
-    'text-border-color': function (ele) {
-      if (ele.selected()) {
-        return selectionColor;
-      }
-      return ele.css('line-color');
-    },
-    'color': function (ele) {
-      if (ele.selected()) {
-        return selectionColor;
-      }
-      return ele.css('line-color');
-    },
-    'arrow-scale': 1.25
-  })
-  .selector("edge.cy-expand-collapse-meta-edge")
-  .css({
-    'line-color': '#C4C4C4',
-    'source-arrow-color': '#C4C4C4',
-    'target-arrow-color': '#C4C4C4'
-  })
-  .selector("edge:selected")
-  .css({
-    'line-color': selectionColor,
-    'source-arrow-color': selectionColor,
-'target-arrow-color': selectionColor,
-'width': function(ele){
-return Math.max(parseFloat(ele.data('width')) + 2, 3);
-}
-  })
-  .selector("edge:active")
-  .css({
-    'background-opacity': 0.7, 'overlay-color': selectionColor,
-    'overlay-padding': '8'
-  })
-  .selector("edge[cardinality > 0]")
-  .css({
-    'text-rotation': 'autorotate',
-    'text-background-shape': 'rectangle',
-    'text-border-opacity': '1',
-    'text-border-width': '1',
-    'text-background-color': 'white',
-    'text-background-opacity': '1'
-  })
-  .selector("edge[class='consumption'][cardinality > 0]")
-  .css({
-    'source-label': function (ele) {
-      return '' + ele.data('cardinality');
-    },
-    'source-text-margin-y': '-10',
-    'source-text-offset': function (ele) {
-      return elementUtilities.getCardinalityDistance(ele);
-    }
-  })
-  .selector("edge[class='production'][cardinality > 0]")
-  .css({
-    'target-label': function (ele) {
-      return '' + ele.data('cardinality');
-    },
-    'target-text-margin-y': '-10',
-    'target-text-offset': function (ele) {
-      return elementUtilities.getCardinalityDistance(ele);
-    }
-  })
-  .selector("edge[class]")
-  .css({
-    'target-arrow-shape': function (ele) {
-      return elementUtilities.getCyArrowShape(ele);
-    },
-    'source-arrow-shape': 'none',
-    'source-endpoint': function(ele) {
-      return elementUtilities.getEndPoint(ele, 'source');
-    },
-    'target-endpoint': function(ele) {
-      return elementUtilities.getEndPoint(ele, 'target');
-    },
-    'line-style': function (ele) {
-      return elementUtilities.getArrayLineStyle(ele);
-    }
-  })
-  .selector("core")
-  .css({
-    'selection-box-color': selectionColor,
-    'selection-box-opacity': '0.2', 'selection-box-border-color': selectionColor
-  }));*/
-
+  
 
   cy.nodes().forEach((node) => {
     node.css("width", node.data().bbox.w || size);
@@ -798,8 +381,7 @@ return Math.max(parseFloat(ele.data('width')) + 2, 3);
     //node.css("height", node.data().bbox.h || size);
     //console.log(edge.data());
   });
-  //console.log(cy.edges().data());
-  //console.log("ziyaaaaaaaaaaaaaaaaaaaaaaaa");
+ 
   errors.forEach((errorData, i) => {
     if (errorData.pattern == "pd10109" || errorData.pattern == 'pd10110') {
       let ele = cy.getElementById(errorData.role);
@@ -845,852 +427,16 @@ return Math.max(parseFloat(ele.data('width')) + 2, 3);
     if( error.pattern !== "pd10102"){
       errorCount++;
     }});
-  ret['remainingErrors'] = errorCount;
   //console.log( errors );
 
-  let bgColors = [];
-  //console.log(colorScheme);
-  if (colorScheme == "greyscale") {
-    bgColors = ['#f0f0f0', '#d9d9d9', '#bdbdbd'];
-  }
-  else if (colorScheme == "bluescale") {
-    bgColors = ['#eff3ff', '#c6dbef', '#9ecae1'];
-  }
-  else if (colorScheme == "red_blue") {
-    bgColors = ['#f4a582', '#fddbc7', '#f7f7f7', '#d1e5f0', '#92c5de'];
-  }
-  else if (colorScheme == "green_brown") {
-    bgColors = ['#dfc27d', '#f6e8c3', '#f5f5f5', '#c7eae5', '#80cdc1'];
-  }
-  else if (colorScheme == "purple_brown") {
-    bgColors = ['#fdb863', '#fee0b6', '#f7f7f7', '#d8daeb', '#b2abd2'];
-  }
-  else if (colorScheme == "purple_green") {
-    bgColors = ['#a6dba0', '#d9f0d3', '#f7f7f7', '#e7d4e8', '#c2a5cf'];
-  }
-  else if (colorScheme == "grey_red") {
-    bgColors = ['#bababa', '#e0e0e0', '#ffffff', '#fddbc7', '#f4a582'];
-  }
-  else {
-    bgColors = ['#ffffff', '#000000'];
-  }
-  //console.log(bgColors.length);
-  //return res.status(200).send(ret);
-
-  function bGColor() {
-    return '#c6dbef';
-  }
-  let selectionColorr = function () { return imageOptions.color || "white"; }
-
-
-  // console.log(stylesheet);
-  //console.log(errors);
-  /*let adjustStylesheet = function(colorScheme) {
-    let stylesheet;
-    //console.log("stylesheet is adjusted");
-      if(colorScheme == 'black_white') {
-        stylesheet = function(){
-          return stylesheetForSbgn(cytoscape, 'black_white');
-        };
-      }
-      else if(colorScheme == 'greyscale') {
-        console.log("greyscale stylesheet");
-        stylesheet = function(){
-          return stylesheetForSbgn(cytoscape, 'greyscale');
-        };
-      }
-      else if(colorScheme == 'bluescale') {
-        stylesheet = function(){
-          return stylesheetForSbgn(cytoscape, 'bluescale');
-        };
-      }
-      else if(colorScheme == 'red_blue') {
-        stylesheet = function(){
-          return stylesheetForSbgn(cytoscape, 'red_blue');
-        };
-      }
-      else if(colorScheme == 'green_brown') {
-        stylesheet = function(){
-          return stylesheetForSbgn(cytoscape,'green_brown');
-        };
-      }
-      else if(colorScheme == 'purple_brown') {
-        stylesheet = function(){
-          return stylesheetForSbgn(cytoscape,'purple_brown');
-        };
-      }
-      else if(colorScheme == 'purple_green') {
-        stylesheet = function(){
-          return stylesheetForSbgn(cytoscape,'purple_green');
-        };
-      }
-      else if(colorScheme == 'grey_red') {
-        stylesheet = function(){
-          return stylesheetForSbgn(cytoscape,'grey_red');
-        };
-      }
-      else {
-        // default color scheme for SBGNML is bluescale
-        stylesheet = function(){
-          return stylesheetForSbgn(cytoscape,'bluescale');
-        };
-      }
-      return stylesheet;
-    };*/
-  let stylesheetForSbgnn = function () {
-    return cytoscape.stylesheet()
-      /* .selector("node")
-       .css({
-         'width': 'data(bbox.w)',
-         'height': 'data(bbox.h)'
-       })*/
-      .selector('node')
-      .css({
-        'text-valign': 'center',
-        'text-halign': 'center',
-        'text-opacity': 1,
-        'opacity': 1,
-        'padding': 0,
-        'background-color': '#c6dbef',
-        'border-width': 1,
-        'font-size': function (node) {
-          return node.data('font-size');
-        },
-        'font-style': function (node) {
-          return node.data('font-style');
-        },
-        'height': function (node) {
-          return node.data().bbox.h;
-        },
-        'width': function (node) {
-          return node.data().bbox.w;
-        },
-        'shape': elementUtilities.getCyShape(node),/*function(node) {
-              sbgnStyle = new Map()
-              .set('unspecified entity', {w: 32, h: 32, shape: 'ellipse'})
-              .set('simple chemical', {w: 48, h: 48, shape: 'ellipse'})
-              .set('simple chemical multimer', {w: 48, h: 48, shape: 'ellipse'})
-              .set('macromolecule', {w: 96, h: 48, shape: 'roundrectangle'})
-    .set('macromolecule multimer', {w: 96, h: 48, shape: 'roundrectangle'})
-    .set('nucleic acid feature', {w: 88, h: 56, shape: 'bottomroundrectangle'})
-    .set('nucleic acid feature multimer', {w: 88, h: 52, shape: 'bottomroundrectangle'})
-    .set('complex', {w: 10, h: 10, shape: 'cutrectangle'})
-    .set('complex multimer', {w: 10, h: 10, shape: 'cutrectangle'})
-    .set('source and sink', {w: 60, h: 60, shape: 'polygon'})
-    .set('perturbing agent', {w: 140, h: 60, shape: 'concavehexagon'})
-    
-    .set('phenotype', {w: 140, h: 60, shape: 'hexagon'})
-    .set('process', {w:25, h: 25, shape: 'square'})
-    .set('uncertain process', {w:25, h: 25, shape: 'square'})
-    .set('omitted process', {w:25, h: 25, shape: 'square'})
-    .set('association', {w:25, h: 25, shape: 'ellipse'})
-    .set('dissociation', {w:25, h: 25, shape: 'ellipse'})
-    
-    .set('compartment', {w: 50, h: 50, shape: 'barrel'})
-    
-    .set('tag', {w: 100, h: 65, shape: 'tag'})
-    .set('and', {w: 40, h: 40, shape: 'ellipse'})
-    .set('or', {w: 40, h: 40, shape: 'ellipse'})
-    .set('not', {w: 40, h: 40, shape: 'ellipse'});
-              var _class = node.data().class;
-              if( _class == 'unspecified entity' || _class == 'simple chemical' || 
-              _class == 'association' || _class == 'dissociation' || _class == 'simple chemical multimer' || _class == 'and'
-              || _class == 'or' || _class == 'not')
-                   return 'ellipse';
-              if( _class == 'perturbing agent')
-                   return 'concavehexagon';
-              if( _class == 'nucleic acid feature' || _class == 'nucleic acid feature multimer')
-                   return 'bottomroundrectangle';
-                   if( _class == 'process' || _class == 'uncertain process')
-                   return 'square';
-              if( _class == 'macromolecule')
-                   return 'roundrectangle'
-                   if( _class == 'compartment')
-                   return 'barrel'
-                   if( _class == 'source and sink')
-                   return 'polygon'
-                   if( _class == 'complex' || _class == 'complex multimer')
-                   return 'cutrectangle';
-                   if( _class == 'tag')
-                   return 'tag';
-              return 'rectangle';
-            }*/
-      })
-      .selector(':parent').css({
-        'background-opacity': 0.3,
-        'text-valign': 'bottom',
-        'text-halign': 'center',
-      })
-      .selector('node.error').css({
-        'overlay-color': function (node) {
-          return node.data('highlightColor') ? node.data('highlightColor') : "#ff0000";
-        },
-        'overlay-padding': function (node) {
-          return node.data('highlightWidth') ? node.data('highlightWidth') : "0px";
-        },
-        'overlay-opacity': function (node) {
-          return node.data('highlightWidth') ? 0.5 : 0;
-        },
-      })
-      .selector('edge.error').css({
-        'underlay-color': function (edge) {
-          return edge.data('highlightColor') ? edge.data('highlightColor') : "#00ff00";
-        },
-        'underlay-padding': function (edge) {
-          return edge.data('highlightWidth') ? edge.data('highlightWidth') : "0px";
-        },
-        'underlay-opacity': function (edge) {
-          return edge.data('highlightWidth') ? 0.5 : 0;
-        },
-      })
-      .selector("node[class]").css({
-        'content': function (ele) {
-          var _class = ele.data('class');
-
-          if (_class.endsWith(' multimer')) {
-            _class = _class.replace(' multimer', '');
-          }
-
-          var content = "";
-          if (_class == 'macromolecule' || _class == 'simple chemical'
-            || _class == 'phenotype'
-            || _class == 'unspecified entity' || _class == 'nucleic acid feature'
-            || _class == 'perturbing agent' || _class == 'tag'
-            || _class == 'biological activity' || _class.startsWith('BA')
-            || _class == 'submap' || _class == 'SIF macromolecule'
-            || _class == 'SIF simple chemical' || _class == 'complex') {
-            content = ele.data('label') ? ele.data('label') : "";
-          }
-          else if (_class == 'compartment') {
-            content = ele.data('label') ? ele.data('label') : "";
-          }
-          else if (_class == 'complex') {
-            if (ele.children().length == 0) {
-              if (ele.data('label')) {
-                content = ele.data('label');
-              }
-              else if (ele.data('infoLabel')) {
-                content = ele.data('infoLabel');
-              }
-              else {
-                content = '';
-              }
-            }
-            else {
-              content = '';
-            }
-          }
-          else if (_class == 'and') {
-            content = 'AND';
-          }
-          else if (_class == 'or') {
-            content = 'OR';
-          }
-          else if (_class == 'not') {
-            content = 'NOT';
-          }
-          else if (_class == 'omitted process') {
-            content = '\\\\';
-          }
-          else if (_class == 'uncertain process') {
-            content = '?';
-          }
-          else if (_class == 'dissociation') {
-            content = 'o';
-          }
-          else if (_class == 'delay') {
-            content = '\u03C4'; // tau
-          }
-
-          var textWidth = ele.outerWidth() || ele.data('bbox').w;
-
-          var textProp = {
-            label: content,
-            width: (_class == 'perturbing agent' ? textWidth / 2 : textWidth)
-          };
-
-          return textProp.label;
-        },
-
-      })
-      .selector("edge")
-      .css({
-        'target-arrow-shape': function (ele) {
-          var _class = ele.data('class');
-
-          switch (_class) {
-            case 'necessary stimulation':
-              return 'triangle-cross';
-            case 'inhibition': case 'negative influence': case 'inhibits':
-            case 'downregulates-expression': case 'dephosphorylates':
-              return 'tee';
-            case 'catalysis':
-              return 'circle';
-            case 'stimulation': case 'production': case 'positive influence':
-            case 'activates': case 'phosphorylates': case 'upregulates-expression':
-            case 'controls-state-change-of': case 'chemical-affects':
-            case 'controls-transport-of': case 'controls-phosphorylation-of':
-            case 'controls-expression-of': case 'catalysis-precedes':
-            case 'consumption-controled-by': case 'controls-production-of':
-            case 'controls-transport-of-chemical': case 'used-to-produce':
-              return 'triangle';
-            case 'modulation': case 'unknown influence':
-              return 'diamond';
-            default:
-              return 'none';
-          }
-        },
-        'source-arrow-shape': 'none',
-        'source-endpoint': function (ele) {
-          var endNode = ele.source();
-          var portId = ele.data('portsource');
-
-          if (portId == null) {
-            return 'outside-to-node'; // If there is no portsource return the default value which is 'outside-to-node'
-          }
-
-          var ports = endNode.data('ports');
-          var port;
-          for (var i = 0; i < ports.length; i++) {
-            if (ports[i].id === portId) {
-              port = ports[i];
-            }
-          }
-
-          if (port === undefined) {
-            return 'outside-to-node'; // If port is not found return the default value which is 'outside-to-node'
-          }
-
-          var x, y;
-          // Note that for drawing ports we represent the whole shape by a polygon and ports are always 50% away from the node center
-          if (port.x != 0) {
-            x = Math.sign(port.x) * 50;
-            y = 0;
-          }
-          else {
-            x = 0;
-            y = Math.sign(port.y) * 50;
-          }
-
-          return '' + x + '% ' + y + '%';
-        }/*,
-                  'target-endpoint': function(ele) {
-                    return elementUtilities.getEndPoint(ele, 'target');
-                  },
-                  'line-style': function (ele) {
-                    return elementUtilities.getArrayLineStyle(ele);
-                  }*/
-      })
-    /*
-    .selector("node[class]")
-    .css({
-      'shape': function (ele) {
-        var _class = ele.data('class');
-        // Get rid of rectangle postfix to have the actual node class
-        // return 'compartment';
-        if (_class.endsWith(' multimer')) {
-          _class = _class.replace(' multimer', '');
-        }
  
-        if (_class == 'compartment') {
-          console.log("compartment dsadas");
-          return 'compartment';
-        }
-        if (_class == 'phenotype') {
-          console.log("compartment2 dsadas");
-          return 'hexagon';
-        }
-        if (_class == 'perturbing agent' || _class == 'tag') {
-          return 'polygon';
-        }
-        if (_class == 'SIF macromolecule') {
-          return 'macromolecule';
-        }
-        if (_class == 'simple chemical') {
-          return 'hexagon';
-        }
- 
-        if (_class.startsWith('BA')) {
-          return 'biological activity';
-        }
- 
-        if (_class == 'submap' || _class == 'topology group') {
-          return 'rectangle';
-        }
-      },
-      'content': function (ele) {
-        var _class = ele.data('class');
- 
-        if (_class.endsWith(' multimer')) {
-          _class = _class.replace(' multimer', '');
-        }
- 
-        var content = "";
-        if (_class == 'macromolecule' || _class == 'simple chemical'
-          || _class == 'phenotype'
-          || _class == 'unspecified entity' || _class == 'nucleic acid feature'
-          || _class == 'perturbing agent' || _class == 'tag'
-          || _class == 'biological activity' || _class.startsWith('BA')
-          || _class == 'submap' || _class == 'SIF macromolecule'
-          || _class == 'SIF simple chemical') {
-          content = ele.data('label') ? ele.data('label') : "";
-        }
-        else if (_class == 'compartment') {
-          content = ele.data('label') ? ele.data('label') : "";
-        }
-        else if (_class == 'complex') {
-          if (ele.children().length == 0) {
-            if (ele.data('label')) {
-              content = ele.data('label');
-            }
-            else if (ele.data('infoLabel')) {
-              content = ele.data('infoLabel');
-            }
-            else {
-              content = '';
-            }
-          }
-          else {
-            content = '';
-          }
-        }
-        else if (_class == 'and') {
-          content = 'AND';
-        }
-        else if (_class == 'or') {
-          content = 'OR';
-        }
-        else if (_class == 'not') {
-          content = 'NOT';
-        }
-        else if (_class == 'omitted process') {
-          content = '\\\\';
-        }
-        else if (_class == 'uncertain process') {
-          content = '?';
-        }
-        else if (_class == 'dissociation') {
-          content = 'o';
-        }
-        else if (_class == 'delay') {
-          content = '\u03C4'; // tau
-        }
- 
-        var textWidth = ele.outerWidth() || ele.data('bbox').w;
- 
-        var textProp = {
-          label: content,
-          width: (_class == 'perturbing agent' ? textWidth / 2 : textWidth)
-        };
- 
-        return textProp.label;
-      },
-      'font-size': function (ele) {
-        // If node labels are expected to be adjusted automatically or element cannot have label
-        // or ele.data('font-size') is not defined return elementUtilities.getLabelTextSize()
-        // else return ele.data('font-size')
-        var opt = options.adjustNodeLabelFontSizeAutomatically;
-        var adjust = typeof opt === 'function' ? opt() : opt;
- 
-        if (!adjust && ele.data('font-size') != undefined) {
-          return ele.data('font-size');
-        }
- 
-        //return elementUtilities.getLabelTextSize(ele);
-      }
-    })
-    /*.selector("edge[width]")
-    .style({
-      'width': function( ele ) {
-        return ele.data('width');
-      }
-    })
-    .selector('node[class][font-family]')
-    .style({
-      'font-family': function (ele) {
-        return ele.data('font-family');
-      }
-    })
- 
-    .selector("node[class][font-style]")
-    .style({
-      'font-style': function (ele) {
-        return ele.data('font-style')
-      }
-    })
-    .selector("node[class][font-weight]")
-    .style({
-      'font-weight': function (ele) {
-        return ele.data('font-weight');
-      }
-    })
-    .selector("node[class][color]")
-    .style({
-      'color': function (ele) {
-        return ele.data('color');
-      }
-    })
-    /*.selector("node[class][background-color]")
-    .style({
-      'background-color': function( ele ) {
-        return ele.data('background-color');
-      }
-    })
-    .selector("node[class][background-opacity]")
-    .style({
-      'background-opacity': function (ele) {
-        return ele.data('background-opacity');
-      }
-    })
-    .selector("node[class][border-width]")
-    .style({
-      'border-width': function (ele) {
-        return ele.data('border-width');
-      }
-    })
-    .selector("node[class][border-color]")
-    .style({
-      'border-color': function (ele) {
-        return ele.data('border-color');
-      }
-    })
-    .selector("node[class][text-wrap]")
-    .style({
-      'text-wrap': function (ele) {
-        var opt = options.fitLabelsToNodes;
-        var isFit = typeof opt === 'function' ? opt() : opt;
-        if (isFit) {
-          return 'ellipsis';
-        }
-        return ele.data('text-wrap');
-      }
-    })
-    .selector("node")
-    .style({
-      'text-max-width': function (ele) {
-        var opt = options.fitLabelsToNodes;
-        var isFit = typeof opt === 'function' ? opt() : opt;
-        if (isFit) {
-          return ele.width();
-        }
-        return '1000px';
-      },
-      'color': function () {
-        return "Red";
-      }
-    })
-    .selector("edge[class][line-color]")
-    .style({
-      'line-color': function (ele) {
-        return ele.data('line-color');
-      },
-      'source-arrow-color': function (ele) {
-        return ele.data('line-color');
-      },
-      'target-arrow-color': function (ele) {
-        return ele.data('line-color');
-      }
-    })
-    .selector("edge[class][width]")
-    .style({
-      'width': function (ele) {
-        return ele.data('width');
-      }
-    })
-    .selector("node[class='association'],[class='dissociation'],[class='and'],[class='or'],[class='not'],[class='process'],[class='omitted process'],[class='uncertain process']")
-    .css({
-      'shape-polygon-points': function (ele) {
-        //return '-1 -1 1 1 1 0';
-        return '-1 -1 1 1 1 0';
-        if (ele.data('ports').length === 2) {
-          // We assume that the ports of the edge are symetric according to the node center so just checking one port is enough for us
-          var port = ele.data('ports')[0];
-          // If the ports are located above/below of the node then the orientation is 'vertical' else it is 'horizontal'
-          var orientation = port.x === 0 ? 'vertical' : 'horizontal';
-          // The half width of the actual shape discluding the ports
-          var shapeHW = orientation === 'vertical' ? 50 / Math.abs(port.y) : 50 / Math.abs(port.x);
-          // Get the class of the node
-          var _class = ele.data('class');
-          // If class is one of process, omitted process or uncertain process then the type of actual shape is 'rectangle' else it is 'circle'
-          var type = _class.endsWith('process') ? 'rectangle' : 'circle';
- 
-          // Generate a polygon string with above parameters and return it
-          return generateShapeWithPortString(0.01, shapeHW, type, orientation);
-        }
- 
-        // This element is not expected to have a poygonial shape (Because it does not have 2 ports) just return a trivial string here not to have a run time bug
-        return '-1 -1 1 1 1 0';
-      }
-    })
-    .selector("node[class='perturbing agent']")
-    .css({
-      'shape-polygon-points': '-1, -1,   -0.5, 0,  -1, 1,   1, 1,   0.5, 0, 1, -1'
-    })
-    .selector("node[class='tag']")
-    .css({
-      'shape-polygon-points': '-1, -1,   0.25, -1,   1, 0,    0.25, 1,    -1, 1'
-    })
-    .selector("node:parent[class^='complex']") // start with complex
-    .css({
-      'text-valign': 'bottom',
-      'text-halign': 'center',
-      // 'text-margin-y': elementUtilities.getComplexMargin,
-      // 'padding': elementUtilities.getComplexPadding,
-      'compound-sizing-wrt-labels': 'exclude',
-    })
-    .selector("node[class='compartment']")
-    .css({
-      'text-valign': 'bottom',
-      'text-halign': 'center',
-      'text-margin-y': -1 * options.extraCompartmentPadding,
-      'compound-sizing-wrt-labels': 'exclude',
-    })
-    .selector("node:parent[class='compartment']")
-    .css({
-      'padding': function () {
-        return options.extraCompartmentPadding;
-        // return graphUtilities.getCompoundPaddings() + options.extraCompartmentPadding;
-      }
-    })
-    .selector("node[class='submap']")
-    .css({
-      'text-valign': 'bottom',
-      'text-halign': 'center',
-      'text-margin-y': -1 * options.extraCompartmentPadding,
-      'compound-sizing-wrt-labels': 'exclude',
-    })
-    .selector("node:parent[class='submap'],[class='topology group']")
-    .css({
-      'padding': function () {
-        return options.extraCompartmentPadding;
-        //  return graphUtilities.getCompoundPaddings() + options.extraCompartmentPadding;
-      }
-    })
-    .selector("node:childless[bbox]")
-    .css({
-      'width': 'data(bbox.w)',
-      'height': 'data(bbox.h)'
-    })
-    .selector("node:parent[minHeight]")
-    .css({
-      'min-height': function (ele) {
-        // if (graphUtilities.compoundSizesConsidered) {
-        return ele.data('minHeight');
-        //   }
- 
-        return 0;
-      }
-    })
-    .selector("node:parent[minHeightBiasTop]")
-    .css({
-      'min-height-bias-top': function (ele) {
-        var min = parseFloat(ele.data('minHeightBiasTop'));
-        return (min >= 0 ? min : 100) + '%';
-      }
-    })
-    .selector("node:parent[minHeightBiasBottom]")
-    .css({
-      'min-height-bias-bottom': function (ele) {
-        var min = parseFloat(ele.data('minHeightBiasBottom'));
-        return (min >= 0 ? min : 100) + '%';
-      }
-    })
-    .selector("node:parent[minWidth]")
-    .css({
-      'min-width': function (ele) {
-        //if (graphUtilities.compoundSizesConsidered) {
-        return ele.data('minWidth');
-        //}
- 
-        return 0;
-      }
-    })
-    .selector("node:parent[minWidthBiasLeft]")
-    .css({
-      'min-width-bias-left': function (ele) {
-        var min = parseFloat(ele.data('minWidthBiasLeft'));
-        return (min >= 0 ? min : 100) + '%';
-      }
-    })
-    .selector("node:parent[minWidthBiasRight]")
-    .css({
-      'min-width-bias-right': function (ele) {
-        var min = parseFloat(ele.data('minWidthBiasRight'));
-        return (min >= 0 ? min : 100) + '%';
-      }
-    })
-    .selector("node.cy-expand-collapse-collapsed-node")
-    .css({
-      'border-style': 'dashed'
-    })
-    .selector("node:selected")
-    .css({
-      // 'border-color': selectionColor,
-      'target-arrow-color': '#000',
-      'text-outline-color': '#000',
-      'border-width': function (ele) {
-        return Math.max(parseFloat(ele.data('border-width')) + 2, 3);
-      }
-    })
-    .selector("node:active")
-    .css({
-      'background-opacity': 0.7, //'overlay-color': selectionColor,
-      'overlay-padding': '14'
-    })
-    .selector("edge")
-    .css({
-      'curve-style': 'bezier',
-      /*'target-arrow-fill': function(ele) {
-        return elementUtilities.getCyTargetArrowFill(ele);
-      },
-      'source-arrow-fill': 'hollow',
-      'text-border-color': function (ele) {
-        /*if (ele.selected()) {
-          return selectionColor;
-        }
-        return ele.css('line-color');
-      },
-      'color': function (ele) {
-        /*if (ele.selected()) {
-          return selectionColor;
-        }
-        return ele.css('line-color');
-      },
-      'arrow-scale': 1.25
-    })
-    .selector("edge.cy-expand-collapse-meta-edge")
-    .css({
-      'line-color': '#C4C4C4',
-      'source-arrow-color': '#C4C4C4',
-      'target-arrow-color': '#C4C4C4'
-    })
-    /* .selector("edge:selected")
-     .css({
-       'line-color': selectionColor,
-       'source-arrow-color': selectionColor,
- 'target-arrow-color': selectionColor,
- 'width': function(ele){
-   return Math.max(parseFloat(ele.data('width')) + 2, 3);
-   }
-     })
-    .selector("edge:active")
-    .css({
-      'background-opacity': 0.7, //'overlay-color': selectionColor,
-      'overlay-padding': '8'
-    })
-    .selector("edge[cardinality > 0]")
-    .css({
-      'text-rotation': 'autorotate',
-      'text-background-shape': 'rectangle',
-      'text-border-opacity': '1',
-      'text-border-width': '1',
-      'text-background-color': 'white',
-      'text-background-opacity': '1'
-    })
-    .selector("edge[class='consumption'][cardinality > 0]")
-    .css({
-      'source-label': function (ele) {
-        return '' + ele.data('cardinality');
-      },
-      'source-text-margin-y': '-10',
-      /*'source-text-offset': function (ele) {
-        return elementUtilities.getCardinalityDistance(ele);
-      }
-    })
-    .selector("edge[class='production'][cardinality > 0]")
-    .css({
-      'target-label': function (ele) {
-        return '' + ele.data('cardinality');
-      },
-      'target-text-margin-y': '-10',
-      /* 'target-text-offset': function (ele) {
-         return elementUtilities.getCardinalityDistance(ele);
-       }
-    })
-    .selector("edge[class]")
-    .css({
-      'target-arrow-shape': function (ele) {
-        var _class = ele.data('class');
- 
-        switch (_class) {
-          case 'necessary stimulation':
-            return 'triangle-cross';
-          case 'inhibition': case 'negative influence': case 'inhibits':
-          case 'downregulates-expression': case 'dephosphorylates':
-            return 'tee';
-          case 'catalysis':
-            return 'circle';
-          case 'stimulation': case 'production': case 'positive influence':
-          case 'activates': case 'phosphorylates': case 'upregulates-expression':
-          case 'controls-state-change-of': case 'chemical-affects':
-          case 'controls-transport-of': case 'controls-phosphorylation-of':
-          case 'controls-expression-of': case 'catalysis-precedes':
-          case 'consumption-controled-by': case 'controls-production-of':
-          case 'controls-transport-of-chemical': case 'used-to-produce':
-            return 'triangle';
-          case 'modulation': case 'unknown influence':
-            return 'diamond';
-          default:
-            return 'none';
-        }
-      },
-      'source-arrow-shape': 'none',
-      'source-endpoint': function (ele) {
-        var endNode = ele.source();
-        var portId = ele.data('portsource');
- 
-        if (portId == null) {
-          return 'outside-to-node'; // If there is no portsource return the default value which is 'outside-to-node'
-        }
- 
-        var ports = endNode.data('ports');
-        var port;
-        for (var i = 0; i < ports.length; i++) {
-          if (ports[i].id === portId) {
-            port = ports[i];
-          }
-        }
- 
-        if (port === undefined) {
-          return 'outside-to-node'; // If port is not found return the default value which is 'outside-to-node'
-        }
- 
-        var x, y;
-        // Note that for drawing ports we represent the whole shape by a polygon and ports are always 50% away from the node center
-        if (port.x != 0) {
-          x = Math.sign(port.x) * 50;
-          y = 0;
-        }
-        else {
-          x = 0;
-          y = Math.sign(port.y) * 50;
-        }
- 
-        return '' + x + '% ' + y + '%';
-      }/*,
-            'target-endpoint': function(ele) {
-              return elementUtilities.getEndPoint(ele, 'target');
-            },
-            'line-style': function (ele) {
-              return elementUtilities.getArrayLineStyle(ele);
-            }
-    })
-  /*.selector("core")
-  .css({
-    'selection-box-color': selectionColor,
-    'selection-box-opacity': '0.2', 'selection-box-border-color': selectionColor
-  })*/
-
-  };
-  let styleSheet = stylesheetForSbgn();
   //console.log( styleSheet);
   postProcessForLayouts(cy);
   //console.log(cy.json());
   errors.forEach( error => {
     unsolvedErrorInformation[ error.pattern + error.role ] = true;
   })
-  highlightErrors(errors, cy,imageOptions);
-  
+  highlightErrors(errors, cy,imageOptions, true);
   cy.nodes().forEach( node => {
     //console.log( node.data());
   })
@@ -1703,7 +449,7 @@ return Math.max(parseFloat(ele.data('width')) + 2, 3);
 
       return snap.shot({
         elements: cy.elements().jsons(),
-        layout: { name: 'fcose' },
+        layout: { name: 'fcose', randomize : false },
         style: stylesheet,
         resolvesTo: 'all',
         format: imageOptions.format,
@@ -1714,60 +460,16 @@ return Math.max(parseFloat(ele.data('width')) + 2, 3);
         fullGraph: imageOptions.fullGraph
       }).then(function (result) {
         let image = result.image;
-        ret["imageErrorsHighlighted"] = (result.image);
-        //cropImage(result.image).then(response => {console.log("sdsdas");});
-        /*image = image.replace(/^data:image\/png;base64,/,"");
-        const buffer = Buffer.from(image,"base64");
-        //image = image.replace(/^data:image\/png;base64,/,"");
-        //fs.unlinkSync('./src/1.png');
-        //fs.unlinkSync('./src/out.png');
-        trimm(buffer);//fs.writeFileSync('./src/1.png', buffer)
-        fs.writeFileSync('./src/1.png', buffer);*/
-        /*trimImage("./src/1.png", "./src/out.png", async function (err)  {
-          if (err) {
-            console.log(err);
-            return 2;
-          }
-          else {
-            await sizeOf("./src/out.png", async function (err, dimensions) {
-              /*console.log(dimensions.width, dimensions.height);
-              width = dimensions.width;height = dimensions.height;
-              dims = dimensions;
-              console.log( "no error " + dims );
-              return dims;
-           });
-          }
-          }) 
-          console.log( "timeout started");*/
-
-         /*sizeOf("./src/out.png", async function (err, dimensions) {
-            //await console.log(dimensions.width, dimensions.height);
-            width = dimensions.width;height = dimensions.height;
-            dims = dimensions;
-         });*/
-         setTimeout(()=>{console.log( "before getting dimension");
-         /*sizeOf("./src/out.png", function (err, dimensions) {
-          //await console.log(dimensions.width, dimensions.height);
-          console.log( "timeot and try to get width and height");
-          width = dimensions.width;height = dimensions.height;
-          dims = dimensions;
-       })*/
-
-        //ret["imageErrorsHighlighted"]  = base64_encode('./src/out.png');//console.log(ret["imageErrorsHighlighted"]);
-        //let img = new Image();
-        //ret["aspectRatio"] = dims.width / dims.height;
-        let width, height;
-       
+        ret["image"] = (result.image);       
         ret['errors'] = errors;
         ret['sbgn'] = currentSbgn;
-        ret['cyjson'] = cy.elements().jsons();
         /*let data = jsonToSbgnml.createSbgnml(undefined, undefined, undefined, undefined, undefined, undefined, cy);
         data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
         currentSbgn = data;*/
         //while(1);
         //fs.unlinkSync('./src/1.png');
         //fs.unlinkSync('./src/out.png');
-        return res.status(200).send(ret)}, 0);
+        return res.status(200).send(ret);
       }).then(function () {
         snap.stop();
         //   next();
@@ -1852,12 +554,9 @@ app.post('/fixError', (req, res) => {
 
   
   let ret = {};
-  //console.log(errors);
-  //console.log(errors.length);
-  //console.log(cy);
-  //console.log(req.query);
   ret['errors'] = errors;
-  ret["imageErrorsHighlighted"] = imageErrorsHighlighted;
+  ret["image"] = image;
+  console.log( image);
   //console.log(errors);
   let currentErrors;
 
@@ -1869,7 +568,6 @@ app.post('/fixError', (req, res) => {
   }
   currentErrors = errors;
   //console.log(errors);
-  console.log(errors.length);
   unsolvedErrorInformation = {};
   previousErrorCode = "";
   previousErrorRole = "";
@@ -1877,38 +575,13 @@ app.post('/fixError', (req, res) => {
 
   while (check < currentErrors.length) {
     let currentLength = currentErrors.length;
-    console.log( check + " " + currentErrors[check].pattern + " " + currentErrors[check].role + currentErrors.length);
-   /* if( currentErrors[check].pattern === previousErrorCode && currentErrors[check].role === previousErrorRole){
-        console.log( check + " not solved");
-        check++;
-        unsolvedErrorInformation[ previousErrorCode + previousErrorRole ] = true;
-        continue;
-    }*/
+   
     previousErrorCode = currentErrors[check].pattern;
     previousErrorRole = currentErrors[check].role;
-    /*console.log( "check point " + numberOfUnsolvedErrors + " " + currentErrors.length + " " + currentErrors[numberOfUnsolvedErrors].pattern 
-    + " " +  currentErrors[numberOfUnsolvedErrors].role + " "  + errors[check].pattern);*/
-    if( currentErrors.length === 5){
-      console.log(currentErrors);
-    }
     currentErrors[check].status = "unsolved";
     let errorFixParam = {};
     errorFixParam.errorCode = currentErrors[check].pattern;
     let ele = cy.getElementById(currentErrors[check].role);
-    console.log(check + " " +  numberOfUnsolvedErrors );
-    console.log( currentErrors.length);
-    //console.log( currentErrors[numberOfUnsolvedErrors] );
-    //console.log( errors[check]);
-    /*if ( currentErrors.length == 0 || (currentErrors[numberOfUnsolvedErrors].text[0] !== errors[check].text[0]
-      || currentErrors[numberOfUnsolvedErrors].pattern !== errors[check].pattern || currentErrors[numberOfUnsolvedErrors].role !== errors[check].role)) {
-      //console.log( "not equal");
-      errors[check].status = "solved";
-      check++;
-      continue;
-    }*/
-
-    
-
     if (currentErrors[check].pattern == "pd10112") {
       var compartments = cy.nodes('[class= "compartment"]');
       var listedNodes = [];
@@ -2260,21 +933,17 @@ app.post('/fixError', (req, res) => {
     else if (currentErrors[check].pattern == "pd10105" || currentErrors[check].pattern == "pd10106") {
       let sourceNode = ele.source();
       let targetNode = ele.target();
-      console.log( "pd10105 is entered");
       if (elementUtilities.isPNClass(targetNode) && elementUtilities.isEPNClass(sourceNode)) {
-        console.log ("pd10105 is started to fix");
         errorFixParam.edge = ele;
         fixError(errorFixParam);
         //errors[check].status = "solved";
         fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "The source and target of production arc have been swapped.";
       }
       else {
-        console.log( "unsolved count + 1");
         numberOfUnsolvedErrors++;
       }
     }
     else {
-      console.log( "unsolved count + 1");
       numberOfUnsolvedErrors++;
     }
     
@@ -2369,7 +1038,7 @@ app.post('/fixError', (req, res) => {
   let styleSheet = stylesheetForSbgn();
   //console.log( styleSheet);
   //console.log( imageOptions.highlightWidth);
-  highlightErrors(errors, cy,imageOptions);
+  highlightErrors(errors, cy,imageOptions,false);
 
   //console.log( "after return " + errors.length);
   let colorScheme = imageOptions.color || "white";
@@ -2387,7 +1056,7 @@ app.post('/fixError', (req, res) => {
 
       return snap.shot({
         elements: cy.elements().jsons(),
-        layout: { name: 'fcose' },
+        layout: { name: 'fcose', randomize:false },
         style: stylesheet,
         resolvesTo: 'all',
         format: imageOptions.format,
@@ -2397,12 +1066,11 @@ app.post('/fixError', (req, res) => {
         background: imageOptions.background,
         fullGraph: imageOptions.fullGraph
       }).then(function (result) {
-        ret["imageErrorsHighlighted"] = result.image;
+        ret["image"] = result.image;
      //   console.log(result.image.width + " " + result.image.height);
         //next();
         ret['errors'] = errors;
         ret['sbgn'] = currentSbgn;
-        ret['remainingErrors'] = numberOfUnsolvedErrors;
     //    console.log("before return ");
         //console.log( errors);
         return res.status(200).send(ret);
@@ -2643,7 +1311,7 @@ function addNode(x, y, nodeParams, id, parent, visibility) {
 //errors = [];
 //return res.status(200).send(ret);
 
-function highlightErrors(errors, cy, imageOptions) {
+function highlightErrors(errors, cy, imageOptions,isValidation) {
   //console.log( errors.length );
   //console.log( errors);
   let errorColor = {};
@@ -2653,21 +1321,27 @@ cy.nodes().forEach((node) => { node.removeData('highlightColor'); node.removeCla
   );
   cy.edges().forEach((edge) => { edge.removeData('highlightColor'); edge.removeClass('path');/*edge.removeData('label');*/ });
   errors.forEach((errorData, i) => {
+    let ele = cy.getElementById(errorData.role);
+    if( ele.isNode() ){
+      errorData.label = ele.data('label') ? ele.data('label') : ele.id();
+    }
+    else {
+      //console.log( ele.source().data('label') + " " + ele.target().data());
+      errorData.label = ele.source() !== undefined  ?(ele.source().data('label') !== undefined ? ele.source().data('label') : ele.source().id()) : " " + " " +
+      (ele.target() !== undefined ? (ele.target().data('label') !== undefined ? ele.target().data('label') : ele.target().id())  : " ") ;
+    }
     if( unsolvedErrorInformation[errorData.pattern + errorData.role] !== true){
-      console.log( "solved Error")
       errorData.explanation = fixExplanation[errorData.pattern + errorData.role] ? fixExplanation[errorData.pattern + errorData.role] : "Fix of another error resolved this error.";
       errorData.status = "solved";
       errorData.colorCode = "#808080";
-      let ele = cy.getElementById(errorData.role);
       ele.data('highlightColor', "#808080");
     }
     //console.log( errorData.pattern);
     else {  
-    let ele = cy.getElementById(errorData.role);
-    if (ele.data('label')) {
+    if (ele.data('label') && isValidation === true ) {
       ele.data('label', ele.data('label') + "\n(" + (i + 1) + ")");
     }
-    else {
+    else if(isValidation === true){
       ele.data('label', "\n(" + (i + 1) + ")");
     }
     if( ele.isNode()){

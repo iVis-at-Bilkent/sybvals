@@ -40,8 +40,8 @@
     <glyph id="glyph0" class="compartment">
       <extension>
         <extraInfo>
-          <w>95</w>
-          <h>190.62918945810614</h>
+          <w>499.44217233159435</w>
+          <h>598.2504652663548</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -51,13 +51,13 @@
         </extraInfo>
       </extension>
       <label text="juxtanuclear inclusion"/>
-      <bbox x="247.14782054282813" y="73.73900404169494" w="115" h="210.62918945810614"/>
+      <bbox x="112.37318928611262" y="76.2390040416949" w="519.4421723315943" h="618.2504652663548"/>
     </glyph>
     <glyph id="glyph35" class="complex" compartmentRef="glyph0">
       <extension>
         <extraInfo>
-          <w>72</w>
-          <h>85.25</h>
+          <w>32</w>
+          <h>80.25</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -67,26 +67,199 @@
         </extraInfo>
       </extension>
       <label text="Hsp70"/>
-      <bbox x="258.64782054282813" y="85.23900404169493" w="92" h="105.25"/>
+      <bbox x="278.64782054282813" y="87.73900404169493" w="52" h="100.25"/>
       <glyph id="glyph37" class="macromolecule">
         <label text="Hsp70"/>
-        <bbox x="269.64782054282813" y="96.23900404169493" w="70" h="35"/>
+        <bbox x="289.64782054282813" y="98.73900404169493" w="30" h="30"/>
       </glyph>
       <glyph id="glyph36" class="macromolecule">
         <label text="misfolded&#xA;protein"/>
-        <bbox x="269.64782054282813" y="144.48900404169493" w="70" h="35"/>
+        <bbox x="289.64782054282813" y="146.98900404169493" w="30" h="30"/>
       </glyph>
     </glyph>
     <glyph id="glyph30" class="process" compartmentRef="glyph0">
-      <bbox x="322.0708377798055" y="258.36819349980107" w="15" h="15"/>
-      <port id="glyph30.1" x="322.0708377798055" y="265.86819349980107"/>
-      <port id="glyph30.2" x="337.0708377798055" y="265.86819349980107"/>
+      <bbox x="314.5708377798055" y="250.86819349980107" w="30" h="30"/>
+      <port id="glyph30.1" x="314.5708377798055" y="265.86819349980107"/>
+      <port id="glyph30.2" x="344.5708377798055" y="265.86819349980107"/>
+    </glyph>
+    <glyph id="glyph18" class="macromolecule" compartmentRef="glyph0">
+      <label text="E3"/>
+      <bbox x="406.3641919958123" y="224.49935014985581" w="30" h="30"/>
+    </glyph>
+    <glyph id="glyph2" class="complex" compartmentRef="glyph0">
+      <extension>
+        <extraInfo>
+          <w>34</w>
+          <h>80.75000000000006</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
+      <label text="PolyQ aggregates"/>
+      <bbox x="123.87318928611256" y="427.855374441516" w="54" h="100.75000000000006"/>
+      <glyph id="glyph16" class="macromolecule">
+        <label text="PolyQ&#xA;aggregates"/>
+        <bbox x="134.87318928611256" y="487.60537444151595" w="30" h="30"/>
+      </glyph>
+      <glyph id="glyph9" class="macromolecule multimer">
+        <label text="Sis1"/>
+        <bbox x="136.87318928611256" y="438.85537444151595" w="30" h="30"/>
+        <glyph id="glyph9_0" class="unit of information">
+          <label text="N:2"/>
+          <bbox x="164.94185620586993" y="553.8637945934518" w="31" h="16"/>
+        </glyph>
+      </glyph>
+    </glyph>
+    <glyph id="glyph14" class="macromolecule" compartmentRef="glyph0">
+      <label text="importin"/>
+      <bbox x="590.8153616177069" y="653.4894693080497" w="30" h="30"/>
+    </glyph>
+    <glyph id="glyph17" class="macromolecule" compartmentRef="glyph0">
+      <label text="PolyQ&#xA;aggregates"/>
+      <bbox x="221.08828493831618" y="366.57005421915164" w="30" h="30"/>
+    </glyph>
+    <glyph id="glyph10" class="macromolecule multimer" compartmentRef="glyph0">
+      <label text="Sis1"/>
+      <clone/>
+      <bbox x="307.53308088949177" y="449.04901483552896" w="30" h="30"/>
+      <glyph id="glyph10_0" class="unit of information">
+        <label text="N:2"/>
+        <bbox x="384.6664666452207" y="566.9881066007435" w="31" h="16"/>
+      </glyph>
+    </glyph>
+    <glyph id="glyph24" class="simple chemical" compartmentRef="glyph0">
+      <label text="Ub"/>
+      <bbox x="493.11465903778645" y="257.2487725243021" w="30" h="30"/>
+    </glyph>
+    <glyph id="glyph5" class="complex" compartmentRef="glyph0">
+      <extension>
+        <extraInfo>
+          <w>32</w>
+          <h>80.25</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
+      <label text="misfolded protein"/>
+      <bbox x="492.1892832933702" y="335.2844129262429" w="52" h="100.25"/>
+      <glyph id="glyph13" class="macromolecule">
+        <label text="misfolded&#xA;protein"/>
+        <bbox x="503.1892832933702" y="346.2844129262429" w="30" h="30"/>
+        <glyph id="glyph13_0" class="state variable">
+          <state/>
+          <bbox x="642.312452240214" y="432.2474316425377" w="20" h="20"/>
+        </glyph>
+      </glyph>
+      <glyph id="glyph19" class="macromolecule">
+        <label text="Hsp70"/>
+        <bbox x="503.1892832933702" y="394.5344129262429" w="30" h="30"/>
+      </glyph>
+    </glyph>
+    <glyph id="glyph3" class="complex" compartmentRef="glyph0">
+      <extension>
+        <extraInfo>
+          <w>115.25000000000006</w>
+          <h>80.74999999999994</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
+      <label text="Hsp70"/>
+      <bbox x="435.4035668122808" y="485.58425203218394" w="135.25000000000006" h="100.74999999999994"/>
+      <glyph id="glyph21" class="macromolecule">
+        <label text="Hsp70"/>
+        <bbox x="446.40356681228076" y="545.3342520321839" w="30" h="30"/>
+      </glyph>
+      <glyph id="glyph12" class="macromolecule">
+        <label text="misfolded&#xA;protein"/>
+        <bbox x="529.6535668122808" y="545.3342520321839" w="30" h="30"/>
+      </glyph>
+      <glyph id="glyph8" class="macromolecule multimer">
+        <label text="Sis1"/>
+        <bbox x="448.40356681228076" y="496.584252032184" w="30" h="30"/>
+        <glyph id="glyph8_0" class="unit of information">
+          <label text="N:2"/>
+          <bbox x="566.0372172708114" y="628.1897244914369" w="31" h="16"/>
+        </glyph>
+      </glyph>
+    </glyph>
+    <glyph id="glyph7" class="complex" compartmentRef="glyph0">
+      <extension>
+        <extraInfo>
+          <w>30</w>
+          <h>30</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
+      <label text="cytosolic&#xA;proteasome"/>
+      <bbox x="196.2283227551345" y="259.87267866973554" w="30" h="30"/>
+    </glyph>
+    <glyph id="glyph4" class="complex" compartmentRef="glyph0">
+      <extension>
+        <extraInfo>
+          <w>32</w>
+          <h>80.25</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
+      <label text="misfolded protein"/>
+      <bbox x="338.8686668979196" y="307.7572669899152" w="52" h="100.25"/>
+      <glyph id="glyph11" class="macromolecule">
+        <label text="misfolded&#xA;protein"/>
+        <bbox x="349.8686668979196" y="318.7572669899152" w="30" h="30"/>
+      </glyph>
+      <glyph id="glyph20" class="macromolecule">
+        <label text="Hsp70"/>
+        <bbox x="349.8686668979196" y="367.0072669899152" w="30" h="30"/>
+      </glyph>
+    </glyph>
+    <glyph id="glyph33" class="association" compartmentRef="glyph0">
+      <bbox x="226.86256861255399" y="428.197338994052" w="30" h="30"/>
+      <port id="glyph33.1" x="226.86256861255399" y="443.197338994052"/>
+      <port id="glyph33.2" x="256.862568612554" y="443.197338994052"/>
+    </glyph>
+    <glyph id="glyph34" class="association" compartmentRef="glyph0">
+      <bbox x="389.02055286622755" y="436.9784244243673" w="30" h="30"/>
+      <port id="glyph34.1" x="389.02055286622755" y="451.9784244243673"/>
+      <port id="glyph34.2" x="419.02055286622755" y="451.9784244243673"/>
+    </glyph>
+    <glyph id="glyph31" class="uncertain process" compartmentRef="glyph0">
+      <bbox x="263.57590629937744" y="301.6788900699694" w="30" h="30"/>
+      <port id="glyph31.1" x="263.57590629937744" y="316.6788900699694"/>
+      <port id="glyph31.2" x="293.57590629937744" y="316.6788900699694"/>
+    </glyph>
+    <glyph id="glyph29" class="process" compartmentRef="glyph0">
+      <bbox x="431.3750537620963" y="283.08672751071424" w="30" h="30"/>
+      <port id="glyph29.1" x="431.3750537620963" y="298.08672751071424"/>
+      <port id="glyph29.2" x="461.3750537620963" y="298.08672751071424"/>
     </glyph>
     <glyph id="glyph1" class="compartment">
       <extension>
         <extraInfo>
-          <w>549.1860201229539</w>
-          <h>453.900305991656</h>
+          <w>507.1860201229539</w>
+          <h>448.900305991656</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -96,16 +269,16 @@
         </extraInfo>
       </extension>
       <label text="nucleus"/>
-      <bbox x="728.417961804332" y="461.2174069789238" w="569.1860201229539" h="473.900305991656"/>
+      <bbox x="748.417961804332" y="463.7174069789238" w="527.1860201229539" h="468.900305991656"/>
     </glyph>
     <glyph id="glyph22" class="source and sink" compartmentRef="glyph1">
-      <bbox x="1056.9163417549303" y="876.3069034826349" w="25" h="25"/>
+      <bbox x="1054.4163417549303" y="873.8069034826349" w="30" h="30"/>
     </glyph>
     <glyph id="glyph38" class="complex" compartmentRef="glyph1">
       <extension>
         <extraInfo>
-          <w>155.25</w>
-          <h>86.25</h>
+          <w>115.25</w>
+          <h>80.75</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -115,63 +288,63 @@
         </extraInfo>
       </extension>
       <label text="Hsp70"/>
-      <bbox x="739.9179618043319" y="663.857936647751" w="175.25" h="106.25"/>
+      <bbox x="759.9179618043319" y="666.857936647751" w="135.25" h="100.75"/>
       <glyph id="glyph45" class="macromolecule">
         <label text="Hsp70"/>
-        <bbox x="750.9179618043319" y="724.107936647751" w="70" h="35"/>
+        <bbox x="770.9179618043319" y="726.607936647751" w="30" h="30"/>
       </glyph>
       <glyph id="glyph43" class="macromolecule">
         <label text="misfolded&#xA;protein"/>
-        <bbox x="834.1679618043319" y="724.107936647751" w="70" h="35"/>
+        <bbox x="854.1679618043319" y="726.607936647751" w="30" h="30"/>
       </glyph>
       <glyph id="glyph41" class="macromolecule multimer">
         <label text="Sis1"/>
-        <bbox x="750.9179618043319" y="674.857936647751" w="74" h="36"/>
+        <bbox x="772.9179618043319" y="677.857936647751" w="30" h="30"/>
         <glyph id="glyph41_0" class="unit of information">
           <label text="N:2"/>
-          <bbox x="1308.3882040169833" y="898.5910696328444" w="31" h="16"/>
+          <bbox x="983.8495008230773" y="861.5795934339794" w="31" h="16"/>
         </glyph>
       </glyph>
     </glyph>
     <glyph id="glyph32" class="dissociation" compartmentRef="glyph1">
-      <bbox x="955.1307535233076" y="728.3347615601014" w="15" h="15"/>
-      <port id="glyph32.1" x="955.1307535233076" y="735.8347615601014"/>
-      <port id="glyph32.2" x="970.1307535233076" y="735.8347615601014"/>
+      <bbox x="947.6307535233076" y="720.8347615601014" w="30" h="30"/>
+      <port id="glyph32.1" x="947.6307535233076" y="735.8347615601014"/>
+      <port id="glyph32.2" x="977.6307535233076" y="735.8347615601014"/>
     </glyph>
     <glyph id="glyph42" class="macromolecule" compartmentRef="glyph1">
       <label text="misfolded&#xA;protein"/>
-      <bbox x="963.0203592378725" y="778.8860488498126" w="70" h="35"/>
+      <bbox x="983.0203592378725" y="781.3860488498126" w="30" h="30"/>
     </glyph>
     <glyph id="glyph25" class="process" compartmentRef="glyph1">
-      <bbox x="1068.667499095512" y="825.266614723011" w="15" h="15"/>
-      <port id="glyph25.1" x="1076.167499095512" y="825.266614723011"/>
-      <port id="glyph25.2" x="1076.167499095512" y="840.266614723011"/>
+      <bbox x="1061.167499095512" y="817.766614723011" w="30" h="30"/>
+      <port id="glyph25.1" x="1076.167499095512" y="817.766614723011"/>
+      <port id="glyph25.2" x="1076.167499095512" y="847.766614723011"/>
     </glyph>
     <glyph id="glyph46" class="macromolecule" compartmentRef="glyph1">
       <label text="Hsp70"/>
-      <bbox x="949.364189360105" y="656.5195962733725" w="70" h="35"/>
+      <bbox x="969.364189360105" y="659.0195962733725" w="30" h="30"/>
     </glyph>
     <glyph id="glyph27" class="process" compartmentRef="glyph1">
-      <bbox x="1032.1022972413107" y="619.0457032900716" w="15" h="15"/>
-      <port id="glyph27.1" x="1039.6022972413107" y="619.0457032900716"/>
-      <port id="glyph27.2" x="1039.6022972413107" y="634.0457032900716"/>
+      <bbox x="1024.6022972413107" y="611.5457032900716" w="30" h="30"/>
+      <port id="glyph27.1" x="1039.6022972413107" y="611.5457032900716"/>
+      <port id="glyph27.2" x="1039.6022972413107" y="641.5457032900716"/>
     </glyph>
     <glyph id="glyph40" class="macromolecule multimer" compartmentRef="glyph1">
       <label text="Sis1"/>
-      <bbox x="1008.1868915515513" y="717.6819707828051" w="74" h="36"/>
+      <bbox x="1030.1868915515513" y="720.6819707828051" w="30" h="30"/>
       <glyph id="glyph40_0" class="unit of information">
         <label text="N:2"/>
-        <bbox x="1752.8202801553048" y="956.2964556298299" w="31" h="16"/>
+        <bbox x="1315.0832478726225" y="916.7155373828616" w="31" h="16"/>
       </glyph>
     </glyph>
     <glyph id="glyph28" class="process" compartmentRef="glyph1">
-      <bbox x="1114.103277706198" y="689.7153723217443" w="15" h="15"/>
-      <port id="glyph28.1" x="1129.103277706198" y="697.2153723217443"/>
-      <port id="glyph28.2" x="1114.103277706198" y="697.2153723217443"/>
+      <bbox x="1106.603277706198" y="682.2153723217443" w="30" h="30"/>
+      <port id="glyph28.1" x="1136.603277706198" y="697.2153723217443"/>
+      <port id="glyph28.2" x="1106.603277706198" y="697.2153723217443"/>
     </glyph>
     <glyph id="glyph15" class="macromolecule" compartmentRef="glyph1">
       <label text="E3(San1)"/>
-      <bbox x="1144.4631571542498" y="889.1177129705799" w="70" h="35"/>
+      <bbox x="1164.4631571542498" y="891.6177129705799" w="30" h="30"/>
     </glyph>
     <glyph id="glyph6" class="complex" compartmentRef="glyph1">
       <extension>
@@ -190,199 +363,25 @@
       <bbox x="1179.9150092625237" y="807.0709790162017" w="30" h="30"/>
     </glyph>
     <glyph id="glyph23" class="and" compartmentRef="glyph1">
-      <label text="&#xA;(2)"/>
-      <bbox x="1121.5885895173253" y="834.0646119564072" w="25" h="25"/>
+      <bbox x="1119.0885895173253" y="831.5646119564072" w="30" h="30"/>
     </glyph>
     <glyph id="glyph44" class="macromolecule" compartmentRef="glyph1">
       <label text="Hsp70"/>
-      <bbox x="873.9224976631683" y="472.21740697892386" w="70" h="35"/>
+      <bbox x="893.9224976631683" y="474.71740697892386" w="30" h="30"/>
     </glyph>
     <glyph id="glyph39" class="macromolecule multimer" compartmentRef="glyph1">
       <label text="Sis1"/>
       <clone/>
-      <bbox x="1212.6039819272858" y="528.622915542494" w="74" h="36"/>
+      <bbox x="1234.6039819272858" y="531.622915542494" w="30" h="30"/>
       <glyph id="glyph39_0" class="unit of information">
         <label text="N:2"/>
-        <bbox x="2105.950803779386" y="701.5393786935106" w="31" h="16"/>
-      </glyph>
-    </glyph>
-    <glyph id="glyph18" class="macromolecule">
-      <label text="E3&#xA;(3)"/>
-      <bbox x="386.3641919958123" y="221.99935014985581" w="70" h="35"/>
-    </glyph>
-    <glyph id="glyph2" class="complex">
-      <extension>
-        <extraInfo>
-          <w>76</w>
-          <h>86.25000000000006</h>
-          <minW>0</minW>
-          <minH>0</minH>
-          <WLBias>0</WLBias>
-          <WRBias>0</WRBias>
-          <HTBias>0</HTBias>
-          <HBBias>0</HBBias>
-        </extraInfo>
-      </extension>
-      <label text="PolyQ aggregates&#xA;(4)"/>
-      <bbox x="103.87318928611256" y="424.855374441516" w="96" h="106.25000000000006"/>
-      <glyph id="glyph16" class="macromolecule">
-        <label text="PolyQ&#xA;aggregates"/>
-        <bbox x="114.87318928611256" y="485.10537444151595" w="70" h="35"/>
-      </glyph>
-      <glyph id="glyph9" class="macromolecule multimer">
-        <label text="Sis1"/>
-        <bbox x="114.87318928611256" y="435.85537444151595" w="74" h="36"/>
-        <glyph id="glyph9_0" class="unit of information">
-          <label text="N:2"/>
-          <bbox x="209.62085949175946" y="576.5351170599428" w="31" h="16"/>
-        </glyph>
-      </glyph>
-    </glyph>
-    <glyph id="glyph14" class="macromolecule">
-      <label text="importin&#xA;(5)"/>
-      <bbox x="570.8153616177069" y="650.9894693080497" w="70" h="35"/>
-    </glyph>
-    <glyph id="glyph17" class="macromolecule">
-      <label text="PolyQ&#xA;aggregates&#xA;(6)"/>
-      <bbox x="201.08828493831618" y="364.07005421915164" w="70" h="35"/>
-    </glyph>
-    <glyph id="glyph33" class="association">
-      <bbox x="234.36256861255399" y="435.697338994052" w="15" h="15"/>
-      <port id="glyph33.1" x="234.36256861255399" y="443.197338994052"/>
-      <port id="glyph33.2" x="249.36256861255399" y="443.197338994052"/>
-    </glyph>
-    <glyph id="glyph10" class="macromolecule multimer">
-      <label text="Sis1&#xA;(7)"/>
-      <clone/>
-      <bbox x="285.53308088949177" y="446.04901483552896" w="74" h="36"/>
-      <glyph id="glyph10_0" class="unit of information">
-        <label text="N:2"/>
-        <bbox x="504.435822236597" y="590.2710474908753" w="31" h="16"/>
-      </glyph>
-    </glyph>
-    <glyph id="glyph34" class="association">
-      <bbox x="396.52055286622755" y="444.4784244243673" w="15" h="15"/>
-      <port id="glyph34.1" x="396.52055286622755" y="451.9784244243673"/>
-      <port id="glyph34.2" x="411.52055286622755" y="451.9784244243673"/>
-    </glyph>
-    <glyph id="glyph24" class="simple chemical">
-      <label text="Ub&#xA;(8)"/>
-      <bbox x="488.11465903778645" y="252.24877252430213" w="40" h="40"/>
-    </glyph>
-    <glyph id="glyph5" class="complex">
-      <extension>
-        <extraInfo>
-          <w>72</w>
-          <h>85.25</h>
-          <minW>0</minW>
-          <minH>0</minH>
-          <WLBias>0</WLBias>
-          <WRBias>0</WRBias>
-          <HTBias>0</HTBias>
-          <HBBias>0</HBBias>
-        </extraInfo>
-      </extension>
-      <label text="misfolded protein&#xA;(9)"/>
-      <bbox x="472.1892832933702" y="332.7844129262429" w="92" h="105.25"/>
-      <glyph id="glyph13" class="macromolecule">
-        <label text="misfolded&#xA;protein"/>
-        <bbox x="483.1892832933702" y="343.7844129262429" w="70" h="35"/>
-        <glyph id="glyph13_0" class="state variable">
-          <state/>
-          <bbox x="829.7881655575623" y="446.43665228884987" w="20" h="20"/>
-        </glyph>
-      </glyph>
-      <glyph id="glyph19" class="macromolecule">
-        <label text="Hsp70"/>
-        <bbox x="483.1892832933702" y="392.0344129262429" w="70" h="35"/>
-      </glyph>
-    </glyph>
-    <glyph id="glyph3" class="complex">
-      <extension>
-        <extraInfo>
-          <w>155.25000000000006</w>
-          <h>86.24999999999994</h>
-          <minW>0</minW>
-          <minH>0</minH>
-          <WLBias>0</WLBias>
-          <WRBias>0</WRBias>
-          <HTBias>0</HTBias>
-          <HBBias>0</HBBias>
-        </extraInfo>
-      </extension>
-      <label text="Hsp70&#xA;(10)"/>
-      <bbox x="415.4035668122808" y="482.58425203218394" w="175.25000000000006" h="106.24999999999994"/>
-      <glyph id="glyph21" class="macromolecule">
-        <label text="Hsp70"/>
-        <bbox x="426.40356681228076" y="542.8342520321839" w="70" h="35"/>
-      </glyph>
-      <glyph id="glyph12" class="macromolecule">
-        <label text="misfolded&#xA;protein"/>
-        <bbox x="509.6535668122808" y="542.8342520321839" w="70" h="35"/>
-      </glyph>
-      <glyph id="glyph8" class="macromolecule multimer">
-        <label text="Sis1"/>
-        <bbox x="426.40356681228076" y="493.584252032184" w="74" h="36"/>
-        <glyph id="glyph8_0" class="unit of information">
-          <label text="N:2"/>
-          <bbox x="747.7895866682151" y="654.3247796133679" w="31" h="16"/>
-        </glyph>
+        <bbox x="1578.2702517313805" y="673.3020037609609" w="31" h="16"/>
       </glyph>
     </glyph>
     <glyph id="glyph26" class="process">
-      <bbox x="621.3427540286153" y="603.1849360243156" w="15" h="15"/>
-      <port id="glyph26.1" x="621.3427540286153" y="610.6849360243156"/>
-      <port id="glyph26.2" x="636.3427540286153" y="610.6849360243156"/>
-    </glyph>
-    <glyph id="glyph7" class="complex">
-      <extension>
-        <extraInfo>
-          <w>68.08837890625</w>
-          <h>36</h>
-          <minW>0</minW>
-          <minH>0</minH>
-          <WLBias>0</WLBias>
-          <WRBias>0</WRBias>
-          <HTBias>0</HTBias>
-          <HBBias>0</HBBias>
-        </extraInfo>
-      </extension>
-      <label text="cytosolic&#xA;proteasome&#xA;(11)"/>
-      <bbox x="177.1841333020095" y="256.87267866973554" w="68.08837890625" h="36"/>
-    </glyph>
-    <glyph id="glyph4" class="complex">
-      <extension>
-        <extraInfo>
-          <w>72</w>
-          <h>85.25</h>
-          <minW>0</minW>
-          <minH>0</minH>
-          <WLBias>0</WLBias>
-          <WRBias>0</WRBias>
-          <HTBias>0</HTBias>
-          <HBBias>0</HBBias>
-        </extraInfo>
-      </extension>
-      <label text="misfolded protein&#xA;(12)"/>
-      <bbox x="318.8686668979196" y="305.2572669899152" w="92" h="105.25"/>
-      <glyph id="glyph11" class="macromolecule">
-        <label text="misfolded&#xA;protein"/>
-        <bbox x="329.8686668979196" y="316.2572669899152" w="70" h="35"/>
-      </glyph>
-      <glyph id="glyph20" class="macromolecule">
-        <label text="Hsp70"/>
-        <bbox x="329.8686668979196" y="364.5072669899152" w="70" h="35"/>
-      </glyph>
-    </glyph>
-    <glyph id="glyph31" class="uncertain process">
-      <bbox x="271.07590629937744" y="309.1788900699694" w="15" h="15"/>
-      <port id="glyph31.1" x="271.07590629937744" y="316.6788900699694"/>
-      <port id="glyph31.2" x="286.07590629937744" y="316.6788900699694"/>
-    </glyph>
-    <glyph id="glyph29" class="process">
-      <bbox x="438.8750537620963" y="290.58672751071424" w="15" h="15"/>
-      <port id="glyph29.1" x="438.8750537620963" y="298.08672751071424"/>
-      <port id="glyph29.2" x="453.8750537620963" y="298.08672751071424"/>
+      <bbox x="613.8427540286153" y="595.6849360243156" w="30" h="30"/>
+      <port id="glyph26.1" x="613.8427540286153" y="610.6849360243156"/>
+      <port id="glyph26.2" x="643.8427540286153" y="610.6849360243156"/>
     </glyph>
     <arc id="_0810ebd9-b3e3-4535-8e17-60c0ca789496" class="consumption" source="glyph4" target="glyph31.2">
       <start/>
@@ -440,7 +439,7 @@
       <start/>
       <end/>
     </arc>
-    <arc id="cc43e987-4c20-40b4-8df9-c4b572f4c6a2" class="stimulation" source="glyph23" target="glyph25">
+    <arc id="_7ce1b829-ab12-4e34-ae64-ccb21fcae1be" class="consumption" source="glyph4" target="glyph30.2">
       <start/>
       <end/>
     </arc>
@@ -484,7 +483,7 @@
       <start/>
       <end/>
     </arc>
-    <arc id="_2c99a565-b610-40a9-a9e6-8555b36e14e0" class="logic arc" source="glyph15" target="glyph23">
+    <arc id="cc43e987-4c20-40b4-8df9-c4b572f4c6a2" class="stimulation" source="glyph6" target="glyph25">
       <start/>
       <end/>
     </arc>
@@ -500,7 +499,7 @@
       <start/>
       <end/>
     </arc>
-    <arc id="_7ce1b829-ab12-4e34-ae64-ccb21fcae1be" class="consumption" source="glyph4" target="glyph30.2">
+    <arc id="nwtE_22c0389d-8ab2-4333-87ca-631bf42e6cfe" class="logic arc" source="glyph15" target="glyph23">
       <start/>
       <end/>
     </arc>
