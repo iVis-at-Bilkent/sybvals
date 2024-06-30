@@ -47,7 +47,7 @@ let imageOptions = {
   color: 'greyscale',
   highlightColor: '#ff0000',
   highlightWidth: 30,
-  fullGraph: false
+  autoSize: false
 };
 
 const $ = jQuery = require('jquery')(window);
@@ -133,13 +133,14 @@ app.use(cors());
 
 // middleware to manage the formats of files
 app.use((req, res, next) => {
-  //console.log(req.query.errorFixing);
-  if (req.query.errorFixing === true) {
-    //console.log("error fixingtrue");
+  console.log(req.query.errorFixing);
+  console.log( req.query);
+  if (req.query.errorFixing === "true") {
+    console.log("error fixingtrue");
     //while(1);
     next();
   }
-  if (req.method === "POST") {
+  else if (req.method === "POST") {
     //console.log("edgesssssssssssssssss " + req.query.edges + " " + req.query.format);
     //while(1);
     body = '';
@@ -147,7 +148,7 @@ app.use((req, res, next) => {
     options = '';
     data = '';
     errorMessage = undefined;
-    
+    console.log( " request has come now");
     req.on('data', chunk => {
       body += chunk;
     })
@@ -457,12 +458,16 @@ app.use((req, res, next) => {
         width: imageOptions.width,
         height: imageOptions.height,
         background: imageOptions.background,
-        fullGraph: imageOptions.fullGraph
+        fullGraph: imageOptions.autoSize
       }).then(function (result) {
+        data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
+        data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
+        currentSbgn = data;
         let image = result.image;
         ret["image"] = (result.image);       
         ret['errors'] = errors;
         ret['sbgn'] = currentSbgn;
+        fs.writeFileSync('./src/sbgnFile.sbgn', data);
         /*let data = jsonToSbgnml.createSbgnml(undefined, undefined, undefined, undefined, undefined, undefined, cy);
         data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
         currentSbgn = data;*/
@@ -475,21 +480,15 @@ app.use((req, res, next) => {
         //   next();
         //console.log( sbgnmlToJson.map.extension);
         //console.log( sbgnmlToJson.map.extension.get('renderInformation'));
-        data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
+        /*data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
 
         data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
-        currentSbgn = data;
+        currentSbgn = data;*/
 
 
 
-        fs.writeFileSync('./src/sbgnFile.sbgn', data);
 
-        let result = SaxonJS.transform({
-          stylesheetFileName: './src/templatelibsbgn.sef.json',
-          sourceFileName: "./src/sbgnFile.sbgn",
-          destination: "serialized"
-        }).principalResult;
-        //console.log(data);
+       
       });
     });
   }
@@ -572,8 +571,9 @@ app.post('/fixError', (req, res) => {
   previousErrorCode = "";
   previousErrorRole = "";
   fixExplanation = {};
+  let count = 0;
 
-  while (check < currentErrors.length) {
+  while (check < currentErrors.length ) {
     let currentLength = currentErrors.length;
    
     previousErrorCode = currentErrors[check].pattern;
@@ -996,13 +996,15 @@ app.post('/fixError', (req, res) => {
     }
     //check++;
     //console.log(errors.length);
+    console.log( "loop ");
   }
   data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
   data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
-  currentSbgn = data;
+  //currentSbgn = data;
+  ret['sbgn'] = currentSbgn;
 
 
-  fs.writeFileSync('./src/sbgnFile.sbgn', data);
+  fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
 
   let result = SaxonJS.transform({
     stylesheetFileName: './src/templatelibsbgn.sef.json',
@@ -1064,13 +1066,18 @@ app.post('/fixError', (req, res) => {
         width: imageOptions.width,
         height: imageOptions.height,
         background: imageOptions.background,
-        fullGraph: imageOptions.fullGraph
+        fullGraph: imageOptions.autoSize
       }).then(function (result) {
+        data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
+        data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
+        fs.writeFileSync('./src/sbgnFile.sbgn', data);
+        currentSbgn = data;
+
         ret["image"] = result.image;
      //   console.log(result.image.width + " " + result.image.height);
         //next();
         ret['errors'] = errors;
-        ret['sbgn'] = currentSbgn;
+        //ret['sbgn'] = currentSbgn;
     //    console.log("before return ");
         //console.log( errors);
         return res.status(200).send(ret);
@@ -1078,7 +1085,7 @@ app.post('/fixError', (req, res) => {
       }).then(function () {
         snap.stop();
         //   next();
-        data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
+        /*data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
         data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
 
 
@@ -1088,7 +1095,7 @@ app.post('/fixError', (req, res) => {
           stylesheetFileName: './src/templatelibsbgn.sef.json',
           sourceFileName: "./src/sbgnFile.sbgn",
           destination: "serialized"
-        }).principalResult;
+        }).principalResult;*/
         //console.log(data);
       });
     });
@@ -1322,14 +1329,6 @@ cy.nodes().forEach((node) => { node.removeData('highlightColor'); node.removeCla
   cy.edges().forEach((edge) => { edge.removeData('highlightColor'); edge.removeClass('path');/*edge.removeData('label');*/ });
   errors.forEach((errorData, i) => {
     let ele = cy.getElementById(errorData.role);
-    if( ele.isNode() ){
-      errorData.label = ele.data('label') ? ele.data('label') : ele.id();
-    }
-    else {
-      //console.log( ele.source().data('label') + " " + ele.target().data());
-      errorData.label = ele.source() !== undefined  ?(ele.source().data('label') !== undefined ? ele.source().data('label') : ele.source().id()) : " " + " " +
-      (ele.target() !== undefined ? (ele.target().data('label') !== undefined ? ele.target().data('label') : ele.target().id())  : " ") ;
-    }
     if( unsolvedErrorInformation[errorData.pattern + errorData.role] !== true){
       errorData.explanation = fixExplanation[errorData.pattern + errorData.role] ? fixExplanation[errorData.pattern + errorData.role] : "Fix of another error resolved this error.";
       errorData.status = "solved";
@@ -1343,6 +1342,14 @@ cy.nodes().forEach((node) => { node.removeData('highlightColor'); node.removeCla
     }
     else if(isValidation === true){
       ele.data('label', "\n(" + (i + 1) + ")");
+    }
+    if( ele.isNode() && ele.data('label') ){
+      errorData.label = ele.data('label');
+    }
+    else if ( ele.isEdge() && ((ele.source() !== undefined && ele.source().data('label')) || (ele.target()) !== undefined && ele.target().data('label'))){
+      //console.log( ele.source().data('label') + " " + ele.target().data());
+      errorData.label = ele.source() !== undefined  ?(ele.source().data('label') !== undefined ? ele.source().data('label') : " ") : " " + "-" +
+      (ele.target() !== undefined ? (ele.target().data('label') !== undefined ? ele.target().data('label') : " ")  : " ") ;
     }
     if( ele.isNode()){
     ele.addClass('highlight');

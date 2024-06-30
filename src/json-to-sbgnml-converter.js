@@ -312,9 +312,10 @@ const jsonToSbgnml = {};
        glyph.setClone(new libsbgnjs.CloneType());
     //add bbox information
     glyph.setBbox(this.addGlyphBbox(node));
-
+    var extraInfo = {};
+    extraInfo.w = node.width();
+    extraInfo.h = node.height();
     if(node.isParent() || node.data().class == 'topology group' || node.data().class == 'submap' || node.data().class == 'complex' || node.data().class == 'compartment'){
-      var extraInfo = {};
       extraInfo.w = node.width();
       extraInfo.h = node.height();
       extraInfo.minW = Number(node.css("min-width").replace("px",""));

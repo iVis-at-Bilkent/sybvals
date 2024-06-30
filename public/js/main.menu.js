@@ -136,7 +136,8 @@ let applyErrorFix = async function () {
 				errorNo.append('<img src = "' + imgSource + '" style=" height: 20px; width: 20px;" />');
 				errorNo.append('<div class="ui item" style = "margin-left : 5px;"> <b>Error </b> ' + error.errorNo + '</div>');
 				let errorPattern = $('<div class="ui item"> <b>Pattern:</b> ' + error.pattern + '</div>');
-				let errorRole = $('<div class="ui item"> <b>Role:</b> ' + error.label + '</div>');
+				let errorRole = $('<div class="ui item"> <b>Role:</b> ' + error.role + '</div>');
+				let errorLabel = $('<div class="ui item"> <b>Label:</b> ' + error.label + '</div>');
 				let errorText = $('<div class="ui item"> <b>Message:</b> ' + error.text + '</div>');
 				let errorStatus = $('<div class="ui item"> <b>Status:</b> ' + (error.status !== undefined ? error.status : "unknown") + '</div>');
 				let list = $('<div class="ui list">');
@@ -146,6 +147,9 @@ let applyErrorFix = async function () {
 				let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo + '">');
 				list.append(errorNo);
 				list.append(errorRole);
+				if( error.label){
+				   list.append(errorLabel);
+				}
 				list.append(errorPattern);
 				list.append(errorText);
 				//list.append(errorStatus);
@@ -299,13 +303,17 @@ let processValidation = async function () {
 			res.errors.forEach((error) => {
 				let errorNo = $('<div class="ui item"> <b>Error </b> ' + error.errorNo + '</div>');
 				let errorPattern = $('<div class="ui item"> <b>Pattern:</b> ' + error.pattern + '</div>');
-				let errorRole = $('<div class="ui item"> <b>Role:</b> ' + error.label + '</div>');
+				let errorRole = $('<div class="ui item"> <b>Role:</b> ' + error.role + '</div>');
+				let errorLabel = $('<div class="ui item"> <b>Label:</b> ' + error.label + '</div>');
 				let errorText = $('<div class="ui item"> <b>Message:</b> ' + error.text + '</div>');
 				let list = $('<div class="ui list">');
 				//let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo +  '" style = "border = 10px solid ' +  errorHighlightColors[(error.errorNo - 1) % 8] + '">');
 				let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo + '">');
 				list.append(errorNo);
 				list.append(errorRole);
+				if( error.label){
+                    list.append(errorLabel);
+				}
 				list.append(errorPattern);
 				list.append(errorText);
 				errorRectangle.append(list);
