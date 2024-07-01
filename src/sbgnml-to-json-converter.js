@@ -125,8 +125,8 @@ sbgnmlToJson.bboxProp = function (ele) {
         }
       }
 
-      var compoundPadding = parseFloat(mapProperties.compoundPadding);
-      var extraCompartmentPadding = parseFloat(mapProperties.extraCompartmentPadding); 
+      /*var compoundPadding = parseFloat(mapProperties.compoundPadding);
+      var extraCompartmentPadding = parseFloat(mapProperties.extraCompartmentPadding);*/
 
 
     var padding = this.calculateElementPadding(ele);

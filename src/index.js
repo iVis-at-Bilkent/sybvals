@@ -589,16 +589,12 @@ app.post('/fixError', (req, res) => {
         if (compartments[i].parent().length == 0)
           listedNodes.push(compartments[i]);
       }
-      //console.log(listedNodes.length);
-      //console.log(listedNodes[0].data());
       if (listedNodes.length === 0) {
         numberOfUnsolvedErrors++;
       }
       else {
-        //currentErrors[check].status = "solved";
         ele.move({ "parent": listedNodes[0].data().id });
         fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "Fixed by moving "  + " inside " + listedNodes[0].data().id + ".";
-        errors[check].explanation = "Fixed by moving "  + " inside " + listedNodes[0].data().id + ".";
       }
     }
     else if (currentErrors[check].pattern == "pd10126") {
@@ -615,9 +611,6 @@ app.post('/fixError', (req, res) => {
         }
       }
       if (connectedEdges.length !== 0) {
-        //errors[check].status = "solved";
-        
-        //errors[check].explanation = "Edge between this node and " + selectedEdge.source().id() + " is kept."
         fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] =  "Edge between this node and " + selectedEdge.source().id() + " is kept.";
         fixError(errorFixParam);
       }
@@ -730,7 +723,6 @@ app.post('/fixError', (req, res) => {
         }
         errorFixParam.oldEdges.push(edges[i]);
       }
-      //errors[check].status = "solved";
       fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "Source and sink glyph is splitted for each consumption arc.";
       fixError(errorFixParam);
     }
@@ -1045,7 +1037,7 @@ app.post('/fixError', (req, res) => {
   //console.log( "after return " + errors.length);
   let colorScheme = imageOptions.color || "white";
   let stylesheet = adjustStylesheet('sbgnml', colorScheme);
-  postProcessForLayouts(cy);
+  //postProcessForLayouts(cy);
   for( let i = 0; i < errors.length ; i++ ){
     if( errors[i].status == "solved" && errors[i].explanation === undefined ){
       errors[i].explanation = "Fix of another error resolved this error."
@@ -1072,14 +1064,10 @@ app.post('/fixError', (req, res) => {
         data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
         fs.writeFileSync('./src/sbgnFile.sbgn', data);
         currentSbgn = data;
-
+        ret["sbgn"] = currentSbgn;
         ret["image"] = result.image;
-     //   console.log(result.image.width + " " + result.image.height);
-        //next();
         ret['errors'] = errors;
-        //ret['sbgn'] = currentSbgn;
-    //    console.log("before return ");
-        //console.log( errors);
+    
         return res.status(200).send(ret);
       //  console.log("after return");
       }).then(function () {
@@ -1125,14 +1113,7 @@ function fixError(errorFixParam) {
   }
   if (errorCode == "pd10103" || errorCode == "pd10107") {
     errorFixParam.newNodes.forEach(function (newNode) {
-   //   console.log(newNode);
       elementUtilities.addNode(newNode.x, newNode.y, newNode.class, newNode.id, undefined, "visible", cy);
-      //console.log(cy.nodes()[0].data().id);
-      //console.log(cy.nodes()[1].data().id);
-      //console.log(cy.nodes()[2].data().id);
-      //console.log(cy.nodes()[3].data().id);
-
-
     });
 
     errorFixParam.newEdges.forEach(function (newEdge) {
@@ -1147,9 +1128,6 @@ function fixError(errorFixParam) {
     });
 
     errorFixParam.node.remove();
-    //console.log("Number of nodes after fix :" + cy.nodes().length);
-    //console.log("Number of edges after fix :" + cy.edges().length);
-
   }
   if (errorCode == "pd10105" || errorCode == "pd10106") {
     elementUtilities.reverseEdge(errorFixParam.edge);
