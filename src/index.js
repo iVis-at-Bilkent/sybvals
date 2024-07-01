@@ -1037,7 +1037,7 @@ app.post('/fixError', (req, res) => {
   //console.log( "after return " + errors.length);
   let colorScheme = imageOptions.color || "white";
   let stylesheet = adjustStylesheet('sbgnml', colorScheme);
-  //postProcessForLayouts(cy);
+  postProcessForLayouts(cy);
   for( let i = 0; i < errors.length ; i++ ){
     if( errors[i].status == "solved" && errors[i].explanation === undefined ){
       errors[i].explanation = "Fix of another error resolved this error."
