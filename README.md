@@ -151,7 +151,7 @@ options = {
     color: 'greyscale'          // node color
     width: 1280,                // desired width
     height: 720,                // desired height
-    autoSize: false,            // automatically size image with no padding
+    autoSize: true,             // automatically size image with no padding
     highlightWidth: 10          // underlay padding used to highlight errors
   }
 }
