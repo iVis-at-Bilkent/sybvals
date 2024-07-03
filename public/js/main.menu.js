@@ -15,7 +15,7 @@ let errorHighlightColors = ['#1e90ff', '#ff0000', '#b0b000', '#006400', '#0000ff
 let currentSbgn;
 let cy;
 let aspectRatio;
-let autoSize = false;
+let autoSize = true;
 
 let setFileContent = function (fileName) {
 	let span = document.getElementById('file-name');
@@ -402,8 +402,10 @@ function dragElement(elmnt) {
 			pos3 = e.clientX;
 			pos4 = e.clientY;
 			// set the element's new position:
-			elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+			//if( elmnt.offsetTop - pos2 > 0 && elmnt.offsetLeft - pos1){
+			elmnt.style.top = (elmnt.offsetTop - pos2 > 0 ? elmnt.offsetTop - pos2 : 0) + "px";
 			elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+			//}
 			//console.log(elmnt.offsetTop + " " + elmnt.offsetLeft);
 		}
 	}
@@ -600,6 +602,8 @@ $("#imageSettingsDefault").on("click", function (e) {
 	$("input[value='png']").prop("checked", true);
 	$("#imageWidth").val(1280);
 	$("#imageHeight").val(720);
+	$("#imageWidth").prop("disabled",true);
+	$("#imageHeight").prop("disabled",true);
 	$("#color").val("#9ecae1");
 	$("#colorScheme").val("greyscale");
 	$("#imageBackground").val("#ffffff");
@@ -607,9 +611,9 @@ $("#imageSettingsDefault").on("click", function (e) {
 	$("#transparent").prop("checked", true);
 	$("#highlightColor").val("#ff0000");
 	$("#highlightWidth").val(10);
-	$("#auto-size-graph").prop("checked", false);
-	document.getElementById("imageWidth").disabled = false;
-	document.getElementById("imageHeight").disabled = false;
+	$("#auto-size-graph").prop("checked", true);
+	document.getElementById("imageWidth").disabled = true;
+	document.getElementById("imageHeight").disabled = true;
 	//console.log(document.getElementById("fullGraph"));
 });
 
@@ -774,8 +778,12 @@ $("#resultImage1").on("click", function (e) {
 	document.getElementById("draggableImageArea").style.top = "400px";
 	document.getElementById("draggableImageArea").style.left = "850px";
 	document.getElementById("draggableImageArea").style.aspectRatio = aspectRatio;
-	document.getElementById("draggableImageArea").style.width = "900px";
-	document.getElementById("draggableImageArea").style.height = (900 / aspectRatio + 40) + "px";
+	let height = ( 900/aspectRatio > 800 ? 800 : 900/aspectRatio);
+	//document.getElementById("draggableImageArea").style.width = "900px";
+	document.getElementById("draggableImageArea").style.height = (height + 60) + "px";
+	//document.getElementById("resultImage").style.height = (height) + "px";
+
+	
 	document.getElementById("resultImage").style.aspectRatio = aspectRatio;
 	document.getElementById("imageAreaPopUp").style.aspectRatio = aspectRatio;
 	document.getElementById("dragRegion").innerHTML = document.getElementById("file-name").innerHTML

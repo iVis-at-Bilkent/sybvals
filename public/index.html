@@ -105,15 +105,15 @@
 							<div class="two wide field">
 								<input type="number" id="imageWidth"
 									oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : 0"
-									value="1280" min="1">
+									value="1280" min="1" disabled>
 							</div>
 							<span class="add-on layout-text option-label" title="Desired image height"> Height: </span>
 							<div class="two wide field">
 								<input type="number" id="imageHeight"
 									oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : 0"
-									value="720" min="1">
+									value="720" min="1" disabled>
 							</div>
-							<input type="checkbox" id='auto-size-graph'>
+							<input type="checkbox" id='auto-size-graph' checked>
 							<!-- <label class="radio-label">Transparent</label> -->
 							<span class="add-on layout-text option-label" style="margin-left: 6px;"> Auto </span>
 						</div>

@@ -125,9 +125,6 @@ sbgnmlToJson.bboxProp = function (ele) {
         }
       }
 
-      /*var compoundPadding = parseFloat(mapProperties.compoundPadding);
-      var extraCompartmentPadding = parseFloat(mapProperties.extraCompartmentPadding);*/
-
 
     var padding = this.calculateElementPadding(ele);
     if (ele.class_ == "complex") {
@@ -564,9 +561,9 @@ sbgnmlToJson.addCytoscapeJsNode = function (ele, jsonArray, parent, compartments
       relativeYPos = 0;
     }
 
-    if (relativeXPos === 0 && relativeYPos === 0) {
+    /*if (relativeXPos === 0 && relativeYPos === 0) {
       continue;
-    }
+    }*/
 
     ports.push({
       id: id,

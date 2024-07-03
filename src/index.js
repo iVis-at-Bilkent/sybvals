@@ -182,14 +182,15 @@ app.use((req, res, next) => {
 
       var parser = new window.DOMParser;
       var xml = parser.parseFromString(data, 'text/xml');
+            data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
+
       currentSbgn = data;
       let cyJsonData = sbgnmlToJson.convert(xml, data);
 
-      //data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
 
       fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
       //while(1);
-      data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
+      //data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
       //console.log( data[0] );
       data = cyJsonData;
       fs.unlinkSync('./src/sbgnFile.sbgn');
@@ -211,7 +212,7 @@ app.use((req, res, next) => {
       try {
         cy.add(data);
         cy.nodes().forEach( node => {
-          //console.log( node.data());
+          console.log( node.data());
         })
       }catch(err){};
 
@@ -1301,13 +1302,28 @@ function highlightErrors(errors, cy, imageOptions,isValidation) {
   //console.log( errors);
   let errorColor = {};
   let counter = 0;
+  let labels = {};
 
 cy.nodes().forEach((node) => { node.removeData('highlightColor'); node.removeClass('highlight');/*node.removeData('label');*/ }
   );
   cy.edges().forEach((edge) => { edge.removeData('highlightColor'); edge.removeClass('path');/*edge.removeData('label');*/ });
+  console.log( errors.length);
+  errors.forEach( (errorData,i) => {
+    let ele = cy.getElementById(errorData.role);
+    if( ele.isNode() && ele.data('label') && errorData.label === undefined ){
+      errorData.label = ele.data('label');
+    }
+    else if ( ele.isEdge() && errorData.label === undefined ){
+      //console.log( ele.source().data('label') + " " + ele.target().data());
+      console.log( "edge labeling ");
+      errorData.label = (ele.source() !== undefined  ?(ele.source().data('label') !== undefined ? ele.source().data('label') : "") : "") + " - " +
+      (ele.target() !== undefined ? (ele.target().data('label') !== undefined ? ele.target().data('label') : "")  : "") ;
+    }
+  });
   errors.forEach((errorData, i) => {
     let ele = cy.getElementById(errorData.role);
-    if( unsolvedErrorInformation[errorData.pattern + errorData.role] !== true){
+    console.log(errorData.role);
+    if( unsolvedErrorInformation[errorData.pattern + errorData.role] !== true && !isValidation){
       errorData.explanation = fixExplanation[errorData.pattern + errorData.role] ? fixExplanation[errorData.pattern + errorData.role] : "Fix of another error resolved this error.";
       errorData.status = "solved";
       errorData.colorCode = "#808080";
@@ -1318,18 +1334,13 @@ cy.nodes().forEach((node) => { node.removeData('highlightColor'); node.removeCla
     if (ele.data('label') && isValidation === true ) {
       ele.data('label', ele.data('label') + "\n(" + (i + 1) + ")");
     }
-    else if(isValidation === true){
+    /*else if(isValidation === true){
       ele.data('label', "\n(" + (i + 1) + ")");
-    }
-    if( ele.isNode() && ele.data('label') ){
-      errorData.label = ele.data('label');
-    }
-    else if ( ele.isEdge() && ((ele.source() !== undefined && ele.source().data('label')) || (ele.target()) !== undefined && ele.target().data('label'))){
-      //console.log( ele.source().data('label') + " " + ele.target().data());
-      errorData.label = ele.source() !== undefined  ?(ele.source().data('label') !== undefined ? ele.source().data('label') : " ") : " " + "-" +
-      (ele.target() !== undefined ? (ele.target().data('label') !== undefined ? ele.target().data('label') : " ")  : " ") ;
-    }
+      console.log(errorData.role + " " + ele.data('label'));
+    }*/
+    
     if( ele.isNode()){
+      console.log( errorData.role + " node is higlighlited");
     ele.addClass('highlight');
     }
     else {
@@ -1349,6 +1360,8 @@ cy.nodes().forEach((node) => { node.removeData('highlightColor'); node.removeCla
    // console.log( imageOptions.highlightWidth);
     ele.data('highlightWidth', imageOptions.highlightWidth);
   }
+  
+  
   
   });
 }
