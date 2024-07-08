@@ -151,7 +151,7 @@ options = {
     color: 'greyscale'          // node color
     width: 1280,                // desired width
     height: 720,                // desired height
-    autoSize: false,            // automatically size image with no padding
+    autoSize: true,             // automatically size image with no padding
     highlightWidth: 10          // underlay padding used to highlight errors
   }
 }
@@ -286,17 +286,19 @@ Icons in the client demo are made by [Freepik](http://www.freepik.com) and [Flat
 [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/).
 
 Third-party libraries used in web service:
-[sbgnml-to-cytoscape](https://www.npmjs.com/package/sbgnml-to-cytoscape),
+[sbgnviz.js](https://github.com/iVis-at-Bilkent/sbgnviz.js),
 [cytoscape-sbgn-stylesheet](https://github.com/iVis-at-Bilkent/cytoscape-sbgn-stylesheet),
 [cytosnap](https://github.com/iVis-at-Bilkent/cytosnap),
-[libsbmljs](https://libsbmljs.github.io),
 [express](https://www.npmjs.com/package/express),
 [cors](https://www.npmjs.com/package/cors),
 [jQuery](https://www.npmjs.com/package/jquery),
 [jsdom](https://www.npmjs.com/package/jsdom),
 [nodemon](https://www.npmjs.com/package/nodemon),
 [jest](https://www.npmjs.com/package/jest),
-[super-test](https://www.npmjs.com/package/supertest)
+[super-test](https://www.npmjs.com/package/supertest),
+[xml2js](https://www.npmjs.com/package/xml2js),
+[SaxonJS](https://www.npmjs.com/package/saxon-js).
+Saxonjs is used with [Public License](https://www.saxonica.com/saxon-js/documentation2/index.html#!conditions/public-license).
 
 Third-party libraries used in demo client:
 [Semantic UI](https://semantic-ui.com),
