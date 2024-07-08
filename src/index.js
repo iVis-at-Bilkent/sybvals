@@ -47,7 +47,7 @@ let imageOptions = {
   color: 'greyscale',
   highlightColor: '#ff0000',
   highlightWidth: 30,
-  autoSize: false
+  autoSize: true
 };
 
 const $ = jQuery = require('jquery')(window);
@@ -135,12 +135,52 @@ app.use(cors());
 app.use((req, res, next) => {
   console.log(req.query.errorFixing);
   console.log( req.query);
-  if (req.query.errorFixing === "true") {
+  /*if (req.query.errorFixing === "true") {
     console.log("error fixingtrue");
     //while(1);
-    next();
-  }
-  else if (req.method === "POST") {
+    body = '';
+    isJson = false;
+    options = '';
+    data = '';
+    errorMessage = undefined;
+    console.log( " request has come now");
+    req.on('data', chunk => {
+      body += chunk;
+    })
+    //req.on('end', () => {
+      //console.log("ziya");
+      let indexOfOptions = Math.min(body.includes("layoutOptions") ? body.indexOf("layoutOptions") : Number.MAX_SAFE_INTEGER,
+        body.includes("imageOptions") ? body.indexOf("imageOptions") : Number.MAX_SAFE_INTEGER,
+        body.includes("queryOptions") ? body.indexOf("queryOptions") : Number.MAX_SAFE_INTEGER);
+      let indexOfOptionsStart;
+      if (indexOfOptions != Number.MAX_SAFE_INTEGER) {
+        indexOfOptionsStart = body.substring(0, indexOfOptions).lastIndexOf("{");
+        options = body.substring(indexOfOptionsStart);
+        data = body.substring(0, indexOfOptionsStart);
+      }
+      else {
+        data = body;
+        options = "";
+      }
+
+      try {
+        options = JSON.parse(options);
+      }
+      catch (e) {
+        let date = new Date()
+        errorMessage = "<b>Sorry! Cannot process the given file!</b><br><br>There is something wrong with the format of the options!<br><br>Error detail: <br>" + e;
+        //logger.log('---- %s', date + ": \n" + errorMessage.replace(/<br\s*[\/]?>/gi, "\n").replace(/<b\s*\/?>/mg, "") + "\n");
+      }
+
+      // convert sbgn data to json for cytoscape
+
+      
+    //});
+
+
+    return next();
+  }*/
+   if (req.method === "POST") {
     //console.log("edgesssssssssssssssss " + req.query.edges + " " + req.query.format);
     //while(1);
     body = '';
@@ -177,6 +217,9 @@ app.use((req, res, next) => {
         errorMessage = "<b>Sorry! Cannot process the given file!</b><br><br>There is something wrong with the format of the options!<br><br>Error detail: <br>" + e;
         logger.log('---- %s', date + ": \n" + errorMessage.replace(/<br\s*[\/]?>/gi, "\n").replace(/<b\s*\/?>/mg, "") + "\n");
       }
+      if (req.query.errorFixing === "true") {
+         return next();
+      }
 
       // convert sbgn data to json for cytoscape
 
@@ -198,7 +241,8 @@ app.use((req, res, next) => {
 
       cy = cytoscape({
         styleEnabled: true,
-        headless: true
+        headless: true,
+        isStyleEnabled : true
       });
       let sbgnNodes = data["nodes"];
       sbgnNodes.forEach(function (node) {
@@ -434,13 +478,23 @@ app.use((req, res, next) => {
  
   //console.log( styleSheet);
   postProcessForLayouts(cy);
+  cy.nodes().forEach( node => {
+    console.log( node.data().id + " " + node.data().bbox.x + " " + node.data().bbox.y);
+  })
+  console.log(" before layout");
+  var layout = cy.layout({name:'fcose'});
+  layout.pon('layoutstop').then(function( event ){
+    console.log('layoutstop promise fulfilled');
+  
+  
+
   //console.log(cy.json());
   errors.forEach( error => {
     unsolvedErrorInformation[ error.pattern + error.role ] = true;
   })
   highlightErrors(errors, cy,imageOptions, true);
   cy.nodes().forEach( node => {
-    //console.log( node.data());
+    console.log( node.data().id + " " + node.data().bbox.x + " " + node.data().bbox.y);
   })
 
   //while(1);
@@ -501,7 +555,8 @@ app.use((req, res, next) => {
       errorMessage: errorMessage
     });
   }
-
+});
+layout.run();
 });
 
 // whether to include edges in the output or not
@@ -1044,6 +1099,7 @@ app.post('/fixError', (req, res) => {
       errors[i].explanation = "Fix of another error resolved this error."
     }
   }
+  //cy.layout({name:'fcose'}).run();
   try {
     //next();
 

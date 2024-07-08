@@ -353,7 +353,7 @@ let processValidation = async function () {
 		$("#resultImage1").attr("src", imageUrl);
 		//$("#resultImage1").attr("aspect-ratio", aspectRatio);
 
-		document.getElementById("resultImage1").style.aspectRatio = aspectRatio;
+		//document.getElementById("resultImage1").style.aspectRatio = aspectRatio;
 
 	}
 	else {
@@ -777,15 +777,15 @@ $("#resultImage1").on("click", function (e) {
 	document.getElementById("draggableImageArea").style.position = "absolute";
 	document.getElementById("draggableImageArea").style.top = "400px";
 	document.getElementById("draggableImageArea").style.left = "850px";
-	document.getElementById("draggableImageArea").style.aspectRatio = aspectRatio;
+	//document.getElementById("draggableImageArea").style.aspectRatio = aspectRatio;
 	let height = ( 900/aspectRatio > 800 ? 800 : 900/aspectRatio);
 	//document.getElementById("draggableImageArea").style.width = "900px";
-	document.getElementById("draggableImageArea").style.height = (height + 60) + "px";
-	//document.getElementById("resultImage").style.height = (height) + "px";
+	//document.getElementById("draggableImageArea").style.height = (height) + "px";
+	document.getElementById("imageAreaPopUp").style.height = "500px";
 
 	
-	document.getElementById("resultImage").style.aspectRatio = aspectRatio;
-	document.getElementById("imageAreaPopUp").style.aspectRatio = aspectRatio;
+	//document.getElementById("resultImage").style.aspectRatio = aspectRatio;
+	//document.getElementById("imageAreaPopUp").style.aspectRatio = aspectRatio;
 	document.getElementById("dragRegion").innerHTML = document.getElementById("file-name").innerHTML
 
 	//document.getElementById("imageArea").style.aspectRatio = aspectRatio;
