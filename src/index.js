@@ -52,26 +52,15 @@ let imageOptions = {
 
 const $ = jQuery = require('jquery')(window);
 
-function base64_encode(file) {
-  // read binary data
-  var bitmap;
-  bitmap = fs.readFileSync(file);
-  // convert binary data to base64 encoded string
-  return new Buffer(bitmap).toString('base64');
-}
-
 function postProcessForLayouts(cy) {
   let processNodes = cy.nodes('[class = "process",class = "uncertain process"]', '[class = "uncertain process"]');
   for (let i = 0; i < processNodes.length; i++) {
     let compartment;
     let connectedNodes = processNodes[i].connectedEdges().map(edge => (edge.source() == processNodes[i] ? edge.target() : edge.source()));
-    //console.log( processNodes[i].parent().data().class );
-    if( processNodes[i].parent() !== undefined && processNodes[i].parent().data("class") === "compartment"){
-    //  console.log( "is entered");
+    if (processNodes[i].parent() !== undefined && processNodes[i].parent().data("class") === "compartment") {
       continue;
     }
     for (let j = 0; j < connectedNodes.length; j++) {
-      //console.log( connectedNodes[j].parent().label);
       if (compartment === undefined) {
         compartment = connectedNodes[j].parent();
       }
@@ -79,17 +68,17 @@ function postProcessForLayouts(cy) {
         compartment = -1;
       }
     }
-    if (compartment !== -1 && compartment !== undefined ) {
+    if (compartment !== -1 && compartment !== undefined) {
       processNodes[i].move({ "parent": compartment.id() });
     }
   }
 
 
 }
-  
-      
-      
- 
+
+
+
+
 
 // for fcose
 const fcose = require('cytoscape-fcose');
@@ -120,9 +109,7 @@ function findClosestNode(ele, connectedEdges) {
   for (let i = 0; i < connectedEdges.size(); i++) {
     if (distanceBetween(ele, connectedEdges[i].source()) < shortestDistance) {
       shortestDistance = distanceBetween(ele, connectedEdges[i].source());
-      //console.log( "distance : " + shortestDistance);
       closestEdge = connectedEdges[i];
-      //console.log( connectedEdges[i].source().id() + " " + connectedEdges[i].target().id() );
     }
   }
   return closestEdge;
@@ -133,68 +120,17 @@ app.use(cors());
 
 // middleware to manage the formats of files
 app.use((req, res, next) => {
-  console.log(req.query.errorFixing);
-  console.log( req.query);
-  /*if (req.query.errorFixing === "true") {
-    console.log("error fixingtrue");
-    //while(1);
+  if (req.method === "POST") {
     body = '';
     isJson = false;
     options = '';
     data = '';
     errorMessage = undefined;
-    console.log( " request has come now");
-    req.on('data', chunk => {
-      body += chunk;
-    })
-    //req.on('end', () => {
-      //console.log("ziya");
-      let indexOfOptions = Math.min(body.includes("layoutOptions") ? body.indexOf("layoutOptions") : Number.MAX_SAFE_INTEGER,
-        body.includes("imageOptions") ? body.indexOf("imageOptions") : Number.MAX_SAFE_INTEGER,
-        body.includes("queryOptions") ? body.indexOf("queryOptions") : Number.MAX_SAFE_INTEGER);
-      let indexOfOptionsStart;
-      if (indexOfOptions != Number.MAX_SAFE_INTEGER) {
-        indexOfOptionsStart = body.substring(0, indexOfOptions).lastIndexOf("{");
-        options = body.substring(indexOfOptionsStart);
-        data = body.substring(0, indexOfOptionsStart);
-      }
-      else {
-        data = body;
-        options = "";
-      }
-
-      try {
-        options = JSON.parse(options);
-      }
-      catch (e) {
-        let date = new Date()
-        errorMessage = "<b>Sorry! Cannot process the given file!</b><br><br>There is something wrong with the format of the options!<br><br>Error detail: <br>" + e;
-        //logger.log('---- %s', date + ": \n" + errorMessage.replace(/<br\s*[\/]?>/gi, "\n").replace(/<b\s*\/?>/mg, "") + "\n");
-      }
-
-      // convert sbgn data to json for cytoscape
-
-      
-    //});
-
-
-    return next();
-  }*/
-   if (req.method === "POST") {
-    //console.log("edgesssssssssssssssss " + req.query.edges + " " + req.query.format);
-    //while(1);
-    body = '';
-    isJson = false;
-    options = '';
-    data = '';
-    errorMessage = undefined;
-    console.log( " request has come now");
     req.on('data', chunk => {
       body += chunk;
     })
 
     req.on('end', () => {
-      //console.log("ziya");
       let indexOfOptions = Math.min(body.includes("layoutOptions") ? body.indexOf("layoutOptions") : Number.MAX_SAFE_INTEGER,
         body.includes("imageOptions") ? body.indexOf("imageOptions") : Number.MAX_SAFE_INTEGER,
         body.includes("queryOptions") ? body.indexOf("queryOptions") : Number.MAX_SAFE_INTEGER);
@@ -218,73 +154,54 @@ app.use((req, res, next) => {
         logger.log('---- %s', date + ": \n" + errorMessage.replace(/<br\s*[\/]?>/gi, "\n").replace(/<b\s*\/?>/mg, "") + "\n");
       }
       if (req.query.errorFixing === "true") {
-         return next();
+        return next();
       }
 
       // convert sbgn data to json for cytoscape
 
       var parser = new window.DOMParser;
       var xml = parser.parseFromString(data, 'text/xml');
-            data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
+      data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
 
       currentSbgn = data;
       let cyJsonData = sbgnmlToJson.convert(xml, data);
 
 
       fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
-      //while(1);
-      //data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
-      //console.log( data[0] );
       data = cyJsonData;
       fs.unlinkSync('./src/sbgnFile.sbgn');
-    
+
 
       cy = cytoscape({
         styleEnabled: true,
         headless: true,
-        isStyleEnabled : true
+        isStyleEnabled: true
       });
       let sbgnNodes = data["nodes"];
       sbgnNodes.forEach(function (node) {
         if (node["data"].bbox) {
           node["position"] = { x: node["data"].bbox.x, y: node["data"].bbox.y };
         }
-       // console.log(node["data"].label + " " + node["data"].parent);
-    
       });
-      //console.log("ziyaaaaaaaaaaaaaaaaaaaaaaaa");
       try {
         cy.add(data);
-        cy.nodes().forEach( node => {
-          console.log( node.data());
-        })
-      }catch(err){};
-
+      } catch (err) { };
       postProcessForLayouts(cy);
-
       data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
       data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
       currentSbgn = data;
       fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
-
-
       let result = SaxonJS.transform({
         stylesheetFileName: './src/templatelibsbgn.sef.json',
         sourceFileName: "./src/sbgnFile.sbgn",
         destination: "serialized"
       }).principalResult;
-
-      //while(1);
-
       fs.unlinkSync('./src/sbgnFile.sbgn');
-
-      //console.log( cyJsonData );
       let parseString = xml2js.parseString;
       let parsedResult;
       parseString(result, function (err, data) {
         parsedResult = data;
       });
-      //console.log( parsedResult );
       errors = [];
       if (parsedResult["svrl:schematron-output"]["svrl:failed-assert"] == undefined) {
       }
@@ -298,33 +215,7 @@ app.use((req, res, next) => {
           errors.push(error);
         }
       }
-
       data = cyJsonData;
-      //data = convertSBGNtoCytoscape(data);
-      
-     // while(1);
-      //console.log( cyJsonData.nodes );
-      //console.log( data.nodes);
-      data.nodes.forEach((node) => {
-      /*if( node.data('label') === "Ca2+" )
-         console.log(node.data());*/
-        //  console.log( node.data.id);
-      });
-      // data = sbgnmlToJson.convert(xml,data);
-      data = cyJsonData;
-       //console.log(data);
-      // console.log(data);
-      data["nodes"].forEach((node) => {
-        //if( node.data.class == 'process')
-        //console.log(node["data"].label + " " + node["data"].parent);
-      });
-      //  console.log( node.data.id);
-      data.nodes.forEach((node) => {
-        //if (node.data.id === 'glyph1')
-        //console.log(node.data);
-        //  console.log( node.data.id);
-      });
-
       next();
     });
   }
@@ -333,77 +224,43 @@ app.use((req, res, next) => {
   ;
 });
 
-// whether to include edges in the output or not
-// POST :format?edges=true 
-// POST :format?clusters=true
- app.post('/validation', async (req, res, next) => {
+app.post('/validation', async (req, res, next) => {
   let size = 30;
   unsolvedErrorInformation = {};
   previousErrorCode = "";
   previousErrorRole = "";
   fixExplanation = {};
-  //console.log("validationnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
-  //console.log(req.query.errorFixing);
   if (req.query.errorFixing !== undefined && req.query.errorFixing === true) {
-    //console.log("pass to error fixing");
-    //while(1);
     return next();
   }
-  //console.log(req.params);
-  //console.log(req.query);
-  //let format = req.params.format;
+
   let imageWanted = true;
   if (req.query.image == "false") {
     imageWanted = false;
   }
-
-  
-
-  /*let imageOptions = {
-    format: 'png',
-    background: 'transparent',
-    width: 1280,
-    height: 720,
-    color: 'greyscale',
-    highlightColor: '#ff0000',
-    highlightWidth: 30
-  };*/
-
   if (options.imageOptions) {
     $.extend(imageOptions, options.imageOptions);
   }
-
   if (imageOptions.format == 'jpg' && imageOptions.background == "transparent") {
     imageOptions.background = "white";
   }
-
   if (imageOptions.format == 'svg' && imageOptions.background == "transparent") {
     imageOptions.background = undefined;
   }
-
   if (imageOptions.width <= 0) {
     imageOptions.width = 1280;
   }
-
   if (imageOptions.height <= 0) {
     imageOptions.height = 720;
   }
-
-
   let sbgnNodes = data["nodes"];
   sbgnNodes.forEach(function (node) {
     if (node["data"].bbox) {
       node["position"] = { x: node["data"].bbox.x, y: node["data"].bbox.y };
     }
-   // console.log(node["data"].label + " " + node["data"].parent);
-
   });
-  //console.log("ziyaaaaaaaaaaaaaaaaaaaaaaaa");
   try {
     cy.add(data);
-    cy.nodes().forEach( node => {
-      //console.log( node.data());
-    })
   }
   catch (e) {
     let date = new Date()
@@ -413,21 +270,11 @@ app.use((req, res, next) => {
       errorMessage: errorMessage
     });
   }
-  //console.log("ziyaaaaaaaaaaaaaaaaaaaaaaaa");
-
-  
-
   cy.nodes().forEach((node) => {
     node.css("width", node.data().bbox.w || size);
     node.css("height", node.data().bbox.h || size);
-    //console.log(node.data());
   });
-  cy.edges().forEach((edge) => {
-    //node.css("width", node.data().bbox.w || size);
-    //node.css("height", node.data().bbox.h || size);
-    //console.log(edge.data());
-  });
- 
+
   errors.forEach((errorData, i) => {
     if (errorData.pattern == "pd10109" || errorData.pattern == 'pd10110') {
       let ele = cy.getElementById(errorData.role);
@@ -446,137 +293,68 @@ app.use((req, res, next) => {
     }
     errorData.text = errorText;
   });
-  /*errors.forEach((errorData, i) => {
-    let ele = cy.getElementById(errorData.role);
-    if (ele.data('label')) {
-      ele.data('label', ele.data('label') + "\n(" + (i + 1) + ")");
-    }
-    else {
-      ele.data('label', "\n(" + (i + 1) + ")");
-    }
-    ele.addClass('highlight');
-    ele.data('highlightColor', errorHighlightColors[i % 8]);
-    //console.log( imageOptions.highlightWidth);
-    ele.data('highlightWidth', imageOptions.highlightWidth);
-  });*/
-
   let colorScheme = imageOptions.color || "white";
   let stylesheet = adjustStylesheet('sbgnml', colorScheme);
-  //console.log(adjustStylesheet('sbgnml', colorScheme));
-  //console.log(stylesheet);
-
   let ret = {};
-
   ret['errors'] = errors;
   let errorCount = 0;
-  errors.forEach( error => { 
-    if( error.pattern !== "pd10102"){
+  errors.forEach(error => {
+    if (error.pattern !== "pd10102") {
       errorCount++;
-    }});
-  //console.log( errors );
-
- 
-  //console.log( styleSheet);
+    }
+  });
   postProcessForLayouts(cy);
-  cy.nodes().forEach( node => {
-    console.log( node.data().id + " " + node.data().bbox.x + " " + node.data().bbox.y);
-  })
-  console.log(" before layout");
-  var layout = cy.layout({name:'fcose'});
-  layout.pon('layoutstop').then(function( event ){
-    console.log('layoutstop promise fulfilled');
-  
-  
+  var layout = cy.layout({ name: 'fcose' });
+  layout.pon('layoutstop').then(function (event) {
+    errors.forEach(error => {
+      unsolvedErrorInformation[error.pattern + error.role] = true;
+    })
+    highlightErrors(errors, cy, imageOptions, true);
+    try {
 
-  //console.log(cy.json());
-  errors.forEach( error => {
-    unsolvedErrorInformation[ error.pattern + error.role ] = true;
-  })
-  highlightErrors(errors, cy,imageOptions, true);
-  cy.nodes().forEach( node => {
-    console.log( node.data().id + " " + node.data().bbox.x + " " + node.data().bbox.y);
-  })
+      snap.start().then(function () {
 
-  //while(1);
-  try {
-    //next();
-
-    snap.start().then(function () {
-
-      return snap.shot({
-        elements: cy.elements().jsons(),
-        layout: { name: 'fcose', randomize : false },
-        style: stylesheet,
-        resolvesTo: 'all',
-        format: imageOptions.format,
-        quality: 100,
-        width: imageOptions.width,
-        height: imageOptions.height,
-        background: imageOptions.background,
-        fullGraph: imageOptions.autoSize
-      }).then(function (result) {
-        data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
-        data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
-        currentSbgn = data;
-        let image = result.image;
-        ret["image"] = (result.image);       
-        ret['errors'] = errors;
-        ret['sbgn'] = currentSbgn;
-        fs.writeFileSync('./src/sbgnFile.sbgn', data);
-        /*let data = jsonToSbgnml.createSbgnml(undefined, undefined, undefined, undefined, undefined, undefined, cy);
-        data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
-        currentSbgn = data;*/
-        //while(1);
-        //fs.unlinkSync('./src/1.png');
-        //fs.unlinkSync('./src/out.png');
-        return res.status(200).send(ret);
-      }).then(function () {
-        snap.stop();
-        //   next();
-        //console.log( sbgnmlToJson.map.extension);
-        //console.log( sbgnmlToJson.map.extension.get('renderInformation'));
-        /*data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
-
-        data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
-        currentSbgn = data;*/
-
-
-
-
-       
+        return snap.shot({
+          elements: cy.elements().jsons(),
+          layout: { name: 'fcose', randomize: false },
+          style: stylesheet,
+          resolvesTo: 'all',
+          format: imageOptions.format,
+          quality: 100,
+          width: imageOptions.width,
+          height: imageOptions.height,
+          background: imageOptions.background,
+          fullGraph: imageOptions.autoSize
+        }).then(function (result) {
+          data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
+          data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
+          currentSbgn = data;
+          let image = result.image;
+          ret["image"] = (result.image);
+          ret['errors'] = errors;
+          ret['sbgn'] = currentSbgn;
+          fs.writeFileSync('./src/sbgnFile.sbgn', data);
+          return res.status(200).send(ret);
+        }).then(function () {
+          snap.stop();
+        });
       });
-    });
-  }
-  catch (e) {
-    let date = new Date()
-    errorMessage = "<b>Sorry! Cannot process the given file!</b><br><br>Something has gone wrong during either applying layout or generating image.<br><br>Error detail: <br>" + e;
-    logger.log('---- %s', date + ": \n" + errorMessage.replace(/<br\s*[\/]?>/gi, "\n").replace(/<b\s*\/?>/mg, "") + "\n");
-    return res.status(500).send({
-      errorMessage: errorMessage
-    });
-  }
+    }
+    catch (e) {
+      let date = new Date()
+      errorMessage = "<b>Sorry! Cannot process the given file!</b><br><br>Something has gone wrong during either applying layout or generating image.<br><br>Error detail: <br>" + e;
+      logger.log('---- %s', date + ": \n" + errorMessage.replace(/<br\s*[\/]?>/gi, "\n").replace(/<b\s*\/?>/mg, "") + "\n");
+      return res.status(500).send({
+        errorMessage: errorMessage
+      });
+    }
+  });
+  layout.run();
 });
-layout.run();
-});
 
-// whether to include edges in the output or not
-// POST :format?edges=true 
-// POST :format?clusters=true
-/*app.post('/:format', (req, res) => {
-  let ret = {};
-  
-}); */
 
-/*app.post('/fix',(req,res) =>{
-  console.log("fixStarted");
-
-});*/
-
-// whether to include edges in the output or not
-// POST :format?edges=true 
-// POST :format?clusters=true
 app.post('/fixError', (req, res) => {
-  
+
   let imageOptions = {
     format: 'png',
     background: 'transparent',
@@ -606,32 +384,23 @@ app.post('/fixError', (req, res) => {
   if (imageOptions.height <= 0) {
     imageOptions.height = 720;
   }
-
-  
   let ret = {};
   ret['errors'] = errors;
   ret["image"] = image;
-  console.log( image);
-  //console.log(errors);
   let currentErrors;
-
-
   let check = 0;
   let numberOfUnsolvedErrors = 0;
   for (let i = 0; i < errors.length; i++) {
     errors[i].errorNo = i + 1;
   }
   currentErrors = errors;
-  //console.log(errors);
   unsolvedErrorInformation = {};
   previousErrorCode = "";
   previousErrorRole = "";
   fixExplanation = {};
   let count = 0;
-
-  while (check < currentErrors.length ) {
+  while (check < currentErrors.length) {
     let currentLength = currentErrors.length;
-   
     previousErrorCode = currentErrors[check].pattern;
     previousErrorRole = currentErrors[check].role;
     currentErrors[check].status = "unsolved";
@@ -650,7 +419,7 @@ app.post('/fixError', (req, res) => {
       }
       else {
         ele.move({ "parent": listedNodes[0].data().id });
-        fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "Fixed by moving "  + " inside " + listedNodes[0].data().id + ".";
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Fixed by moving " + " inside " + listedNodes[0].data().id + ".";
       }
     }
     else if (currentErrors[check].pattern == "pd10126") {
@@ -667,7 +436,7 @@ app.post('/fixError', (req, res) => {
         }
       }
       if (connectedEdges.length !== 0) {
-        fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] =  "Edge between this node and " + selectedEdge.source().id() + " is kept.";
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Edge between this node and " + selectedEdge.source().id() + " is kept.";
         fixError(errorFixParam);
       }
       else
@@ -695,16 +464,13 @@ app.post('/fixError', (req, res) => {
             }
           }
       }
-
-      // node should be selected here, default is 0.
       if (listedNodes.length !== 0) {
         let selectedNode = listedNodes[0];
         errorFixParam.newTarget = ele.target().id();
         errorFixParam.newSource = selectedNode.id();
         errorFixParam.edge = ele;
         errorFixParam.portsource = selectedNode.id();
-        //errors[check].status = "solved";
-        fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "Arc is connected to " + selectedNode.id() + ".";
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Arc is connected to " + selectedNode.id() + ".";
         fixError(errorFixParam);
       }
       else
@@ -718,11 +484,7 @@ app.post('/fixError', (req, res) => {
       var eles = cy.elements('[id="' + id + '"]');
       errorFixParam.node = eles;
       var edges = cy.nodes('[id = "' + id + '"]').connectedEdges();
-      // console.log("pd10103 edges");
-      //console.log(edges.data());
       var addedNodeNum = edges.length;
-      //console.log(edges.length);
-
       var nodeParams = { class: eles.data().class, language: eles.data().language };
       for (var i = 0; i < addedNodeNum; i++) {
         var edgeParams = { class: edges[i].data().class, language: edges[i].data().language };
@@ -779,40 +541,23 @@ app.post('/fixError', (req, res) => {
         }
         errorFixParam.oldEdges.push(edges[i]);
       }
-      fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "Source and sink glyph is splitted for each consumption arc.";
+      fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Source and sink glyph is splitted for each consumption arc.";
       fixError(errorFixParam);
     }
     else if (currentErrors[check].pattern == "pd10101" || currentErrors[check].pattern == "pd10102") {
       let targetTmp = ele.target();
       let sourceTmp = ele.source();
-      console.log( "pd10102");
       if (elementUtilities.isEPNClass(targetTmp)) {
-        console.log( "pd10102 conditions satisfied");
         errorFixParam.edge = ele;
         fixError(errorFixParam);
-        fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "Source and target of consumption arc have been swapped.";
-       // errors[check].status = "solved";
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Source and target of consumption arc have been swapped.";
+        // errors[check].status = "solved";
       }
-      else{
+      else {
         //errors[check].status = "unsolved";
         numberOfUnsolvedErrors++;
       }
     }
-    /*else if (errors[check].pattern == "pd10102") {
-      let targetTmp = ele.target();
-      let sourceTmp = ele.source();
-      console.log( "pd10102");
-      if (elementUtilities.isEPNClass(sourceTmp)) {
-        console.log( "pd10102 conditions satisfied");
-        errorFixParam.edge = ele;
-        fixError(errorFixParam);
-        errors[check].explanation = "Source and target of consumption arc have been swapped.";
-        errors[check].status = "solved";
-      }
-      else
-        numberOfUnsolvedErrors++;
-    }*/
-
     else if (currentErrors[check].pattern == "pd10126") {
       let connectedEdges = ele.connectedEdges().filter('[class="logic arc"]');
       //console.log("connected edges" + connectedEdges.size());
@@ -825,10 +570,7 @@ app.post('/fixError', (req, res) => {
           errorFixParam.edges.push(connectedEdges[i]);
         }
       }
-      //console.log( errorFixParam );
-      //console.log(cy.edges());
       fixError(errorFixParam);
-      //console.log(cy.edges());
     }
     else if (currentErrors[check].pattern == "pd10125") {
       var edgeParams = { class: ele.data().class, language: ele.data().language };
@@ -856,23 +598,22 @@ app.post('/fixError', (req, res) => {
       errorFixParam.edge = ele;
       errorFixParam.newEdge = { source: source.id(), target: target.id(), edgeParams: edgeParams };
       fixError(errorFixParam);
-      //errors[check].status = "solved";
-      fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "The arc has a target reference to " + target.id() + ".";
+      fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc has a target reference to " + target.id() + ".";
     }
     else if (currentErrors[check].pattern == "pd10111") {
       errorFixParam.edges = [];
       let connectedEdges = cy.edges('[source =  "' + ele.id() + '"]');
-   //   console.log(connectedEdges.length);
+      //   console.log(connectedEdges.length);
       if (connectedEdges.length !== 0) {
         let selectedEdge = connectedEdges[0]; // default , the selection of edge will be determined later.
         for (let i = 0; i < connectedEdges.size(); i++) {
-          if (connectedEdges[i].id() != selectedEdge.id() ) {
+          if (connectedEdges[i].id() != selectedEdge.id()) {
             errorFixParam.edges.push(connectedEdges[i]);
           }
         }
         fixError(errorFixParam);
         //errors[check].status = "solved";
-        fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "Arc between this node and " + selectedEdge.target.id() + " is kept."; 
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Arc between this node and " + selectedEdge.target.id() + " is kept.";
       }
       else
         numberOfUnsolvedErrors++;
@@ -889,17 +630,14 @@ app.post('/fixError', (req, res) => {
         }
       }
       fixError(errorFixParam);
-      fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "The arc between dissocation glyph and consumption glyph(" + (selectedEdge.source().id() === ele.id() ? 
-      selectedEdge.target().id() : selectedEdge.source().id()) + ") is kept."; 
-     // errors[check].status = "solved";
+      fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc between dissocation glyph and consumption glyph(" + (selectedEdge.source().id() === ele.id() ?
+        selectedEdge.target().id() : selectedEdge.source().id()) + ") is kept.";
+      // errors[check].status = "solved";
     }
     else if (currentErrors[check].pattern == "pd10108") {
       let connectedEdges = ele.connectedEdges().filter('[class = "production"]');
-
       // choose deleted edges and nodes each here when the deletion method is determined
-
       let selectedEdge = connectedEdges[0];
-
       errorFixParam.edges = [];
       errorFixParam.nodes = [];
       for (let i = 0; i < connectedEdges.size(); i++) {
@@ -908,11 +646,9 @@ app.post('/fixError', (req, res) => {
           errorFixParam.nodes.push(connectedEdges[i].source().id() == ele.id() ? connectedEdges[i].target() : connectedEdges[i].source());
         }
         fixError(errorFixParam);
-        fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "The arc between assocation glyph and production glyph(" + (selectedEdge.source().id() === ele.id() ? 
-        selectedEdge.target().id() : selectedEdge.source().id()) + ") is kept."; 
-        //errors[check].status = "solved";
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc between assocation glyph and production glyph(" + (selectedEdge.source().id() === ele.id() ?
+          selectedEdge.target().id() : selectedEdge.source().id()) + ") is kept.";
       }
-
     }
     else if (currentErrors[check].pattern == "pd10109") {
       var sourcePosX = ele.source().position().x;
@@ -935,11 +671,7 @@ app.post('/fixError', (req, res) => {
               listedNodes.push(nodes[i]);
             }
           }
-
-
-
       }
-
       // node should be selected here, default is 0.
       let selectedNode = listedNodes[0];
       errorFixParam.newTarget = ele.target().id();
@@ -948,7 +680,7 @@ app.post('/fixError', (req, res) => {
       errorFixParam.portsource = selectedNode.id();
       fixError(errorFixParam);
       //errors[check].status = "solved";
-      fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "Modulation arc has a source reference to " + selectedNode.id() + ".";
+      fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Modulation arc has a source reference to " + selectedNode.id() + ".";
     }
 
     else if (currentErrors[check].pattern == "pd10125") {
@@ -975,8 +707,7 @@ app.post('/fixError', (req, res) => {
       errorFixParam.edge = ele;
       errorFixParam.portsource = selectedNode.id();
       fixError(errorFixParam);
-      //errors[check].status = "solved";   
-     }
+    }
 
     else if (currentErrors[check].pattern == "pd10105" || currentErrors[check].pattern == "pd10106") {
       let sourceNode = ele.source();
@@ -984,8 +715,7 @@ app.post('/fixError', (req, res) => {
       if (elementUtilities.isPNClass(targetNode) && elementUtilities.isEPNClass(sourceNode)) {
         errorFixParam.edge = ele;
         fixError(errorFixParam);
-        //errors[check].status = "solved";
-        fixExplanation [ currentErrors[check].pattern + currentErrors[check].role ] = "The source and target of production arc have been swapped.";
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The source and target of production arc have been swapped.";
       }
       else {
         numberOfUnsolvedErrors++;
@@ -994,37 +724,21 @@ app.post('/fixError', (req, res) => {
     else {
       numberOfUnsolvedErrors++;
     }
-    
-
-    // console.log(errors);
-    //fixError(errorFixParam);
-
-    //console.log("edgesss after fixx::::");
-    //console.log(cy.edges()[1].data());
-    // console.log("AfterFix");
-    //errors = [];
-    //console.log(sbgnmlToJson.map.extension);
     data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
     data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
     currentSbgn = data;
-
-
     fs.writeFileSync('./src/sbgnFile.sbgn', data);
-
     let result = SaxonJS.transform({
       stylesheetFileName: './src/templatelibsbgn.sef.json',
       sourceFileName: "./src/sbgnFile.sbgn",
       destination: "serialized"
     }).principalResult;
-    //console.log(data);
-
     fs.unlinkSync('./src/sbgnFile.sbgn');
     let parseString = xml2js.parseString;
     let parsedResult;
     parseString(result, function (err, data) {
       parsedResult = data;
     });
-    //console.log( parsedResult );
     currentErrors = [];
     if (parsedResult["svrl:schematron-output"]["svrl:failed-assert"] == undefined) {
     }
@@ -1038,29 +752,20 @@ app.post('/fixError', (req, res) => {
         currentErrors.push(error);
       }
     }
-    if( currentLength == currentErrors.length) {
+    if (currentLength == currentErrors.length) {
       check++;
-      unsolvedErrorInformation[ previousErrorCode + previousErrorRole ] = true;
+      unsolvedErrorInformation[previousErrorCode + previousErrorRole] = true;
     }
-    //check++;
-    //console.log(errors.length);
-    console.log( "loop ");
   }
   data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
   data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
-  //currentSbgn = data;
   ret['sbgn'] = currentSbgn;
-
-
   fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
-
   let result = SaxonJS.transform({
     stylesheetFileName: './src/templatelibsbgn.sef.json',
     sourceFileName: "./src/sbgnFile.sbgn",
     destination: "serialized"
   }).principalResult;
-  //console.log(data);
-
   fs.unlinkSync('./src/sbgnFile.sbgn');
 
   let parseString = xml2js.parseString;
@@ -1072,7 +777,6 @@ app.post('/fixError', (req, res) => {
   if (parsedResult["svrl:schematron-output"]["svrl:failed-assert"] == undefined) {
   }
   else {
-   // console.log( "last check");
     currentErrors = [];
     let errCount = parsedResult["svrl:schematron-output"]["svrl:failed-assert"].length;
     for (let i = 0; i < errCount; i++) {
@@ -1080,34 +784,23 @@ app.post('/fixError', (req, res) => {
       error.setText(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:text"]);
       error.setPattern(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["$"]["id"]);
       error.setRole(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:diagnostic-reference"][0]["_"]);
-      //error.errorNo = i  + 1;
       currentErrors.push(error);
     }
   }
-
-  let styleSheet = stylesheetForSbgn();
-  //console.log( styleSheet);
-  //console.log( imageOptions.highlightWidth);
-  highlightErrors(errors, cy,imageOptions,false);
-
-  //console.log( "after return " + errors.length);
+  highlightErrors(errors, cy, imageOptions, false);
   let colorScheme = imageOptions.color || "white";
   let stylesheet = adjustStylesheet('sbgnml', colorScheme);
   postProcessForLayouts(cy);
-  for( let i = 0; i < errors.length ; i++ ){
-    if( errors[i].status == "solved" && errors[i].explanation === undefined ){
+  for (let i = 0; i < errors.length; i++) {
+    if (errors[i].status == "solved" && errors[i].explanation === undefined) {
       errors[i].explanation = "Fix of another error resolved this error."
     }
   }
-  //cy.layout({name:'fcose'}).run();
   try {
-    //next();
-
     snap.start().then(function () {
-
       return snap.shot({
         elements: cy.elements().jsons(),
-        layout: { name: 'fcose', randomize:false },
+        layout: { name: 'fcose', randomize: false },
         style: stylesheet,
         resolvesTo: 'all',
         format: imageOptions.format,
@@ -1124,24 +817,9 @@ app.post('/fixError', (req, res) => {
         ret["sbgn"] = currentSbgn;
         ret["image"] = result.image;
         ret['errors'] = errors;
-    
         return res.status(200).send(ret);
-      //  console.log("after return");
       }).then(function () {
         snap.stop();
-        //   next();
-        /*data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
-        data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
-
-
-        fs.writeFileSync('./src/sbgnFile.sbgn', data);
-
-        let result = SaxonJS.transform({
-          stylesheetFileName: './src/templatelibsbgn.sef.json',
-          sourceFileName: "./src/sbgnFile.sbgn",
-          destination: "serialized"
-        }).principalResult;*/
-        //console.log(data);
       });
     });
   }
@@ -1155,35 +833,27 @@ app.post('/fixError', (req, res) => {
   }
 
 });
-//console.log("dadasdsdsdsddsdsadsdsdsdsaasd");
 
 function fixError(errorFixParam) {
-  //console.log("error fixing started");
-  //console.log(errorFixParam.errorCode );
-  //console.log(cy);
   var errorCode = errorFixParam.errorCode;
   var result = {};
   result.errorCode = errorCode;
   if (errorCode == "pd10101" || errorCode == "pd10102") {
     elementUtilities.reverseEdge(errorFixParam.edge);
-    //console.log(cy.edges().data());
   }
   if (errorCode == "pd10103" || errorCode == "pd10107") {
     errorFixParam.newNodes.forEach(function (newNode) {
       elementUtilities.addNode(newNode.x, newNode.y, newNode.class, newNode.id, undefined, "visible", cy);
     });
-
     errorFixParam.newEdges.forEach(function (newEdge) {
       //console.log(newEdge);
       var newwEdge = elementUtilities.addEdge(newEdge.source, newEdge.target, newEdge.class, cy);
       // elementUtilities.reverseEdge(newwEdge);
     });
-
     errorFixParam.oldEdges.forEach(function (oldEdge) {
       cy.elements().unselect();
       oldEdge.remove();
     });
-
     errorFixParam.node.remove();
   }
   if (errorCode == "pd10105" || errorCode == "pd10106") {
@@ -1196,14 +866,12 @@ function fixError(errorFixParam) {
     for (let i = 0; i < errorFixParam.edges.length(); i++) {
       errorFixParam.edges[i].remove();
     }
-
   }
   if (errorCode == "pd10109" || errorCode == "pd10124") {
     result.newSource = errorFixParam.edge.data().source;
     result.newTarget = errorFixParam.edge.data().target;
     result.portsource = errorFixParam.edge.data().portsource;
     var clonedEdge = errorFixParam.edge.clone();
-
     var edgeParams = { class: clonedEdge.data().class, language: clonedEdge.data().language };
     clonedEdge.data().source = errorFixParam.newSource;
     clonedEdge.data().target = errorFixParam.newTarget;
@@ -1212,12 +880,10 @@ function fixError(errorFixParam) {
     return result;
   }
   else if (errorCode == "pd10125") {
-
     result.edge = errorFixParam.edge.remove();
     result.newEdge = {};
     var edgeclass = errorFixParam.newEdge.edgeParams.class ? errorFixParam.newEdge.edgeParams.class : errorFixParam.newEdge.edgeParams;
     var validation = elementUtilities.validateArrowEnds(edgeclass, cy.getElementById(errorFixParam.newEdge.source), cy.getElementById(errorFixParam.newEdge.target));
-
     if (validation === 'reverse') {
       var temp = errorFixParam.newEdge.source;
       errorFixParam.newEdge.source = errorFixParam.newEdge.target;
@@ -1227,10 +893,7 @@ function fixError(errorFixParam) {
     result.newEdge.source = errorFixParam.newEdge.source;
     result.newEdge.target = errorFixParam.newEdge.target;
     result.newEdge.edgeParams = errorFixParam.newEdge.edgeParams;
-
     return result;
-
-
   }
   else if (errorCode == "pd10126") {
     errorFixParam.edges.forEach(function (edge) {
@@ -1339,89 +1002,62 @@ function addNode(x, y, nodeParams, id, parent, visibility) {
       elementUtilities.addStateOrInfoBox(newNode, uoi_obj);
     }
   }
-
-  // node bg image was unexpectedly not rendered until it is clicked
-  // use this dirty hack until finding a solution to the problem
   var bgImage = newNode.data('background-image');
   if (bgImage) {
     newNode.data('background-image', bgImage);
   }
-
   return newNode;
-
 }
-//errors = [];
-//return res.status(200).send(ret);
 
-function highlightErrors(errors, cy, imageOptions,isValidation) {
-  //console.log( errors.length );
-  //console.log( errors);
+function highlightErrors(errors, cy, imageOptions, isValidation) {
   let errorColor = {};
   let counter = 0;
   let labels = {};
-
-cy.nodes().forEach((node) => { node.removeData('highlightColor'); node.removeClass('highlight');/*node.removeData('label');*/ }
+  cy.nodes().forEach((node) => { node.removeData('highlightColor'); node.removeClass('highlight');/*node.removeData('label');*/ }
   );
   cy.edges().forEach((edge) => { edge.removeData('highlightColor'); edge.removeClass('path');/*edge.removeData('label');*/ });
-  console.log( errors.length);
-  errors.forEach( (errorData,i) => {
+  errors.forEach((errorData, i) => {
     let ele = cy.getElementById(errorData.role);
-    if( ele.isNode() && ele.data('label') && errorData.label === undefined ){
+    if (ele.isNode() && ele.data('label') && errorData.label === undefined) {
       errorData.label = ele.data('label');
     }
-    else if ( ele.isEdge() && errorData.label === undefined ){
-      //console.log( ele.source().data('label') + " " + ele.target().data());
-      console.log( "edge labeling ");
-      errorData.label = (ele.source() !== undefined  ?(ele.source().data('label') !== undefined ? ele.source().data('label') : "") : "") + " - " +
-      (ele.target() !== undefined ? (ele.target().data('label') !== undefined ? ele.target().data('label') : "")  : "") ;
+    else if (ele.isEdge() && errorData.label === undefined) {
+      errorData.label = (ele.source() !== undefined ? (ele.source().data('label') !== undefined ? ele.source().data('label') : "") : "") + " - " +
+        (ele.target() !== undefined ? (ele.target().data('label') !== undefined ? ele.target().data('label') : "") : "");
     }
   });
   errors.forEach((errorData, i) => {
     let ele = cy.getElementById(errorData.role);
-    console.log(errorData.role);
-    if( unsolvedErrorInformation[errorData.pattern + errorData.role] !== true && !isValidation){
+    if (unsolvedErrorInformation[errorData.pattern + errorData.role] !== true && !isValidation) {
       errorData.explanation = fixExplanation[errorData.pattern + errorData.role] ? fixExplanation[errorData.pattern + errorData.role] : "Fix of another error resolved this error.";
       errorData.status = "solved";
       errorData.colorCode = "#808080";
       ele.data('highlightColor', "#808080");
     }
-    //console.log( errorData.pattern);
-    else {  
-    if (ele.data('label') && isValidation === true ) {
-      ele.data('label', ele.data('label') + "\n(" + (i + 1) + ")");
-    }
-    /*else if(isValidation === true){
-      ele.data('label', "\n(" + (i + 1) + ")");
-      console.log(errorData.role + " " + ele.data('label'));
-    }*/
-    
-    if( ele.isNode()){
-      console.log( errorData.role + " node is higlighlited");
-    ele.addClass('highlight');
-    }
     else {
-      ele.addClass('path');
+      if (ele.data('label') && isValidation === true) {
+        ele.data('label', ele.data('label') + "\n(" + (i + 1) + ")");
+      }
+      if (ele.isNode()) {
+        ele.addClass('highlight');
+      }
+      else {
+        ele.addClass('path');
+      }
+      if (errorColor[errorData.role] !== undefined) {
+        ele.data('highlightColor', errorColor[errorData.role]);
+        errorData.colorCode = errorColor[errorData.role];
+      }
+      else {
+        ele.data('highlightColor', errorHighlightColors[counter % 8]);
+        errorData.colorCode = errorHighlightColors[counter % 8];
+        errorColor[errorData.role] = errorHighlightColors[counter % 8];
+        counter++;
+      }
+      ele.data('highlightWidth', imageOptions.highlightWidth);
     }
-    if( errorColor[errorData.role] !== undefined ){
-    ele.data('highlightColor',errorColor[errorData.role] );
-    errorData.colorCode = errorColor[errorData.role];
-    }
-    else {
-      ele.data('highlightColor',errorHighlightColors[counter % 8] );
-      errorData.colorCode = errorHighlightColors[counter % 8];
-      errorColor[errorData.role] = errorHighlightColors[counter % 8];
-      counter++;
-   
-    }
-   // console.log( imageOptions.highlightWidth);
-    ele.data('highlightWidth', imageOptions.highlightWidth);
-  }
-  
-  
-  
   });
 }
-
 module.exports = {
   port,
   app

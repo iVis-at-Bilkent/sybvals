@@ -121,18 +121,12 @@ let applyErrorFix = async function () {
 		}
 		$('#errorsField').css({ width: errorWidth + 'px' });
 		$("#errorsArea").empty();
-		//$("#errorsArea").css( {'max-height' : '100px', 'overflow':scroll, 'background-color' : 'lightblue'} );
-		// get error info
-
 		let numberOfUnsolvedErrors = 0;
 		console.log( errors );
 		if (errors.length > 0) {
 			res.errors.forEach((error) => {
 				let imgSource = error.status === "solved" ? "img/check-mark.png" : "img/cross.png";
 				let errorNo = $('<div style = "display : flex;" />');
-				// let errorNo = $('<img src = "' + imgSource +  '" style=" height: 20px; width: 20px;" />');
-				//let errorNo = $('<div class="ui item"> <b>Error No:</b> ' + error.errorNo + '</div>');
-				//errorNo.append('<img src = "' + imgSource +  '" style="margin-left : 363px; height: 20px; width: 20px;" />');
 				errorNo.append('<img src = "' + imgSource + '" style=" height: 20px; width: 20px;" />');
 				errorNo.append('<div class="ui item" style = "margin-left : 5px;"> <b>Error </b> ' + error.errorNo + '</div>');
 				let errorPattern = $('<div class="ui item"> <b>Pattern:</b> ' + error.pattern + '</div>');
@@ -142,8 +136,7 @@ let applyErrorFix = async function () {
 				let errorStatus = $('<div class="ui item"> <b>Status:</b> ' + (error.status !== undefined ? error.status : "unknown") + '</div>');
 				let list = $('<div class="ui list">');
 				let fixExplanation = $('<div class="ui item"> <b>Fix explanation:</b> ' + (error.explanation !== undefined ?
-					error.explanation : "-") + '</div>');
-				//let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo +  '" style = "border = 10px solid ' +  errorHighlightColors[(error.errorNo - 1) % 8] + '">');
+				error.explanation : "-") + '</div>');
 				let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo + '">');
 				list.append(errorNo);
 				list.append(errorRole);
@@ -166,11 +159,9 @@ let applyErrorFix = async function () {
 				errorRectangle.css({ 'margin-top': '2px' });
 				errorRectangle.append('</div>');
 				const errorString = "#errorNo" + error.errorNo;
-				//if (error.pattern !== "pd10102")
-					$("#errorsArea").append(errorRectangle);
+				$("#errorsArea").append(errorRectangle);
 				let uiDivider = $('<div class="ui divider"></div>');
 				uiDivider.css({ 'margin': '0rem 0' });
-				//$("#errorsArea").append(uiDivider);
 				console.log( error.colorCode);
 				$(errorString).css({
 					'border': '3px solid', 'border-color': error.colorCode/*error.status === "unsolved" ? errorHighlightColors[numberOfUnsolvedErrors % 8]
@@ -181,7 +172,6 @@ let applyErrorFix = async function () {
 				}
 				$(errorString).css({ 'margin-right': '7px' });
 			});
-			//$("#errorsArea").css( {'max-height' : '100px', 'overflow':scroll, 'background-color' : '#fd713d'} );
 		}
 		else {
 			$("#errorsArea").css('overflow', 'hidden');
@@ -240,9 +230,7 @@ let processValidation = async function () {
 			autoSize: autoSize
 		}
 	};
-
 	let data = graphData + JSON.stringify(options);
-
 	const settings = {
 		method: 'POST',
 		headers: {
@@ -251,7 +239,6 @@ let processValidation = async function () {
 		},
 		body: data
 	};
-
 	let res = await fetch(url, settings)
 		.then(response => response.json())
 		.then(result => {
@@ -262,14 +249,6 @@ let processValidation = async function () {
 			errorContent.innerHTML = "<b>Sorry! Cannot process the given file!</b><br><br>Error detail:<br>" + e;
 			$('#errorModal').modal({ inverted: true }).modal('show');
 		});
-
-	/*cy = cytoscape({styleEnabled: true});  
-		console.log(res.cyjson);
-	cy.add(res.cyjson);
-	console.log(cy);
-	 let pngContent = cy.png({ scale: 3, full: true });*/
-
-	//saveImage(pngContent, "png", document.getElementById("file-name").innerHTML);
 	$("#applyValidation").removeClass("loading");
 	$("#applyValidation").css("background-color", "#d67664");
 	if (res.errors.length > 0) {
@@ -277,10 +256,6 @@ let processValidation = async function () {
 	}
 	aspectRatio = res.aspectRatio;
 	currentSbgn = res.sbgn;
-	//console.log(aspectRatio);
-	//document.getElementById("imageAreaSmall").style.aspectRatio =  aspectRatio;
-	console.log(res.image);
-
 	if (!res.errorMessage && (res.errors !== undefined || res.image !== undefined)) {
 		let remainingErrors = 0;
 		errors = res.errors;
@@ -289,13 +264,11 @@ let processValidation = async function () {
 				remainingErrors++;
 			}
 		});
-		//document.getElementById("errorsField").innerText = "Errors (" + res.remainingErrors + ")";
 		document.getElementById("errorsField").innerText = remainingErrors > 0 ? "Errors (" + remainingErrors + ")" : "Errors (none)";
 		let errorWidth = 86 - (remainingErrors % 10 === remainingErrors) * 10;
 		if (remainingErrors === 0) {
 			errorWidth = 140;
 		}
-		//let errorWidth = 86 - ( res.remainingErrors % 10 === res.remainingErrors) * 10;
 		$('#errorsField').css({ width: errorWidth + 'px' });
 		$("#errorsArea").empty();
 		// get error info
@@ -307,7 +280,6 @@ let processValidation = async function () {
 				let errorLabel = $('<div class="ui item"> <b>Label:</b> ' + error.label + '</div>');
 				let errorText = $('<div class="ui item"> <b>Message:</b> ' + error.text + '</div>');
 				let list = $('<div class="ui list">');
-				//let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo +  '" style = "border = 10px solid ' +  errorHighlightColors[(error.errorNo - 1) % 8] + '">');
 				let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo + '">');
 				list.append(errorNo);
 				list.append(errorRole);
@@ -319,20 +291,13 @@ let processValidation = async function () {
 				errorRectangle.append(list);
 				errorRectangle.append('</div>');
 				list.css({ 'margin': '2px' });
-				//console.log( error.errorNo);
-				//console.log( document.getElementById("errorNo1") !== undefined ? document.getElementById("errorNo1")?.style : undefined);
 				const errorString = "#errorNo" + error.errorNo;
 				errorRectangle.css({ 'margin-top': '2px' });
-				//if (error.pattern !== "pd10102")
-					$("#errorsArea").append(errorRectangle);
+				$("#errorsArea").append(errorRectangle);
 				let uiDivider = $('<div class="ui divider"></div>');
 				uiDivider.css({ 'margin': '0rem 0' });
-				//$("#errorsArea").append(uiDivider);
-				//console.log(errorString);
-				//console.log( $(errorString).css('border') );
 				$(errorString).css({ 'border': '3px solid', 'border-color': error.colorCode /*errorHighlightColors[(error.errorNo - 1) % 8]*/ });
 				$(errorString).css({ 'margin-right': '7px' });
-				//console.log( $(errorString).css('border') );
 			});
 		}
 		else {
@@ -345,16 +310,8 @@ let processValidation = async function () {
 		var img = new Image();
 		img.src = imageUrl;
 		aspectRatio = img.naturalWidth / img.naturalHeight;
-		//console.log(aspectRatio);
-		//$("#imageArea").css("height", parseInt($('#imageHeight').val()) * parseInt($('#imageArea').css('width')) / (parseInt($('#imageWidth').val())));
-		//$("#imageArea").css("height", parseInt($('#imageArea').css('width')) / aspectRatio);
-		//$("#resultImage1").css("height", parseInt($('#imageArea').css('width')) / aspectRatio);
 		$("#resultImage").attr("src", imageUrl);
 		$("#resultImage1").attr("src", imageUrl);
-		//$("#resultImage1").attr("aspect-ratio", aspectRatio);
-
-		//document.getElementById("resultImage1").style.aspectRatio = aspectRatio;
-
 	}
 	else {
 		if (res.errorMessage) {
@@ -373,101 +330,43 @@ let processValidation = async function () {
 function dragElement(elmnt) {
 	var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 	document.getElementById("dragImage").onmousedown = dragMouseDown;
-
-	//document.getElementById("draggableImageArea").onmousedown = dragMouseDown;
-	//document.getElementById("draggableImageArea").onmousemove = elementDrag; 
-
 	function dragMouseDown(e) {
 		e = e || window.event;
-
 		e.preventDefault();
-		// get the mouse cursor position at startup:
 		pos3 = e.clientX;
 		pos4 = e.clientY;
-		//console.log(e);
-		//console.log(pos3 + " " + pos4);
 		document.onmouseup = closeDragElement;
-		// call a function whenever the cursor moves:
 		document.onmousemove = elementDrag;
 	}
 
 	function elementDrag(e) {
 		e = e || window.event;
 		e.preventDefault();
-		//console.log(e);
-		// calculate the new cursor position:
 		if (pos3 !== 0 && pos4 !== 0) {
 			pos1 = pos3 - e.clientX;
 			pos2 = pos4 - e.clientY;
 			pos3 = e.clientX;
 			pos4 = e.clientY;
-			// set the element's new position:
-			//if( elmnt.offsetTop - pos2 > 0 && elmnt.offsetLeft - pos1){
 			elmnt.style.top = (elmnt.offsetTop - pos2 > 0 ? elmnt.offsetTop - pos2 : 0) + "px";
 			elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-			//}
-			//console.log(elmnt.offsetTop + " " + elmnt.offsetLeft);
 		}
 	}
 
 	function closeDragElement(e) {
-		/* stop moving when mouse button is released:  <div className = {this.props.showChat ? "ChatBox" : "ChatBoxHidden"}  style={this.state.styles} onMouseDown={this._dragStart} onMouseMove={this._dragging} onMouseUp={this._dragEnd}>
-		*/
-		//console.log("closeDrag" + e);
 		document.onmousedown = null;
 		document.onmouseup = null;
 		document.onmousemove = null;
-		/*document.getElementById("dragImage").onmouseup = null;
-		document.getElementById("dragImage").onmousemove = null;
-		document.getElementById("dragImage").onmousedown = null;
-		document.getElementById("dragImage").onmousemove = null;
-		document.getElementById("draggableImageArea").onmouseup = null;
-		document.getElementById("draggableImageArea").onmousemove = null;
-		document.getElementById("draggableImageArea").onmousedown = null;
-		document.getElementById("draggableImageArea").onmousemove = null;*/
 	}
 }
 
-function onMouseDrag({ movementX, movementY }) {
-	//console.log("drag");
-	//return ;
-	let getContainerStyle = document.getElementById("draggableImageArea").style;
-	//console.log(getContainerStyle);
-	let leftValue = parseInt(getContainerStyle.left);
-	let topValue = parseInt(getContainerStyle.top);
-	//console.log(leftValue + " " + topValue);
-	if (leftValue + movementX > 0 && leftValue + movementX < 1000)
-		document.getElementById("draggableImageArea").style.left = `${leftValue + movementX}px`;
-	if (topValue + movementY > 0 && topValue + movementY < 800)
-		document.getElementById("draggableImageArea").style.top = `${topValue + movementY}px`;
-}
-
-/*document.getElementById("dragImage").addEventListener("mousedown", () => {
-	console.log("event listener added");
-	document.getElementById("dragImage").addEventListener("mousemove", onMouseDrag);
-});
-document.getElementById("dragImage").addEventListener("mouseup", () => {
-	console.log("event listener removed");
-	document.getElementById("dragImage").removeEventListener("mousemove", onMouseDrag);
-});*/
-
 $('#draggableImageArea').mouseenter(function () {
-	//console.log("mouseEnter");
 	dragElement(document.getElementById("draggableImageArea"));
 });
-
-$('#dragImage').mousedown(function () {
-	//console.log("mouseDown");
-	//dragElement(document.getElementById("draggableImageArea"));
-})
-
 $('#applyValidation').click(function () {
 	if (graphData !== undefined && !areNodesInProcess) {
 		$("#applyValidation").addClass("loading");
 		$("#applyValidation").css("background-color", "#f2711c");
 		processValidation();
-		/*$("#applyValidation").addClass("loading");
-		$("#applyValidation").css("background-color", "#f2711c");*/
 	}
 	else {
 		$("#file-type").html("You must first load an SBGNML file!");
@@ -517,11 +416,6 @@ $('#downloadJSON').click(function () {
 });
 
 $('#downloadImage').click(function () {
-	//console.log("image download");
-	//let pngContent = cy.png({ scale: 3, full: true });
-
-	//saveImage(pngContent, "png", document.getElementById("file-name").innerHTML);
-	//console.log(blobData);
 	if (blobData !== undefined) {
 		let filename = document.getElementById("file-name").innerHTML;
 		filename = filename.substring(0, filename.lastIndexOf('.')) + "." + imageFormat;
@@ -614,7 +508,6 @@ $("#imageSettingsDefault").on("click", function (e) {
 	$("#auto-size-graph").prop("checked", true);
 	document.getElementById("imageWidth").disabled = true;
 	document.getElementById("imageHeight").disabled = true;
-	//console.log(document.getElementById("fullGraph"));
 });
 
 $("#transparent").change(function () {
@@ -638,36 +531,14 @@ $("#fixFormatErrors").click(function () {
 	applyErrorFix();
 });
 
-/* // prevent imageWidth and imageHeight to get negative values
-
-let imageWidth = document.getElementById('imageWidth');
-imageWidth.onkeydown = function(e) {
-		if(!((e.keyCode > 95 && e.keyCode < 106)
-			|| (e.keyCode > 47 && e.keyCode < 58)
-			|| e.keyCode == 8)) {
-				return false;
-		}
-}
-
-let imageHeight = document.getElementById('imageHeight');
-imageHeight.onkeydown = function(e) {
-		if(!((e.keyCode > 95 && e.keyCode < 106)
-			|| (e.keyCode > 47 && e.keyCode < 58)
-			|| e.keyCode == 8)) {
-				return false;
-		}
-} */
-
 // image content is base64 data and imageType is png/jpg
 let saveImage = function (imageContent, imageType, fileName) {
 	// see http://stackoverflow.com/questions/16245767/creating-a-blob-from-a-base64-string-in-javascript
 	function b64toBlob(b64Data, contentType, sliceSize) {
 		contentType = contentType || '';
 		sliceSize = sliceSize || 512;
-
 		let byteCharacters = atob(b64Data);
 		let byteArrays = [];
-
 		for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
 			let slice = byteCharacters.slice(offset, offset + sliceSize);
 
@@ -680,11 +551,9 @@ let saveImage = function (imageContent, imageType, fileName) {
 
 			byteArrays.push(byteArray);
 		}
-
 		let blob = new Blob(byteArrays, { type: contentType });
 		return blob;
 	}
-
 	let blob;
 	if (imageType == "svg") {
 		blob = new Blob([imageContent], { type: "image/svg+xml;charset=utf-8" });
@@ -700,7 +569,6 @@ let saveImage = function (imageContent, imageType, fileName) {
 
 $("#save-as-png").on("click", function (evt) {
 	let pngContent = cy.png({ scale: 3, full: true });
-
 	saveImage(pngContent, "png", document.getElementById("file-name").innerHTML);
 });
 
@@ -733,7 +601,6 @@ function loadSample(fileName) {
 			type: ""
 		});
 	}
-
 	return fileObj;
 }
 
@@ -752,19 +619,6 @@ $("#save-sbgn").click(function () {
 });
 
 $("#resultImage1").on("click", function (e) {
-	function resize() {
-		//console.log("enterred")
-		var height = parseInt(document.getElementById("resultImage").width);
-		//console.log(height);
-		document.getElementById("draggableImageArea").style.width = (height + 18) + "px";
-		document.getElementById("draggableImageArea").style.height = 1.10 * parseInt(document.getElementById("draggableImageArea").style.width) / aspectRatio + "px";
-
-		/*$('.parent-div').css({
-			minWidth: height,
-			maxWidth: height,
-		})*/
-	}
-
 	let imageContent = document.getElementById("imageContent");
 	let imageSource = document.getElementById("resultImage1").src;
 	var img = new Image();
@@ -773,36 +627,13 @@ $("#resultImage1").on("click", function (e) {
 	aspectRatio = img.naturalWidth / img.naturalHeight;
 	let imageTitle = document.getElementById("imageTitle");
 	imageTitle.innerHTML = document.getElementById("file-name").innerHTML;
-	//$( "#draggableImageArea" ).resizable({containment: "#resultImage"}).draggable({ cursor: "move",containment: "#draggableImageArea"      });
 	document.getElementById("draggableImageArea").style.position = "absolute";
 	document.getElementById("draggableImageArea").style.top = "400px";
 	document.getElementById("draggableImageArea").style.left = "850px";
-	//document.getElementById("draggableImageArea").style.aspectRatio = aspectRatio;
-	let height = ( 900/aspectRatio > 800 ? 800 : 900/aspectRatio);
-	//document.getElementById("draggableImageArea").style.width = "900px";
-	//document.getElementById("draggableImageArea").style.height = (height) + "px";
 	document.getElementById("imageAreaPopUp").style.height = "500px";
-
-	
-	//document.getElementById("resultImage").style.aspectRatio = aspectRatio;
-	//document.getElementById("imageAreaPopUp").style.aspectRatio = aspectRatio;
+	document.getElementById("imageAreaPopUp").style.width= "auto";	
+	document.getElementById("imageAreaPopUp").style.aspectRatio = aspectRatio;
 	document.getElementById("dragRegion").innerHTML = document.getElementById("file-name").innerHTML
-
-	//document.getElementById("imageArea").style.aspectRatio = aspectRatio;
-	//resize();
-	//setInterval(resize, 20);
 	document.getElementById("draggableImageArea").style.display = "inline";
-
 	document.getElementById("sbgnImageUI").style.display = "none";
-
-
-	//$('#imageModal').modal({inverted: true}).modal('show');
-});
-$("#resultImage").on("click", function (e) {
-	//document.getElementById("resultImage").addEventListener("mousemove", onMouseDrag);
-});
-
-//$('#imageModal').modal({inverted: true}).modal('show');
-document.getElementById("resultImage").addEventListener("mouseup", () => {
-	//document.getElementById("resultImage").removeEventListener("mousemove", onMouseDrag);
 });

@@ -32,9 +32,6 @@
     "cytosnap": "github:iVis-at-Bilkent/cytosnap#3052cdd",
     "express": "^4.17.1",
     "file-saver": "^2.0.5",
-    "gm": "^1.25.0",
-    "image-dimensions": "^2.3.0",
-    "image-size": "^1.1.1",
     "jquery": "^3.6.0",
     "jsdom": "^16.5.3",
     "libsbgn.js": "^0.3.1",
@@ -43,7 +40,6 @@
     "saxon-js": "^2.5.0",
     "sbgnml-to-cytoscape": "^4.0.4",
     "tippy.js": "^6.3.7",
-    "trim-image": "^1.0.3",
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
