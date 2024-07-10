@@ -1,4 +1,4 @@
-FROM node:14.20.1
+FROM node:20.14.0
 
 # install git
 RUN apt-get update
