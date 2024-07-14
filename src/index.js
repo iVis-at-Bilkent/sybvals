@@ -79,15 +79,33 @@ function reduceErrors(){
   let reducedErrors = [];
   //console.log( "Errors length : " + errors.length);
   for( let i = 0; i < errors.length;i++){
-    if( errors[i].pattern != "pd10125" && errors[i].pattern != "pd10142" ){
+    if( errors[i].pattern != "pd10125" && errors[i].pattern != "pd10142" && 
+    errors[i].pattern != "pd10109" && errors[i].pattern != "pd10124" 
+    && errors[i].pattern != "pd10111" && errors[i].pattern != "pd10126"){
       reducedErrors.push( errors[i]);
       continue;
     }
     var ele = cy.getElementById(errors[i].role);
     //console.log( i + " " + errors[i].pattern + " " + errors[i].role + " " + ele.target().data().class );
-    if( ele.target().data().class == "and" || ele.target().data().class == "or" || ele.target().data().class == "not" ) {
+    if( (errors[i].pattern == "pd10125" || errors[i].pattern == "pd10142" )  && (ele.target().data().class == "and" || ele.target().data().class == "or" || ele.target().data().class == "not" ) ) {
       continue;
     }
+    else if( (errors[i].pattern == "pd10124" || errors[i].pattern == "pd10109" ) && (ele.source().data().class == "and" || ele.source().data().class == "or" || ele.source().data().class == "not" ) ){
+      continue;
+    }
+    else if( (errors[i].pattern == "pd10111")){
+      var connectedEdges = cy.edges('[source =  "' + ele.id() + '"]');
+      if( connectedEdges.length == 1 ) {
+        continue;
+       }
+    }
+    else {
+      let connectedEdges = ele.connectedEdges().filter('[class="logic arc"]');
+      if( connectedEdges.length == 1 ){
+        continue;
+      }
+    }
+
     reducedErrors.push(errors[i]);
   }
   errors = reducedErrors;
