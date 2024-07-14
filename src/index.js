@@ -73,7 +73,24 @@ function postProcessForLayouts(cy) {
     }
   }
 
+}
 
+function reduceErrors(){
+  let reducedErrors = [];
+  //console.log( "Errors length : " + errors.length);
+  for( let i = 0; i < errors.length;i++){
+    if( errors[i].pattern != "pd10125" && errors[i].pattern != "pd10142" ){
+      reducedErrors.push( errors[i]);
+      continue;
+    }
+    var ele = cy.getElementById(errors[i].role);
+    //console.log( i + " " + errors[i].pattern + " " + errors[i].role + " " + ele.target().data().class );
+    if( ele.target().data().class == "and" || ele.target().data().class == "or" || ele.target().data().class == "not" ) {
+      continue;
+    }
+    reducedErrors.push(errors[i]);
+  }
+  errors = reducedErrors;
 }
 
 
@@ -215,6 +232,7 @@ app.use((req, res, next) => {
           errors.push(error);
         }
       }
+      reduceErrors();
       data = cyJsonData;
       next();
     });
@@ -399,7 +417,7 @@ app.post('/fixError', (req, res) => {
   previousErrorRole = "";
   fixExplanation = {};
   let count = 0;
-  while (check < currentErrors.length) {
+  while (check < currentErrors.length && check < 1) {
     let currentLength = currentErrors.length;
     previousErrorCode = currentErrors[check].pattern;
     previousErrorRole = currentErrors[check].role;
@@ -600,10 +618,14 @@ app.post('/fixError', (req, res) => {
       fixError(errorFixParam);
       fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc has a target reference to " + target.id() + ".";
     }
+
     else if (currentErrors[check].pattern == "pd10111") {
+      let ele = cy.getElementById( currentErrors[check].role );
+      //console.log( ele );
       errorFixParam.edges = [];
+      //console.log( ele + " pd10111 fixing");
       let connectedEdges = cy.edges('[source =  "' + ele.id() + '"]');
-      //   console.log(connectedEdges.length);
+         console.log(connectedEdges.length);
       if (connectedEdges.length !== 0) {
         let selectedEdge = connectedEdges[0]; // default , the selection of edge will be determined later.
         for (let i = 0; i < connectedEdges.size(); i++) {

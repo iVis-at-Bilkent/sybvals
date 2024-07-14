@@ -331,9 +331,6 @@ const jsonToSbgnml = {};
    
      //add port information
     var ports = node._private.data.ports;
-    if( glyph.id === "nwtN_de28e025-a62b-4338-bd24-bff2474e60e7"){
-      console.log( ports);
-    }
     for(var i = 0 ; ports && i < ports.length ; i++){
        var orientation = ports[i].x === 0 ? 'vertical' : 'horizontal';
        // This is the ratio of the area occupied for ports over the whole shape

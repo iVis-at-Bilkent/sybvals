@@ -428,6 +428,7 @@ $("body").on("change", "#file-input", function (e, fileObject) {
 	let fileInput = document.getElementById('file-input');
 	let file = fileInput.files[0] || fileObject;
 	let reader = new FileReader();
+	$("#fixFormatErrors").prop('disabled', true);
 	setFileContent(file.name);
 	//console.log(file.name);
 	reader.onload = async function (e) {
