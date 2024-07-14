@@ -56,7 +56,7 @@ Then, build a Docker image with name *sybvals* (this may take a while).
 ```
 docker build -t sybvals .
 ```
-Lastly, run the image from port 3000. If you want to use another port, please change the first port number in below command.
+Lastly, run the image from port 3400. If you want to use another port, please change the first port number in below command.
 ```
 docker run -p 3400:3400 sybvals
 ```
