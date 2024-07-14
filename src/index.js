@@ -435,7 +435,7 @@ app.post('/fixError', (req, res) => {
   previousErrorRole = "";
   fixExplanation = {};
   let count = 0;
-  while (check < currentErrors.length && check < 1) {
+  while (check < currentErrors.length) {
     let currentLength = currentErrors.length;
     previousErrorCode = currentErrors[check].pattern;
     previousErrorRole = currentErrors[check].role;

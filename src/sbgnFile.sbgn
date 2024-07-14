@@ -8,40 +8,12 @@
         <listOfBackgroundImages/>
         <listOfStyles/>
       </renderInformation>
-      <mapProperties>
-        <compoundPadding>0</compoundPadding>
-        <extraCompartmentPadding>14</extraCompartmentPadding>
-        <extraComplexPadding>10</extraComplexPadding>
-        <arrowScale>1.25</arrowScale>
-        <showComplexName>true</showComplexName>
-        <dynamicLabelSize>regular</dynamicLabelSize>
-        <inferNestingOnLoad>false</inferNestingOnLoad>
-        <fitLabelsToNodes>false</fitLabelsToNodes>
-        <fitLabelsToInfoboxes>false</fitLabelsToInfoboxes>
-        <recalculateLayoutOnComplexityManagement>true</recalculateLayoutOnComplexityManagement>
-        <rearrangeOnComplexityManagement>true</rearrangeOnComplexityManagement>
-        <animateOnDrawingChanges>true</animateOnDrawingChanges>
-        <adjustNodeLabelFontSizeAutomatically>false</adjustNodeLabelFontSizeAutomatically>
-        <enablePorts>true</enablePorts>
-        <enableSIFTopologyGrouping>false</enableSIFTopologyGrouping>
-        <allowCompoundNodeResize>true</allowCompoundNodeResize>
-        <mapColorScheme>inverse_blue_scale</mapColorScheme>
-        <mapColorSchemeStyle>gradient</mapColorSchemeStyle>
-        <mapName>PolyQ proteins interference</mapName>
-        <mapDescription>PolyQ proteins interfere with nuclear degradation of cytosolic proteins by sequestering the Sis1p chaperone</mapDescription>
-        <highlightColor>#0B9BCD</highlightColor>
-        <extraHighlightThickness>2</extraHighlightThickness>
-        <mapPD2AFConverted>false</mapPD2AFConverted>
-        <defaultInfoboxHeight>12</defaultInfoboxHeight>
-        <defaultInfoboxWidth>30</defaultInfoboxWidth>
-        <rearrangeAfterExpandCollapse>true</rearrangeAfterExpandCollapse>
-      </mapProperties>
     </extension>
-    <glyph id="glyph1" class="compartment">
+    <glyph id="d5695" class="compartment">
       <extension>
         <extraInfo>
-          <w>149.17162802106873</w>
-          <h>277.440444692274</h>
+          <w>1042.514474682173</w>
+          <h>464.8990882606678</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -50,30 +22,610 @@
           <HBBias>0</HBBias>
         </extraInfo>
       </extension>
-      <label text="nucleus"/>
-      <bbox x="682.755504236647" y="246.3320346559201" w="169.17162802106873" h="297.440444692274"/>
+      <bbox x="-290.4957101020424" y="-28.388975256347862" w="1062.514474682173" h="484.8990882606678"/>
     </glyph>
-    <glyph id="glyph22" class="source and sink" compartmentRef="glyph1">
-      <bbox x="809.0315064119548" y="469.7673282776957" w="25" h="25"/>
+    <glyph id="d519e" class="simple chemical" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#d519e">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/hmdb:HMDB0000464"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="Ca2+"/>
+      <bbox x="20.62626895976456" y="-17.388975256347834" w="32" h="20"/>
     </glyph>
-    <glyph id="glyph42" class="macromolecule" compartmentRef="glyph1">
-      <label text="misfolded&#xA;protein"/>
-      <bbox x="694.1413954375714" y="497.7724793481941" w="70" h="35"/>
+    <glyph id="da9ee" class="simple chemical" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#da9ee">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/hmdb:HMDB0000016"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="Deoxycorticosterone"/>
+      <bbox x="-217.89064653711017" y="22.630003823279424" w="113.75" h="20"/>
     </glyph>
-    <glyph id="glyph25" class="process" compartmentRef="glyph1">
-      <bbox x="748.9965141972659" y="428.3361733020095" w="15" h="15"/>
-      <port id="glyph25.1" x="756.4965141972659" y="428.3361733020095"/>
-      <port id="glyph25.2" x="756.4965141972659" y="443.3361733020095"/>
+    <glyph id="e14ac" class="nucleic acid feature" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#e14ac">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:1585"/>
+                  <rdf:li rdf:resource="https://identifiers.org/pubmed:15134803"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="CYP11B2"/>
+      <bbox x="-74.28538757973342" y="36.896871040421615" w="62" h="20"/>
+      <glyph id="e14acuoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="134.0458624202666" y="107.20937104042162" w="42" h="12"/>
+      </glyph>
     </glyph>
-    <glyph id="glyph15" class="macromolecule" compartmentRef="glyph1">
-      <label text="E3(San1)"/>
-      <bbox x="770.9271322577157" y="257.3320346559201" w="70" h="35"/>
+    <glyph id="b75c3" class="simple chemical" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#b75c3">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/hmdb:HMDB0000037"/>
+                  <rdf:li rdf:resource="https://identifiers.org/pubmed:15134803"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="Aldosterone"/>
+      <bbox x="-185.75968280276066" y="164.46073183629306" w="70" h="20"/>
     </glyph>
-    <glyph id="glyph6" class="complex" compartmentRef="glyph1">
+    <glyph id="b47da" class="nucleic acid feature" compartmentRef="d5695">
+      <label text="TFs"/>
+      <bbox x="24.362380022547484" y="56.49210659663686" w="37" h="20"/>
+      <glyph id="b47dauoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="121.14613002254748" y="126.80460659663686" w="17" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="ec3b5" class="nucleic acid feature" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#ec3b5">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:4306"/>
+                  <rdf:li rdf:resource="https://identifiers.org/pubmed:15134803"/>
+                  <rdf:li rdf:resource="https://identifiers.org/pubmed:18729003"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="NR3C2"/>
+      <bbox x="-279.49571010204244" y="74.28090176391231" w="55" h="20"/>
+      <glyph id="ec3b5uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="-56.46446010204244" y="159.7809017639123" w="35" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="b1122" class="nucleic acid feature" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#b1122">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:186"/>
+                  <rdf:li rdf:resource="https://identifiers.org/pubmed:18035185"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="AGTR2"/>
+      <bbox x="3.6982825155192813" y="189.7278256624964" w="60" h="20"/>
+      <glyph id="b1122uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="230.0566197655193" y="245.2903269124964" w="40" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="b4811" class="nucleic acid feature" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#b4811">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:185"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="AGTR1"/>
+      <bbox x="12.264451821368766" y="126.7887807128568" w="60" h="20"/>
+      <glyph id="b4811uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="153.14153907136878" y="182.3512819628568" w="40" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="eaace" class="process" compartmentRef="d5695">
+      <bbox x="-121.99513427088459" y="90.11836340517797" w="20" h="20"/>
+      <port id="eaace.1" x="-121.99513427088459" y="100.11836340517797"/>
+      <port id="eaace.2" x="-101.99513427088459" y="100.11836340517797"/>
+    </glyph>
+    <glyph id="e2599" class="process" compartmentRef="d5695">
+      <bbox x="-44.213029640480556" y="105.01117259443708" w="20" h="20"/>
+      <port id="e2599.1" x="-44.213029640480556" y="115.01117259443708"/>
+      <port id="e2599.2" x="-24.213029640480556" y="115.01117259443708"/>
+    </glyph>
+    <glyph id="a21fb" class="uncertain process" compartmentRef="d5695">
+      <bbox x="-187.9329882758613" y="103.43297953159363" w="20" h="20"/>
+      <port id="a21fb.1" x="-177.9329882758613" y="103.43297953159363"/>
+      <port id="a21fb.2" x="-177.9329882758613" y="123.43297953159363"/>
+    </glyph>
+    <glyph id="e89d5" class="nucleic acid feature" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#e89d5">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:183"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="AGT&#xA;(10)"/>
+      <bbox x="380.855254745268" y="356.0291698190482" w="50" h="20"/>
+      <glyph id="e89d5uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="537.292751495268" y="362.1229198190482" w="30" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="e68e0" class="nucleic acid feature" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#e68e0">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:59272"/>
+                  <rdf:li rdf:resource="https://identifiers.org/pubmed:18449520"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="ACE2&#xA;(11)"/>
+      <bbox x="168.99355802461488" y="382.12887945388695" w="50" h="20"/>
+      <glyph id="e68e0uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="276.5998080246149" y="398.25387945388695" w="30" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="d6f1e" class="nucleic acid feature" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#d6f1e">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:1636"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="ACE&#xA;(12)"/>
+      <bbox x="541.7489711021731" y="99.03810586124484" w="50" h="20"/>
+      <glyph id="d6f1euoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="786.748954852173" y="137.22560648624486" w="30" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="d046f" class="nucleic acid feature" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#d046f">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:1636"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="ACE&#xA;(13)"/>
+      <bbox x="570.1023936042156" y="220.48483559895078" w="50" h="20"/>
+      <glyph id="d046fuoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="615.5523936042157" y="258.85983622395077" w="30" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="ef1f3" class="nucleic acid feature" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#ef1f3">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:1636"/>
+                  <rdf:li rdf:resource="https://identifiers.org/pubmed:15174896"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="ACE&#xA;(14)"/>
+      <bbox x="386.9643024264503" y="160.08098018584946" w="50" h="20"/>
+      <glyph id="ef1f3uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="585.0018024264502" y="192.26848081084947" w="30" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="de1e4" class="nucleic acid feature" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#de1e4">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:1215"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="CMA1&#xA;(15)"/>
+      <bbox x="114.4670581260946" y="280.42423732816184" w="50" h="20"/>
+      <glyph id="de1e4uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="231.0920581260946" y="313.23673732816184" w="30" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="c9ca8" class="nucleic acid feature" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#c9ca8">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:1511"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="CTSG&#xA;(16)"/>
+      <bbox x="126.0648284973345" y="335.2513689245226" w="50" h="20"/>
+      <glyph id="c9ca8uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="252.6835784973345" y="363.1888689245226" w="30" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="c496e" class="simple chemical" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#c496e">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/hmdb:HMDB0004246"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="Bradykinin&#xA;(17)"/>
+      <bbox x="681.0187645801306" y="65.05898981381668" w="80" h="20"/>
+    </glyph>
+    <glyph id="e08c8" class="nucleic acid feature" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#e08c8">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:59272"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="ACE2&#xA;(18)"/>
+      <bbox x="461.15716795333924" y="301.4368202498575" w="50" h="20"/>
+      <glyph id="e08c8uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="564.6196679533392" y="340.93682087485746" w="30" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="e0a11" class="nucleic acid feature" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#e0a11">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:5972"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="REN&#xA;(19)"/>
+      <bbox x="223.0260877764884" y="425.5101130043199" w="50" h="20"/>
+      <glyph id="e0a11uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="348.46569227648837" y="436.65690925431994" w="30" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="b298c" class="simple chemical" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#b298c">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/kegg.compound:C15852"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="Ang 1-5&#xA;(20)"/>
+      <bbox x="604.9893118160408" y="292.95046388575213" w="54" h="20"/>
+    </glyph>
+    <glyph id="d6a08" class="simple chemical" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#d6a08">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/pubchem.compound:3081372"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="Angiotensin I&#xA;(21)"/>
+      <bbox x="291.11824739392864" y="299.98695813156303" w="80" h="20"/>
+    </glyph>
+    <glyph id="d9620" class="simple chemical" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#d9620">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/CHEBI:35457"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="ACE inhibitor&#xA;(22)"/>
+      <bbox x="488.0886082392792" y="166.04239051712122" w="91" h="20"/>
+    </glyph>
+    <glyph id="df262" class="simple chemical" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#df262">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/chemspider:110354"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="Ang 1-7&#xA;(23)"/>
+      <bbox x="466.8540675765424" y="354.3229974085957" w="51" h="20"/>
+    </glyph>
+    <glyph id="ca3ad" class="simple chemical" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#ca3ad">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/hmdb:HMDB0001035"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="Angiotensin II&#xA;(24)"/>
+      <bbox x="255.05259212246233" y="239.03559187647113" w="80" h="20"/>
+    </glyph>
+    <glyph id="fbc8b" class="simple chemical" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#fbc8b">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/kegg.compound:C15851"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="Ang 1-9&#xA;(25)"/>
+      <bbox x="327.6365513741301" y="424.9962884034591" w="51" h="20"/>
+    </glyph>
+    <glyph id="cc0b4" class="nucleic acid feature" compartmentRef="d5695">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#cc0b4">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:3827"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="KNG1&#xA;(26)"/>
+      <bbox x="654.0089610769348" y="180.78977093265604" w="50" h="20"/>
+      <glyph id="cc0b4uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="930.8589773269348" y="211.78977030765603" w="30" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="d74bc" class="process" compartmentRef="d5695">
+      <bbox x="381.6281439262266" y="232.27577179485587" w="20" h="20"/>
+      <port id="d74bc.1" x="391.6281439262266" y="232.27577179485587"/>
+      <port id="d74bc.2" x="391.6281439262266" y="252.27577179485587"/>
+    </glyph>
+    <glyph id="c4468" class="uncertain process" compartmentRef="d5695">
+      <bbox x="200.2262162864502" y="173.10069995045956" w="20" h="20"/>
+      <port id="c4468.1" x="220.2262162864502" y="183.10069995045956"/>
+      <port id="c4468.2" x="200.2262162864502" y="183.10069995045956"/>
+    </glyph>
+    <glyph id="f8c76" class="process" compartmentRef="d5695">
+      <bbox x="534.3628889215344" y="280.58460735653364" w="20" h="20"/>
+      <port id="f8c76.1" x="554.3628889215344" y="290.58460735653364"/>
+      <port id="f8c76.2" x="534.3628889215344" y="290.58460735653364"/>
+    </glyph>
+    <glyph id="f3a74" class="process" compartmentRef="d5695">
+      <bbox x="230.88082062274412" y="313.772864103968" w="20" h="20"/>
+      <port id="f3a74.1" x="240.88082062274412" y="313.772864103968"/>
+      <port id="f3a74.2" x="240.88082062274412" y="333.772864103968"/>
+    </glyph>
+    <glyph id="dd7bd" class="process" compartmentRef="d5695">
+      <bbox x="430.07313771637473" y="413.0067938981712" w="20" h="20"/>
+      <port id="dd7bd.1" x="440.07313771637473" y="413.0067938981712"/>
+      <port id="dd7bd.2" x="440.07313771637473" y="433.0067938981712"/>
+    </glyph>
+    <glyph id="bf0c1" class="uncertain process" compartmentRef="d5695">
+      <bbox x="174.0402248208595" y="221.71934759567284" w="20" h="20"/>
+      <port id="bf0c1.1" x="174.0402248208595" y="231.71934759567284"/>
+      <port id="bf0c1.2" x="194.0402248208595" y="231.71934759567284"/>
+    </glyph>
+    <glyph id="a76b3" class="process" compartmentRef="d5695">
+      <bbox x="316.1621093213315" y="378.1973091715254" w="20" h="20"/>
+      <port id="a76b3.1" x="326.1621093213315" y="378.1973091715254"/>
+      <port id="a76b3.2" x="326.1621093213315" y="398.1973091715254"/>
+    </glyph>
+    <glyph id="aa8ff" class="process" compartmentRef="d5695">
+      <bbox x="644.2224905349956" y="110.15348353965408" w="20" h="20"/>
+      <port id="aa8ff.1" x="654.2224905349956" y="110.15348353965408"/>
+      <port id="aa8ff.2" x="654.2224905349956" y="130.15348353965408"/>
+    </glyph>
+    <glyph id="a45d0" class="process" compartmentRef="d5695">
+      <bbox x="215.95349003523899" y="269.8329106850047" w="20" h="20"/>
+      <port id="a45d0.1" x="225.95349003523899" y="269.8329106850047"/>
+      <port id="a45d0.2" x="225.95349003523899" y="289.8329106850047"/>
+    </glyph>
+    <glyph id="d4ea3" class="process" compartmentRef="d5695">
+      <bbox x="397.48702496529756" y="287.7363773794424" w="20.000040000000013" h="20.000040000000013"/>
+      <port id="d4ea3.1" x="417.4870649652976" y="297.7363973794424"/>
+      <port id="d4ea3.2" x="397.48702496529756" y="297.7363973794424"/>
+    </glyph>
+    <glyph id="a24b1" class="process" compartmentRef="d5695">
+      <bbox x="273.3105678634961" y="366.7007895171995" w="20" h="20"/>
+      <port id="a24b1.1" x="293.3105678634961" y="376.7007895171995"/>
+      <port id="a24b1.2" x="273.3105678634961" y="376.7007895171995"/>
+    </glyph>
+    <glyph id="c2049" class="compartment">
       <extension>
         <extraInfo>
-          <w>30</w>
-          <h>30</h>
+          <w>191.39332433371408</w>
+          <h>245.13196341425876</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -82,29 +634,441 @@
           <HBBias>0</HBBias>
         </extraInfo>
       </extension>
-      <label text="nuclear&#xA;proteasome"/>
-      <bbox x="693.755504236647" y="291.15073884249546" w="30" h="30"/>
+      <bbox x="800.1023857683283" y="-161.34851962052954" w="211.39332433371408" h="265.13196341425873"/>
     </glyph>
-    <glyph id="glyph23" class="and" compartmentRef="glyph1">
-      <bbox x="767.6584863217662" y="346.91913085002955" w="25" h="25"/>
+    <glyph id="b4349" class="nucleic acid feature" compartmentRef="c2049">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#b4349">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:623"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="BDKRB1"/>
+      <bbox x="836.834583243353" y="72.78344379372922" w="57" h="20"/>
+      <glyph id="b4349uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="1129.977083243353" y="127.90844379372922" w="37" h="12"/>
+      </glyph>
     </glyph>
-    <arc id="_2c99a565-b610-40a9-a9e6-8555b36e14e0" class="logic arc" source="glyph15" target="glyph23">
+    <glyph id="ab119" class="nucleic acid feature" compartmentRef="c2049">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#ab119">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:4846"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="NOS3"/>
+      <bbox x="940.4957101020425" y="-66.2546645254364" w="60" h="20"/>
+      <glyph id="ab119uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="1274.7582101020425" y="12.182836724563614" w="40" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="f54f5" class="nucleic acid feature" compartmentRef="c2049">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#f54f5">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:624"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="BDKRB2"/>
+      <bbox x="819.0190584452268" y="-73.70428873807816" w="60" h="20"/>
+      <glyph id="f54f5uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="1172.277372195227" y="-18.579288738078162" w="40" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="e01c3" class="simple chemical" compartmentRef="c2049">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#e01c3">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/pubchem.compound:114805"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="Prostacyclin"/>
+      <bbox x="890.5445553090858" y="-125.9497390409586" w="70" h="20"/>
+    </glyph>
+    <glyph id="b2aa3" class="unspecified entity" compartmentRef="c2049">
+      <label text="EDHF"/>
+      <bbox x="811.1023857683284" y="-150.34851962052954" w="42" h="20"/>
+    </glyph>
+    <glyph id="f975e" class="compartment">
+      <extension>
+        <extraInfo>
+          <w>221.66576423422777</w>
+          <h>181.41188593205402</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
+      <bbox x="211.21493595679212" y="532.1033016884755" w="241.66576423422777" h="201.41188593205402"/>
+    </glyph>
+    <glyph id="becdd" class="nucleic acid feature" compartmentRef="f975e">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#becdd">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:7040"/>
+                  <rdf:li rdf:resource="https://identifiers.org/pubmed:16374430"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="TGFB1"/>
+      <bbox x="222.2149359567921" y="662.4159494140041" w="59" h="20"/>
+      <glyph id="becdduoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="286.4524359567921" y="734.9784494140041" w="39" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="fd8ec" class="nucleic acid feature" compartmentRef="f975e">
+      <label text="TFs"/>
+      <bbox x="287.43659098182206" y="622.4655691025964" w="37" h="20"/>
+      <glyph id="fd8ecuoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="300.74409098182207" y="692.9655691025964" w="17" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="ee619" class="nucleic acid feature" compartmentRef="f975e">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#ee619">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:10159"/>
+                  <rdf:li rdf:resource="https://identifiers.org/pubmed:18417113"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="ATP6AP2"/>
+      <bbox x="227.2395363644153" y="550.0920184287602" w="64" h="20"/>
+      <glyph id="ee619uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="230.3395363644153" y="605.4045184287602" w="44" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="e3012" class="nucleic acid feature" compartmentRef="f975e">
+      <extension>
+        <annotation>
+          <rdf:RDF 
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#e3012">
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/ncbigene:4142"/>
+                  <rdf:li rdf:resource="https://identifiers.org/pubmed:18449520"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </extension>
+      <label text="MAS1"/>
+      <bbox x="389.88070019101986" y="543.1033016884755" w="52" h="20"/>
+      <glyph id="e3012uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="461.1707001910199" y="598.4158016884755" w="32" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="e10e0" class="process" compartmentRef="f975e">
+      <bbox x="310.60699821239325" y="702.5151876205296" w="20" h="20"/>
+      <port id="e10e0.1" x="310.60699821239325" y="712.5151876205296"/>
+      <port id="e10e0.2" x="330.60699821239325" y="712.5151876205296"/>
+    </glyph>
+    <glyph id="a6f8b" class="uncertain process">
+      <bbox x="749.4840072147554" y="137.52959734266608" w="20" h="20"/>
+      <port id="a6f8b.1" x="769.4840072147554" y="147.52959734266608"/>
+      <port id="a6f8b.2" x="749.4840072147554" y="147.52959734266608"/>
+    </glyph>
+    <glyph id="ec371" class="process">
+      <bbox x="168.76747123043026" y="473.78215582624136" w="20" h="20"/>
+      <port id="ec371.1" x="178.76747123043026" y="473.78215582624136"/>
+      <port id="ec371.2" x="178.76747123043026" y="493.78215582624136"/>
+    </glyph>
+    <glyph id="bed79" class="uncertain process">
+      <bbox x="719.8746584017676" y="-13.889114704612268" w="20" h="20"/>
+      <port id="bed79.1" x="719.8746584017676" y="-3.8891147046122683"/>
+      <port id="bed79.2" x="739.8746584017676" y="-3.8891147046122683"/>
+    </glyph>
+    <glyph id="ef46a" class="uncertain process">
+      <bbox x="476.8589196193763" y="447.8780735047414" w="20" h="20"/>
+      <port id="ef46a.1" x="486.8589196193763" y="447.8780735047414"/>
+      <port id="ef46a.2" x="486.8589196193763" y="467.8780735047414"/>
+    </glyph>
+    <arc id="arc0" class="consumption" source="da9ee" target="eaace.1">
       <start/>
       <end/>
     </arc>
-    <arc id="cc43e987-4c20-40b4-8df9-c4b572f4c6a2" class="stimulation" source="glyph23" target="glyph25">
+    <arc id="arc1" class="production" source="eaace.2" target="b75c3">
       <start/>
       <end/>
     </arc>
-    <arc id="_5bca6e61-2ae7-4796-b03d-3221d67fa455" class="consumption" source="glyph42" target="glyph25.1">
+    <arc id="arc2" class="catalysis" source="e14ac" target="eaace">
       <start/>
       <end/>
     </arc>
-    <arc id="f52bf077-f247-45ac-b2fc-da59fbbb3538" class="logic arc" source="glyph6" target="glyph23">
+    <arc id="arc3" class="consumption" source="d6a08" target="d74bc.1">
       <start/>
       <end/>
     </arc>
-    <arc id="f801d788-89e8-4082-ab55-e6e6807b6e8b" class="production" source="glyph25.2" target="glyph22">
+    <arc id="arc4" class="production" source="d74bc.2" target="ca3ad">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc5" class="catalysis" source="ef1f3" target="d74bc">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc6" class="consumption" source="ca3ad" target="c4468.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc7" class="production" source="c4468.2" target="b4811">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc8" class="consumption" source="c496e" target="a6f8b.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc9" class="production" source="a6f8b.2" target="b4349">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="c353b" class="inhibition" source="d9620" target="ef1f3">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc10" class="consumption" source="df262" target="f8c76.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc11" class="production" source="f8c76.2" target="b298c">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc12" class="catalysis" source="d046f" target="f8c76">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="afbf9" class="stimulation" source="f54f5" target="ab119">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc13" class="consumption" source="d6a08" target="f3a74.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc14" class="production" source="f3a74.2" target="ca3ad">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc15" class="catalysis" source="c9ca8" target="f3a74">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="f75ef" class="stimulation" source="d519e" target="b47da">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc16" class="consumption" source="fbc8b" target="dd7bd.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc17" class="production" source="dd7bd.2" target="df262">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc18" class="consumption" source="ca3ad" target="bf0c1.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc19" class="production" source="bf0c1.2" target="b1122">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc20" class="consumption" source="e89d5" target="a76b3.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc21" class="production" source="a76b3.2" target="d6a08">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc22" class="catalysis" source="e0a11" target="a76b3">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="c6bfc" class="stimulation" source="f54f5" target="e01c3">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc23" class="consumption" source="e0a11" target="ec371.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc24" class="production" source="ec371.2" target="ee619">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc25" class="consumption" source="b47da" target="e2599.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc26" class="production" source="e2599.2" target="e14ac">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc27" class="consumption" source="b75c3" target="a21fb.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc28" class="production" source="a21fb.2" target="ec3b5">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="ee6b5" class="stimulation" source="f54f5" target="b2aa3">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="cc08a" class="stimulation" source="ee619" target="fd8ec">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc29" class="consumption" source="cc0b4" target="aa8ff.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc30" class="production" source="aa8ff.2" target="c496e">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc31" class="catalysis" source="d6f1e" target="aa8ff">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="f3f2e" class="inhibition" source="d9620" target="d6f1e">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc32" class="consumption" source="fd8ec" target="e10e0.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc33" class="production" source="e10e0.2" target="becdd">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc34" class="consumption" source="d6a08" target="a45d0.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc35" class="production" source="a45d0.2" target="ca3ad">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc36" class="catalysis" source="de1e4" target="a45d0">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="d5bc3" class="inhibition" source="d9620" target="d046f">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc37" class="consumption" source="ca3ad" target="d4ea3.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc38" class="production" source="d4ea3.2" target="df262">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc39" class="catalysis" source="e08c8" target="d4ea3">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc40" class="consumption" source="c496e" target="bed79.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc41" class="production" source="bed79.2" target="f54f5">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="e0a2d" class="stimulation" source="b4811" target="b47da">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc42" class="consumption" source="d6a08" target="a24b1.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc43" class="production" source="a24b1.2" target="fbc8b">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc44" class="catalysis" source="e68e0" target="a24b1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc45" class="consumption" source="df262" target="ef46a.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="arc46" class="production" source="ef46a.2" target="e3012">
       <start/>
       <end/>
     </arc>

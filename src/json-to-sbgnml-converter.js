@@ -9,6 +9,14 @@ var mapPropertiesBuilder = new xml2js.Builder({rootName: "mapProperties"});
 var compoundExtensionBuilder = new xml2js.Builder({rootName: "extraInfo"});
 var textUtilities = require('./text-utilities');
 var { elementUtilities } = require('./element-utilities.js');
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const { window } = new JSDOM();
+const { document } = (new JSDOM('')).window;
+
+const $ = jQuery = require('jquery')(window);
+
+
 
 const jsonToSbgnml = {};
 
