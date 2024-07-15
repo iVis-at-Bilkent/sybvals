@@ -447,13 +447,13 @@ sbgnmlToJson.addCytoscapeJsNode = function (ele, jsonArray, parent, compartments
   nodeObj.stateVariables = [];
   var childNodes = ele.glyphMembers;
 
-  if( ele.id === "glyph25")
-  console.log( ele );
+  /*if( ele.id === "glyph25")
+  console.log( ele );*/
   //while(1);
 
   for( let i = 0; i < childNodes.length; i++){
-    if( ele.id === "glyph25")
-        console.log( "child " + childNodes[i]);
+    /*if( ele.id === "glyph25")
+        console.log( "child " + childNodes[i]);*/
     if( childNodes[i].class_ === "state variable"){
         nodeObj.stateVariables.push(childNodes[i]);
         //console.log(childNodes[i]);
@@ -1098,7 +1098,7 @@ sbgnmlToJson.mapPropertiesToObj = function () {
     parseString(xml, function (err, result) {
       obj = result;
     });
-    console.log( "parsed obj \n" + obj);
+    //console.log( "parsed obj \n" + obj);
     return obj;
   } else {
 

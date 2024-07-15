@@ -11,6 +11,8 @@ const { jsonToSbgnml } = require('./json-to-sbgnml-converter');
 const { sbgnmlToJson } = require('./sbgnml-to-json-converter');
 const { elementUtilities } = require('./element-utilities');
 const sbgnStylesheet = require('cytoscape-sbgn-stylesheet');
+const puppeteer = require('puppeteer');
+
 
 const cytosnap = require('cytosnap');
 cytosnap.use(['cytoscape-fcose'], { sbgnStylesheet: 'cytoscape-sbgn-stylesheet', layoutUtilities: 'cytoscape-layout-utilities', svg: 'cytoscape-svg' });
@@ -75,7 +77,7 @@ function postProcessForLayouts(cy) {
 
 }
 
-function reduceErrors(){
+function reduceErrors(errors){
   let reducedErrors = [];
   //console.log( "Errors length : " + errors.length);
   for( let i = 0; i < errors.length;i++){
@@ -108,6 +110,7 @@ function reduceErrors(){
 
     reducedErrors.push(errors[i]);
   }
+  return reducedErrors;
   errors = reducedErrors;
 }
 
@@ -154,13 +157,16 @@ app.use(express.static(path.join(__dirname, "../public/")));
 app.use(cors());
 
 // middleware to manage the formats of files
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
+  
   if (req.method === "POST") {
-    body = '';
-    isJson = false;
-    options = '';
-    data = '';
-    errorMessage = undefined;
+    console.log( "request started");
+
+    let body = '';
+    let isJson = false;
+    let options = '';
+    let data = '';
+    let errorMessage = undefined;
     req.on('data', chunk => {
       body += chunk;
     })
@@ -188,9 +194,9 @@ app.use((req, res, next) => {
         errorMessage = "<b>Sorry! Cannot process the given file!</b><br><br>There is something wrong with the format of the options!<br><br>Error detail: <br>" + e;
         logger.log('---- %s', date + ": \n" + errorMessage.replace(/<br\s*[\/]?>/gi, "\n").replace(/<b\s*\/?>/mg, "") + "\n");
       }
-      if (req.query.errorFixing === "true") {
+      /*if (req.query.errorFixing === "true") {
         return next();
-      }
+      }*/
 
       // convert sbgn data to json for cytoscape
 
@@ -237,7 +243,7 @@ app.use((req, res, next) => {
       parseString(result, function (err, data) {
         parsedResult = data;
       });
-      errors = [];
+      let errors = [];
       if (parsedResult["svrl:schematron-output"]["svrl:failed-assert"] == undefined) {
       }
       else {
@@ -250,21 +256,54 @@ app.use((req, res, next) => {
           errors.push(error);
         }
       }
-      reduceErrors();
+      errors = reduceErrors(errors);
       data = cyJsonData;
+      let unsolvedErrorInformation = {};
+      errors.forEach(error => {
+        unsolvedErrorInformation[error.pattern + error.role] = true;
+      })
+      res.locals.body =  body;
+      res.locals.unsolvedErrorInformation = unsolvedErrorInformation;
+      res.locals.isJson = isJson;
+      res.locals.options = options;
+      res.locals.data = data ;
+      res.locals.errorMessage = errorMessage;
+      res.locals.currentSbgn = currentSbgn;
+      res.locals.cy = cy;
+      res.locals.errors = errors;
+      res.locals.imageOptions = {
+        format: 'png',
+        background: 'transparent',
+        width: 1280,
+        height: 720,
+        color: 'greyscale',
+        highlightColor: '#ff0000',
+        highlightWidth: 30,
+        autoSize: true
+      };      
       next();
     });
   }
   else
-    next();
+   next();
   ;
 });
 
 app.post('/validation', async (req, res, next) => {
   let size = 30;
-  unsolvedErrorInformation = {};
-  previousErrorCode = "";
-  previousErrorRole = "";
+  let previousErrorCode = "";
+  let previousErrorRole = "";
+  let body = res.locals.body;
+  let isJson = res.locals.isJson;
+  let options = res.locals.options;
+  let data = res.locals.data;
+  let currentSbgn = res.locals.currentSbgn;
+  let cy= res.locals.cy;
+  let imageOptions = res.locals.imageOptions; 
+  let errors = res.locals.errors;
+  let unsolvedErrorInformation = res.locals.unsolvedErrorInformation;
+
+  
   fixExplanation = {};
   if (req.query.errorFixing !== undefined && req.query.errorFixing === true) {
     return next();
@@ -341,6 +380,7 @@ app.post('/validation', async (req, res, next) => {
   });
   postProcessForLayouts(cy);
   var layout = cy.layout({ name: 'fcose' });
+  let snap = cytosnap();
   layout.pon('layoutstop').then(function (event) {
     errors.forEach(error => {
       unsolvedErrorInformation[error.pattern + error.role] = true;
@@ -370,6 +410,7 @@ app.post('/validation', async (req, res, next) => {
           ret['errors'] = errors;
           ret['sbgn'] = currentSbgn;
           fs.writeFileSync('./src/sbgnFile.sbgn', data);
+          console.log( "before response");
           return res.status(200).send(ret);
         }).then(function () {
           snap.stop();
@@ -390,8 +431,21 @@ app.post('/validation', async (req, res, next) => {
 
 
 app.post('/fixError', (req, res) => {
+  let fixExplanation = {};
+  let size = 30;
+  let previousErrorCode = "";
+  let previousErrorRole = "";
+  let body = res.locals.body;
+  let isJson = res.locals.isJson;
+  let options = res.locals.options;
+  let data = res.locals.data;
+  let currentSbgn = res.locals.currentSbgn;
+  let cy= res.locals.cy;
+  let imageOptions = res.locals.imageOptions; 
+  let errors = res.locals.errors;
+  let unsolvedErrorInformation = res.locals.unsolvedErrorInformation;
 
-  let imageOptions = {
+  /*let imageOptions = {
     format: 'png',
     background: 'transparent',
     width: 1280,
@@ -399,7 +453,7 @@ app.post('/fixError', (req, res) => {
     color: 'greyscale',
     highlightColor: '#ff0000',
     highlightWidth: 30
-  };
+  };*/
 
   if (options.imageOptions) {
     $.extend(imageOptions, options.imageOptions);
@@ -836,6 +890,7 @@ app.post('/fixError', (req, res) => {
       errors[i].explanation = "Fix of another error resolved this error."
     }
   }
+  let snap = cytosnap();
   try {
     snap.start().then(function () {
       return snap.shot({

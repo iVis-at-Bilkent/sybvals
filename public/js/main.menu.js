@@ -242,6 +242,7 @@ let processValidation = async function () {
 	let res = await fetch(url, settings)
 		.then(response => response.json())
 		.then(result => {
+			console.log( "result of one is come");
 			return result;
 		})
 		.catch(e => {
