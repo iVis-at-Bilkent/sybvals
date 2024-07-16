@@ -259,11 +259,13 @@ app.use(async (req, res, next) => {
       errors = reduceErrors(errors);
       data = cyJsonData;
       let unsolvedErrorInformation = {};
+      let fixExplanation = {};
       errors.forEach(error => {
         unsolvedErrorInformation[error.pattern + error.role] = true;
       })
       res.locals.body =  body;
       res.locals.unsolvedErrorInformation = unsolvedErrorInformation;
+      res.locals.fixExplanation = {};
       res.locals.isJson = isJson;
       res.locals.options = options;
       res.locals.data = data ;
@@ -302,6 +304,7 @@ app.post('/validation', async (req, res, next) => {
   let imageOptions = res.locals.imageOptions; 
   let errors = res.locals.errors;
   let unsolvedErrorInformation = res.locals.unsolvedErrorInformation;
+  let fixExplanation = res.locals.fixExplanation;
 
   
   fixExplanation = {};
@@ -385,7 +388,10 @@ app.post('/validation', async (req, res, next) => {
     errors.forEach(error => {
       unsolvedErrorInformation[error.pattern + error.role] = true;
     })
-    highlightErrors(errors, cy, imageOptions, true);
+    data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
+    data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
+    currentSbgn = data;
+    highlightErrors(errors, cy, imageOptions, true,unsolvedErrorInformation, fixExplanation);
     try {
 
       snap.start().then(function () {
@@ -402,9 +408,9 @@ app.post('/validation', async (req, res, next) => {
           background: imageOptions.background,
           fullGraph: imageOptions.autoSize
         }).then(function (result) {
-          data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
+          /*data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
           data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
-          currentSbgn = data;
+          currentSbgn = data;*/
           let image = result.image;
           ret["image"] = (result.image);
           ret['errors'] = errors;
@@ -431,7 +437,7 @@ app.post('/validation', async (req, res, next) => {
 
 
 app.post('/fixError', (req, res) => {
-  let fixExplanation = {};
+  let fixExplanation = res.locals.fixExplanation;
   let size = 30;
   let previousErrorCode = "";
   let previousErrorRole = "";
@@ -490,6 +496,7 @@ app.post('/fixError', (req, res) => {
   fixExplanation = {};
   let count = 0;
   while (check < currentErrors.length) {
+    console.log( " checking step " + check + " " + currentErrors.length);
     let currentLength = currentErrors.length;
     previousErrorCode = currentErrors[check].pattern;
     previousErrorRole = currentErrors[check].role;
@@ -818,6 +825,7 @@ app.post('/fixError', (req, res) => {
     else {
       numberOfUnsolvedErrors++;
     }
+    console.log( "one fix step is completed");
     data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
     data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
     currentSbgn = data;
@@ -846,8 +854,10 @@ app.post('/fixError', (req, res) => {
         currentErrors.push(error);
       }
     }
+    console.log( currentLength === currentErrors.length);
     if (currentLength == currentErrors.length) {
       check++;
+      console.log( previousErrorCode + " " + previousErrorRole);
       unsolvedErrorInformation[previousErrorCode + previousErrorRole] = true;
     }
   }
@@ -881,7 +891,7 @@ app.post('/fixError', (req, res) => {
       currentErrors.push(error);
     }
   }
-  highlightErrors(errors, cy, imageOptions, false);
+  highlightErrors(errors, cy, imageOptions, false, unsolvedErrorInformation, fixExplanation);
   let colorScheme = imageOptions.color || "white";
   let stylesheet = adjustStylesheet('sbgnml', colorScheme);
   postProcessForLayouts(cy);
@@ -1104,7 +1114,7 @@ function addNode(x, y, nodeParams, id, parent, visibility) {
   return newNode;
 }
 
-function highlightErrors(errors, cy, imageOptions, isValidation) {
+function highlightErrors(errors, cy, imageOptions, isValidation,unsolvedErrorInformation, fixExplanation) {
   let errorColor = {};
   let counter = 0;
   let labels = {};

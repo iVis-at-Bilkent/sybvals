@@ -1,47 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <sbgn xmlns="http://sbgn.org/libsbgn/0.2">
-  <map language="process description">
-    <extension>
-      <renderInformation 
-        xmlns="http://www.sbml.org/sbml/level3/version1/render/version1" id="renderInformation" program-name="sbgnviz" program-version="6.1.0">
-        <listOfColorDefinitions/>
-        <listOfBackgroundImages/>
-        <listOfStyles/>
-      </renderInformation>
-      <mapProperties>
-        <compoundPadding>0</compoundPadding>
-        <extraCompartmentPadding>14</extraCompartmentPadding>
-        <extraComplexPadding>10</extraComplexPadding>
-        <arrowScale>1.25</arrowScale>
-        <showComplexName>true</showComplexName>
-        <dynamicLabelSize>regular</dynamicLabelSize>
-        <inferNestingOnLoad>false</inferNestingOnLoad>
-        <fitLabelsToNodes>false</fitLabelsToNodes>
-        <fitLabelsToInfoboxes>false</fitLabelsToInfoboxes>
-        <recalculateLayoutOnComplexityManagement>true</recalculateLayoutOnComplexityManagement>
-        <rearrangeOnComplexityManagement>true</rearrangeOnComplexityManagement>
-        <animateOnDrawingChanges>true</animateOnDrawingChanges>
-        <adjustNodeLabelFontSizeAutomatically>false</adjustNodeLabelFontSizeAutomatically>
-        <enablePorts>true</enablePorts>
-        <enableSIFTopologyGrouping>false</enableSIFTopologyGrouping>
-        <allowCompoundNodeResize>true</allowCompoundNodeResize>
-        <mapColorScheme>inverse_blue_scale</mapColorScheme>
-        <mapColorSchemeStyle>gradient</mapColorSchemeStyle>
-        <mapName>PolyQ proteins interference</mapName>
-        <mapDescription>PolyQ proteins interfere with nuclear degradation of cytosolic proteins by sequestering the Sis1p chaperone</mapDescription>
-        <highlightColor>#0B9BCD</highlightColor>
-        <extraHighlightThickness>2</extraHighlightThickness>
-        <mapPD2AFConverted>false</mapPD2AFConverted>
-        <defaultInfoboxHeight>12</defaultInfoboxHeight>
-        <defaultInfoboxWidth>30</defaultInfoboxWidth>
-        <rearrangeAfterExpandCollapse>true</rearrangeAfterExpandCollapse>
-      </mapProperties>
-    </extension>
-    <glyph id="glyph0" class="compartment">
+  <map language="hybrid sbgn">
+    <glyph id="_82f19e9e-6aa2-42b3-8b5e-8cee17197085" class="compartment">
       <extension>
         <extraInfo>
-          <w>95</w>
-          <h>172.51255741391662</h>
+          <w>309.53379456157217</w>
+          <h>314.349250181308</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -50,14 +14,27 @@
           <HBBias>0</HBBias>
         </extraInfo>
       </extension>
-      <label text="juxtanuclear inclusion"/>
-      <bbox x="1119.6367836541335" y="641.9859928305145" w="115" h="192.51255741391662"/>
+      <label text="synaptic button"/>
+      <bbox x="18.671251353062303" y="299.2647289130275" w="329.53379456157217" h="334.349250181308"/>
     </glyph>
-    <glyph id="glyph35" class="complex" compartmentRef="glyph0">
+    <glyph id="_66737d5c-5193-43a2-baa6-094aa1c21654" class="macromolecule" compartmentRef="_82f19e9e-6aa2-42b3-8b5e-8cee17197085">
+      <label text="CHT1"/>
+      <bbox x="171.82187403204398" y="310.2647289130275" w="30" h="30"/>
+    </glyph>
+    <glyph id="be08c23c-dca4-43cd-b8a6-06f6ebdaf710" class="macromolecule" compartmentRef="_82f19e9e-6aa2-42b3-8b5e-8cee17197085">
+      <label text="SNARE"/>
+      <bbox x="307.20504591463447" y="419.4397893466623" w="30" h="30"/>
+    </glyph>
+    <glyph id="_96b935d7-083c-468d-8607-d3b70fff10a7" class="process" compartmentRef="_82f19e9e-6aa2-42b3-8b5e-8cee17197085">
+      <bbox x="257.6029233865896" y="327.5899677147311" w="30" h="30"/>
+      <port id="_96b935d7-083c-468d-8607-d3b70fff10a7.1" x="287.6029233865896" y="342.5899677147311"/>
+      <port id="_96b935d7-083c-468d-8607-d3b70fff10a7.2" x="257.6029233865896" y="342.5899677147311"/>
+    </glyph>
+    <glyph id="_9007194d-c2e6-4939-a795-be71ae35a60d" class="compartment" compartmentRef="_82f19e9e-6aa2-42b3-8b5e-8cee17197085">
       <extension>
         <extraInfo>
-          <w>72</w>
-          <h>82</h>
+          <w>32</w>
+          <h>32</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -66,27 +43,48 @@
           <HBBias>0</HBBias>
         </extraInfo>
       </extension>
-      <label text="Hsp70"/>
-      <bbox x="1131.1367836541335" y="720.9985502444312" w="92" h="102"/>
-      <glyph id="glyph37" class="macromolecule">
-        <label text="Hsp70"/>
-        <bbox x="1142.1367836541335" y="731.9985502444312" w="70" h="35"/>
-      </glyph>
-      <glyph id="glyph36" class="macromolecule">
-        <label text="misfolded&#xA;protein"/>
-        <bbox x="1142.1367836541335" y="776.9985502444312" w="70" h="35"/>
-      </glyph>
+      <label text="synaptic vesicle"/>
+      <bbox x="218.84166372210893" y="434.4919982213286" w="52" h="52"/>
     </glyph>
-    <glyph id="glyph30" class="process" compartmentRef="glyph0">
-      <bbox x="1173.040097413229" y="652.9859928305145" w="15" h="15"/>
-      <port id="glyph30.1" x="1173.040097413229" y="660.4859928305145"/>
-      <port id="glyph30.2" x="1188.040097413229" y="660.4859928305145"/>
+    <glyph id="a083be43-422d-9067-c688-661cec17e472" class="simple chemical" compartmentRef="_9007194d-c2e6-4939-a795-be71ae35a60d">
+      <label text="ACh"/>
+      <bbox x="229.84166372210893" y="445.4919982213286" w="30" h="30"/>
     </glyph>
-    <glyph id="glyph1" class="compartment">
+    <glyph id="d2531344-d005-4b92-afd2-14dcb7d40965" class="simple chemical" compartmentRef="_82f19e9e-6aa2-42b3-8b5e-8cee17197085">
+      <label text="ACh"/>
+      <bbox x="100.45824588942412" y="583.5312268112145" w="30" h="30"/>
+    </glyph>
+    <glyph id="_135e2807-2b5c-4886-bbdf-d3c8bf433ab9" class="simple chemical" compartmentRef="_82f19e9e-6aa2-42b3-8b5e-8cee17197085">
+      <label text="choline"/>
+      <bbox x="163.51082892492377" y="412.9000476165242" w="30" h="30"/>
+    </glyph>
+    <glyph id="ed79ab12-7b79-4a8a-80b3-c65181c076e4" class="simple chemical" compartmentRef="_82f19e9e-6aa2-42b3-8b5e-8cee17197085">
+      <label text="acetyl&#xA;CoA"/>
+      <bbox x="29.671251353062303" y="549.4374052658547" w="30" h="30"/>
+    </glyph>
+    <glyph id="_2bdf0056-96f6-4184-a214-8c7cc7da6214" class="process" compartmentRef="_82f19e9e-6aa2-42b3-8b5e-8cee17197085">
+      <bbox x="111.20309419564148" y="504.6611773052066" w="30" h="30"/>
+      <port id="_2bdf0056-96f6-4184-a214-8c7cc7da6214.1" x="126.20309419564148" y="534.6611773052066"/>
+      <port id="_2bdf0056-96f6-4184-a214-8c7cc7da6214.2" x="126.20309419564148" y="504.6611773052066"/>
+    </glyph>
+    <glyph id="ce103257-dbf5-430f-9e6c-1745990341de" class="macromolecule" compartmentRef="_82f19e9e-6aa2-42b3-8b5e-8cee17197085">
+      <label text="ChAT"/>
+      <bbox x="39.796280058438356" y="460.3727429077535" w="30" h="30"/>
+    </glyph>
+    <glyph id="_9886817c-7043-4de9-9895-0cd247f47190" class="macromolecule" compartmentRef="_82f19e9e-6aa2-42b3-8b5e-8cee17197085">
+      <label text="vAChT"/>
+      <bbox x="177.21329511279168" y="592.6139790943355" w="30" h="30"/>
+    </glyph>
+    <glyph id="_3797d8d2-4f00-4d1f-9d85-ecad1e61746d" class="process" compartmentRef="_82f19e9e-6aa2-42b3-8b5e-8cee17197085">
+      <bbox x="176.8517283717281" y="518.9967113133589" w="30" h="30"/>
+      <port id="_3797d8d2-4f00-4d1f-9d85-ecad1e61746d.1" x="176.8517283717281" y="533.9967113133589"/>
+      <port id="_3797d8d2-4f00-4d1f-9d85-ecad1e61746d.2" x="206.8517283717281" y="533.9967113133589"/>
+    </glyph>
+    <glyph id="e95a1256-8a47-4aaf-b3d8-7d8387d5a31d" class="compartment">
       <extension>
         <extraInfo>
-          <w>658.240329411353</w>
-          <h>353.44403311026696</h>
+          <w>182.5303648665129</w>
+          <h>344.7270444243762</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -95,17 +93,40 @@
           <HBBias>0</HBBias>
         </extraInfo>
       </extension>
-      <label text="nucleus"/>
-      <bbox x="40.97144516644164" y="175.8581667678437" w="678.240329411353" h="373.44403311026696"/>
+      <label text="synaptic cleft"/>
+      <bbox x="362.73662076030837" y="-80.52656550325474" w="202.5303648665129" h="364.7270444243762"/>
     </glyph>
-    <glyph id="glyph22" class="source and sink" compartmentRef="glyph1">
-      <bbox x="247.5719332150419" y="369.9668726439915" w="25" h="25"/>
+    <glyph id="b88b6460-4172-427f-abbe-d7c0f0a174ce" class="macromolecule" compartmentRef="e95a1256-8a47-4aaf-b3d8-7d8387d5a31d">
+      <label text="AChE"/>
+      <bbox x="524.2669856268212" y="-45.101755206936105" w="30" h="30"/>
     </glyph>
-    <glyph id="glyph38" class="complex" compartmentRef="glyph1">
+    <glyph id="fb8eb6bc-a39a-4361-b938-026a3b63a9b9" class="simple chemical" compartmentRef="e95a1256-8a47-4aaf-b3d8-7d8387d5a31d">
+      <label text="choline"/>
+      <bbox x="373.7366207603083" y="118.3435562046538" w="30" h="30"/>
+    </glyph>
+    <glyph id="_8ba53135-01b4-4a4b-b87d-a5971850cb39" class="simple chemical" compartmentRef="e95a1256-8a47-4aaf-b3d8-7d8387d5a31d">
+      <label text="acetate"/>
+      <bbox x="446.4075077039007" y="-69.52656550325474" w="30" h="30"/>
+    </glyph>
+    <glyph id="_6865aebe-2564-4ff6-a15a-6bd07a3a0ef8" class="process" compartmentRef="e95a1256-8a47-4aaf-b3d8-7d8387d5a31d">
+      <bbox x="453.38818731853354" y="31.458547816601765" w="30" h="30"/>
+      <port id="_6865aebe-2564-4ff6-a15a-6bd07a3a0ef8.1" x="483.38818731853354" y="46.458547816601765"/>
+      <port id="_6865aebe-2564-4ff6-a15a-6bd07a3a0ef8.2" x="453.38818731853354" y="46.458547816601765"/>
+    </glyph>
+    <glyph id="d9e08f4b-94b8-4285-af36-f4159b56a2fc" class="process" compartmentRef="e95a1256-8a47-4aaf-b3d8-7d8387d5a31d">
+      <bbox x="383.97786780554947" y="243.20047892112143" w="30" h="30"/>
+      <port id="d9e08f4b-94b8-4285-af36-f4159b56a2fc.1" x="383.97786780554947" y="258.20047892112143"/>
+      <port id="d9e08f4b-94b8-4285-af36-f4159b56a2fc.2" x="413.97786780554947" y="258.20047892112143"/>
+    </glyph>
+    <glyph id="_06e41c55-1352-407e-9c4b-604d3f5f616b" class="simple chemical" compartmentRef="e95a1256-8a47-4aaf-b3d8-7d8387d5a31d">
+      <label text="ACh"/>
+      <bbox x="462.29924104643175" y="140.59437608492647" w="30" h="30"/>
+    </glyph>
+    <glyph id="_23d436e2-6633-42f2-98d0-00dbb962ac3d" class="compartment">
       <extension>
         <extraInfo>
-          <w>152</w>
-          <h>83</h>
+          <w>904.9764924951274</w>
+          <h>286.33502089145315</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -114,70 +135,44 @@
           <HBBias>0</HBBias>
         </extraInfo>
       </extension>
-      <label text="Hsp70"/>
-      <bbox x="535.7117745777946" y="434.8021998781106" w="172" h="103"/>
-      <glyph id="glyph45" class="macromolecule">
-        <label text="Hsp70"/>
-        <bbox x="546.7117745777946" y="491.8021998781106" w="70" h="35"/>
-      </glyph>
-      <glyph id="glyph43" class="macromolecule">
-        <label text="misfolded&#xA;protein"/>
-        <bbox x="626.7117745777946" y="491.8021998781106" w="70" h="35"/>
-      </glyph>
-      <glyph id="glyph41" class="macromolecule multimer">
-        <label text="Sis1"/>
-        <bbox x="546.7117745777946" y="445.8021998781106" w="74" h="36"/>
-        <glyph id="glyph41_0" class="unit of information">
-          <label text="N:2"/>
-          <bbox x="1104.1820167904461" y="669.5353328632041" w="31" h="16"/>
-        </glyph>
+      <label text="muscle cytosol"/>
+      <bbox x="550.1977355806594" y="275.84145063295273" w="924.9764924951274" h="306.33502089145315"/>
+    </glyph>
+    <glyph id="f3ac8950-6d69-4c5b-92dd-3020906ea2c8" class="macromolecule" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <label text="nAChR"/>
+      <bbox x="561.1977355806592" y="388.2407762048036" w="30" h="30"/>
+      <glyph id="f3ac8950-6d69-4c5b-92dd-3020906ea2c8_0" class="unit of information">
+        <label text="closed"/>
+        <bbox x="824.6320061693001" y="514.9467179646375" w="28.90625" h="12"/>
       </glyph>
     </glyph>
-    <glyph id="glyph32" class="dissociation" compartmentRef="glyph1">
-      <bbox x="457.3282428348075" y="431.2165874644448" w="15" h="15"/>
-      <port id="glyph32.1" x="457.3282428348075" y="438.7165874644448"/>
-      <port id="glyph32.2" x="472.3282428348075" y="438.7165874644448"/>
-    </glyph>
-    <glyph id="glyph42" class="macromolecule" compartmentRef="glyph1">
-      <label text="misfolded&#xA;protein"/>
-      <bbox x="329.9815767182123" y="453.53002347180006" w="70" h="35"/>
-    </glyph>
-    <glyph id="glyph25" class="process" compartmentRef="glyph1">
-      <bbox x="257.2143628529475" y="449.97754349671214" w="15" h="15"/>
-      <port id="glyph25.1" x="264.7143628529475" y="449.97754349671214"/>
-      <port id="glyph25.2" x="264.7143628529475" y="464.97754349671214"/>
-    </glyph>
-    <glyph id="glyph46" class="macromolecule" compartmentRef="glyph1">
-      <label text="Hsp70"/>
-      <bbox x="488.4726970137822" y="356.75943814506707" w="70" h="35"/>
-    </glyph>
-    <glyph id="glyph27" class="process" compartmentRef="glyph1">
-      <bbox x="610.6077265266052" y="365.5432225436531" w="15" h="15"/>
-      <port id="glyph27.1" x="618.1077265266052" y="365.5432225436531"/>
-      <port id="glyph27.2" x="618.1077265266052" y="380.5432225436531"/>
-    </glyph>
-    <glyph id="glyph40" class="macromolecule multimer" compartmentRef="glyph1">
-      <label text="Sis1"/>
-      <bbox x="370.5616255322626" y="347.4581133814655" w="74" h="36"/>
-      <glyph id="glyph40_0" class="unit of information">
-        <label text="N:2"/>
-        <bbox x="1115.1950141360162" y="586.0725982284903" w="31" h="16"/>
+    <glyph id="_4b4a1add-6cf6-47cb-b952-5ea0ceade9a0" class="macromolecule" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <label text="nAChR"/>
+      <bbox x="746.0225751290182" y="374.40143139193066" w="30" h="30"/>
+      <glyph id="_4b4a1add-6cf6-47cb-b952-5ea0ceade9a0_0" class="unit of information">
+        <label text="open"/>
+        <bbox x="1087.7598455827488" y="492.46925081208315" w="22.24609375" h="12"/>
       </glyph>
     </glyph>
-    <glyph id="glyph28" class="process" compartmentRef="glyph1">
-      <bbox x="395.6374306570941" y="277.0357750251552" w="15" h="15"/>
-      <port id="glyph28.1" x="410.6374306570941" y="284.5357750251552"/>
-      <port id="glyph28.2" x="395.6374306570941" y="284.5357750251552"/>
+    <glyph id="ac2f1b2b-2e6e-4647-84bd-c141925f4d85" class="simple chemical" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <label text="Ca2+"/>
+      <bbox x="915.5989431988464" y="444.8050572955314" w="30" h="30"/>
     </glyph>
-    <glyph id="glyph15" class="macromolecule" compartmentRef="glyph1">
-      <label text="E3(San1)"/>
-      <bbox x="51.97144516644164" y="472.371545273175" w="70" h="35"/>
+    <glyph id="_264a7088-e810-4679-9c92-f06886510f98" class="process" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <bbox x="648.0851740706958" y="348.1668788536127" w="30" h="30"/>
+      <port id="_264a7088-e810-4679-9c92-f06886510f98.1" x="648.0851740706958" y="363.1668788536127"/>
+      <port id="_264a7088-e810-4679-9c92-f06886510f98.2" x="678.0851740706958" y="363.1668788536127"/>
     </glyph>
-    <glyph id="glyph6" class="complex" compartmentRef="glyph1">
+    <glyph id="d756f4ab-9813-4d55-aa86-c37dc7f3b286" class="process" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <bbox x="841.8949549484342" y="403.66647664456565" w="30" h="30"/>
+      <port id="d756f4ab-9813-4d55-aa86-c37dc7f3b286.1" x="841.8949549484342" y="418.66647664456565"/>
+      <port id="d756f4ab-9813-4d55-aa86-c37dc7f3b286.2" x="871.8949549484342" y="418.66647664456565"/>
+    </glyph>
+    <glyph id="_1129b8c7-71da-4a6c-8681-3082e6f04a6c" class="complex" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
       <extension>
         <extraInfo>
-          <w>30</w>
-          <h>30</h>
+          <w>47</w>
+          <h>72</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -186,34 +181,44 @@
           <HBBias>0</HBBias>
         </extraInfo>
       </extension>
-      <label text="nuclear&#xA;proteasome"/>
-      <bbox x="120.24413872986042" y="389.2623289420209" w="30" h="30"/>
-    </glyph>
-    <glyph id="glyph23" class="and" compartmentRef="glyph1">
-      <bbox x="176.62208077248033" y="462.84235905849164" w="25" h="25"/>
-    </glyph>
-    <glyph id="glyph44" class="macromolecule" compartmentRef="glyph1">
-      <label text="Hsp70"/>
-      <bbox x="578.58503237391" y="277.9761327436095" w="70" h="35"/>
-    </glyph>
-    <glyph id="glyph39" class="macromolecule multimer" compartmentRef="glyph1">
-      <label text="Sis1"/>
-      <clone/>
-      <bbox x="370.6383834322084" y="186.85816676784367" w="74" h="36"/>
-      <glyph id="glyph39_0" class="unit of information">
-        <label text="N:2"/>
-        <bbox x="1263.985205284309" y="359.77462991886034" w="31" h="16"/>
+      <label text="myosin"/>
+      <bbox x="985.3275824019952" y="326.15174876231157" w="67" h="92"/>
+      <glyph id="_26a815b4-64c3-4797-9bfd-7dceafb3345d" class="macromolecule">
+        <label text="myosin"/>
+        <bbox x="1011.3275824019952" y="337.15174876231157" w="30" h="30"/>
+      </glyph>
+      <glyph id="_5fcbfc9c-92a0-45b2-834b-ad8866d4008b" class="simple chemical">
+        <label text="ATP"/>
+        <bbox x="996.3275824019952" y="377.15174876231157" w="30" h="30"/>
       </glyph>
     </glyph>
-    <glyph id="glyph18" class="macromolecule">
-      <label text="E3&#xA;(1)"/>
-      <bbox x="1213.0330466192033" y="460.6774457649301" w="70" h="35"/>
+    <glyph id="_9b7f467a-30eb-4b8e-a966-43692648a46e" class="macromolecule" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <label text="actin"/>
+      <bbox x="1128.7100976543165" y="320.01602699954157" w="30" h="30"/>
     </glyph>
-    <glyph id="glyph2" class="complex">
+    <glyph id="_3a96c155-e828-4038-8384-4c25f4f1aaf6" class="association" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <bbox x="1117.1635273574473" y="386.8341481663757" w="30" h="30"/>
+      <port id="_3a96c155-e828-4038-8384-4c25f4f1aaf6.1" x="1132.1635273574473" y="386.8341481663757"/>
+      <port id="_3a96c155-e828-4038-8384-4c25f4f1aaf6.2" x="1132.1635273574473" y="416.8341481663757"/>
+    </glyph>
+    <glyph id="_97c2c87b-c5d2-41fb-97f6-a1001075cf08" class="dissociation" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <bbox x="1188.9142905289182" y="397.84559648278884" w="30" h="30"/>
+      <port id="_97c2c87b-c5d2-41fb-97f6-a1001075cf08.1" x="1203.9142905289182" y="397.84559648278884"/>
+      <port id="_97c2c87b-c5d2-41fb-97f6-a1001075cf08.2" x="1203.9142905289182" y="427.84559648278884"/>
+    </glyph>
+    <glyph id="a0a8dd07-644b-4646-a305-ef249fa67752" class="macromolecule" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <label text="myosin"/>
+      <bbox x="1124.901849708464" y="464.072296020096" w="30" h="30"/>
+    </glyph>
+    <glyph id="_20e434c6-e738-4ae5-8a8a-e49f53fe85fb" class="simple chemical" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <label text="ATP"/>
+      <bbox x="1038.3448906512551" y="541.1764715244059" w="30" h="30"/>
+    </glyph>
+    <glyph id="_85682413-94f7-8b3c-e052-59a72cd48e12" class="complex" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
       <extension>
         <extraInfo>
-          <w>76</w>
-          <h>83</h>
+          <w>32</w>
+          <h>72</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -222,57 +227,30 @@
           <HBBias>0</HBBias>
         </extraInfo>
       </extension>
-      <label text="PolyQ aggregates&#xA;(2)"/>
-      <bbox x="878.5726222338495" y="605.4357238929715" w="96" h="103"/>
-      <glyph id="glyph16" class="macromolecule">
-        <label text="PolyQ&#xA;aggregates"/>
-        <bbox x="889.5726222338495" y="662.4357238929715" w="70" h="35"/>
+      <label text="tense"/>
+      <bbox x="1302.0819253819932" y="400.246538869049" w="52" h="92"/>
+      <glyph id="_85682413-94f7-8b3c-e052-59a72cd48e12_0" class="unit of information">
+        <label text="tense"/>
+        <bbox x="2501.0019238020473" y="985.6900067284176" w="24.462890625" h="12"/>
       </glyph>
-      <glyph id="glyph9" class="macromolecule multimer">
-        <label text="Sis1"/>
-        <bbox x="889.5726222338495" y="616.4357238929715" w="74" h="36"/>
-        <glyph id="glyph9_0" class="unit of information">
-          <label text="N:2"/>
-          <bbox x="984.3202924394964" y="757.1154665113983" w="31" h="16"/>
-        </glyph>
+      <glyph id="_1ce3ffae-f9a7-09a1-c91f-bf176708c1d2" class="macromolecule">
+        <label text="myosin"/>
+        <bbox x="1313.0819253819932" y="411.246538869049" w="30" h="30"/>
       </glyph>
-    </glyph>
-    <glyph id="glyph14" class="macromolecule">
-      <label text="importin&#xA;(3)"/>
-      <bbox x="791.5040034393335" y="354.37548381082877" w="70" h="35"/>
-    </glyph>
-    <glyph id="glyph17" class="macromolecule">
-      <label text="PolyQ&#xA;aggregates&#xA;(4)"/>
-      <bbox x="786.2223999370531" y="584.8055038710468" w="70" h="35"/>
-    </glyph>
-    <glyph id="glyph33" class="association">
-      <bbox x="877.1797003897658" y="536.8695972647123" w="15" h="15"/>
-      <port id="glyph33.1" x="877.1797003897658" y="544.3695972647123"/>
-      <port id="glyph33.2" x="892.1797003897658" y="544.3695972647123"/>
-    </glyph>
-    <glyph id="glyph10" class="macromolecule multimer">
-      <label text="Sis1&#xA;(5)"/>
-      <clone/>
-      <bbox x="939.1888307749754" y="491.2907994119739" w="74" h="36"/>
-      <glyph id="glyph10_0" class="unit of information">
-        <label text="N:2"/>
-        <bbox x="1158.0915721220806" y="635.5128320673202" w="31" h="16"/>
+      <glyph id="_0fbd0d13-c59b-48ab-240d-c262dd1bc480" class="macromolecule">
+        <label text="actin"/>
+        <bbox x="1313.0819253819932" y="451.246538869049" w="30" h="30"/>
       </glyph>
     </glyph>
-    <glyph id="glyph34" class="association">
-      <bbox x="989.1886582261055" y="425.6217700720593" w="15" h="15"/>
-      <port id="glyph34.1" x="989.1886582261055" y="433.1217700720593"/>
-      <port id="glyph34.2" x="1004.1886582261055" y="433.1217700720593"/>
+    <glyph id="e889d01c-1eb1-4c83-8bd9-0160e9c2abcb" class="phenotype" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <label text="muscle&#xA;contraction"/>
+      <bbox x="1434.1742280757867" y="439.99564883980094" w="30" h="30"/>
     </glyph>
-    <glyph id="glyph24" class="simple chemical">
-      <label text="Ub&#xA;(6)"/>
-      <bbox x="1181.1337680454476" y="308.7463938819077" w="40" h="40"/>
-    </glyph>
-    <glyph id="glyph5" class="complex">
+    <glyph id="_04ea25d8-dfaa-7912-303f-be00b342fc27" class="complex" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
       <extension>
         <extraInfo>
-          <w>72</w>
-          <h>82</h>
+          <w>87</w>
+          <h>72</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -281,26 +259,43 @@
           <HBBias>0</HBBias>
         </extraInfo>
       </extension>
-      <label text="misfolded protein&#xA;(7)"/>
-      <bbox x="1268.5057260469566" y="326.1623967133902" w="92" h="102"/>
-      <glyph id="glyph13" class="macromolecule">
-        <label text="misfolded&#xA;protein"/>
-        <bbox x="1279.5057260469566" y="337.1623967133902" w="70" h="35"/>
-        <glyph id="glyph13_0" class="state variable">
-          <state/>
-          <bbox x="1626.1046083111487" y="439.81463607599716" w="20" h="20"/>
-        </glyph>
+      <label text="relaxed"/>
+      <bbox x="1213.4767039355906" y="287.34145063295273" w="107" h="92"/>
+      <glyph id="_04ea25d8-dfaa-7912-303f-be00b342fc27_0" class="unit of information">
+        <label text="relaxed"/>
+        <bbox x="3906.507616465189" y="785.025393438601" w="32.7978515625" h="12"/>
       </glyph>
-      <glyph id="glyph19" class="macromolecule">
-        <label text="Hsp70"/>
-        <bbox x="1279.5057260469566" y="382.1623967133902" w="70" h="35"/>
+      <glyph id="_343e0d0d-eeac-5cf5-acec-bc15975650a3" class="macromolecule">
+        <label text="myosin"/>
+        <bbox x="1224.4767039355906" y="298.34145063295273" w="30" h="30"/>
+      </glyph>
+      <glyph id="_96e17352-dd50-0332-a224-954cd97fc3c2" class="macromolecule">
+        <label text="actin"/>
+        <bbox x="1224.4767039355906" y="338.34145063295273" w="30" h="30"/>
+      </glyph>
+      <glyph id="a3f830ac-34e3-466a-62ac-642bc3e51777" class="simple chemical">
+        <label text="ATP"/>
+        <bbox x="1279.4767039355906" y="298.34145063295273" w="30" h="30"/>
       </glyph>
     </glyph>
-    <glyph id="glyph3" class="complex">
+    <glyph id="_1e9c2dbf-2a4d-48c9-9d47-de9c0314f5b8" class="process" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <bbox x="1224.9217813273233" y="442.8604943101839" w="30" h="30"/>
+      <port id="_1e9c2dbf-2a4d-48c9-9d47-de9c0314f5b8.1" x="1224.9217813273233" y="457.8604943101839"/>
+      <port id="_1e9c2dbf-2a4d-48c9-9d47-de9c0314f5b8.2" x="1254.9217813273233" y="457.8604943101839"/>
+    </glyph>
+    <glyph id="_6259ebd3-e879-4c70-b442-a602e5408989" class="simple chemical" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <label text="Pi"/>
+      <bbox x="1251.8267373356916" y="529.0684277856271" w="30" h="30"/>
+    </glyph>
+    <glyph id="fb04887c-b0a0-4a2d-8cdd-a70826c659ee" class="simple chemical" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <label text="ADP"/>
+      <bbox x="1188.230647951017" y="513.7613599884801" w="30" h="30"/>
+    </glyph>
+    <glyph id="nwtN_d1535aaf-5d91-4108-9331-852d6acb876e" class="compartment" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
       <extension>
         <extraInfo>
-          <w>152</w>
-          <h>83</h>
+          <w>32</w>
+          <h>32</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -309,197 +304,167 @@
           <HBBias>0</HBBias>
         </extraInfo>
       </extension>
-      <label text="Hsp70&#xA;(8)"/>
-      <bbox x="884.4799223540572" y="273.04551770606395" w="172" h="103"/>
-      <glyph id="glyph21" class="macromolecule">
-        <label text="Hsp70"/>
-        <bbox x="895.4799223540572" y="330.04551770606395" w="70" h="35"/>
-      </glyph>
-      <glyph id="glyph12" class="macromolecule">
-        <label text="misfolded&#xA;protein"/>
-        <bbox x="975.4799223540572" y="330.04551770606395" w="70" h="35"/>
-      </glyph>
-      <glyph id="glyph8" class="macromolecule multimer">
-        <label text="Sis1"/>
-        <bbox x="895.4799223540572" y="284.04551770606395" w="74" h="36"/>
-        <glyph id="glyph8_0" class="unit of information">
-          <label text="N:2"/>
-          <bbox x="1216.8659422099915" y="444.7860452872479" w="31" h="16"/>
-        </glyph>
-      </glyph>
+      <label text="ER"/>
+      <bbox x="854.6969646132794" y="325.4126366384431" w="52" h="52"/>
     </glyph>
-    <glyph id="glyph26" class="process">
-      <bbox x="866.9959205287545" y="423.770052976131" w="15" h="15"/>
-      <port id="glyph26.1" x="866.9959205287545" y="431.270052976131"/>
-      <port id="glyph26.2" x="881.9959205287545" y="431.270052976131"/>
+    <glyph id="_8c083cee-7025-4035-9201-1319da22340b" class="simple chemical" compartmentRef="nwtN_d1535aaf-5d91-4108-9331-852d6acb876e">
+      <label text="Ca2+"/>
+      <bbox x="865.6969646132794" y="336.4126366384431" w="30" h="30"/>
     </glyph>
-    <glyph id="glyph7" class="complex">
-      <extension>
-        <extraInfo>
-          <w>68.08837890625</w>
-          <h>36</h>
-          <minW>0</minW>
-          <minH>0</minH>
-          <WLBias>0</WLBias>
-          <WRBias>0</WRBias>
-          <HTBias>0</HTBias>
-          <HBBias>0</HBBias>
-        </extraInfo>
-      </extension>
-      <label text="cytosolic&#xA;proteasome&#xA;(9)"/>
-      <bbox x="1259.5767763583906" y="531.8893408103069" w="68.08837890625" h="36"/>
+    <glyph id="_00ac7e0a-288f-42e0-b252-9bcb59027572" class="association" compartmentRef="_23d436e2-6633-42f2-98d0-00dbb962ac3d">
+      <bbox x="1034.0625056420076" y="463.09511778560284" w="30" h="30"/>
+      <port id="_00ac7e0a-288f-42e0-b252-9bcb59027572.1" x="1064.0625056420076" y="478.09511778560284"/>
+      <port id="_00ac7e0a-288f-42e0-b252-9bcb59027572.2" x="1034.0625056420076" y="478.09511778560284"/>
     </glyph>
-    <glyph id="glyph4" class="complex">
-      <extension>
-        <extraInfo>
-          <w>72</w>
-          <h>82</h>
-          <minW>0</minW>
-          <minH>0</minH>
-          <WLBias>0</WLBias>
-          <WRBias>0</WRBias>
-          <HTBias>0</HTBias>
-          <HBBias>0</HBBias>
-        </extraInfo>
-      </extension>
-      <label text="misfolded protein&#xA;(10)"/>
-      <bbox x="1056.7674547767638" y="413.3005627058197" w="92" h="102"/>
-      <glyph id="glyph11" class="macromolecule">
-        <label text="misfolded&#xA;protein"/>
-        <bbox x="1067.7674547767638" y="424.3005627058197" w="70" h="35"/>
-      </glyph>
-      <glyph id="glyph20" class="macromolecule">
-        <label text="Hsp70"/>
-        <bbox x="1067.7674547767638" y="469.3005627058197" w="70" h="35"/>
-      </glyph>
-    </glyph>
-    <glyph id="glyph31" class="uncertain process">
-      <bbox x="1188.3312493837611" y="531.8587038548233" w="15" h="15"/>
-      <port id="glyph31.1" x="1188.3312493837611" y="539.3587038548233"/>
-      <port id="glyph31.2" x="1203.3312493837611" y="539.3587038548233"/>
-    </glyph>
-    <glyph id="glyph29" class="process">
-      <bbox x="1197.5361535591178" y="402.10112924029016" w="15" h="15"/>
-      <port id="glyph29.1" x="1197.5361535591178" y="409.60112924029016"/>
-      <port id="glyph29.2" x="1212.5361535591178" y="409.60112924029016"/>
-    </glyph>
-    <arc id="_0810ebd9-b3e3-4535-8e17-60c0ca789496" class="consumption" source="glyph4" target="glyph31.2">
+    <arc id="_04ea25d8-dfaa-7912-303f-be00b342fc27-1e9c2dbf-2a4d-48c9-9d47-de9c0314f5b8" class="consumption" source="_04ea25d8-dfaa-7912-303f-be00b342fc27" target="_1e9c2dbf-2a4d-48c9-9d47-de9c0314f5b8.1">
       <start/>
       <end/>
     </arc>
-    <arc id="_60cdb53c-e509-49d2-b8ff-1d566638eb3e" class="catalysis" source="glyph18" target="glyph29">
+    <arc id="a0a8dd07-644b-4646-a305-ef249fa67752-00ac7e0a-288f-42e0-b252-9bcb59027572" class="consumption" source="a0a8dd07-644b-4646-a305-ef249fa67752" target="_00ac7e0a-288f-42e0-b252-9bcb59027572.1">
       <start/>
       <end/>
     </arc>
-    <arc id="c8173e7b-7d13-4a3c-b504-28b47e7b71b6" class="consumption" source="glyph24" target="glyph29.2">
+    <arc id="_3797d8d2-4f00-4d1f-9d85-ecad1e61746d-a083be43-422d-9067-c688-661cec17e472" class="production" source="_3797d8d2-4f00-4d1f-9d85-ecad1e61746d.2" target="a083be43-422d-9067-c688-661cec17e472">
       <start/>
       <end/>
     </arc>
-    <arc id="_6f3ba8ff-3c99-43fb-b148-105a92f9c60f" class="production" source="glyph34.2" target="glyph3">
+    <arc id="d2531344-d005-4b92-afd2-14dcb7d40965-3797d8d2-4f00-4d1f-9d85-ecad1e61746d" class="consumption" source="d2531344-d005-4b92-afd2-14dcb7d40965" target="_3797d8d2-4f00-4d1f-9d85-ecad1e61746d.1">
       <start/>
       <end/>
     </arc>
-    <arc id="_518bcc1a-8395-4fa9-866e-2bb689c00e60" class="production" source="glyph33.1" target="glyph2">
+    <arc id="_9886817c-7043-4de9-9895-0cd247f47190-3797d8d2-4f00-4d1f-9d85-ecad1e61746d" class="necessary stimulation" source="_9886817c-7043-4de9-9895-0cd247f47190" target="_3797d8d2-4f00-4d1f-9d85-ecad1e61746d">
       <start/>
       <end/>
     </arc>
-    <arc id="_06123149-ebf1-4df4-90b5-70243c6158be" class="production" source="glyph31.1" target="glyph7">
+    <arc id="ce103257-dbf5-430f-9e6c-1745990341de-2bdf0056-96f6-4184-a214-8c7cc7da6214" class="catalysis" source="ce103257-dbf5-430f-9e6c-1745990341de" target="_2bdf0056-96f6-4184-a214-8c7cc7da6214">
       <start/>
       <end/>
     </arc>
-    <arc id="_2ff281e3-14c1-46c0-80b8-b7482d49ab4a" class="production" source="glyph26.2" target="glyph38">
+    <arc id="ed79ab12-7b79-4a8a-80b3-c65181c076e4-2bdf0056-96f6-4184-a214-8c7cc7da6214" class="consumption" source="ed79ab12-7b79-4a8a-80b3-c65181c076e4" target="_2bdf0056-96f6-4184-a214-8c7cc7da6214.1">
       <start/>
       <end/>
     </arc>
-    <arc id="c2ba1356-5adc-4ad3-bdd4-19f31fae6ee3" class="stimulation" source="glyph14" target="glyph26">
+    <arc id="_135e2807-2b5c-4886-bbdf-d3c8bf433ab9-2bdf0056-96f6-4184-a214-8c7cc7da6214" class="consumption" source="_135e2807-2b5c-4886-bbdf-d3c8bf433ab9" target="_2bdf0056-96f6-4184-a214-8c7cc7da6214.1">
       <start/>
       <end/>
     </arc>
-    <arc id="ae59c150-ca22-44f2-8f81-eae3cda3db82" class="production" source="glyph32.2" target="glyph42">
+    <arc id="_2bdf0056-96f6-4184-a214-8c7cc7da6214-d2531344-d005-4b92-afd2-14dcb7d40965" class="production" source="_2bdf0056-96f6-4184-a214-8c7cc7da6214.2" target="d2531344-d005-4b92-afd2-14dcb7d40965">
       <start/>
       <end/>
     </arc>
-    <arc id="_0bdf1a29-50f5-4c52-88d2-ffdbc465b31f" class="production" source="glyph32.2" target="glyph46">
+    <arc id="_96b935d7-083c-468d-8607-d3b70fff10a7-135e2807-2b5c-4886-bbdf-d3c8bf433ab9" class="production" source="_96b935d7-083c-468d-8607-d3b70fff10a7.2" target="_135e2807-2b5c-4886-bbdf-d3c8bf433ab9">
       <start/>
       <end/>
     </arc>
-    <arc id="_1245f7b2-dea5-4766-83ba-864f29ccb8c4" class="production" source="glyph32.2" target="glyph40">
+    <arc id="a083be43-422d-9067-c688-661cec17e472-d9e08f4b-94b8-4285-af36-f4159b56a2fc" class="consumption" source="a083be43-422d-9067-c688-661cec17e472" target="d9e08f4b-94b8-4285-af36-f4159b56a2fc.1">
       <start/>
       <end/>
     </arc>
-    <arc id="_95ca1f25-381a-49cc-9a60-cdcae14dd33c" class="production" source="glyph27.1" target="glyph44">
+    <arc id="_66737d5c-5193-43a2-baa6-094aa1c21654-96b935d7-083c-468d-8607-d3b70fff10a7" class="necessary stimulation" source="_66737d5c-5193-43a2-baa6-094aa1c21654" target="_96b935d7-083c-468d-8607-d3b70fff10a7">
       <start/>
       <end/>
     </arc>
-    <arc id="_7cf17394-4166-4140-80cd-c063e06c6794" class="production" source="glyph28.1" target="glyph39">
+    <arc id="fb8eb6bc-a39a-4361-b938-026a3b63a9b9-96b935d7-083c-468d-8607-d3b70fff10a7" class="consumption" source="fb8eb6bc-a39a-4361-b938-026a3b63a9b9" target="_96b935d7-083c-468d-8607-d3b70fff10a7.1">
       <start/>
       <end/>
     </arc>
-    <arc id="f801d788-89e8-4082-ab55-e6e6807b6e8b" class="production" source="glyph25.2" target="glyph22">
+    <arc id="be08c23c-dca4-43cd-b8a6-06f6ebdaf710-d9e08f4b-94b8-4285-af36-f4159b56a2fc" class="necessary stimulation" source="be08c23c-dca4-43cd-b8a6-06f6ebdaf710" target="d9e08f4b-94b8-4285-af36-f4159b56a2fc">
       <start/>
       <end/>
     </arc>
-    <arc id="cc43e987-4c20-40b4-8df9-c4b572f4c6a2" class="stimulation" source="glyph23" target="glyph25">
+    <arc id="d9e08f4b-94b8-4285-af36-f4159b56a2fc-06e41c55-1352-407e-9c4b-604d3f5f616b" class="production" source="d9e08f4b-94b8-4285-af36-f4159b56a2fc.2" target="_06e41c55-1352-407e-9c4b-604d3f5f616b">
       <start/>
       <end/>
     </arc>
-    <arc id="_3a28aad6-504c-4a48-8fd1-3ae6d6537134" class="consumption" source="glyph17" target="glyph33.2">
+    <arc id="_06e41c55-1352-407e-9c4b-604d3f5f616b-6865aebe-2564-4ff6-a15a-6bd07a3a0ef8" class="consumption" source="_06e41c55-1352-407e-9c4b-604d3f5f616b" target="_6865aebe-2564-4ff6-a15a-6bd07a3a0ef8.1">
       <start/>
       <end/>
     </arc>
-    <arc id="_8b9eefc9-c293-4eb6-8e84-dd61b6fb35f3" class="consumption" source="glyph10" target="glyph33.2">
+    <arc id="b88b6460-4172-427f-abbe-d7c0f0a174ce-6865aebe-2564-4ff6-a15a-6bd07a3a0ef8" class="catalysis" source="b88b6460-4172-427f-abbe-d7c0f0a174ce" target="_6865aebe-2564-4ff6-a15a-6bd07a3a0ef8">
       <start/>
       <end/>
     </arc>
-    <arc id="_1e4fba68-cab9-432c-a3b7-0ba3805418f5" class="consumption" source="glyph10" target="glyph34.1">
+    <arc id="_6865aebe-2564-4ff6-a15a-6bd07a3a0ef8-fb8eb6bc-a39a-4361-b938-026a3b63a9b9" class="production" source="_6865aebe-2564-4ff6-a15a-6bd07a3a0ef8.2" target="fb8eb6bc-a39a-4361-b938-026a3b63a9b9">
       <start/>
       <end/>
     </arc>
-    <arc id="_09f5ca15-a2a0-412b-be1b-8391e5a142de" class="consumption" source="glyph4" target="glyph34.1">
+    <arc id="_6865aebe-2564-4ff6-a15a-6bd07a3a0ef8-8ba53135-01b4-4a4b-b87d-a5971850cb39" class="production" source="_6865aebe-2564-4ff6-a15a-6bd07a3a0ef8.2" target="_8ba53135-01b4-4a4b-b87d-a5971850cb39">
       <start/>
       <end/>
     </arc>
-    <arc id="b66594e0-a268-4b1a-860d-90977210b817" class="consumption" source="glyph5" target="glyph29.2">
+    <arc id="f3ac8950-6d69-4c5b-92dd-3020906ea2c8-264a7088-e810-4679-9c92-f06886510f98" class="consumption" source="f3ac8950-6d69-4c5b-92dd-3020906ea2c8" target="_264a7088-e810-4679-9c92-f06886510f98.1">
       <start/>
       <end/>
     </arc>
-    <arc id="_959a4490-8a15-4636-a040-ffe80459fa22" class="production" source="glyph29.1" target="glyph4">
+    <arc id="_264a7088-e810-4679-9c92-f06886510f98-4b4a1add-6cf6-47cb-b952-5ea0ceade9a0" class="production" source="_264a7088-e810-4679-9c92-f06886510f98.2" target="_4b4a1add-6cf6-47cb-b952-5ea0ceade9a0">
       <start/>
       <end/>
     </arc>
-    <arc id="be0ba93b-f57b-4876-a357-b07f882b254f" class="consumption" source="glyph38" target="glyph32.1">
+    <arc id="_4b4a1add-6cf6-47cb-b952-5ea0ceade9a0-d756f4ab-9813-4d55-aa86-c37dc7f3b286" class="necessary stimulation" source="_4b4a1add-6cf6-47cb-b952-5ea0ceade9a0" target="d756f4ab-9813-4d55-aa86-c37dc7f3b286">
       <start/>
       <end/>
     </arc>
-    <arc id="_5bca6e61-2ae7-4796-b03d-3221d67fa455" class="consumption" source="glyph42" target="glyph25.1">
+    <arc id="d756f4ab-9813-4d55-aa86-c37dc7f3b286-ac2f1b2b-2e6e-4647-84bd-c141925f4d85" class="production" source="d756f4ab-9813-4d55-aa86-c37dc7f3b286.2" target="ac2f1b2b-2e6e-4647-84bd-c141925f4d85">
       <start/>
       <end/>
     </arc>
-    <arc id="_9af24d05-9d35-4194-8247-c66c4d4b6cca" class="consumption" source="glyph46" target="glyph27.2">
+    <arc id="nwtE_f3b18f20-2f35-4d4e-995c-259bc58a01c9" class="stimulation" source="ac2f1b2b-2e6e-4647-84bd-c141925f4d85" target="_1129b8c7-71da-4a6c-8681-3082e6f04a6c">
       <start/>
       <end/>
     </arc>
-    <arc id="_8d624d9e-bc9c-4f3b-b842-02e0e2f44904" class="consumption" source="glyph40" target="glyph28.2">
+    <arc id="_06e41c55-1352-407e-9c4b-604d3f5f616b-264a7088-e810-4679-9c92-f06886510f98" class="necessary stimulation" source="_06e41c55-1352-407e-9c4b-604d3f5f616b" target="_264a7088-e810-4679-9c92-f06886510f98">
       <start/>
       <end/>
     </arc>
-    <arc id="_2c99a565-b610-40a9-a9e6-8555b36e14e0" class="logic arc" source="glyph15" target="glyph23">
+    <arc id="_1129b8c7-71da-4a6c-8681-3082e6f04a6c-3a96c155-e828-4038-8384-4c25f4f1aaf6" class="consumption" source="_1129b8c7-71da-4a6c-8681-3082e6f04a6c" target="_3a96c155-e828-4038-8384-4c25f4f1aaf6.1">
       <start/>
       <end/>
     </arc>
-    <arc id="f52bf077-f247-45ac-b2fc-da59fbbb3538" class="logic arc" source="glyph6" target="glyph23">
+    <arc id="_1e9c2dbf-2a4d-48c9-9d47-de9c0314f5b8-6259ebd3-e879-4c70-b442-a602e5408989" class="production" source="_1e9c2dbf-2a4d-48c9-9d47-de9c0314f5b8.2" target="_6259ebd3-e879-4c70-b442-a602e5408989">
       <start/>
       <end/>
     </arc>
-    <arc id="_97bb18b9-55dc-4bc4-80d4-de0b5cb01b32" class="consumption" source="glyph3" target="glyph26.1">
+    <arc id="_9b7f467a-30eb-4b8e-a966-43692648a46e-3a96c155-e828-4038-8384-4c25f4f1aaf6" class="consumption" source="_9b7f467a-30eb-4b8e-a966-43692648a46e" target="_3a96c155-e828-4038-8384-4c25f4f1aaf6.1">
       <start/>
       <end/>
     </arc>
-    <arc id="_4894832d-e735-469b-98ca-c43fa3c867de" class="production" source="glyph30.1" target="glyph35">
+    <arc id="_97c2c87b-c5d2-41fb-97f6-a1001075cf08-9b7f467a-30eb-4b8e-a966-43692648a46e" class="production" source="_97c2c87b-c5d2-41fb-97f6-a1001075cf08.1" target="_9b7f467a-30eb-4b8e-a966-43692648a46e">
       <start/>
       <end/>
     </arc>
-    <arc id="_7ce1b829-ab12-4e34-ae64-ccb21fcae1be" class="consumption" source="glyph4" target="glyph30.2">
+    <arc id="_3a96c155-e828-4038-8384-4c25f4f1aaf6-04ea25d8-dfaa-7912-303f-be00b342fc27" class="production" source="_3a96c155-e828-4038-8384-4c25f4f1aaf6.2" target="_04ea25d8-dfaa-7912-303f-be00b342fc27">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="_97c2c87b-c5d2-41fb-97f6-a1001075cf08-a0a8dd07-644b-4646-a305-ef249fa67752" class="production" source="_97c2c87b-c5d2-41fb-97f6-a1001075cf08.1" target="a0a8dd07-644b-4646-a305-ef249fa67752">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="_85682413-94f7-8b3c-e052-59a72cd48e12-97c2c87b-c5d2-41fb-97f6-a1001075cf08" class="consumption" source="_85682413-94f7-8b3c-e052-59a72cd48e12" target="_97c2c87b-c5d2-41fb-97f6-a1001075cf08.2">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="_8c083cee-7025-4035-9201-1319da22340b-d756f4ab-9813-4d55-aa86-c37dc7f3b286" class="consumption" source="_8c083cee-7025-4035-9201-1319da22340b" target="d756f4ab-9813-4d55-aa86-c37dc7f3b286.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="_1e9c2dbf-2a4d-48c9-9d47-de9c0314f5b8-85682413-94f7-8b3c-e052-59a72cd48e12" class="production" source="_1e9c2dbf-2a4d-48c9-9d47-de9c0314f5b8.2" target="_85682413-94f7-8b3c-e052-59a72cd48e12">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="_85682413-94f7-8b3c-e052-59a72cd48e12-e889d01c-1eb1-4c83-8bd9-0160e9c2abcb" class="stimulation" source="_85682413-94f7-8b3c-e052-59a72cd48e12" target="e889d01c-1eb1-4c83-8bd9-0160e9c2abcb">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="_00ac7e0a-288f-42e0-b252-9bcb59027572-1129b8c7-71da-4a6c-8681-3082e6f04a6c" class="production" source="_00ac7e0a-288f-42e0-b252-9bcb59027572.2" target="_1129b8c7-71da-4a6c-8681-3082e6f04a6c">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="_20e434c6-e738-4ae5-8a8a-e49f53fe85fb-00ac7e0a-288f-42e0-b252-9bcb59027572" class="consumption" source="_20e434c6-e738-4ae5-8a8a-e49f53fe85fb" target="_00ac7e0a-288f-42e0-b252-9bcb59027572.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="_1e9c2dbf-2a4d-48c9-9d47-de9c0314f5b8-fb04887c-b0a0-4a2d-8cdd-a70826c659ee" class="production" source="_1e9c2dbf-2a4d-48c9-9d47-de9c0314f5b8.2" target="fb04887c-b0a0-4a2d-8cdd-a70826c659ee">
       <start/>
       <end/>
     </arc>

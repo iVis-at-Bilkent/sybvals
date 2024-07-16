@@ -81,7 +81,7 @@ let applyErrorFix = async function () {
 		}
 	};
 
-	let data = graphData + JSON.stringify(options);
+	let data = currentSbgn + JSON.stringify(options);
 
 	const settings = {
 		method: 'POST',
