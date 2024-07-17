@@ -77,8 +77,9 @@ function postProcessForLayouts(cy) {
 
 }
 
-function reduceErrors(errors){
+function reduceErrors(errors,cy){
   let reducedErrors = [];
+  let errorInfo = {};
   //console.log( "Errors length : " + errors.length);
   for( let i = 0; i < errors.length;i++){
     if( errors[i].pattern != "pd10125" && errors[i].pattern != "pd10142" && 
@@ -97,6 +98,7 @@ function reduceErrors(errors){
     }
     else if( (errors[i].pattern == "pd10111")){
       var connectedEdges = cy.edges('[source =  "' + ele.id() + '"]');
+      console.log( connectedEdges.length);
       if( connectedEdges.length == 1 ) {
         continue;
        }
@@ -107,9 +109,79 @@ function reduceErrors(errors){
         continue;
       }
     }
-
+    errorInfo [ errors[i].pattern + errors[i].role] = true;
     reducedErrors.push(errors[i]);
   }
+  let logicalOperators = cy.nodes();
+  logicalOperators.forEach(node => {
+    if( node.data().class === "and"){
+
+    //console.log( node.data());
+    var edges = node.incomers();
+   
+    var edgess = node.outgoers();
+    console.log( "outgoers " + node.data().id + " " + node.data().class + " " + edgess.size());
+    edgess.forEach( edge => {
+     // console.log( edge.data());
+    });
+    let error = new Issue();
+    error.setText("'and', 'or', and 'not' glyphs must be the source for exactly one arc");
+    error.setPattern("pd10111");
+    error.setRole(node.data().id);
+    if( edgess.length > 2 && errorInfo["pd10111" + node.data().id] !== true)
+    reducedErrors.push(error);
+    
+  }
+  else if( node.data().class === "or"){
+
+    //console.log( node.data());
+    var edges = node.incomers();
+   
+    var edgess = node.outgoers();
+    //console.log( "outgoers " + node.data().id + " " + node.data().class + " " + edgess.size());
+    edgess.forEach( edge => {
+      //console.log( edge.data());
+    });
+    let error = new Issue();
+    error.setText("'and', 'or', and 'not' glyphs must be the source for exactly one arc");
+    error.setPattern("pd10111");
+    error.setRole(node.data().id);
+    if( edgess.length > 2 && errorInfo["pd10111" + node.data().id] !== true)
+    reducedErrors.push(error);
+    
+  }
+  else if( node.data().class === "not"){
+      
+    //console.log( node.data());
+    var edges = node.incomers();
+    console.log( "incomers " + node.data().id + " " + node.data().class + " " + edges.size());
+    edges.forEach( edge => {
+     // console.log( edge.data());
+    });
+    if( edges.size() > 2 && errorInfo[ "pd10126" + node.data().id] !== true){
+      let error = new Issue();
+      error.setText("The 'not' glyph can only be the target of one logic arc glyph");
+      error.setPattern("pd10126");
+      error.setRole(node.data().id);
+      reducedErrors.push(error);
+    }
+    var edgess = node.outgoers();
+    //console.log( "outgoers " + node.data().id + " " + node.data().class + " " + edgess.size());
+    edgess.forEach( edge => {
+      //console.log( edge.data());
+    });
+    if( edgess.size() > 2 && errorInfo[ "pd10111" + node.data().id] !== true){
+      let error = new Issue();
+      error.setText("'and', 'or', and 'not' glyphs must be the source for exactly one arc");
+      error.setPattern("pd10111");
+      error.setRole(node.data().id);
+      reducedErrors.push(error);
+    }
+  }
+  })
+
+
+  
   return reducedErrors;
   errors = reducedErrors;
 }
@@ -256,7 +328,7 @@ app.use(async (req, res, next) => {
           errors.push(error);
         }
       }
-      errors = reduceErrors(errors);
+      errors = reduceErrors(errors,cy);
       data = cyJsonData;
       let unsolvedErrorInformation = {};
       let fixExplanation = {};
@@ -712,9 +784,10 @@ app.post('/fixError', (req, res) => {
             errorFixParam.edges.push(connectedEdges[i]);
           }
         }
+        console.log( "pd10111 fix")
         fixError(errorFixParam);
         //errors[check].status = "solved";
-        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Arc between this node and " + selectedEdge.target.id() + " is kept.";
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Arc between this node and " + selectedEdge.target().id() + " is kept.";
       }
       else
         numberOfUnsolvedErrors++;
@@ -774,6 +847,7 @@ app.post('/fixError', (req, res) => {
           }
       }
       // node should be selected here, default is 0.
+      if( listedNodes.length > 0){
       let selectedNode = listedNodes[0];
       errorFixParam.newTarget = ele.target().id();
       errorFixParam.newSource = selectedNode.id();
@@ -782,6 +856,8 @@ app.post('/fixError', (req, res) => {
       fixError(errorFixParam);
       //errors[check].status = "solved";
       fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Modulation arc has a source reference to " + selectedNode.id() + ".";
+      }
+
     }
 
     else if (currentErrors[check].pattern == "pd10125") {
@@ -851,10 +927,14 @@ app.post('/fixError', (req, res) => {
         error.setText(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:text"]);
         error.setPattern(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["$"]["id"]);
         error.setRole(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:diagnostic-reference"][0]["_"]);
+        //console.log( error.pattern + " " + error.role) ;
         currentErrors.push(error);
       }
     }
     console.log( currentLength === currentErrors.length);
+    //console.log( currentErrors.length);
+    currentErrors = reduceErrors( currentErrors, cy);
+    console.log( " remaining errors " + currentErrors.length);
     if (currentLength == currentErrors.length) {
       check++;
       console.log( previousErrorCode + " " + previousErrorRole);
@@ -891,6 +971,7 @@ app.post('/fixError', (req, res) => {
       currentErrors.push(error);
     }
   }
+  currentErrors = reduceErrors( currentErrors,cy);
   highlightErrors(errors, cy, imageOptions, false, unsolvedErrorInformation, fixExplanation);
   let colorScheme = imageOptions.color || "white";
   let stylesheet = adjustStylesheet('sbgnml', colorScheme);
@@ -1009,7 +1090,7 @@ function fixError(errorFixParam) {
     });
   }
   if (errorCode == "pd10111") {
-    param.edges.forEach(function (edge) {
+    errorFixParam.edges.forEach(function (edge) {
       edge.remove();
     });
   }
