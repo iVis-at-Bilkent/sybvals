@@ -604,7 +604,7 @@ app.post('/fixError', (req, res) => {
       }
       else {
         ele.move({ "parent": listedNodes[0].data().id });
-        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Fixed by moving " + " inside " + listedNodes[0].data().id + ".";
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Fixed by moving inside " + listedNodes[0].data().id + ".";
       }
     }
     else if (currentErrors[check].pattern == "pd10126") {
