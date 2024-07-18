@@ -214,15 +214,31 @@ function distanceBetween(a, b) {
 }
 
 function findClosestNode(ele, connectedEdges) {
-  let shortestDistance = 100000000.0;
+  let shortestDistance = 10000000000.0;
   let closestEdge;
-  for (let i = 0; i < connectedEdges.size(); i++) {
-    if (distanceBetween(ele, connectedEdges[i].source()) < shortestDistance) {
-      shortestDistance = distanceBetween(ele, connectedEdges[i].source());
+  for (let i = 0; i < connectedEdges.length; i++) {
+    let distance = ( ele.data().id == connectedEdges.source().id ? distanceBetween(ele, connectedEdges[i].target() ) : 
+    distanceBetween(ele, connectedEdges[i].source() ) );
+    if ( distance < shortestDistance) {
+      shortestDistance = distance;
       closestEdge = connectedEdges[i];
     }
   }
   return closestEdge;
+}
+function closestNodeForEdges(ele, nodes) {
+  let shortestDistance = 10000000000.0;
+  let closestNode;
+  for (let i = 0; i < nodes.length; i++) {
+    /*let distance = ( ele.data().id == connectedEdges.source().id ? distanceBetween(ele, connectedEdges[i].target() ) : 
+    distanceBetween(ele, connectedEdges[i].source() ) );*/
+    distance = distanceBetween( ele, nodes[i]);
+    if ( distance < shortestDistance) {
+      shortestDistance = distance;
+      closestNode = nodes[i];
+    }
+  }
+  return closestNode;
 }
 
 app.use(express.static(path.join(__dirname, "../public/")));
@@ -634,7 +650,7 @@ app.post('/fixError', (req, res) => {
           }
       }
       if (listedNodes.length !== 0) {
-        let selectedNode = listedNodes[0];
+        let selectedNode = closestNodeForEdges(ele.target(), listedNodes );
         errorFixParam.newTarget = ele.target().id();
         errorFixParam.newSource = selectedNode.id();
         errorFixParam.edge = ele;
@@ -760,7 +776,8 @@ app.post('/fixError', (req, res) => {
       }
 
       // node should be selected here, default is 0.
-      let selectedNode = listedNodes[0];
+      if( listedNodes.length > 0 ){
+      let selectedNode = closestNodeForEdges( ele.source(), listedNodes);
       //selectedNode = findClosest( )
       var source = ele.source();
       var target = selectedNode;
@@ -768,6 +785,7 @@ app.post('/fixError', (req, res) => {
       errorFixParam.newEdge = { source: source.id(), target: target.id(), edgeParams: edgeParams };
       fixError(errorFixParam);
       fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc has a target reference to " + target.id() + ".";
+      }
     }
 
     else if (currentErrors[check].pattern == "pd10111") {
@@ -778,7 +796,7 @@ app.post('/fixError', (req, res) => {
       let connectedEdges = cy.edges('[source =  "' + ele.id() + '"]');
          console.log(connectedEdges.length);
       if (connectedEdges.length !== 0) {
-        let selectedEdge = connectedEdges[0]; // default , the selection of edge will be determined later.
+        let selectedEdge = findClosestNode(ele, connectedEdges); // default , the selection of edge will be determined later.
         for (let i = 0; i < connectedEdges.size(); i++) {
           if (connectedEdges[i].id() != selectedEdge.id()) {
             errorFixParam.edges.push(connectedEdges[i]);
@@ -796,7 +814,7 @@ app.post('/fixError', (req, res) => {
       var connectedEdges = ele.connectedEdges().filter('[class="consumption"]');
       errorFixParam.nodes = [];
       errorFixParam.edges = [];
-      selectedEdge = connectedEdges[0]; // default selection, it will be determined. closest one will be kept. 
+      selectedEdge = closestNode(ele, connectedEdges); // default selection, it will be determined. closest one will be kept. 
       for (let i = 0; i < connectedEdges.size(); i++) {
         if (connectedEdges[i].id() != selectedEdge.id()) {
           errorFixParam.nodes.push(connectedEdges[i].source().id() == ele.id() ? connectedEdges[i].target() : connectedEdges[i].source());
@@ -811,7 +829,7 @@ app.post('/fixError', (req, res) => {
     else if (currentErrors[check].pattern == "pd10108") {
       let connectedEdges = ele.connectedEdges().filter('[class = "production"]');
       // choose deleted edges and nodes each here when the deletion method is determined
-      let selectedEdge = connectedEdges[0];
+      let selectedEdge = findClosestNode(ele, connectedEdges);
       errorFixParam.edges = [];
       errorFixParam.nodes = [];
       for (let i = 0; i < connectedEdges.size(); i++) {
@@ -829,10 +847,16 @@ app.post('/fixError', (req, res) => {
       var targetPosX = ele.target().position().x;
       var sourcePosY = ele.source().position().y;
       var targetPosY = ele.target().position().y;
-      var minX = Math.min(sourcePosX, targetPosX) - 150;
+     /* var minX = Math.min(sourcePosX, targetPosX) - 150;
       var maxX = Math.max(sourcePosX, targetPosX) + 150;
       var minY = Math.min(sourcePosY, targetPosY) - 150;
-      var maxY = Math.max(sourcePosY, targetPosY) + 150;
+      var maxY = Math.max(sourcePosY, targetPosY) + 150;*/
+      var minX =-15000000000;
+      var maxX = 15000000000;
+      var minY =-15000000000;
+      var maxY = 15000000000;
+      
+
       var nodes = cy.nodes();
       var listedNodes = [];
       for (let i = 0; i < nodes.length; i++) {
@@ -848,7 +872,8 @@ app.post('/fixError', (req, res) => {
       }
       // node should be selected here, default is 0.
       if( listedNodes.length > 0){
-      let selectedNode = listedNodes[0];
+      //let selectedNode = listedNodes[0];
+      let selectedNode = closestNodeForEdges( ele.target(), listedNodes );
       errorFixParam.newTarget = ele.target().id();
       errorFixParam.newSource = selectedNode.id();
       errorFixParam.edge = ele;
@@ -858,32 +883,6 @@ app.post('/fixError', (req, res) => {
       fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Modulation arc has a source reference to " + selectedNode.id() + ".";
       }
 
-    }
-
-    else if (currentErrors[check].pattern == "pd10125") {
-      var sourcePosX = ele.source().position().x;
-      var targetPosX = ele.target().position().x;
-      var sourcePosY = ele.source().position().y;
-      var targetPosY = ele.target().position().y;
-      var minX = Math.min(sourcePosX, targetPosX) - 150;
-      var maxX = Math.max(sourcePosX, targetPosX) + 150;
-      var minY = Math.min(sourcePosY, targetPosY) - 150;
-      var maxY = Math.max(sourcePosY, targetPosY) + 150;
-      var nodes = cy.nodes();
-      var listedNodes = [];
-      for (let i = 0; i < nodes.length; i++) {
-        if (nodes[i].position().x >= minX && nodes[i].position().x <= maxX && nodes[i].position().y >= minY && nodes[i].position().y <= maxY)
-          if (elementUtilities.isLogicalOperator(nodes[i]))
-            listedNodes.push(nodes[i]);
-      }
-
-      // node should be selected here, default is 0.
-      let selectedNode = listedNodes[0];
-      errorFixParam.newTarget = ele.target().id();
-      errorFixParam.newSource = selectedNode.id();
-      errorFixParam.edge = ele;
-      errorFixParam.portsource = selectedNode.id();
-      fixError(errorFixParam);
     }
 
     else if (currentErrors[check].pattern == "pd10105" || currentErrors[check].pattern == "pd10106") {
