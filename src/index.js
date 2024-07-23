@@ -77,6 +77,477 @@ function postProcessForLayouts(cy) {
 
 }
 
+function findCandidatesOrFix( errors, cy, isFix){
+  currentErrors = errors;
+  let check = 0; 
+  while (check < currentErrors.length) {
+    //console.log( " checking step " + check + " " + currentErrors.length);
+    let currentLength = currentErrors.length;
+    previousErrorCode = currentErrors[check].pattern;
+    previousErrorRole = currentErrors[check].role;
+    currentErrors[check].status = "unsolved";
+    let errorFixParam = {};
+    if( isFix === false ){
+      currentErrors[check].fixCandidate = [];
+    }
+    errorFixParam.errorCode = currentErrors[check].pattern;
+    let ele = cy.getElementById(currentErrors[check].role);
+    if (currentErrors[check].pattern == "pd10112") {
+      var compartments = cy.nodes('[class= "compartment"]');
+      var listedNodes = [];
+      for (var i = 0; i < compartments.length; i++) {
+        if (compartments[i].parent().length == 0){
+           if( isFix === false ){
+               currentErrors[check].fixCandidate.push( {label : compartments[i].data().label, id : compartments[i].data().id});
+           }
+           else {
+          listedNodes.push(compartments[i]);
+          }
+        }
+      }
+      if( isFix === false ){
+        check++;
+        continue;
+      }
+      if (listedNodes.length === 0) {
+        numberOfUnsolvedErrors++;
+      }
+      else {
+        ele.move({ "parent": listedNodes[0].data().id });
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Fixed by moving " + " inside " + listedNodes[0].data().id + ".";
+      }
+    }
+    else if (currentErrors[check].pattern == "pd10126") {
+      let connectedEdges = ele.connectedEdges().filter('[class="logic arc"]');
+      if( isFix === false ){
+        currentErrors[check].fixCandidate = [];
+        for( let i = 0; i <  connectedEdges.length; i++){
+             currentErrors[check].fixCandidate.push( {label:connectedEdges[i].data().label, id: connectedEdges[i].data().id});
+        }
+        check++;
+        continue;
+      }
+      errorFixParam.edges = [];
+      errorFixParam.nodes = [];
+      let selectedEdge = connectedEdges[check]; // 0 is default, it should be decided later.
+      selectedEdge = findClosestNode(ele, connectedEdges);
+      //console.log("closest edge selected : " + selectedEdge);
+      for (let i = 0; i < connectedEdges.size(); i++) {
+        if (selectedEdge.id() != connectedEdges[i].id()) {
+          errorFixParam.nodes.push(connectedEdges[i].source());
+          errorFixParam.edges.push(connectedEdges[i]);
+        }
+      }
+      if (connectedEdges.length !== 0) {
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Edge between this node and " + selectedEdge.source().id() + " is kept.";
+        fixError(errorFixParam);
+      }
+      else
+        numberOfUnsolvedErrors++;
+    }
+    else if (currentErrors[check].pattern == "pd10124") {
+      var sourcePosX = ele.source().position().x;
+      var targetPosX = ele.target().position().x;
+      var sourcePosY = ele.source().position().y;
+      var targetPosY = ele.target().position().y;
+      var minX = Math.min(sourcePosX, targetPosX) - 150;
+      var maxX = Math.max(sourcePosX, targetPosX) + 150;
+      var minY = Math.min(sourcePosY, targetPosY) - 150;
+      var maxY = Math.max(sourcePosY, targetPosY) + 150;
+      var nodes = cy.nodes();
+      var listedNodes = [];
+      for (let i = 0; i < nodes.length; i++) {
+        if (nodes[i].position().x >= minX && nodes[i].position().x <= maxX && nodes[i].position().y >= minY && nodes[i].position().y <= maxY)
+          if (ele.target().data().id != nodes[i].data().id) {
+            if (elementUtilities.isEPNClass(nodes[i])) {
+              listedNodes.unshift(nodes[i]);
+            }
+            else if (elementUtilities.isLogicalOperator(nodes[i])) {
+              listedNodes.push(nodes[i]);
+            }
+          }
+      }
+      if( isFix === false ){
+        currentErrors[check].fixCandidate = [];
+        for( let i = 0; i <  listedNodes.length; i++){
+             currentErrors[check].fixCandidate.push( {label: listedNodes[i].data().label, id: listedNodes[i].data().id});
+        }
+        check++;
+        continue;
+      }
+      if (listedNodes.length !== 0) {
+        let selectedNode = closestNodeForEdges(ele.target(), listedNodes );
+        errorFixParam.newTarget = ele.target().id();
+        errorFixParam.newSource = selectedNode.id();
+        errorFixParam.edge = ele;
+        errorFixParam.portsource = selectedNode.id();
+        console.log( "fix operation for pd10124");
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Arc is connected to " + selectedNode.id() + ".";
+        fixError(errorFixParam);
+      }
+      else
+        numberOfUnsolvedErrors++;
+    }
+    else if (currentErrors[check].pattern == "pd10103" || currentErrors[check].pattern == "pd10107") {
+      if( isFix === false ){
+        continue;
+        currentErrors[check].fixCandidate = [];
+        for( let i = 0; i <  connectedEdges.length; i++){
+             currentErrors[check].fixCandidate.push( {label:connectedEdges[i].data().label, id: connectedEdges[i].data().id});
+        }
+        check++;
+        continue;
+      }
+      errorFixParam.newEdges = [];
+      errorFixParam.newNodes = [];
+      errorFixParam.oldEdges = [];
+      var id = currentErrors[check].role;
+      var eles = cy.elements('[id="' + id + '"]');
+      errorFixParam.node = eles;
+      var edges = cy.nodes('[id = "' + id + '"]').connectedEdges();
+      var addedNodeNum = edges.length;
+      var nodeParams = { class: eles.data().class, language: eles.data().language };
+      for (var i = 0; i < addedNodeNum; i++) {
+        var edgeParams = { class: edges[i].data().class, language: edges[i].data().language };
+        var shiftX = 22;
+        var shiftY = 22;
+        var target = edges[i].target();
+        var source = edges[i].source();
+        var x = edges[i].source().x; // endpoint are removed
+        var y = edges[i].source().y;
+        if (edges[i].data().class != 'consumption') {
+          x = edges[i].target().x;
+          y = edges[i].target().y;
+        }
+
+        var xdiff = Math.abs(edges[i].target().x - edges[i].source().x);
+        var ydiff = Math.abs(edges[i].target().y - edges[i].source().y);
+        var ratio = ydiff / xdiff;
+        if (xdiff == 0) {
+          shiftX = 0;
+          shiftY = 22;
+        }
+        else if (ydiff == 0) {
+          shiftY = 0;
+          shiftX = 22;
+        }
+        else {
+          var resultt = 22 * 22;
+          var ratiosquare = ratio * ratio;
+          var dx = Math.sqrt(resultt / (ratiosquare + 1));
+          shiftX = dx;
+          shiftY = shiftX * ratio;
+        }
+        if (edges[i].data().class == 'consumption') {
+          if (eles.position().x > target.position().x)
+            shiftX *= -1;
+          if (eles.position().y > target.position().y)
+            shiftY *= -1;
+        } else {
+          if (eles.position().x > source.position().x)
+            shiftX *= -1;
+          if (eles.position().y > source.position().y)
+            shiftY *= -1;
+        }
+        var cX = x + shiftX;
+        var cY = y + shiftY;
+
+        errorFixParam.newNodes.push({ x: cX, y: cY, class: nodeParams, id: "node" + i });
+        if (edges[i].data().class == 'consumption') {
+          errorFixParam.newEdges.push({ source: "node" + i, target: target.id(), class: edgeParams, property: 'porttarget', value: edges[i].data().porttarget });
+        }
+        else {
+          errorFixParam.newEdges.push({ source: source.id(), target: "node" + i, class: edgeParams, property: 'portsource', value: edges[i].data().portsource });
+
+        }
+        errorFixParam.oldEdges.push(edges[i]);
+      }
+      fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Source and sink glyph is splitted for each consumption arc.";
+      fixError(errorFixParam);
+    }
+    else if (currentErrors[check].pattern == "pd10101" || currentErrors[check].pattern == "pd10102") {
+      let targetTmp = ele.target();
+      let sourceTmp = ele.source();
+      if( isFix === false ){
+        continue;
+        currentErrors[check].fixCandidate = [];
+        for( let i = 0; i <  connectedEdges.length; i++){
+             currentErrors[check].fixCandidate.push( {label:connectedEdges[i].data().label, id: connectedEdges[i].data().id});
+        }
+        check++;
+        continue;
+      }
+      if (elementUtilities.isEPNClass(targetTmp)) {
+        errorFixParam.edge = ele;
+        fixError(errorFixParam);
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Source and target of consumption arc have been swapped.";
+        // errors[check].status = "solved";
+      }
+      else {
+        //errors[check].status = "unsolved";
+        numberOfUnsolvedErrors++;
+      }
+    }
+    else if (currentErrors[check].pattern == "pd10126") {
+      let connectedEdges = ele.connectedEdges().filter('[class="logic arc"]');
+      //console.log("connected edges" + connectedEdges.size());
+      errorFixParam.edges = [];
+      errorFixParam.nodes = [];
+      let selectedEdge = connectedEdges[0]; // 0 is default, it should be decided later.
+      for (let i = 0; i < connectedEdges.size(); i++) {
+        if (selectedEdge.id() != connectedEdges[i].id()) {
+          errorFixParam.nodes.push(connectedEdges[i].source());
+          errorFixParam.edges.push(connectedEdges[i]);
+        }
+      }
+      fixError(errorFixParam);
+    }
+    else if (currentErrors[check].pattern == "pd10125") {
+      var edgeParams = { class: ele.data().class, language: ele.data().language };
+      var sourcePosX = ele.source().position().x;
+      var targetPosX = ele.target().position().x;
+      var sourcePosY = ele.source().position().y;
+      var targetPosY = ele.target().position().y;
+      var minX = Math.min(sourcePosX, targetPosX) - 150;
+      var maxX = Math.max(sourcePosX, targetPosX) + 150;
+      var minY = Math.min(sourcePosY, targetPosY) - 150;
+      var maxY = Math.max(sourcePosY, targetPosY) + 150;
+      var nodes = cy.nodes();
+      var listedNodes = [];
+      for (let i = 0; i < nodes.length; i++) {
+        if (nodes[i].position().x >= minX && nodes[i].position().x <= maxX && nodes[i].position().y >= minY && nodes[i].position().y <= maxY)
+          if (elementUtilities.isLogicalOperator(nodes[i]))
+            listedNodes.push(nodes[i]);
+      }
+
+      if( isFix === false ){
+        currentErrors[check].fixCandidate = [];
+        for( let i = 0; i <  listedNodes.length; i++){
+             currentErrors[check].fixCandidate.push( {label:listedNodes[i].data().label, id: listedNodes[i].data().id});
+        }
+        check++;
+        continue;
+      }
+
+      // node should be selected here, default is 0.
+      if( listedNodes.length > 0 ){
+      let selectedNode = closestNodeForEdges( ele.source(), listedNodes);
+      //selectedNode = findClosest( )
+      var source = ele.source();
+      var target = selectedNode;
+      errorFixParam.edge = ele;
+      errorFixParam.newEdge = { source: source.id(), target: target.id(), edgeParams: edgeParams };
+      fixError(errorFixParam);
+      fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc has a target reference to " + target.id() + ".";
+      }
+    }
+
+    else if (currentErrors[check].pattern == "pd10111") {
+      let ele = cy.getElementById( currentErrors[check].role );
+      //console.log( ele );
+      errorFixParam.edges = [];
+      //console.log( ele + " pd10111 fixing");
+      let connectedEdges = cy.edges('[source =  "' + ele.id() + '"]');
+      if( isFix === false ){
+        currentErrors[check].fixCandidate = [];
+        for( let i = 0; i <  connectedEdges.length; i++){
+             currentErrors[check].fixCandidate.push( {label:connectedEdges[i].data().label, id: connectedEdges[i].data().id});
+        }
+        check++;
+        continue;
+      }
+         console.log(connectedEdges.length);
+      if (connectedEdges.length !== 0) {
+        let selectedEdge = findClosestNode(ele, connectedEdges); // default , the selection of edge will be determined later.
+        for (let i = 0; i < connectedEdges.size(); i++) {
+          if (connectedEdges[i].id() != selectedEdge.id()) {
+            errorFixParam.edges.push(connectedEdges[i]);
+          }
+        }
+        console.log( "pd10111 fix")
+        fixError(errorFixParam);
+        //errors[check].status = "solved";
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Arc between this node and " + selectedEdge.target().id() + " is kept.";
+      }
+      else
+        numberOfUnsolvedErrors++;
+    }
+    else if (currentErrors[check].pattern == "pd10104") {
+      var connectedEdges = ele.connectedEdges().filter('[class="consumption"]');
+      if( isFix === false ){
+        currentErrors[check].fixCandidate = [];
+        for( let i = 0; i <  connectedEdges.length; i++){
+             currentErrors[check].fixCandidate.push( {label:connectedEdges[i].data().label, id: connectedEdges[i].data().id});
+        }
+        check++;
+        continue;
+      }
+      errorFixParam.nodes = [];
+      errorFixParam.edges = [];
+      selectedEdge = closestNode(ele, connectedEdges); // default selection, it will be determined. closest one will be kept. 
+      for (let i = 0; i < connectedEdges.size(); i++) {
+        if (connectedEdges[i].id() != selectedEdge.id()) {
+          errorFixParam.nodes.push(connectedEdges[i].source().id() == ele.id() ? connectedEdges[i].target() : connectedEdges[i].source());
+          errorFixParam.edges.push(connectedEdges[i]);
+        }
+      }
+      fixError(errorFixParam);
+      fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc between dissocation glyph and consumption glyph(" + (selectedEdge.source().id() === ele.id() ?
+        selectedEdge.target().id() : selectedEdge.source().id()) + ") is kept.";
+      // errors[check].status = "solved";
+    }
+    else if (currentErrors[check].pattern == "pd10108") {
+      let connectedEdges = ele.connectedEdges().filter('[class = "production"]');
+      if( isFix === false ){
+        currentErrors[check].fixCandidate = [];
+        for( let i = 0; i <  connectedEdges.length; i++){
+             currentErrors[check].fixCandidate.push( {label:connectedEdges[i].data().label, id: connectedEdges[i].data().id});
+        }
+        check++;
+        continue;
+      }
+      // choose deleted edges and nodes each here when the deletion method is determined
+      let selectedEdge = findClosestNode(ele, connectedEdges);
+      errorFixParam.edges = [];
+      errorFixParam.nodes = [];
+      for (let i = 0; i < connectedEdges.size(); i++) {
+        if (connectedEdges[i].id() != selectedEdge.id()) {
+          errorFixParam.edges.push(connectedEdges[i]);
+          errorFixParam.nodes.push(connectedEdges[i].source().id() == ele.id() ? connectedEdges[i].target() : connectedEdges[i].source());
+        }
+        fixError(errorFixParam);
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc between assocation glyph and production glyph(" + (selectedEdge.source().id() === ele.id() ?
+          selectedEdge.target().id() : selectedEdge.source().id()) + ") is kept.";
+      }
+    }
+    else if (currentErrors[check].pattern == "pd10109") {
+      var sourcePosX = ele.source().position().x;
+      var targetPosX = ele.target().position().x;
+      var sourcePosY = ele.source().position().y;
+      var targetPosY = ele.target().position().y;
+     /* var minX = Math.min(sourcePosX, targetPosX) - 150;
+      var maxX = Math.max(sourcePosX, targetPosX) + 150;
+      var minY = Math.min(sourcePosY, targetPosY) - 150;
+      var maxY = Math.max(sourcePosY, targetPosY) + 150;*/
+      var minX =-15000000000;
+      var maxX = 15000000000;
+      var minY =-15000000000;
+      var maxY = 15000000000;
+      
+
+      var nodes = cy.nodes();
+      var listedNodes = [];
+      for (let i = 0; i < nodes.length; i++) {
+        if (nodes[i].position().x >= minX && nodes[i].position().x <= maxX && nodes[i].position().y >= minY && nodes[i].position().y <= maxY)
+          if (ele.target().data().id != nodes[i].data().id) {
+            if (elementUtilities.isEPNClass(nodes[i])) {
+              listedNodes.unshift(nodes[i]);
+            }
+            else if (elementUtilities.isLogicalOperator(nodes[i])) {
+              listedNodes.push(nodes[i]);
+            }
+          }
+      }
+      if( isFix === false ){
+        currentErrors[check].fixCandidate = [];
+        for( let i = 0; i <  listedNodes.length; i++){
+             currentErrors[check].fixCandidate.push( {label:listedNodes[i].data().label, id: listedNodes[i].data().id});
+        }
+        check++;
+        continue;
+      }
+      // node should be selected here, default is 0.
+      if( listedNodes.length > 0){
+      //let selectedNode = listedNodes[0];
+      let selectedNode = closestNodeForEdges( ele.target(), listedNodes );
+      errorFixParam.newTarget = ele.target().id();
+      errorFixParam.newSource = selectedNode.id();
+      errorFixParam.edge = ele;
+      errorFixParam.portsource = selectedNode.id();
+      fixError(errorFixParam);
+      //errors[check].status = "solved";
+      fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Modulation arc has a source reference to " + selectedNode.id() + ".";
+      }
+
+    }
+
+    else if (currentErrors[check].pattern == "pd10105" || currentErrors[check].pattern == "pd10106") {
+      let sourceNode = ele.source();
+      let targetNode = ele.target();
+      if( isFix === false ){
+        continue;
+        currentErrors[check].fixCandidate = [];
+        for( let i = 0; i <  connectedEdges.length; i++){
+             currentErrors[check].fixCandidate.push( {label:connectedEdges[i].data().label, id: connectedEdges[i].data().id});
+        }
+        check++;
+        continue;
+      }
+      if (elementUtilities.isPNClass(targetNode) && elementUtilities.isEPNClass(sourceNode)) {
+        errorFixParam.edge = ele;
+        fixError(errorFixParam);
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The source and target of production arc have been swapped.";
+      }
+      else {
+        numberOfUnsolvedErrors++;
+      }
+    }
+    else {
+      numberOfUnsolvedErrors++;
+    }
+    console.log( "one fix step is completed");
+    let currentErrorRole = currentErrors[check].role;
+    let currentErrorPattern = currentErrors[check].pattern;
+    let isSolved = true;
+    data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
+    data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
+    currentSbgn = data;
+    fs.writeFileSync('./src/sbgnFile.sbgn', data);
+    let result = SaxonJS.transform({
+      stylesheetFileName: './src/templatelibsbgn.sef.json',
+      sourceFileName: "./src/sbgnFile.sbgn",
+      destination: "serialized"
+    }).principalResult;
+    fs.unlinkSync('./src/sbgnFile.sbgn');
+    let parseString = xml2js.parseString;
+    let parsedResult;
+    parseString(result, function (err, data) {
+      parsedResult = data;
+    });
+    currentErrors = [];
+    if (parsedResult["svrl:schematron-output"]["svrl:failed-assert"] == undefined) {
+    }
+    else {
+      let errCount = parsedResult["svrl:schematron-output"]["svrl:failed-assert"].length;
+      for (let i = 0; i < errCount; i++) {
+        let error = new Issue();
+        error.setText(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:text"]);
+        error.setPattern(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["$"]["id"]);
+        error.setRole(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:diagnostic-reference"][0]["_"]);
+        //console.log( error.pattern + " " + error.role) ;
+        if( currentErrorPattern === error.pattern && currentErrorRole === error.role){
+          isSolved = false;
+        }
+        currentErrors.push(error);
+      }
+    }
+    console.log( currentErrors );
+    console.log( currentLength === currentErrors.length);
+    //console.log( currentErrors.length);
+    currentErrors = reduceErrors( currentErrors, cy);
+    console.log( " remaining errors " + currentErrors.length);
+    if ( !isSolved) {
+      check++;
+      console.log( previousErrorCode + " " + previousErrorRole);
+      unsolvedErrorInformation[previousErrorCode + previousErrorRole] = true;
+    }
+  }
+  if( isFix === false ){
+    return currentErrors;
+  }
+
+}
+
 function reduceErrors(errors,cy){
   let reducedErrors = [];
   let errorInfo = {};
@@ -84,7 +555,7 @@ function reduceErrors(errors,cy){
   for( let i = 0; i < errors.length;i++){
     if( errors[i].pattern != "pd10125" && errors[i].pattern != "pd10142" && 
     errors[i].pattern != "pd10109" && errors[i].pattern != "pd10124" 
-    && errors[i].pattern != "pd10111" && errors[i].pattern != "pd10126"){
+    && errors[i].pattern != "pd10111" && errors[i].pattern != "pd10126" && errors[i].pattern != "pd10141"){
       reducedErrors.push( errors[i]);
       continue;
     }
@@ -102,6 +573,11 @@ function reduceErrors(errors,cy){
       if( connectedEdges.length == 1 ) {
         continue;
        }
+    }
+    else if( errors[i].pattern == "pd10141"){
+      if( ele.incomers().length > 0 && ele.outgoers().length > 0){
+        continue;
+      }
     }
     else {
       let connectedEdges = ele.connectedEdges().filter('[class="logic arc"]');
@@ -249,39 +725,70 @@ app.use(async (req, res, next) => {
   
   if (req.method === "POST") {
     console.log( "request started");
+    let showFix = req.query.showFix !== undefined ? true : false;
+   //let showFix = false;
 
     let body = '';
     let isJson = false;
     let options = '';
     let data = '';
     let errorMessage = undefined;
+    let errors = [];
     req.on('data', chunk => {
       body += chunk;
     })
 
     req.on('end', () => {
+      console.log( body);
       let indexOfOptions = Math.min(body.includes("layoutOptions") ? body.indexOf("layoutOptions") : Number.MAX_SAFE_INTEGER,
         body.includes("imageOptions") ? body.indexOf("imageOptions") : Number.MAX_SAFE_INTEGER,
         body.includes("queryOptions") ? body.indexOf("queryOptions") : Number.MAX_SAFE_INTEGER);
       let indexOfOptionsStart;
+      let indexOfErrorsStart = body.includes("[") ? body.indexOf("[") : Number.MAX_SAFE_INTEGER;
+      if( indexOfErrorsStart < Number.MAX_SAFE_INTEGER )
+      console.log( body.charAt(indexOfErrorsStart));
       if (indexOfOptions != Number.MAX_SAFE_INTEGER) {
         indexOfOptionsStart = body.substring(0, indexOfOptions).lastIndexOf("{");
         options = body.substring(indexOfOptionsStart);
         data = body.substring(0, indexOfOptionsStart);
       }
       else {
+        indexOfOptionsStart = Number.MAX_SAFE_INTEGER;
         data = body;
         options = "";
       }
+      if( indexOfErrorsStart === Number.MAX_SAFE_INTEGER ){
+        console.log( "errors not ");
+        errors = "";
+      }
+      else {
+        errors = indexOfOptionsStart !== Number.MAX_SAFE_INTEGER ? body.substring( indexOfErrorsStart, (indexOfOptionsStart))
+        : body.substring( indexOfErrorsStart);
+        data = body.substring(0, indexOfErrorsStart);
+      }
+         /* lengthOfData= Math.min(lengthOfData, indexOfOptionsStart);
+      data = lengthOfData === Number.MAX_SAFE_INTEGER ? body : body.substring(0, lengthOfData);
+      errors = indexOfErrorsStart == Number.MAX_SAFE_INTEGER ? [] : ( indexOfOptionsStart < Number.MAX_SAFE_INTEGER ? body.substring( indexOfErrorsStart,(indexOfOptionsStart- indexOfErrorsStart) ): 
+      body.substring( indexOfErrorsStart ));*/
 
       try {
+        console.log( indexOfErrorsStart + " "  + indexOfOptionsStart);
+        console.log( body.substring(indexOfErrorsStart));;
+        console.log( body.substring( indexOfErrorsStart, (indexOfOptionsStart)));
+        if( errors !== "" )
+        errors = JSON.parse(errors);
+        else {
+          errors = [];
+        } 
         options = JSON.parse(options);
+        console.log( options);
       }
       catch (e) {
         let date = new Date()
         errorMessage = "<b>Sorry! Cannot process the given file!</b><br><br>There is something wrong with the format of the options!<br><br>Error detail: <br>" + e;
         logger.log('---- %s', date + ": \n" + errorMessage.replace(/<br\s*[\/]?>/gi, "\n").replace(/<b\s*\/?>/mg, "") + "\n");
       }
+      console.log( errors);
       /*if (req.query.errorFixing === "true") {
         return next();
       }*/
@@ -320,6 +827,7 @@ app.use(async (req, res, next) => {
       data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
       currentSbgn = data;
       fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
+      if( errors.length === 0){
       let result = SaxonJS.transform({
         stylesheetFileName: './src/templatelibsbgn.sef.json',
         sourceFileName: "./src/sbgnFile.sbgn",
@@ -331,7 +839,6 @@ app.use(async (req, res, next) => {
       parseString(result, function (err, data) {
         parsedResult = data;
       });
-      let errors = [];
       if (parsedResult["svrl:schematron-output"]["svrl:failed-assert"] == undefined) {
       }
       else {
@@ -345,6 +852,7 @@ app.use(async (req, res, next) => {
         }
       }
       errors = reduceErrors(errors,cy);
+      }
       data = cyJsonData;
       let unsolvedErrorInformation = {};
       let fixExplanation = {};
@@ -361,6 +869,7 @@ app.use(async (req, res, next) => {
       res.locals.currentSbgn = currentSbgn;
       res.locals.cy = cy;
       res.locals.errors = errors;
+      res.locals.showFix = showFix;
       res.locals.imageOptions = {
         format: 'png',
         background: 'transparent',
@@ -393,6 +902,7 @@ app.post('/validation', async (req, res, next) => {
   let errors = res.locals.errors;
   let unsolvedErrorInformation = res.locals.unsolvedErrorInformation;
   let fixExplanation = res.locals.fixExplanation;
+  let showFix = res.locals.showFix;
 
   
   fixExplanation = {};
@@ -480,6 +990,9 @@ app.post('/validation', async (req, res, next) => {
     data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
     currentSbgn = data;
     highlightErrors(errors, cy, imageOptions, true,unsolvedErrorInformation, fixExplanation);
+    if( showFix === true ){
+      errors = findCandidatesOrFix( errors, cy, false );
+    }
     try {
 
       snap.start().then(function () {
@@ -539,6 +1052,13 @@ app.post('/fixError', (req, res) => {
   let errors = res.locals.errors;
   let unsolvedErrorInformation = res.locals.unsolvedErrorInformation;
 
+  let fixData = {};
+  for( let i = 0; i < errors.length; i++){
+      if( errors[i].fixChoice !== undefined ){
+        fixData[errors[i].pattern + errors[i].role] = errors[i].fixChoice;
+      }
+  }
+
   /*let imageOptions = {
     format: 'png',
     background: 'transparent',
@@ -595,6 +1115,12 @@ app.post('/fixError', (req, res) => {
     if (currentErrors[check].pattern == "pd10112") {
       var compartments = cy.nodes('[class= "compartment"]');
       var listedNodes = [];
+      if( fixData[previousErrorCode + previousErrorRole] !== undefined ){
+        let node = cy.getElementById( fixData[previousErrorCode + previousErrorRole]);
+        ele.move({ "parent": node.data().id });
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Fixed by moving " + " inside " + node.data().id + ".";
+      }
+      else {
       for (var i = 0; i < compartments.length; i++) {
         if (compartments[i].parent().length == 0)
           listedNodes.push(compartments[i]);
@@ -606,6 +1132,7 @@ app.post('/fixError', (req, res) => {
         ele.move({ "parent": listedNodes[0].data().id });
         fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Fixed by moving " + " inside " + listedNodes[0].data().id + ".";
       }
+    }
     }
     else if (currentErrors[check].pattern == "pd10126") {
       let connectedEdges = ele.connectedEdges().filter('[class="logic arc"]');
@@ -655,6 +1182,7 @@ app.post('/fixError', (req, res) => {
         errorFixParam.newSource = selectedNode.id();
         errorFixParam.edge = ele;
         errorFixParam.portsource = selectedNode.id();
+        console.log( "fix operation for pd10124");
         fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Arc is connected to " + selectedNode.id() + ".";
         fixError(errorFixParam);
       }
@@ -901,6 +1429,9 @@ app.post('/fixError', (req, res) => {
       numberOfUnsolvedErrors++;
     }
     console.log( "one fix step is completed");
+    let currentErrorRole = currentErrors[check].role;
+    let currentErrorPattern = currentErrors[check].pattern;
+    let isSolved = true;
     data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
     data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
     currentSbgn = data;
@@ -927,14 +1458,18 @@ app.post('/fixError', (req, res) => {
         error.setPattern(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["$"]["id"]);
         error.setRole(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:diagnostic-reference"][0]["_"]);
         //console.log( error.pattern + " " + error.role) ;
+        if( currentErrorPattern === error.pattern && currentErrorRole === error.role){
+          isSolved = false;
+        }
         currentErrors.push(error);
       }
     }
+    console.log( currentErrors );
     console.log( currentLength === currentErrors.length);
     //console.log( currentErrors.length);
     currentErrors = reduceErrors( currentErrors, cy);
     console.log( " remaining errors " + currentErrors.length);
-    if (currentLength == currentErrors.length) {
+    if ( !isSolved) {
       check++;
       console.log( previousErrorCode + " " + previousErrorRole);
       unsolvedErrorInformation[previousErrorCode + previousErrorRole] = true;
