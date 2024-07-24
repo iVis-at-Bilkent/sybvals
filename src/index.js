@@ -182,6 +182,7 @@ function findCandidatesOrFix( errors, cy, isFix){
         errorFixParam.newSource = selectedNode.id();
         errorFixParam.edge = ele;
         errorFixParam.portsource = selectedNode.id();
+        console.log( "fix operation for pd10124");
         fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Arc is connected to " + selectedNode.id() + ".";
         fixError(errorFixParam);
       }
@@ -356,6 +357,7 @@ function findCandidatesOrFix( errors, cy, isFix){
         check++;
         continue;
       }
+         console.log(connectedEdges.length);
       if (connectedEdges.length !== 0) {
         let selectedEdge = findClosestNode(ele, connectedEdges); // default , the selection of edge will be determined later.
         for (let i = 0; i < connectedEdges.size(); i++) {
@@ -498,6 +500,7 @@ function findCandidatesOrFix( errors, cy, isFix){
       check++;
       continue;
     }
+    console.log( "one fix step is completed");
     let currentErrorRole = currentErrors[check].role;
     let currentErrorPattern = currentErrors[check].pattern;
     let isSolved = true;
@@ -533,9 +536,8 @@ function findCandidatesOrFix( errors, cy, isFix){
         currentErrors.push(error);
       }
     }
-    //console.log( currentErrors.length);
+   
     currentErrors = reduceErrors( currentErrors, cy);
-    console.log( " remaining errors " + currentErrors.length);
     if ( !isSolved) {
       check++;
       console.log( previousErrorCode + " " + previousErrorRole);
@@ -560,7 +562,6 @@ function reduceErrors(errors,cy){
       continue;
     }
     var ele = cy.getElementById(errors[i].role);
-    //console.log( i + " " + errors[i].pattern + " " + errors[i].role + " " + ele.target().data().class );
     if( (errors[i].pattern == "pd10125" || errors[i].pattern == "pd10142" )  && (ele.target().data().class == "and" || ele.target().data().class == "or" || ele.target().data().class == "not" ) ) {
       continue;
     }
@@ -569,7 +570,6 @@ function reduceErrors(errors,cy){
     }
     else if( (errors[i].pattern == "pd10111")){
       var connectedEdges = cy.edges('[source =  "' + ele.id() + '"]');
-      console.log( connectedEdges.length + " " + ele.id());
       if( connectedEdges.length == 1 ) {
         continue;
        }
@@ -596,6 +596,7 @@ function reduceErrors(errors,cy){
     var edges = node.incomers();
    
     var edgess = node.outgoers();
+    console.log( "outgoers " + node.data().id + " " + node.data().class + " " + edgess.size());
     edgess.forEach( edge => {
      // console.log( edge.data());
     });
@@ -629,6 +630,7 @@ function reduceErrors(errors,cy){
       
     //console.log( node.data());
     var edges = node.incomers();
+    console.log( "incomers " + node.data().id + " " + node.data().class + " " + edges.size());
     edges.forEach( edge => {
      // console.log( edge.data());
     });
@@ -737,12 +739,12 @@ app.use(async (req, res, next) => {
     })
 
     req.on('end', () => {
+      console.log( body);
       let indexOfOptions = Math.min(body.includes("layoutOptions") ? body.indexOf("layoutOptions") : Number.MAX_SAFE_INTEGER,
         body.includes("imageOptions") ? body.indexOf("imageOptions") : Number.MAX_SAFE_INTEGER,
         body.includes("queryOptions") ? body.indexOf("queryOptions") : Number.MAX_SAFE_INTEGER);
       let indexOfOptionsStart;
       let indexOfErrorsStart = body.includes("[") ? body.indexOf("[") : Number.MAX_SAFE_INTEGER;
-      if( indexOfErrorsStart < Number.MAX_SAFE_INTEGER )
       if (indexOfOptions != Number.MAX_SAFE_INTEGER) {
         indexOfOptionsStart = body.substring(0, indexOfOptions).lastIndexOf("{");
         options = body.substring(indexOfOptionsStart);
@@ -779,6 +781,7 @@ app.use(async (req, res, next) => {
         errorMessage = "<b>Sorry! Cannot process the given file!</b><br><br>There is something wrong with the format of the options!<br><br>Error detail: <br>" + e;
         logger.log('---- %s', date + ": \n" + errorMessage.replace(/<br\s*[\/]?>/gi, "\n").replace(/<b\s*\/?>/mg, "") + "\n");
       }
+      console.log( errors);
       /*if (req.query.errorFixing === "true") {
         return next();
       }*/
@@ -981,7 +984,9 @@ app.post('/validation', async (req, res, next) => {
     currentSbgn = data;
     highlightErrors(errors, cy, imageOptions, true,unsolvedErrorInformation, fixExplanation);
     if( showFix === true ){
+      console.log( errors );
       errors = findCandidatesOrFix( errors, cy, false );
+      console.log( errors);
     }
     try {
 
@@ -1139,6 +1144,7 @@ app.post('/fixError', (req, res) => {
         }
       }
       if (connectedEdges.length !== 0) {
+        console.log( "pd10126");
         fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Edge between this node and " + selectedEdge.source().id() + " is kept.";
         fixError(errorFixParam);
       }
@@ -1453,6 +1459,9 @@ app.post('/fixError', (req, res) => {
         currentErrors.push(error);
       }
     }
+    //console.log( currentErrors );
+    console.log( currentLength === currentErrors.length);
+    //console.log( currentErrors.length);
     currentErrors = reduceErrors( currentErrors, cy);
     for( let i = 0; i < currentErrors.length; i++){
       if( currentErrorPattern === currentErrors[i].pattern && currentErrorRole === currentErrors[i].role){
