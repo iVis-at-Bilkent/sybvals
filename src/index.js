@@ -78,8 +78,9 @@ function postProcessForLayouts(cy) {
 }
 
 function findCandidatesOrFix( errors, cy, isFix){
-  currentErrors = errors;
+  let currentErrors = errors;
   let check = 0; 
+  let numberOfUnsolvedErrors = 0;
   while (check < currentErrors.length) {
     //console.log( " checking step " + check + " " + currentErrors.length);
     let currentLength = currentErrors.length;
@@ -181,7 +182,6 @@ function findCandidatesOrFix( errors, cy, isFix){
         errorFixParam.newSource = selectedNode.id();
         errorFixParam.edge = ele;
         errorFixParam.portsource = selectedNode.id();
-        console.log( "fix operation for pd10124");
         fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Arc is connected to " + selectedNode.id() + ".";
         fixError(errorFixParam);
       }
@@ -356,7 +356,6 @@ function findCandidatesOrFix( errors, cy, isFix){
         check++;
         continue;
       }
-         console.log(connectedEdges.length);
       if (connectedEdges.length !== 0) {
         let selectedEdge = findClosestNode(ele, connectedEdges); // default , the selection of edge will be determined later.
         for (let i = 0; i < connectedEdges.size(); i++) {
@@ -495,7 +494,10 @@ function findCandidatesOrFix( errors, cy, isFix){
     else {
       numberOfUnsolvedErrors++;
     }
-    console.log( "one fix step is completed");
+    if( isFix === false ){
+      check++;
+      continue;
+    }
     let currentErrorRole = currentErrors[check].role;
     let currentErrorPattern = currentErrors[check].pattern;
     let isSolved = true;
@@ -531,8 +533,6 @@ function findCandidatesOrFix( errors, cy, isFix){
         currentErrors.push(error);
       }
     }
-    console.log( currentErrors );
-    console.log( currentLength === currentErrors.length);
     //console.log( currentErrors.length);
     currentErrors = reduceErrors( currentErrors, cy);
     console.log( " remaining errors " + currentErrors.length);
@@ -569,7 +569,7 @@ function reduceErrors(errors,cy){
     }
     else if( (errors[i].pattern == "pd10111")){
       var connectedEdges = cy.edges('[source =  "' + ele.id() + '"]');
-      console.log( connectedEdges.length);
+      console.log( connectedEdges.length + " " + ele.id());
       if( connectedEdges.length == 1 ) {
         continue;
        }
@@ -596,7 +596,6 @@ function reduceErrors(errors,cy){
     var edges = node.incomers();
    
     var edgess = node.outgoers();
-    console.log( "outgoers " + node.data().id + " " + node.data().class + " " + edgess.size());
     edgess.forEach( edge => {
      // console.log( edge.data());
     });
@@ -630,7 +629,6 @@ function reduceErrors(errors,cy){
       
     //console.log( node.data());
     var edges = node.incomers();
-    console.log( "incomers " + node.data().id + " " + node.data().class + " " + edges.size());
     edges.forEach( edge => {
      // console.log( edge.data());
     });
@@ -739,14 +737,12 @@ app.use(async (req, res, next) => {
     })
 
     req.on('end', () => {
-      console.log( body);
       let indexOfOptions = Math.min(body.includes("layoutOptions") ? body.indexOf("layoutOptions") : Number.MAX_SAFE_INTEGER,
         body.includes("imageOptions") ? body.indexOf("imageOptions") : Number.MAX_SAFE_INTEGER,
         body.includes("queryOptions") ? body.indexOf("queryOptions") : Number.MAX_SAFE_INTEGER);
       let indexOfOptionsStart;
       let indexOfErrorsStart = body.includes("[") ? body.indexOf("[") : Number.MAX_SAFE_INTEGER;
       if( indexOfErrorsStart < Number.MAX_SAFE_INTEGER )
-      console.log( body.charAt(indexOfErrorsStart));
       if (indexOfOptions != Number.MAX_SAFE_INTEGER) {
         indexOfOptionsStart = body.substring(0, indexOfOptions).lastIndexOf("{");
         options = body.substring(indexOfOptionsStart);
@@ -758,7 +754,6 @@ app.use(async (req, res, next) => {
         options = "";
       }
       if( indexOfErrorsStart === Number.MAX_SAFE_INTEGER ){
-        console.log( "errors not ");
         errors = "";
       }
       else {
@@ -772,23 +767,18 @@ app.use(async (req, res, next) => {
       body.substring( indexOfErrorsStart ));*/
 
       try {
-        console.log( indexOfErrorsStart + " "  + indexOfOptionsStart);
-        console.log( body.substring(indexOfErrorsStart));;
-        console.log( body.substring( indexOfErrorsStart, (indexOfOptionsStart)));
         if( errors !== "" )
         errors = JSON.parse(errors);
         else {
           errors = [];
         } 
         options = JSON.parse(options);
-        console.log( options);
       }
       catch (e) {
         let date = new Date()
         errorMessage = "<b>Sorry! Cannot process the given file!</b><br><br>There is something wrong with the format of the options!<br><br>Error detail: <br>" + e;
         logger.log('---- %s', date + ": \n" + errorMessage.replace(/<br\s*[\/]?>/gi, "\n").replace(/<b\s*\/?>/mg, "") + "\n");
       }
-      console.log( errors);
       /*if (req.query.errorFixing === "true") {
         return next();
       }*/
@@ -1139,7 +1129,8 @@ app.post('/fixError', (req, res) => {
       errorFixParam.edges = [];
       errorFixParam.nodes = [];
       let selectedEdge = connectedEdges[check]; // 0 is default, it should be decided later.
-      selectedEdge = findClosestNode(ele, connectedEdges);
+      selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):
+        findClosestNode(ele, connectedEdges);
       //console.log("closest edge selected : " + selectedEdge);
       for (let i = 0; i < connectedEdges.size(); i++) {
         if (selectedEdge.id() != connectedEdges[i].id()) {
@@ -1177,7 +1168,7 @@ app.post('/fixError', (req, res) => {
           }
       }
       if (listedNodes.length !== 0) {
-        let selectedNode = closestNodeForEdges(ele.target(), listedNodes );
+        let selectedNode = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):closestNodeForEdges(ele.target(), listedNodes );
         errorFixParam.newTarget = ele.target().id();
         errorFixParam.newSource = selectedNode.id();
         errorFixParam.edge = ele;
@@ -1305,7 +1296,7 @@ app.post('/fixError', (req, res) => {
 
       // node should be selected here, default is 0.
       if( listedNodes.length > 0 ){
-      let selectedNode = closestNodeForEdges( ele.source(), listedNodes);
+      let selectedNode = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):losestNodeForEdges( ele.source(), listedNodes);
       //selectedNode = findClosest( )
       var source = ele.source();
       var target = selectedNode;
@@ -1324,7 +1315,7 @@ app.post('/fixError', (req, res) => {
       let connectedEdges = cy.edges('[source =  "' + ele.id() + '"]');
          console.log(connectedEdges.length);
       if (connectedEdges.length !== 0) {
-        let selectedEdge = findClosestNode(ele, connectedEdges); // default , the selection of edge will be determined later.
+        let selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):findClosestNode(ele, connectedEdges); // default , the selection of edge will be determined later.
         for (let i = 0; i < connectedEdges.size(); i++) {
           if (connectedEdges[i].id() != selectedEdge.id()) {
             errorFixParam.edges.push(connectedEdges[i]);
@@ -1342,7 +1333,7 @@ app.post('/fixError', (req, res) => {
       var connectedEdges = ele.connectedEdges().filter('[class="consumption"]');
       errorFixParam.nodes = [];
       errorFixParam.edges = [];
-      selectedEdge = closestNode(ele, connectedEdges); // default selection, it will be determined. closest one will be kept. 
+      selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):closestNode(ele, connectedEdges); // default selection, it will be determined. closest one will be kept. 
       for (let i = 0; i < connectedEdges.size(); i++) {
         if (connectedEdges[i].id() != selectedEdge.id()) {
           errorFixParam.nodes.push(connectedEdges[i].source().id() == ele.id() ? connectedEdges[i].target() : connectedEdges[i].source());
@@ -1357,7 +1348,7 @@ app.post('/fixError', (req, res) => {
     else if (currentErrors[check].pattern == "pd10108") {
       let connectedEdges = ele.connectedEdges().filter('[class = "production"]');
       // choose deleted edges and nodes each here when the deletion method is determined
-      let selectedEdge = findClosestNode(ele, connectedEdges);
+      let selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):findClosestNode(ele, connectedEdges);
       errorFixParam.edges = [];
       errorFixParam.nodes = [];
       for (let i = 0; i < connectedEdges.size(); i++) {
@@ -1401,7 +1392,7 @@ app.post('/fixError', (req, res) => {
       // node should be selected here, default is 0.
       if( listedNodes.length > 0){
       //let selectedNode = listedNodes[0];
-      let selectedNode = closestNodeForEdges( ele.target(), listedNodes );
+      let selectedNode = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):closestNodeForEdges( ele.target(), listedNodes );
       errorFixParam.newTarget = ele.target().id();
       errorFixParam.newSource = selectedNode.id();
       errorFixParam.edge = ele;
@@ -1458,16 +1449,16 @@ app.post('/fixError', (req, res) => {
         error.setPattern(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["$"]["id"]);
         error.setRole(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:diagnostic-reference"][0]["_"]);
         //console.log( error.pattern + " " + error.role) ;
-        if( currentErrorPattern === error.pattern && currentErrorRole === error.role){
-          isSolved = false;
-        }
+       
         currentErrors.push(error);
       }
     }
-    console.log( currentErrors );
-    console.log( currentLength === currentErrors.length);
-    //console.log( currentErrors.length);
     currentErrors = reduceErrors( currentErrors, cy);
+    for( let i = 0; i < currentErrors.length; i++){
+      if( currentErrorPattern === currentErrors[i].pattern && currentErrorRole === currentErrors[i].role){
+        isSolved = false;
+      }
+    }
     console.log( " remaining errors " + currentErrors.length);
     if ( !isSolved) {
       check++;

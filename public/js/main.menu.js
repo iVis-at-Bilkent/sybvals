@@ -25,13 +25,6 @@ let setFileContent = function (fileName) {
 	span.appendChild(document.createTextNode(fileName));
 };
 
-function myFunction(event){
-   console.log( event);
-}
-
-function idOfDiv( id){
-	return '#solutionField' + stringify(id);
-}
 
 $("#save-file-json").on("click", function (e) {
 	let save = [];
@@ -130,7 +123,6 @@ let applyErrorFix = async function () {
 		$('#errorsField').css({ width: errorWidth + 'px' });
 		$("#errorsArea").empty();
 		let numberOfUnsolvedErrors = 0;
-		console.log( errors );
 		if (errors.length > 0) {
 			res.errors.forEach((error) => {
 				let imgSource = error.status === "solved" ? "img/check-mark.png" : "img/cross.png";
@@ -170,7 +162,6 @@ let applyErrorFix = async function () {
 				$("#errorsArea").append(errorRectangle);
 				let uiDivider = $('<div class="ui divider"></div>');
 				uiDivider.css({ 'margin': '0rem 0' });
-				console.log( error.colorCode);
 				$(errorString).css({
 					'border': '3px solid', 'border-color': error.colorCode/*error.status === "unsolved" ? errorHighlightColors[numberOfUnsolvedErrors % 8]
 						: "grey"*/
@@ -211,18 +202,10 @@ let applyErrorFix = async function () {
 	}
 
 }
-$('.ui.radio.checkbox').on('click', event =>{
-                   console.log( event);
-				});
 
 let processValidation = async function () {
 	document.getElementById("draggableImageArea").style.display = "none";
 	document.getElementById("sbgnImageUI").style.display = "inline";
-	$('.ui.radio.checkbox').on('click', event =>{
-                   console.log( event);
-				});
-
-
 	errors = undefined;
 	if (!syblars) {
 		//console.log( "request  " + port );
@@ -290,7 +273,6 @@ let processValidation = async function () {
 		// get error info
 		if (errors.length > 0) {
 			res.errors.forEach((error) => {
-				console.log( error.errorNo);
 				let errorNo = $('<div class="ui item"> <b>Error </b> ' + error.errorNo + '</div>');
 				let errorPattern = $('<div class="ui item"> <b>Pattern:</b> ' + error.pattern + '</div>');
 				let errorRole = $('<div class="ui item"> <b>Role:</b> ' + error.role + '</div>');
@@ -302,16 +284,11 @@ let processValidation = async function () {
 				let item = $('<div id = "item' + error.errorNo + '" class="item"> <a class="title"> <i class="dropdown icon"></i>Choose Test</a><div class="content"><div class="ui form"><div class="grouped fields" id ="solutionField' + error.errorNo + '"> </div></div></div></div>' );
 				let option = $('<div class="field"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" name="test" value="ds"><label>Data Structure</label></div></div>');
 				let classItem =  $('<a class="active title">');
-				console.log( accordion[0].id);
 				let str = ("#solutionField" + error.errorNo ).toString();
 				//let str = document.getElementById(accordion[0].id).firstChild.children[1].children[0].children[0].id;
-				console.log( accordion[0].children[0]);
 				//str += error.errorNo;
-				console.log( str === "#solutionField1");
 				let id = error.errorNo;
 				let element = $( `#solutionField${id}` );
-				console.log( element);
-				console.log( document.getElementById("solutionField1"));
 				$('.ui.accordion').accordion();
 				$('.ui.radio.checkbox').checkbox();
 				$('.ui.checkbox').checkbox();
@@ -328,7 +305,6 @@ let processValidation = async function () {
 				$('.ui.radio.checkbox').checkbox();
 				$('.ui.checkbox').checkbox();
 				
-				console.log( element.val() );
 
 			
                
@@ -362,14 +338,10 @@ let processValidation = async function () {
 				$('.ui.checkbox').checkbox();
 			});
 			$('.ui.radio.checkbox').on('click', event =>{
-				console.log( event.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id);
 				let errorId = event.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
 				errorId = errorId.replace("rec", "");
 				errorId = parseInt( errorId ) - 1;
 				errors[errorId].fixChoice = event.delegateTarget.firstChild.value;
-				console.log( errorId);
-				console.log( event.value);
-				console.log( event.delegateTarget.firstChild.value);
 				event.currentTarget.style.checked = true;
 ;			 });
 		}
