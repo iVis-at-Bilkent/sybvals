@@ -17,7 +17,7 @@
 
 <body>
 
-	<div class="ui container">
+	<div class="ui container" style="overflow-x: scroll;">
 		<div class="ui vertically padded grid">
 			<div class="row" style="padding-bottom: 0; padding-top: 0;  margin-top: 15px;">
 				<div class="four wide column">
@@ -96,12 +96,11 @@
 									<label class="radio-label">SVG</label>
 								</div>
 							</div>
-							<img class="ui image" id="imageSettingsDefault" title="Reset to default" src="img/settings.svg"
-								style="height: 25px; width: 25px; margin-left: 30px; margin-top: 0px; float: right; padding: 2.5px">
-						</div>
-						<div class="inline fields">
+							
+						<!--</div>
+						 <div class="inline fields"> -->
 
-							<span class="add-on layout-text option-label" title="Desired image width"> Width: </span>
+							<span style = "margin-left: 40px;"class="add-on layout-text option-label" title="Desired image width"> Width: </span>
 							<div class="two wide field">
 								<input type="number" id="imageWidth"
 									oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : 0"
@@ -116,7 +115,10 @@
 							<input type="checkbox" id='auto-size-graph' checked>
 							<!-- <label class="radio-label">Transparent</label> -->
 							<span class="add-on layout-text option-label" style="margin-left: 6px;"> Auto </span>
-						</div>
+
+							<img class="ui image" id="imageSettingsDefault" title="Reset to default" src="img/settings.svg"
+								style="height: 25px; width: 25px; margin-left: 30px; margin-top: 0px; float: right; padding: 2.5px">
+						 </div> 
 
 						<div class="inline fields">
 							<span class="add-on layout-text option-label" title="Node color"> Color: </span>
@@ -124,7 +126,7 @@
                   <input type="color" id="color" value="#9ecae1">
                 </div>
                 <span class="add-on layout-text option-label"> or </span> -->
-							<div class="seven wide field">
+							<!--<div class="seven wide field">-->
 								<div class="field">
 									<select id="colorScheme">
 										<option value="greyscale">Greyscale</option>
@@ -137,10 +139,10 @@
 										<option value="black_white">Black-White</option>
 									</select>
 								</div>
-							</div>
-						</div>
-						<div class="inline fields">
-							<span class="add-on layout-text option-label" title="Image background color"> Background: </span>
+							<!--/div> -->
+						<!--</div>
+						<div class="inline fields"> -->
+							<span style="margin-left: 40px;" class="add-on layout-text option-label" title="Image background color"> Background: </span>
 							<div class="two wide field">
 								<input type="color" disabled id="imageBackground" value="#ffffff">
 							</div>
@@ -149,8 +151,8 @@
 							<!-- <label class="radio-label">Transparent</label> -->
 							<span class="add-on layout-text option-label" style="margin-left: 6px;"> Transparent </span>
 							<!-- </div> -->
-						</div>
-						<div class="inline fields">
+						<!--</div>
+						<div class="inline fields"> -->
 							<!--<span class="add-on layout-text option-label" title="Error highlight color"> Highlight: </span>
                 <div class="two wide field">
                   <input type="color" id="highlightColor" value="#ff0000">
@@ -162,6 +164,13 @@
 									oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : 0" value="10"
 									min="1">
 							</div>
+						</div>
+						<div class="inline fields">
+							<div class="field">
+						<input type="checkbox" id='resolution-alternatives-checkbox' checked>
+							<!-- <label class="radio-label">Transparent</label> -->
+							<span class="add-on layout-text option-label" style="margin-left: 6px;"> Show Resolution Alternatives </span>
+						</div>
 						</div>
 					</div>
 				</div>
@@ -273,7 +282,7 @@
 			</div>
 		</div>
 		<div id="draggableImageArea"
-			style="display: none;;cursor:pointer;; overflow:hidden;opacity: 1; z-index: 5000;">
+			style="display: none;;cursor:pointer;; overflow:hidden;opacity: 1; z-index: 5000;position: absolute;width: auto;">
 			<div style=" display: flex;cursor: move;z-index: 5000;opacity: inherit;margin-bottom: -3px;" id="dragImage">
 				<img class="ui image" id="closeImageBox" src="img/bitmap.png" title="Close popup"
 					style="height: 25px; width: 25px; padding: 2.5px;">
@@ -285,7 +294,7 @@
 			</div>
 			<div id="imageAreaPopUp" class="ui segment"
 				style="  margin: 3px;; overflow: hidden; padding: 0px;resize: both;">
-				<img style=" padding: 5px !important;overflow: hidden;height:500x !important;max-height: 100%;width: auto;"
+				<img style=" padding: 5px !important;overflow: hidden !important;height: 500px !important;max-height:100%;width: auto;"
 					class="ui centered huge image" id="resultImage">
 			</div>
 		</div>
@@ -359,6 +368,8 @@
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 
 	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.1/underscore-min.js"></script>
