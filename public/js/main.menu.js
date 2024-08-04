@@ -150,8 +150,8 @@ let applyErrorFix = async function () {
 				if (error.explanation !== undefined) {
 					list.append(fixExplanation);
 				}
-				let accordion = $('<div id ="rec' + error.errorNo + '"class="ui vertical accordion menu">');
-				let item = $('<div id = "item' + error.errorNo + '"  class="field"> <a class="title" style = "background: grey; padding : 0"> <i class="dropdown icon"></i>Resolution Alternative</a><div class="content" style = "padding : 0"><div class="ui form"><div class="grouped fields" id ="solutionField' + error.errorNo + '"> </div></div></div></div>' );
+				let accordion = $('<div id ="rec' + error.errorNo + '"class="ui vertical accordion menu" style = "min-height: 0px !important;">');
+				let item = $('<div id = "item' + error.errorNo + '"  class="field"> <a class="title" style = "background: grey; padding : 0; width : inherit !important;display:block;"> <i class="dropdown icon"></i>Resolution Alternative</a><div class="content" style = "padding : 0"><div class="ui form"><div class="grouped fields" id ="solutionField' + error.errorNo + '"> </div></div></div></div>' );
 				let option = $('<div class="field"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" name="test" value="ds"><label>Data Structure</label></div></div>');
 				let classItem =  $('<a class="active title">');
 				let str = ("#solutionField" + error.errorNo ).toString();
@@ -186,9 +186,6 @@ let applyErrorFix = async function () {
 				errorRectangle.css({ 'margin-top': '2px' });
 				errorRectangle.append('</div>');
 				const errorString = "#errorNo" + error.errorNo;
-				
-				console.log( error.errorNo);
-				console.log( error.fixCandidate);
 				$("#errorsArea").append(errorRectangle);
 				let resolutionAlternative;
 				if( showResolutionAlternatives && error.status !== "solved" && error.fixCandidate !== undefined && error.fixCandidate.length > 0){
@@ -219,10 +216,17 @@ let applyErrorFix = async function () {
 				$(errorString).css({ 'margin-right': '7px' });
 			});
 			$('.ui.radio.checkbox').on('click', event =>{
+				
+				try {
+				console.log( "format or alternative" + " "  + event.currentTarget.parentElement.id);
 				let errorId = event.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
 				errorId = errorId.replace("rec", "");
 				errorId = parseInt( errorId ) - 1;
 				errors[errorId].fixChoice = event.delegateTarget.firstChild.value;
+				}
+				catch{
+					event.currentTarget.style.checked = true;
+				}
 				event.currentTarget.style.checked = true;
 ;			 });
 		}
@@ -334,8 +338,8 @@ let processValidation = async function () {
 				let errorText = $('<div class="ui item"> <b>Message:</b> ' + error.text + '</div>');
 				let list = $('<div class="ui list">');
 				let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo + '">');
-				let accordion = $('<div id ="rec' + error.errorNo + '"class="ui vertical accordion menu">');
-				let item = $('<div id = "item' + error.errorNo + '"  class="field"> <a class="title" style = "background: grey; padding : 0"> <i class="dropdown icon"></i>Resolution Alternatives</a><div class="content" style = "padding : 0"><div class="ui form"><div class="grouped fields" id ="solutionField' + error.errorNo + '"> </div></div></div></div>' );
+				let accordion = $('<div id ="rec' + error.errorNo + '"class="ui vertical accordion menu" style = "min-height: 0px !important;">');
+				let item = $('<div id = "item' + error.errorNo + '"  class="field"> <a class="title" style = "background: #efefef; padding : 0; width : inherit !important;display:block;"> <i class="dropdown icon"></i>Resolution Alternatives</a><div class="content" style = "padding : 0"><div class="ui form"><div class="grouped fields" id ="solutionField' + error.errorNo + '"> </div></div></div></div>' );
 				let option = $('<div class="field"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" name="test" value="ds"><label>Data Structure</label></div></div>');
 				let classItem =  $('<a class="active title">');
 				let str = ("#solutionField" + error.errorNo ).toString();
@@ -400,10 +404,17 @@ let processValidation = async function () {
 				$('.ui.checkbox').checkbox();
 			});
 			$('.ui.radio.checkbox').on('click', event =>{
+				console.log( event);
+				console.log( "format or alternative" + " "  );
+				try {
 				let errorId = event.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
 				errorId = errorId.replace("rec", "");
 				errorId = parseInt( errorId ) - 1;
 				errors[errorId].fixChoice = event.delegateTarget.firstChild.value;
+				}
+				catch {
+					event.currentTarget.style.checked = true;
+				}
 				event.currentTarget.style.checked = true;
 ;			 });
 		}
@@ -550,6 +561,8 @@ $("body").on("change", "#file-input", function (e, fileObject) {
 		if (isSBGNML) {
 			fileType = "sbgnml";
 			$("#file-type").html("SBGNML file is detected! <br> Now you can apply validation.");
+			document.getElementById("errorsField").innerText = "Errors";
+	        $('#errorsField').css({ width: '50px' });
 			$("#colorScheme").attr("disabled", false);
 			$("#color").attr("disabled", true);
 		}
@@ -590,8 +603,6 @@ $("body").on("change", "#file-input", function (e, fileObject) {
 });
 
 $("#load-file").on("click", function (e) {
-	document.getElementById("errorsField").innerText = "Errors";
-	$('#errorsField').css({ width: '50px' });
 	$("#file-input").trigger('click');
 });
 

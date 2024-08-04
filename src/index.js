@@ -200,6 +200,61 @@ function findCandidatesOrFix( errors, cy, isFix){
       else
         numberOfUnsolvedErrors++;
     }
+    else if (currentErrors[check].pattern == "pd10127"){
+      let ele = cy.getElementById(currentErrors[check].role);
+      let nodes = cy.nodes();
+      let listedNodes = [];
+      nodes.forEach( node => {
+        if( elementUtilities.isEPNClass( node.data().class ) ) {
+            listedNodes.push( node );
+        }
+      });
+      let closestNode = closestNodeForEdges(ele.target(), listedNodes);
+      currentErrors[check].fixCandidate = [];
+      if( isFix === false){
+        for( let i = 0; i < listedNodes.length; i++){
+          currentErrors[check].fixCandidate.push( {label: getLabel(listedNodes[i]), id: listedNodes[i].data().id});
+          if( closestNode.data().id == listedNodes[i].data().id){
+            currentErrors[check].defaultOption = i;
+          }
+        }
+        check++;
+        continue;
+      }
+      let newSource = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):closestNodeForEdges(ele.target(), listedNodes);
+      errorFixParam.edge = ele;
+      errorFixParam.newEdge = {source: newSource.id(), target: ele.target().id()};
+      fixError( errorFixParam);
+  }
+  else if (currentErrors[check].pattern == "pd10128" || currentErrors[check].pattern == "pd10110"){
+    let ele = cy.getElementById(currentErrors[check].role);
+    let nodes = cy.nodes();
+    let listedNodes = [];
+    nodes.forEach( node => {
+      if( currentErrors[check].pattern == "pd10128" && (node.data().class == "submap" || node.data().class == "terminal" || node.data().class == "tag" )) {
+          listedNodes.push( node );
+      }
+      if( currentErrors[check].pattern == "pd10110" && ( elementUtilities.isPNClass( node.data().class )) ) {
+          listedNodes.push( node );
+      }
+    });
+    let closestNode = closestNodeForEdges(ele.target(), listedNodes);
+    currentErrors[check].fixCandidate = [];
+    if( isFix === false){
+      for( let i = 0; i < listedNodes.length; i++){
+        currentErrors[check].fixCandidate.push( {label: getLabel(listedNodes[i]), id: listedNodes[i].data().id});
+        if( closestNode.data().id == listedNodes[i].data().id){
+          currentErrors[check].defaultOption = i;
+        }
+      }
+      check++;
+      continue;
+    }
+    let newTarget = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):closestNodeForEdges(ele.target(), listedNodes);
+    errorFixParam.edge = ele;
+    errorFixParam.newEdge = {source: ele.source().id(), target: newTarget.id()};
+    fixError( errorFixParam);
+}
     else if( currentErrors[check].pattern == "pd10141"){
       let ele = cy.getElementById( currentErrors[check].role);
       errorFixParam.newEdges = [];
@@ -235,6 +290,7 @@ function findCandidatesOrFix( errors, cy, isFix){
           }
         }
         let selectedNode = closestNodeForEdges( ele, listedNodes);
+        nodes = listedNodes;
         if( isFix === false ){
           currentErrors[check].fixCandidate = [];
           for( let i = 0; i  < nodes.length; i++){
@@ -748,8 +804,17 @@ let body;
 let image;
 
 function distanceBetween(a, b) {
-  let xDiff = a.position().x - b.position().y;
-  let yDiff = a.position().y - b.position().y;
+  let xDiff;
+  let yDiff;
+  try {
+  xDiff = a.position().x - b.position().x;
+  yDiff = a.position().y - b.position().y;
+  }
+  catch {
+    console.log( a);
+    console.log( b);
+    throw Error;
+  }
   return xDiff * xDiff + yDiff * yDiff;
 }
 
@@ -770,9 +835,16 @@ function closestNodeForEdges(ele, nodes) {
   let shortestDistance = 10000000000.0;
   let closestNode;
   for (let i = 0; i < nodes.length; i++) {
+    console.log( nodes[i]);
     /*let distance = ( ele.data().id == connectedEdges.source().id ? distanceBetween(ele, connectedEdges[i].target() ) : 
     distanceBetween(ele, connectedEdges[i].source() ) );*/
+    try {
     distance = distanceBetween( ele, nodes[i]);
+    }
+    catch {
+      console.log( ele);
+      console.log( nodes[i]);
+    }
     if ( distance < shortestDistance) {
       shortestDistance = distance;
       closestNode = nodes[i];
@@ -1419,6 +1491,41 @@ app.post('/fixError', (req, res) => {
         selectedEdge.target().id() : selectedEdge.source().id()) + ") is kept.";
       // errors[check].status = "solved";
     }
+    else if (currentErrors[check].pattern == "pd10127"){
+        let ele = cy.getElementById(currentErrors[check].role);
+        let nodes = cy.nodes();
+        let listedNodes = [];
+        nodes.forEach( node => {
+          if( elementUtilities.isEPNClass( node.data().class ) ) {
+              listedNodes.push( node );
+          }
+        });
+        if( listedNodes.length > 0){
+        let newSource = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):closestNodeForEdges(ele.target(), listedNodes);
+        errorFixParam.edge = ele;
+        errorFixParam.newEdge = {source: newSource.id(), target: ele.target().id()};
+        fixError( errorFixParam);
+        }
+    }
+    else if (currentErrors[check].pattern == "pd10128" || currentErrors[check].pattern == "pd10110"){
+      let ele = cy.getElementById(currentErrors[check].role);
+      let nodes = cy.nodes();
+       let listedNodes = [];
+    nodes.forEach( node => {
+      if( currentErrors[check].pattern == "pd10128" && (node.data().class == "submap" || node.data().class == "terminal" || node.data().class == "tag" )) {
+          listedNodes.push( node );
+      }
+      if( currentErrors[check].pattern == "pd10110" && ( elementUtilities.isPNClass( node.data().class )) ) {
+          listedNodes.push( node );
+      }
+    });
+      if( listedNodes.length > 0) {
+      let newTarget = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):closestNodeForEdges(ele.source(), listedNodes);
+      errorFixParam.edge = ele;
+      errorFixParam.newEdge = {source: ele.source().id(), target: newTarget.id()};
+      fixError( errorFixParam);
+      }
+  }
     else if (currentErrors[check].pattern == "pd10108") {
       let connectedEdges = ele.connectedEdges().filter('[class = "production"]');
       // choose deleted edges and nodes each here when the deletion method is determined
@@ -1552,10 +1659,10 @@ app.post('/fixError', (req, res) => {
         isSolved = false;
       }
     }
-    console.log( check + " " + "is Solved" + isSolved);
+   // console.log( check + " " + "is Solved" + isSolved);
     if ( !isSolved) {
       //check++;
-      console.log( previousErrorCode + " " + previousErrorRole);
+    //  console.log( previousErrorCode + " " + previousErrorRole);
       unsolvedErrorInformation[previousErrorCode + previousErrorRole] = true;
     }
     else {
@@ -1594,7 +1701,7 @@ app.post('/fixError', (req, res) => {
     }
   }
   errorsAfterFix = reduceErrors( errorsAfterFix,cy);
-  console.log( errorsAfterFix);
+  //console.log( errorsAfterFix);
   let indexesOfErrors = {};
   for( let i = 0; i < currentErrors.length; i++){
     indexesOfErrors[ currentErrors[i].pattern + currentErrors[i].role ] = i;
@@ -1614,7 +1721,7 @@ app.post('/fixError', (req, res) => {
   if( showResolutionAlternatives ){
   errors = findCandidatesOrFix( errors, cy, false );
   }
-  console.log( errors);
+  //console.log( errors);
   highlightErrors(errors, cy, imageOptions, false, unsolvedErrorInformation, fixExplanation);
   let colorScheme = imageOptions.color || "white";
   let stylesheet = adjustStylesheet('sbgnml', colorScheme);
@@ -1713,7 +1820,24 @@ function fixError(errorFixParam) {
     result.edge = elementUtilities.addEdge(errorFixParam.newSource, errorFixParam.newTarget, edgeParams, cy, clonedEdge.data().id);
     return result;
   }
-  else if (errorCode == "pd10125") {
+
+  if( errorCode == "pd10127"){
+    var clonedEdge = errorFixParam.edge.clone();
+    var edgeParams = { class: clonedEdge.data().class, language: clonedEdge.data().language };
+    cy.remove(errorFixParam.edge);
+    console.log( errorFixParam.newEdge.source);
+    console.log( errorFixParam.newEdge.target);
+    elementUtilities.addEdge(errorFixParam.newEdge.source, errorFixParam.newEdge.target, edgeParams, cy, clonedEdge.data().id);
+  }
+  if( errorCode == "pd10128" || errorCode == "pd10110"){
+    var clonedEdge = errorFixParam.edge.clone();
+    var edgeParams = { class: clonedEdge.data().class, language: clonedEdge.data().language };
+    cy.remove(errorFixParam.edge);
+    console.log( errorFixParam.newEdge.source);
+    console.log( errorFixParam.newEdge.target);
+    elementUtilities.addEdge(errorFixParam.newEdge.source, errorFixParam.newEdge.target, edgeParams, cy, clonedEdge.data().id);
+  }
+  if (errorCode == "pd10125") {
     result.edge = errorFixParam.edge.remove();
     result.newEdge = {};
     var edgeclass = errorFixParam.newEdge.edgeParams.class ? errorFixParam.newEdge.edgeParams.class : errorFixParam.newEdge.edgeParams;
@@ -1855,7 +1979,7 @@ function highlightErrors(errors, cy, imageOptions, isValidation,unsolvedErrorInf
     if (ele.isNode() ) {
       errorData.label = ele.data('label') ? ele.data('label') : ele.data().class;
     }
-    else if (ele.isEdge() && errorData.label === undefined) {
+    else if (ele.isEdge()) {
       errorData.label = (ele.source() !== undefined ? (ele.source().data('label') !== undefined ? ele.source().data('label') : "") : "") + " - " +
         (ele.target() !== undefined ? (ele.target().data('label') !== undefined ? ele.target().data('label') : "") : "");
     }
