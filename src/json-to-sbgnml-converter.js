@@ -573,9 +573,9 @@ const jsonToSbgnml = {};
 
       var glyph = new libsbgnjs.Glyph({id: id, class_: 'state variable'});
       var state = new libsbgnjs.StateType();
-      if(typeof node.state.value != 'undefined')
+      if(node.state && typeof node.state.value != 'undefined')
           state.value = node.state.value;
-      if(typeof node.state.variable != 'undefined')
+      if(node.state && typeof node.state.variable != 'undefined')
           state.variable = node.state.variable;
       glyph.setState(state);
       glyph.setBbox(this.addStateAndInfoBbox(mainGlyph, node));

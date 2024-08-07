@@ -1112,11 +1112,14 @@ sbgnmlToJson.convert = function (xmlObject, xmlString, urlParams) {
   var cytoscapeJsEdges = [];
   var compartmentChildrenMap = {}; // Map compartments children temporarily
   elementUtilities.fileFormat = 'sbgnml';
-
   var sbgn;
   try {
-    // var xmlString = new XMLSerializer().serializeToString(xmlObject);
+     //var xmlString = new XMLSerializer().serializeToString(xmlObject);
+   console.log( "sbgnml conversion ");
     sbgn = libsbgnjs.Sbgn.fromXML(xmlString);
+    console.log( "sbgnml conversion finished ");
+
+
   }
   catch (err) {
     throw new Error("Could not parse sbgnml. " + err);

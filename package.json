@@ -34,7 +34,7 @@
     "file-saver": "^2.0.5",
     "jquery": "^3.6.0",
     "jsdom": "^16.5.3",
-    "libsbgn.js": "^0.3.1",
+    "libsbgn.js": "github:sbgn/libsbgn.js#develop",
     "nodemon": "^2.0.7",
     "pretty-data": "^0.40.0",
     "saxon-js": "^2.5.0",
