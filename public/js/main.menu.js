@@ -158,6 +158,9 @@ let applyErrorFix = async function () {
 				if( error.label){
 				   list.append(errorLabel);
 				}
+				else {
+					list.append(errorRole);
+				}
 				//list.append(errorPattern);
 				list.append(errorText);
 				//list.append(errorStatus);
@@ -407,6 +410,9 @@ let processValidation = async function () {
 				//list.append(errorRole);
 				if( error.label){
                     list.append(errorLabel);
+				}
+				else {
+					list.append(errorRole);
 				}
 				//list.append(errorPattern);
 				list.append(errorText);
@@ -808,14 +814,33 @@ $("#resultImage1").on("click", function (e) {
 	imageContent.src = imageSource;
 	aspectRatio = img.naturalWidth / img.naturalHeight;
 	let imageTitle = document.getElementById("imageTitle");
+	
 	imageTitle.innerHTML = document.getElementById("file-name").innerHTML;
+
 	document.getElementById("draggableImageArea").style.position = "absolute";
 	document.getElementById("draggableImageArea").style.top = "400px";
 	document.getElementById("draggableImageArea").style.left = "850px";
+	//document.getElementById("draggableImageArea").style.aspectRatio = aspectRatio;
+	let height = ( 900/aspectRatio > 800 ? 800 : 900/aspectRatio);
+	//document.getElementById("draggableImageArea").style.width = "900px";
+	//document.getElementById("draggableImageArea").style.height = (height) + "px";
 	document.getElementById("imageAreaPopUp").style.height = "500px";
+
+
+	
+	
+	/*document.getElementById("draggableImageArea").style.position = "absolute";
+	document.getElementById("draggableImageArea").style.top = "400px";
+	document.getElementById("draggableImageArea").style.left = "850px";
+	//document.getElementById("imageAreaPopUp").style.height = "500px";
+	//document.getElementById("imageAreaPopUp").style.width= "auto";	
+	//document.getElementById("imageAreaPopUp").style.aspectRatio = aspectRatio;
+	document.getElementById("resultImage").style.aspectRatio = aspectRatio;*/
 	document.getElementById("imageAreaPopUp").style.width= "auto";	
 	document.getElementById("imageAreaPopUp").style.aspectRatio = aspectRatio;
 	document.getElementById("dragRegion").innerHTML = document.getElementById("file-name").innerHTML
 	document.getElementById("draggableImageArea").style.display = "inline";
 	document.getElementById("sbgnImageUI").style.display = "none";
+
+	
 });

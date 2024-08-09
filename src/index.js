@@ -928,9 +928,11 @@ app.use(async (req, res, next) => {
       var parser = new window.DOMParser;
       var xml = parser.parseFromString(data, 'text/xml');
       data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
+      let isErrorsEmpty = errors.length == 0;
 
       currentSbgn = data;
       let duplicatedIds = [];
+      if( errors.length === 0){
       fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
       let result = SaxonJS.transform({
         stylesheetFileName: './src/templatelibsbgn.sef.json',
@@ -954,11 +956,13 @@ app.use(async (req, res, next) => {
           error.setRole(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:diagnostic-reference"][0]["_"]);
           if( error.pattern == "00001" || error.pattern == "00002"){
             let ret ={};
-            ret['errorMessage'] = "ID needs to be unique and an arc target should be a glyph defined in the diagram";
-            return res.status(200).send(ret);
+        //    ret['errorMessage'] = "ID needs to be unique and an arc target should be a glyph defined in the diagram";
+         //   return res.status(200).send(ret);
+         errors.push(error);
           }
           //errors.push(error);
         }
+      }
       }
       //errors = [];
       let cyJsonData = sbgnmlToJson.convert(xml, data);
@@ -988,7 +992,7 @@ app.use(async (req, res, next) => {
       data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
       currentSbgn = data;
       fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
-      if( errors.length === 0){
+      if( isErrorsEmpty){
       let result = SaxonJS.transform({
         stylesheetFileName: './src/templatelibsbgn.sef.json',
         sourceFileName: "./src/sbgnFile.sbgn",
@@ -1771,6 +1775,7 @@ app.post('/fixError', (req, res) => {
   //console.log( errors);
   console.log( fixExplanation);
   highlightErrors(errors, cy, imageOptions, false, unsolvedErrorInformation, fixExplanation);
+  console.log( errors);
   let colorScheme = imageOptions.color || "white";
   let stylesheet = adjustStylesheet('sbgnml', colorScheme);
   postProcessForLayouts(cy);
@@ -2030,12 +2035,15 @@ function highlightErrors(errors, cy, imageOptions, isValidation,unsolvedErrorInf
   });
   errors.forEach((errorData, i) => {
     let ele = cy.getElementById(errorData.role);
-    if (unsolvedErrorInformation[errorData.pattern + errorData.role] !== true && !isValidation) {
+    //console.log( errorData);
+    if (unsolvedErrorInformation[errorData.pattern + errorData.role] !== true && !isValidation && errorData.pattern !== "00001" && 
+    errorData.pattern !== "00002") {
       if( errorData.explanation === undefined )
       errorData.explanation = fixExplanation[errorData.pattern + errorData.role] ? fixExplanation[errorData.pattern + errorData.role] : "Fix of another error resolved this error.";
       errorData.status = "solved";
       errorData.colorCode = "#808080";
-      ele.data('highlightColor', "#808080");
+      //ele.data('highlightColor', "#808080");
+      //console.log( "abcd");
     }
     else {
       if (ele.data('label') && isValidation === true) {
@@ -2047,14 +2055,22 @@ function highlightErrors(errors, cy, imageOptions, isValidation,unsolvedErrorInf
       else {
         ele.addClass('path');
       }
-      if (errorColor[errorData.role] !== undefined) {
+      console.log( errorData.errorNo + " " + errorData.role );
+      if( errorData.colorCode !== undefined && errorData.colorCode !== "#808080"){
+          console.log( "1 " + errorData.errorNo + " " + errorData.colorCode );
+          errorColor[errorData.role] = errorData.colorCode;
+          ele.data('highlightColor', errorData.colorCode);
+      }
+      else if (errorColor[errorData.role] !== undefined) {
+                  console.log( "2 " + errorData.errorNo + " " + errorData.colorCode );
         ele.data('highlightColor', errorColor[errorData.role]);
         errorData.colorCode = errorColor[errorData.role];
       }
       else {
-        ele.data('highlightColor', errorHighlightColors[counter % 8]);
-        errorData.colorCode = errorHighlightColors[counter % 8];
-        errorColor[errorData.role] = errorHighlightColors[counter % 8];
+                  console.log( "3 " + errorData.errorNo + " " + errorData.colorCode );
+        ele.data('highlightColor', errorHighlightColors[errorData.errorNo % 8]);
+        errorData.colorCode = errorHighlightColors[errorData.errorNo % 8];
+        errorColor[errorData.role] = errorHighlightColors[errorData.errorNo % 8];
         counter++;
       }
       ele.data('highlightWidth', imageOptions.highlightWidth);

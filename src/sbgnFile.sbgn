@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+  <map language="process description">
+    <extension>
+      <renderInformation 
+        xmlns="http://www.sbml.org/sbml/level3/version1/render/version1" id="renderInformation" program-name="sbgnviz" program-version="6.1.0">
+        <listOfColorDefinitions/>
+        <listOfBackgroundImages/>
+        <listOfStyles/>
+      </renderInformation>
+      <mapProperties>
+        <compoundPadding>0</compoundPadding>
+        <extraCompartmentPadding>14</extraCompartmentPadding>
+        <extraComplexPadding>10</extraComplexPadding>
+        <arrowScale>1.25</arrowScale>
+        <showComplexName>true</showComplexName>
+        <dynamicLabelSize>regular</dynamicLabelSize>
+        <inferNestingOnLoad>false</inferNestingOnLoad>
+        <fitLabelsToNodes>false</fitLabelsToNodes>
+        <fitLabelsToInfoboxes>false</fitLabelsToInfoboxes>
+        <recalculateLayoutOnComplexityManagement>true</recalculateLayoutOnComplexityManagement>
+        <rearrangeOnComplexityManagement>true</rearrangeOnComplexityManagement>
+        <animateOnDrawingChanges>true</animateOnDrawingChanges>
+        <adjustNodeLabelFontSizeAutomatically>false</adjustNodeLabelFontSizeAutomatically>
+        <enablePorts>true</enablePorts>
+        <enableSIFTopologyGrouping>false</enableSIFTopologyGrouping>
+        <allowCompoundNodeResize>true</allowCompoundNodeResize>
+        <mapColorScheme>black_white</mapColorScheme>
+        <mapColorSchemeStyle>solid</mapColorSchemeStyle>
+        <mapName>Pathway #0</mapName>
+        <mapDescription/>
+        <highlightColor>#0B9BCD</highlightColor>
+        <extraHighlightThickness>2</extraHighlightThickness>
+      </mapProperties>
+    </extension>
+    <glyph id="nwtN_425733ab-f25b-46d6-ae1e-935e237a743a" class="macromolecule">
+      <bbox x="730.4981206912845" y="286.01567071974426" w="60" h="30"/>
+    </glyph>
+    <glyph id="nwtN_e6f9d448-206e-426d-8d53-23f667907647" class="process">
+      <bbox x="753.2655868635907" y="211.816316527551" w="20" h="20"/>
+      <port id="nwtN_e6f9d448-206e-426d-8d53-23f667907647.1" x="753.2655868635907" y="221.816316527551"/>
+      <port id="nwtN_e6f9d448-206e-426d-8d53-23f667907647.2" x="773.2655868635907" y="221.816316527551"/>
+    </glyph>
+    <glyph id="nwtN_e66fe1fd-be23-4452-99f4-3a039e9ddd85" class="and">
+      <bbox x="734.9094514429302" y="127.89130270596405" w="30" h="30"/>
+      <port id="nwtN_e66fe1fd-be23-4452-99f4-3a039e9ddd85.1" x="734.9094514429302" y="142.89130270596405"/>
+      <port id="nwtN_e66fe1fd-be23-4452-99f4-3a039e9ddd85.2" x="764.9094514429302" y="142.89130270596405"/>
+    </glyph>
+    <glyph id="nwtN_d08707bc-ab1f-456a-9df1-e5cb900b9f39" class="macromolecule">
+      <bbox x="1001.3317756710526" y="111.96333258866747" w="60" h="30"/>
+    </glyph>
+    <glyph id="nwtN_1675fc23-cd67-4667-86d6-57978e8dc729" class="macromolecule">
+      <bbox x="562.7020899605415" y="183.295195770301" w="60" h="30"/>
+    </glyph>
+    <glyph id="nwtN_a3ba0997-149e-42d9-a287-f59be7fe2245" class="process">
+      <bbox x="674.3272230847969" y="188.65631416160818" w="20" h="20"/>
+      <port id="nwtN_a3ba0997-149e-42d9-a287-f59be7fe2245.1" x="674.3272230847969" y="198.65631416160818"/>
+      <port id="nwtN_a3ba0997-149e-42d9-a287-f59be7fe2245.2" x="694.3272230847969" y="198.65631416160818"/>
+    </glyph>
+    <arc id="nwtE_1ce0a38a-bea3-4dae-98b2-31927437f5be" class="logic arc" source="nwtN_e6f9d448-206e-426d-8d53-23f667907647.2" target="nwtN_e66fe1fd-be23-4452-99f4-3a039e9ddd85.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_f35e3d79-ee4d-4785-93a7-b4308b1be77f" class="consumption" source="nwtN_425733ab-f25b-46d6-ae1e-935e237a743a" target="nwtN_e6f9d448-206e-426d-8d53-23f667907647.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_ca9d8927-02d0-49f0-af51-9051a494e1e5" class="modulation" source="nwtN_e66fe1fd-be23-4452-99f4-3a039e9ddd85.2" target="nwtN_a3ba0997-149e-42d9-a287-f59be7fe2245">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_351a5c9b-8c9a-424c-b879-953d50f351e3" class="production" source="nwtN_a3ba0997-149e-42d9-a287-f59be7fe2245.2" target="nwtN_1675fc23-cd67-4667-86d6-57978e8dc729">
+      <start/>
+      <end/>
+    </arc>
+  </map>
+</sbgn>
