@@ -168,7 +168,7 @@ let applyErrorFix = async function () {
 					list.append(fixExplanation);
 				}
 				let accordion = $('<div id ="rec' + error.errorNo + '"class="ui vertical accordion menu" style = "min-height: 0px !important;">');
-				let item = $('<div id = "item' + error.errorNo + '"  class="field"> <a class="title" style = "background: #efefef; padding : 0; width : inherit !important;display:block;"> <i class="dropdown icon"></i>Resolution Alternative</a><div class="content" style = "padding : 0"><div class="ui form"><div class="grouped fields" id ="solutionField' + error.errorNo + '"> </div></div></div></div>' );
+				let item = $('<div id = "item' + error.errorNo + '"  class="field"> <a class="title" style = "background: #efefef; padding : 0; width : inherit !important;display:block;"> <i class="icon small angle down"></i>Resolution Alternative</a><div class="content" style = "padding : 0"><div class="ui form"><div class="grouped fields" id ="solutionField' + error.errorNo + '"> </div></div></div></div>' );
 				let option = $('<div class="field"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" name="test" value="ds"><label>Data Structure</label></div></div>');
 				let classItem =  $('<a class="active title">');
 				let str = ("#solutionField" + error.errorNo ).toString();
@@ -379,7 +379,7 @@ let processValidation = async function () {
 				let list = $('<div class="ui list">');
 				let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo + '">');
 				let accordion = $('<div id ="rec' + error.errorNo + '"class="ui vertical accordion menu" style = "min-height: 0px !important;">');
-				let item = $('<div id = "item' + error.errorNo + '"  class="field"> <a class="title" style = "background: #efefef; padding : 0; width : inherit !important;display:block;"> <i class="dropdown icon"></i>Resolution Alternatives</a><div class="content" style = "padding : 0"><div class="ui form"><div class="grouped fields" id ="solutionField' + error.errorNo + '"> </div></div></div></div>' );
+				let item = $('<div id = "item' + error.errorNo + '"  class="field"> <a class="title" style = "background: #efefef; padding : 0; width : inherit !important;display:block;"> <i class="icon small angle down"></i>Resolution Alternatives</a><div class="content" style = "padding : 0"><div class="ui form"><div class="grouped fields" id ="solutionField' + error.errorNo + '"> </div></div></div></div>' );
 				let option = $('<div class="field"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" name="test" value="ds"><label>Data Structure</label></div></div>');
 				let classItem =  $('<a class="active title">');
 				let str = ("#solutionField" + error.errorNo ).toString();
@@ -574,6 +574,7 @@ $('#downloadJSON').click(function () {
 	if (errors !== undefined) {
 
 		errors.forEach(error => {
+			console.log( error.text + " " + Array.isArray(error.text));
 			if (Array.isArray(error.text)) {
 				error.text = error.text[0];
 				error.text = error.text.substr(0, error.text.length - 4);
@@ -581,6 +582,7 @@ $('#downloadJSON').click(function () {
 			else {
 				error.text = error.text.substr(0, error.text.length - 1);
 			}
+			console.log( error.text);
 		});
 		if (errors.length > 0) {
 			let jsonText = JSON.stringify(errors, null, 2);

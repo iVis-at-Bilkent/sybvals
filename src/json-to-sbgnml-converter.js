@@ -352,6 +352,7 @@ const jsonToSbgnml = {};
     } 
      //add state and info box information
      //if( node._private.data.statesandinfos != undefined)
+     if( node._private.data.unitsOfInformation !== undefined )
     for(var i = 0 ; i < node._private.data.unitsOfInformation.length ; i++){
        var boxGlyph = node._private.data.unitsOfInformation[i];
        var statesandinfosId = boxGlyph.id;
@@ -363,6 +364,7 @@ const jsonToSbgnml = {};
            glyph.addGlyphMember(this.addInfoBoxGlyph(boxGlyph, statesandinfosId, node));
        }*/
     } 
+    if( node._private.data.stateVariables !== undefined )
     for(var i = 0 ; i < node._private.data.stateVariables.length ; i++){
       var boxGlyph = node._private.data.stateVariables[i];
       var statesandinfosId = boxGlyph.id;
