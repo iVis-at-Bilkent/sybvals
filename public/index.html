@@ -128,7 +128,8 @@
                 <span class="add-on layout-text option-label"> or </span> -->
 							<!--<div class="seven wide field">-->
 								<div class="field">
-									<select id="colorScheme">
+									<select id="colorScheme" class = "ui dropdown icon" <i class="icon small angle down"></i> >
+										<!-- <i class = "dropdown icon"> </i> -->
 										<option value="greyscale">Greyscale</option>
 										<option value="bluescale">Bluescale</option>
 										<option value="red_blue">Red-Blue</option>
@@ -138,7 +139,18 @@
 										<option value="grey_red">Grey-Red</option>
 										<option value="black_white">Black-White</option>
 									</select>
+									<div class="ui selection dropdown">
+									<input type="hidden" name="gender">
+									<i class="dropdown icon"></i>
+									<div class="default text">Gender</div>
+									<div class="menu">
+									  <div class="item" data-value="0">Female</div>
+									  <div class="item" data-value="1">Male</div>
+									  <div class="item" data-value="2">Other</div>
+									</div>
+								  </div>
 								</div>
+								
 							<!--/div> -->
 						<!--</div>
 						<div class="inline fields"> -->
@@ -361,6 +373,7 @@
 
 	<script>
 		let port = window.location.port;
+		$('.ui.dropdown').dropdown(); 
 	</script>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>

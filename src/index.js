@@ -873,6 +873,7 @@ app.use(async (req, res, next) => {
     })
 
     req.on('end', () => {
+      console.log( body);
      // while(1);
       let indexOfOptions = Math.min(body.includes("layoutOptions") ? body.indexOf("layoutOptions") : Number.MAX_SAFE_INTEGER,
         body.includes("imageOptions") ? body.indexOf("imageOptions") : Number.MAX_SAFE_INTEGER,
