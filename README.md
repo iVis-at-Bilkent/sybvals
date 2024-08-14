@@ -111,7 +111,6 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
 ## Usage
 
 Sending request to the local deployment via curl to validate map:
-showResolutionAlternatives parameter given below represents whether resolution alternatives will be shown together with errors or not. By default, it is true.
 ```
 curl -X POST -H "Content-Type: text/plain" --data "request_body" http://localhost:3400/validation?showResolutionAlternatives=true
 ```
@@ -137,7 +136,7 @@ let result = await fetch("http://localhost:3400/validation?showResolutionAlterna
   });
 ```
 
-where `validation` is indicating validation is applied to map in SBGNML.
+where `validation` indicates a validation is to be applied to the specified map in SBGNML and `showResolutionAlternatives` parameter (true by default) represents whether resolution alternatives should be returned together with the errors or not.
 
 `request_body`  needs to be formed in the following way:
 ```
