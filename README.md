@@ -262,7 +262,7 @@ let settings = {
         <end x="971.0283277407184" y="639.006807102588"/>
       </arc>
      </map>
-    </sbgn>[{"text":"If there are compartments defined, top-level glyphs must have a compartment reference\n","pattern":"pd10112","role":"glyph39","errorNo":1,"label":"Sis1","colorCode":"#ff0000","status":"unsolved","fixCandidate":[{"label":"juxtanuclear inclusion","id":"glyph0"},{"label":"nucleus","id":"glyph1"}],"defaultOption":0}]{imageOptions":{"format":"png","background":"transparent","color":"bluescale","autoSize":"true","highlightWidth":10}} // file_content + JSON.stringfy(error_content) + JSON.stringfy(options)
+    </sbgn>[{"text":"If there are compartments defined, top-level glyphs must have a compartment reference\n","pattern":"pd10112","role":"glyph39","errorNo":1,"label":"Sis1","colorCode":"#ff0000","status":"unsolved","fixCandidate":[{"label":"juxtanuclear inclusion","id":"glyph0"},{"label":"nucleus","id":"glyph1"}],"defaultOption":0,"fixChoice":"glyph1"}]{imageOptions":{"format":"png","background":"transparent","color":"bluescale","autoSize":"true","highlightWidth":10}} // file_content + JSON.stringfy(error_content) + JSON.stringfy(options)
 };
 
 let result = await fetch("http://sybvals.cs.bilkent.edu.tr/fixError?showResolutionAlternatives=true, settings)
