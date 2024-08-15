@@ -74,7 +74,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
 - associated message,
 - action to be taken by SyBValS to highlight the problem and
 - action to be taken by SyBValS to fix the problem
-<details>
+<details open>
   <summary>Validation Rule Table</summary>
 
   
