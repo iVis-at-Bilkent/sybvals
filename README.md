@@ -115,7 +115,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
 Sending request to the local deployment via curl to validate map:
 showResolutionAlternatives parameter given below represents whether resolution alternatives will be shown together with errors or not. By default, it is true.
 When validation request is completed, errors are sent to client together with their possible resolve alternatives. error.fixCandidates is storing possible resolve alternatives for each error. Users can select their deserved fix options using Resolve Alternatives accordion on the menu.
-
+```
 curl -X POST -H "Content-Type: text/plain" --data "request_body" http://localhost:3400/validation?showResolutionAlternatives=true
 ```
 and via Fetch API 
@@ -175,7 +175,7 @@ curl -X POST -H "Content-Type: text/plain" --data "<?xml version='1.0' encoding=
 and the corresponding response with error and image information will be as follows:
 
 ```
-{"errors":[{text: "If there are compartments defined, top-level glyphs must have a compartment reference\n", pattern: "pd10112", role: "glyph39", errorNo: 1,...}..."image":"data:image/png;base64,iVBORw0KGgoAAAANS..."
+{"errors":[{text: "If there are compartments defined, top-level glyphs must have a compartment reference\n", pattern: "pd10112", role: "glyph39", errorNo: 1,...}],"image":"data:image/png;base64,iVBORw0KGgoAAAANS..."
 ```
 
 The same query can be done via Fetch API in the following way:
@@ -275,7 +275,7 @@ let result = await fetch("http://sybvals.cs.bilkent.edu.tr/fixError?showResoluti
     return e;
   });
 
-let errorInfo = result["errors"];    // [{"text": "Arc with class consumption must have source reference to glyph of EPN classes",...}]
+let errorInfo = result["errors"];    // [{"text": "If there are compartments defined, top-level glyphs must have a compartment reference",...}]
 let imageInfo = result["image"];     // data:image/png;base64,iVBORw0KGgoAAAANSUhE... (in `base64uri` for `png` and `jpg` and in `xml` for `svg`)
 ```
 Please note that `fixError` option is used instead of `validation` to indicate that error resolving is applied to the map.

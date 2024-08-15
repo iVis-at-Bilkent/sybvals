@@ -104,6 +104,7 @@ let applyErrorFix = async function () {
 			errorContent.innerHTML = "<b>Sorry! Cannot process the given file!</b><br><br>Error detail:<br>" + e;
 			$('#errorModal').modal({ inverted: true }).modal('show');
 		});
+	console.log( res);
 	currentSbgn = res.sbgn;
 	$("#applyValidation").prop('disabled', false);
 	$("#fixFormatErrors").removeClass("loading");
@@ -345,7 +346,7 @@ let processValidation = async function () {
 			errorContent.innerHTML = "<b>Sorry! Cannot process the given file!</b><br><br>Error detail:<br>" + e;
 			$('#errorModal').modal({ inverted: true }).modal('show');
 		});
-		console.log( res);
+		console.log( res.errors[0]);
 	$("#applyValidation").removeClass("loading");
 	$("#applyValidation").css("background-color", "#d67664");
 	if (res.errors && res.errors.length > 0) {

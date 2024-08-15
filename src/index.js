@@ -902,6 +902,8 @@ app.use(async (req, res, next) => {
         : body.substring( indexOfErrorsStart);
         data = body.substring(0, indexOfErrorsStart);
       }
+      data = data.replace( /\n/g, "");
+      console.log( data);
          /* lengthOfData= Math.min(lengthOfData, indexOfOptionsStart);
       data = lengthOfData === Number.MAX_SAFE_INTEGER ? body : body.substring(0, lengthOfData);
       errors = indexOfErrorsStart == Number.MAX_SAFE_INTEGER ? [] : ( indexOfOptionsStart < Number.MAX_SAFE_INTEGER ? body.substring( indexOfErrorsStart,(indexOfOptionsStart- indexOfErrorsStart) ): 
