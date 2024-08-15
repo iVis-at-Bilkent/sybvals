@@ -132,7 +132,7 @@ let applyErrorFix = async function () {
 			let errorId = event.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
 			errorId = errorId.replace("rec", "");
 			errorId = parseInt( errorId ) - 1;
-			errors[errorId].fixChoice = event.delegateTarget.firstChild.value;
+			errors[errorId].selectedOption = event.delegateTarget.firstChild.value;
 			}
 			catch{
 				event.currentTarget.style.checked = true;
@@ -215,9 +215,9 @@ let applyErrorFix = async function () {
 					$('.ui.radio.checkbox').checkbox();
 					$('.ui.checkbox').checkbox();
 					for( let i = 0; i < error.fixCandidate.length; i++){
-					$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + i + '"name="'+ 'fixFor' + error.errorNo + '" value="' + error.fixCandidate[i].id+ '"><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
-					if( (error.defaultOption  ) === i){
-						console.log( error.errorNo + " " + error.defaultOption + " " + i);
+					$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + i + '"name="'+ 'fixFor' + error.errorNo + '" value="' + i+ '"><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
+					if( (error.selectedOption  ) === i){
+						console.log( error.errorNo + " " + error.selectedOption + " " + i);
 						$('.ui.radio.checkbox').on('click', event =>{
 				
 				try {
@@ -225,7 +225,7 @@ let applyErrorFix = async function () {
 				let errorId = event.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
 				errorId = errorId.replace("rec", "");
 				errorId = parseInt( errorId ) - 1;
-				errors[errorId].fixChoice = event.delegateTarget.firstChild.value;
+				errors[errorId].selectedOption = event.delegateTarget.firstChild.value;
 				}
 				catch{
 					event.currentTarget.style.checked = true;
@@ -255,7 +255,7 @@ let applyErrorFix = async function () {
 				let errorId = event.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
 				errorId = errorId.replace("rec", "");
 				errorId = parseInt( errorId ) - 1;
-				errors[errorId].fixChoice = event.delegateTarget.firstChild.value;
+				errors[errorId].selectedOption = event.delegateTarget.firstChild.value;
 				}
 				catch{
 					event.currentTarget.style.checked = true;
@@ -430,9 +430,9 @@ let processValidation = async function () {
 				if( showResolutionAlternatives && error.fixCandidate !== undefined && error.fixCandidate.length > 0){
 				for( let i = 0; i < error.fixCandidate.length; i++){
 				//$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" name="fixFor' + error.errorNo + '" value="' + error.fixCandidate[i].id+ '"><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
-				$( `#solutionField${error.errorNo}` ).append('<div class="active field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + i + '"name="'+ 'fixFor' + error.errorNo + '" value="' + error.fixCandidate[i].id+ '" clicked ><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
-					if( (error.defaultOption  ) === i){
-						console.log( error.errorNo + " " + error.defaultOption + " " + i);
+				$( `#solutionField${error.errorNo}` ).append('<div class="active field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + i + '"name="'+ 'fixFor' + error.errorNo + '" value="' + i + '" clicked ><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
+					if( (error.selectedOption  ) === i){
+						console.log( error.errorNo + " " + error.selectedOption + " " + i);
 						console.log( document.getElementById("resAlt" + error.errorNo + "-" + i));
 						$('#resAlt' + error.errorNo + '-' + i).click();
 
@@ -454,7 +454,7 @@ let processValidation = async function () {
 				let errorId = event.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
 				errorId = errorId.replace("rec", "");
 				errorId = parseInt( errorId ) - 1;
-				errors[errorId].fixChoice = event.delegateTarget.firstChild.value;
+				errors[errorId].selectedOption = event.delegateTarget.firstChild.value;
 				}
 				catch {
 					event.currentTarget.style.checked = true;

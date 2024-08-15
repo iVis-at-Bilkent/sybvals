@@ -1,67 +1,62 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <sbgn xmlns="http://sbgn.org/libsbgn/0.2">
   <map language="process description">
-    <glyph id="glyph0" class="compartment">
-      <extension>
-        <extraInfo>
-          <w>32</w>
-          <h>32</h>
-          <minW>0</minW>
-          <minH>0</minH>
-          <WLBias>0</WLBias>
-          <WRBias>0</WRBias>
-          <HTBias>0</HTBias>
-          <HBBias>0</HBBias>
-        </extraInfo>
-      </extension>
-      <label text="juxtanuclear inclusion"/>
-      <bbox x="666.2583454092148" y="643.295325042146" w="52" h="52"/>
+    <extension>
+      <renderInformation 
+        xmlns="http://www.sbml.org/sbml/level3/version1/render/version1" id="renderInformation" program-name="sbgnviz" program-version="6.1.0">
+        <listOfColorDefinitions/>
+        <listOfBackgroundImages/>
+        <listOfStyles/>
+      </renderInformation>
+    </extension>
+    <glyph id="nwtN_02946783-cd6c-4bd2-91db-f1fb1650968c" class="uncertain process">
+      <label text="process1 uncertain"/>
+      <bbox x="1056.1962751722356" y="552.9146893648758" w="20" h="20"/>
+      <port id="nwtN_02946783-cd6c-4bd2-91db-f1fb1650968c.1" x="1056.1962751722356" y="562.9146893648758"/>
+      <port id="nwtN_02946783-cd6c-4bd2-91db-f1fb1650968c.2" x="1076.1962751722356" y="562.9146893648758"/>
     </glyph>
-    <glyph id="glyph39" class="macromolecule multimer" compartmentRef="glyph0">
-      <label text="Sis1"/>
-      <clone/>
-      <bbox x="677.2583454092148" y="654.295325042146" w="30" h="30"/>
-      <glyph id="glyph39_0" class="unit of information">
-        <label text="N:2"/>
-        <bbox x="1047.7111855522594" y="889.8134624831222" w="31" h="16"/>
-      </glyph>
+    <glyph id="nwtN_9be4a6e0-9550-4f46-961e-0ccef81478e1" class="macromolecule">
+      <label text="macro1"/>
+      <bbox x="1056.1962751722356" y="427.9146893648758" w="60" h="30"/>
     </glyph>
-    <glyph id="glyph1" class="compartment">
-      <extension>
-        <extraInfo>
-          <w>32</w>
-          <h>32</h>
-          <minW>0</minW>
-          <minH>0</minH>
-          <WLBias>0</WLBias>
-          <WRBias>0</WRBias>
-          <HTBias>0</HTBias>
-          <HBBias>0</HBBias>
-        </extraInfo>
-      </extension>
-      <label text="nucleus"/>
-      <bbox x="857.4907846735163" y="658.5038727743663" w="52" h="52"/>
+    <glyph id="nwtN_6c5a3eae-6305-4966-9d82-8823fb6a2bba" class="not">
+      <bbox x="1171.1962751722356" y="507.9146893648758" w="30" h="30"/>
+      <port id="nwtN_6c5a3eae-6305-4966-9d82-8823fb6a2bba.1" x="1171.1962751722356" y="522.9146893648758"/>
+      <port id="nwtN_6c5a3eae-6305-4966-9d82-8823fb6a2bba.2" x="1201.1962751722356" y="522.9146893648758"/>
     </glyph>
-    <glyph id="glyph40" class="macromolecule multimer" compartmentRef="glyph1">
-      <label text="Sis1"/>
-      <bbox x="868.4907846735163" y="669.5038727743663" w="30" h="30"/>
-      <glyph id="glyph40_0" class="unit of information">
-        <label text="N:2"/>
-        <bbox x="1278.828505876846" y="922.1798397516643" w="31" h="16"/>
-      </glyph>
+    <glyph id="nwtN_94059df0-6355-4b1d-b867-ae0d618c2b97" class="omitted process">
+      <bbox x="1086.1962751722356" y="552.9146893648758" w="20" h="20"/>
+      <port id="nwtN_94059df0-6355-4b1d-b867-ae0d618c2b97.1" x="1086.1962751722356" y="562.9146893648758"/>
+      <port id="nwtN_94059df0-6355-4b1d-b867-ae0d618c2b97.2" x="1106.1962751722356" y="562.9146893648758"/>
     </glyph>
-    <glyph id="glyph28" class="process">
-      <bbox x="774.5739624072415" y="653.1523667336794" w="30" h="30"/>
-      <port id="glyph28.1" x="804.5739624072415" y="668.1523667336794"/>
-      <port id="glyph28.2" x="774.5739624072415" y="668.1523667336794"/>
+    <glyph id="nwtN_674591a6-7b16-460a-adc8-0ec8b09270f1" class="phenotype">
+      <label text="pheno"/>
+      <bbox x="1056.1962751722356" y="467.9146893648758" w="60" h="30"/>
     </glyph>
-    <arc id="_8d624d9e-bc9c-4f3b-b842-02e0e2f44904" class="consumption" source="glyph40" target="glyph28.2">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="_7cf17394-4166-4140-80cd-c063e06c6794" class="production" source="glyph28.1" target="glyph39">
-      <start/>
-      <end/>
-    </arc>
+    <glyph id="nwtN_1e37715a-df49-41da-8bd8-c5d74fe270da" class="macromolecule">
+      <label text="macro2"/>
+      <bbox x="1126.1962751722356" y="427.9146893648758" w="60" h="30"/>
+    </glyph>
+    <glyph id="nwtN_3f84948f-394e-4aff-b2a3-4c1abcbe9b0e" class="macromolecule">
+      <label text="macro3"/>
+      <bbox x="1126.1962751722356" y="467.9146893648758" w="60" h="30"/>
+    </glyph>
+    <glyph id="nwtN_ecb9d86f-9ecf-4ea9-8767-a06f26b4db3a" class="macromolecule">
+      <label text="macro4"/>
+      <bbox x="1056.1962751722356" y="507.9146893648758" w="60" h="30"/>
+    </glyph>
+    <glyph id="nwtN_fcc39522-0b5b-4b2e-bd51-a31f54943897" class="process">
+      <bbox x="1116.1962751722356" y="552.9146893648758" w="20" h="20"/>
+      <port id="nwtN_fcc39522-0b5b-4b2e-bd51-a31f54943897.1" x="1116.1962751722356" y="562.9146893648758"/>
+      <port id="nwtN_fcc39522-0b5b-4b2e-bd51-a31f54943897.2" x="1136.1962751722356" y="562.9146893648758"/>
+    </glyph>
+    <glyph id="nwtN_482e65b9-6a78-4f94-88be-5cf0ca5ff470" class="tag">
+      <bbox x="1126.1962751722356" y="507.9146893648758" w="35" h="35"/>
+    </glyph>
+    <glyph id="nwtN_98333c57-6a2d-41db-ac35-77f02ac1de4f" class="association">
+      <bbox x="1146.1962751722356" y="552.9146893648758" w="20" h="20"/>
+      <port id="nwtN_98333c57-6a2d-41db-ac35-77f02ac1de4f.1" x="1146.1962751722356" y="562.9146893648758"/>
+      <port id="nwtN_98333c57-6a2d-41db-ac35-77f02ac1de4f.2" x="1166.1962751722356" y="562.9146893648758"/>
+    </glyph>
   </map>
 </sbgn>
