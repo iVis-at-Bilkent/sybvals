@@ -1,11 +1,12 @@
 # SyBValS
-**Sy**stems **B**iology **Val**idation **S**ervice (SyBValS) is a web service to validate maps in SBGNML format and to produce graphical images of the map with an option to highlight errors. After validating maps, if desired, SyBValS will resolve these errors when possible, reproducing the image after any fixes and returning the corrected SBGN file.
+**Sy**stems **B**iology **Val**idation **S**ervice (SyBValS) is a web service that validates maps in SBGNML format and produces graphical images of the map with an option to highlight errors. After validating maps, if desired, SyBValS will resolve these errors when possible, reproducing the image after any fixes and returning the corrected SBGN file. During the resolution of errors, the user is also provided with possible choices when applicable, or the errors are resolved with default choices.
 
-Here is an example map with errors after the user applies **Validate**:
+Here is an example from our simple demo on a sample deployment. Below is a list of errors found by the service for the map provided by the user upon **Validate**:
 
 ![A screenshot from the sample deployment of SyBValS for validation](img/sybvals-ss-validation.png)
 
-Notice how each error is color-coded both in its text description and in the image, respectively.
+Notice how each error is color-coded both in its text description and in the image, respectively. Also, the user is provided with
+resolution alternatives when applicable.
 
 Here is the same map after the user applied **Resolve Errors**:
 
@@ -15,16 +16,22 @@ All problems have now been fixed.
 
 The main capabilities of SyBValS include:
 - validate and create an image of a map in SBGNML format, and
-- resolve the errors in a map in SBGNML format, recreate an image of the validated map and produce corrected version of the input SBGN file.
+- resolve the errors in a map in SBGNML format, recreate an image of the validated map, and produce a corrected version of the input SBGN file.
 
 Backed by these capabilities, SyBValS can be used to validate, resolve, and generate images of SBGN models (e.g., for including in web pages or scientific articles).
 
 SyBValS is distributed under the [MIT License](https://github.com/iVis-at-Bilkent/sbgn-validation-service/blob/main/LICENSE).
+
 Here is a sample server deployment along with a simple client-side demo:
 
 <p align="center">
 <a href="http://sybvals.cs.bilkent.edu.tr"><img src="https://www.cs.bilkent.edu.tr/~ivis/images/demo1.png" height=42px></a>
 </p>
+
+<!--
+A video tutorial for using this demo is below:
+[![SyBValS](https://i.ytimg.com/vi/Hc79sDi3f0U/maxresdefault.jpg)](https://www.youtube.com/watch?v=arK32LKHxzM "SyBValS")
+--->
 
 ## Setup of a service
 
