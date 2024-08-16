@@ -262,6 +262,7 @@ function findCandidatesOrFix( errors, cy, isFix){
     else if( currentErrors[check].pattern == "pd10141"){
       let ele = cy.getElementById( currentErrors[check].role);
       errorFixParam.newEdges = [];
+      console.log( check + " " + currentErrors[check].role);
       
       if( ele.incomers().length === 0){
           let nodes = cy.nodes();
@@ -275,8 +276,8 @@ function findCandidatesOrFix( errors, cy, isFix){
             currentErrors[check].fixCandidate = [];
 
             for( let i = 0; i  < listedNodes.length; i++){
-              if( nodes[i].data().id != ele.id() ){
-                currentErrors[check].fixCandidate.push( {label: getLabel(nodes[i]), id: nodes[i].data().id} );
+              if( listedNodes[i].data().id != ele.id() ){
+                currentErrors[check].fixCandidate.push( {label: getLabel(listedNodes[i]), id: listedNodes[i].data().id} );
               }
               if( selectedNode.id() === nodes[i].data().id){
                 currentErrors[check].selectedOption = i;
@@ -1280,6 +1281,10 @@ app.post('/fixError', (req, res) => {
   if (imageOptions.height <= 0) {
     imageOptions.height = 720;
   }
+  cy.nodes().forEach((node) => {
+    node.css("width", node.data().bbox.w || size);
+    node.css("height", node.data().bbox.h || size);
+  });
   let ret = {};
   ret['errors'] = errors;
   ret["image"] = image;
