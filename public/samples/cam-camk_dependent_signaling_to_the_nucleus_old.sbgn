@@ -1,15 +1,126 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <sbgn xmlns="http://sbgn.org/libsbgn/0.2">
   <map language="process description">
+    <extension>
+      <renderInformation 
+        xmlns="http://www.sbml.org/sbml/level3/version1/render/version1" id="renderInformation" program-name="sbgnviz" program-version="6.0.1" background-color="#00000000">
+        <listOfColorDefinitions>
+          <colorDefinition id="color_1" value="#ffffffff"/>
+          <colorDefinition id="color_2" value="#bfbfbf"/>
+          <colorDefinition id="color_3" value="#555555"/>
+          <colorDefinition id="color_4" value="#ffffff"/>
+        </listOfColorDefinitions>
+        <listOfBackgroundImages>
+          <backgroundImage id="image_1" value="http://newteditor.org/color-scheme-images/rb3_gradient.png"/>
+          <backgroundImage id="image_2" value="http://newteditor.org/color-scheme-images/pg2_gradient.png"/>
+          <backgroundImage id="image_3" value="http://newteditor.org/color-scheme-images/pg1_gradient.png"/>
+          <backgroundImage id="image_4" value="http://newteditor.org/color-scheme-images/pg4_gradient.png"/>
+          <backgroundImage id="image_5" value="http://newteditor.org/color-scheme-images/bw1_gradient.png"/>
+        </listOfBackgroundImages>
+        <listOfStyles>
+          <style id="nodeffffffbfbfbf1818normalnormalHelvetica000image_1none505010010011" idList="glyph0 glyph1">
+            <g font-size="18" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="18" fill="color_1" background-image="image_1" background-fit="none" background-pos-x="50%" background-pos-y="50%" background-width="100%" background-height="100%" background-image-opacity="1" background-opacity="1"/>
+          </style>
+          <style id="nodeffffff5555551.2511normalnormalHelvetica000image_2none505010010011" idList="glyph3 glyph15 glyph2 glyph11 glyph17 glyph4 glyph14 glyph6 glyph12 glyph10 glyph8 glyph13 glyph5 glyph18 glyph7 glyph16">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_3" stroke-width="1.25" fill="color_1" background-image="image_2" background-fit="none" background-pos-x="50%" background-pos-y="50%" background-width="100%" background-height="100%" background-image-opacity="1" background-opacity="1"/>
+          </style>
+          <style id="nodeffffff5555551.2511normalnormalHelvetica000image_3none505010010011" idList="glyph25 glyph37 glyph22 glyph35 glyph45 glyph30 glyph43 glyph33 glyph32 glyph28 glyph42 glyph34 glyph29 glyph44 glyph41 glyph24 glyph40 glyph31 glyph23 glyph38 glyph20 glyph39 glyph46 glyph21 glyph27 b6769d7e-7ff6-11a0-2620-b71d9cf91ded 364697a4-255c-6c48-1fed-a8e91a24fc67">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_3" stroke-width="1.25" fill="color_1" background-image="image_3" background-fit="none" background-pos-x="50%" background-pos-y="50%" background-width="100%" background-height="100%" background-image-opacity="1" background-opacity="1"/>
+          </style>
+          <style id="infoboxffffff55555519normalnormalArial0f0f0fstadium" idList="glyph25_0 glyph25_1 glyph22_0 glyph22_1 glyph33_0 glyph32_0 glyph28_0 glyph34_0 glyph29_0 glyph24_0 glyph24_1 glyph23_0 glyph23_1 glyph20_0 glyph20_1 glyph21_0 glyph21_1">
+            <g font-size="9" font-family="Arial" font-weight="normal" font-style="normal" font-color="#0f0f0f" stroke="color_3" stroke-width="1" fill="color_4"/>
+          </style>
+          <style id="nodeffffff5555551.2511normalnormalHelvetica000image_4none505010010011" idList="glyph57 glyph50 glyph49 glyph53 glyph51 glyph55 glyph56 glyph54 glyph47 glyph52 glyph48">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_3" stroke-width="1.25" fill="color_1" background-image="image_4" background-fit="none" background-pos-x="50%" background-pos-y="50%" background-width="100%" background-height="100%" background-image-opacity="1" background-opacity="1"/>
+          </style>
+          <style id="nodeffffff5555551.25image_5none505010010011" idList="glyph61 glyph66 glyph59 glyph60 4ba1b666-0578-952d-af1f-df5986a11cc0 glyph63 glyph62 glyph65 glyph58 glyph68 glyph67 glyph69">
+            <g stroke="color_3" stroke-width="1.25" fill="color_1" background-image="image_5" background-fit="none" background-pos-x="50%" background-pos-y="50%" background-width="100%" background-height="100%" background-image-opacity="1" background-opacity="1"/>
+          </style>
+          <style id="nodeffffff5555551.2511normalnormalHelvetica000image_1none505010010011" idList="glyph9 glyph19">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_3" stroke-width="1.25" fill="color_1" background-image="image_1" background-fit="none" background-pos-x="50%" background-pos-y="50%" background-width="100%" background-height="100%" background-image-opacity="1" background-opacity="1"/>
+          </style>
+          <style id="infoboxffffff55555519normalnormalArial0f0f0frectangle" idList="b6769d7e-7ff6-11a0-2620-b71d9cf91ded_0 364697a4-255c-6c48-1fed-a8e91a24fc67_0">
+            <g font-size="9" font-family="Arial" font-weight="normal" font-style="normal" font-color="#0f0f0f" stroke="color_3" stroke-width="1" fill="color_4"/>
+          </style>
+          <style id="edge5555551.25" idList="arc31 nwtE_2228e5b5-771e-402b-b16e-85358c7b9999 nwtE_9ba5e16e-98ca-4066-be1a-cc272f59a28f arc32 arc34 arc33 nwtE_bc4239e4-7e0c-41ad-8556-fa994251bbe4 nwtE_26d7e29f-37d7-4bc8-9607-d28b1932ef52 arc2 arc3 arc4 arc5 arc6 arc7 arc8 arc9 arc10 arc11 arc12 arc13 arc14 arc15 arc16 arc17 arc18 arc19 arc20 arc21 arc22 arc23 arc24 arc25 nwtE_ebc64e3c-e4b6-4858-8a73-ce7c423e835d nwtE_eef9ec0e-9cf7-4257-88c3-58bfd65ef170 arc29 arc30">
+            <g stroke="color_3" stroke-width="1.25"/>
+          </style>
+        </listOfStyles>
+      </renderInformation>
+      <mapProperties>
+        <compoundPadding>0</compoundPadding>
+        <extraCompartmentPadding>14</extraCompartmentPadding>
+        <extraComplexPadding>10</extraComplexPadding>
+        <arrowScale>1.25</arrowScale>
+        <showComplexName>true</showComplexName>
+        <dynamicLabelSize>regular</dynamicLabelSize>
+        <inferNestingOnLoad>false</inferNestingOnLoad>
+        <fitLabelsToNodes>false</fitLabelsToNodes>
+        <fitLabelsToInfoboxes>false</fitLabelsToInfoboxes>
+        <recalculateLayoutOnComplexityManagement>true</recalculateLayoutOnComplexityManagement>
+        <rearrangeOnComplexityManagement>true</rearrangeOnComplexityManagement>
+        <animateOnDrawingChanges>true</animateOnDrawingChanges>
+        <adjustNodeLabelFontSizeAutomatically>false</adjustNodeLabelFontSizeAutomatically>
+        <enablePorts>true</enablePorts>
+        <enableSIFTopologyGrouping>false</enableSIFTopologyGrouping>
+        <allowCompoundNodeResize>false</allowCompoundNodeResize>
+        <mapColorScheme>opposed_purple_green2</mapColorScheme>
+        <mapColorSchemeStyle>gradient</mapColorSchemeStyle>
+        <mapName>CaM-CaMK dependent signaling to nucleus</mapName>
+        <mapDescription>Ma et al., Cell, 2014</mapDescription>
+        <highlightColor>#0B9BCD</highlightColor>
+        <extraHighlightThickness>2</extraHighlightThickness>
+        <mapPD2AFConverted>false</mapPD2AFConverted>
+        <defaultInfoboxHeight>12</defaultInfoboxHeight>
+        <defaultInfoboxWidth>30</defaultInfoboxWidth>
+        <rearrangeAfterExpandCollapse>true</rearrangeAfterExpandCollapse>
+      </mapProperties>
+    </extension>
     <glyph id="glyph0" class="compartment">
+      <extension>
+        <extraInfo>
+          <w>948.2491938838532</w>
+          <h>1163.9691972897863</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
       <label text="neuron"/>
       <bbox x="239.625" y="171.625" w="976.2491938838532" h="1191.9691972897863"/>
     </glyph>
     <glyph id="glyph1" class="compartment" compartmentRef="glyph0">
+      <extension>
+        <extraInfo>
+          <w>900.2491938838532</w>
+          <h>659.3441972897863</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
       <label text="nucleus"/>
       <bbox x="263.625" y="652.25" w="928.2491938838532" h="687.3441972897863"/>
     </glyph>
     <glyph id="glyph3" class="complex" compartmentRef="glyph1">
+      <extension>
+        <extraInfo>
+          <w>151.5</w>
+          <h>116</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
       <label text="Ca/Cam/gCaMKII complex"/>
       <bbox x="279.25" y="686.25" w="171.5" h="136"/>
       <glyph id="glyph25" class="macromolecule">
@@ -26,8 +137,7 @@
       </glyph>
       <glyph id="glyph15" class="complex">
         <extension>
-          <nwt:extraInfo 
-            xmlns:nwt="https://newteditor.org/">
+          <extraInfo>
             <w>128.25</w>
             <h>43.25</h>
             <minW>0</minW>
@@ -36,7 +146,7 @@
             <WRBias>0</WRBias>
             <HTBias>0</HTBias>
             <HBBias>0</HBBias>
-          </nwt:extraInfo>
+          </extraInfo>
         </extension>
         <label text="Ca/CaM complex"/>
         <bbox x="290.875" y="747.375" w="148.25" h="63.25"/>
@@ -77,12 +187,23 @@
       <port id="glyph66.2" x="823" y="757.5625"/>
     </glyph>
     <glyph id="glyph2" class="complex" compartmentRef="glyph1">
+      <extension>
+        <extraInfo>
+          <w>145.5</w>
+          <h>112.375</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
       <label text="Ca/Cam/gCaMKK complex"/>
       <bbox x="911.75" y="691.375" w="165.5" h="132.375"/>
       <glyph id="glyph11" class="complex">
         <extension>
-          <nwt:extraInfo 
-            xmlns:nwt="https://newteditor.org/">
+          <extraInfo>
             <w>122.25</w>
             <h>43.25</h>
             <minW>0</minW>
@@ -91,7 +212,7 @@
             <WRBias>0</WRBias>
             <HTBias>0</HTBias>
             <HBBias>0</HBBias>
-          </nwt:extraInfo>
+          </extraInfo>
         </extension>
         <label text="Ca/CaM complex"/>
         <bbox x="923.375" y="703" w="142.25" h="63.25"/>
@@ -110,6 +231,18 @@
       </glyph>
     </glyph>
     <glyph id="glyph17" class="complex" compartmentRef="glyph1">
+      <extension>
+        <extraInfo>
+          <w>119.24999999999989</w>
+          <h>43.25</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
       <label text="Ca/CaM complex"/>
       <bbox x="589.511211133063" y="786.9551787701424" w="139.2499999999999" h="63.25"/>
       <glyph id="glyph49" class="simple chemical">
@@ -119,6 +252,14 @@
       <glyph id="glyph43" class="macromolecule">
         <label text="CaM"/>
         <bbox x="647.1362111330628" y="801.0801787701424" w="70" h="35"/>
+      </glyph>
+    </glyph>
+    <glyph id="glyph33" class="macromolecule" compartmentRef="glyph1">
+      <label text="CaMKIV"/>
+      <bbox x="484" y="854.5" w="70" h="35"/>
+      <glyph id="glyph33_0" class="state variable">
+        <state variable="T196"/>
+        <bbox x="501.63437444293004" y="883.5" w="32.9443359375" h="12"/>
       </glyph>
     </glyph>
     <glyph id="glyph59" class="association" compartmentRef="glyph1">
@@ -147,12 +288,23 @@
       <bbox x="1106.2491938838532" y="1288.9691972897863" w="70" h="35"/>
     </glyph>
     <glyph id="glyph4" class="complex" compartmentRef="glyph1">
+      <extension>
+        <extraInfo>
+          <w>142.5</w>
+          <h>111.375</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
       <label text="Ca/Cam/gCaMKIV complex"/>
       <bbox x="577.886211133063" y="993.75" w="162.5" h="131.375"/>
       <glyph id="glyph14" class="complex">
         <extension>
-          <nwt:extraInfo 
-            xmlns:nwt="https://newteditor.org/">
+          <extraInfo>
             <w>119.24999999999989</w>
             <h>43.25</h>
             <minW>0</minW>
@@ -161,7 +313,7 @@
             <WRBias>0</WRBias>
             <HTBias>0</HTBias>
             <HBBias>0</HBBias>
-          </nwt:extraInfo>
+          </extraInfo>
         </extension>
         <label text="Ca/CaM complex"/>
         <bbox x="589.511211133063" y="1005.375" w="139.2499999999999" h="63.25"/>
@@ -189,6 +341,18 @@
       <port id="glyph60.2" x="853.9754103538849" y="986.5460162674967"/>
     </glyph>
     <glyph id="glyph6" class="complex" compartmentRef="glyph1">
+      <extension>
+        <extraInfo>
+          <w>145.5</w>
+          <h>114.375</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
       <label text="Ca/Cam/gCaMKIV complex"/>
       <bbox x="911.75" y="978.3728746770742" w="165.5" h="134.375"/>
       <glyph id="glyph29" class="macromolecule">
@@ -201,8 +365,7 @@
       </glyph>
       <glyph id="glyph12" class="complex">
         <extension>
-          <nwt:extraInfo 
-            xmlns:nwt="https://newteditor.org/">
+          <extraInfo>
             <w>122.25</w>
             <h>43.25</h>
             <minW>0</minW>
@@ -211,7 +374,7 @@
             <WRBias>0</WRBias>
             <HTBias>0</HTBias>
             <HBBias>0</HBBias>
-          </nwt:extraInfo>
+          </extraInfo>
         </extension>
         <label text="Ca/CaM complex"/>
         <bbox x="923.375" y="989.9978746770742" w="142.25" h="63.25"/>
@@ -229,14 +392,6 @@
       <bbox x="987" y="1180.9691972897863" w="15" h="15"/>
       <port id="4ba1b666-0578-952d-af1f-df5986a11cc0.1" x="979.5" y="1188.4691972897863"/>
       <port id="4ba1b666-0578-952d-af1f-df5986a11cc0.2" x="1009.5" y="1188.4691972897863"/>
-    </glyph>
-    <glyph id="glyph33" class="macromolecule" compartmentRef="glyph1">
-      <label text="CaMKIV"/>
-      <bbox x="484" y="854.5" w="70" h="35"/>
-      <glyph id="glyph33_0" class="state variable">
-        <state variable="T196"/>
-        <bbox x="501.63437444293004" y="883.5" w="32.9443359375" h="12"/>
-      </glyph>
     </glyph>
     <glyph id="glyph55" class="simple chemical" compartmentRef="glyph0">
       <label text="Ca++"/>
@@ -264,6 +419,18 @@
       </glyph>
     </glyph>
     <glyph id="glyph10" class="complex" compartmentRef="glyph0">
+      <extension>
+        <extraInfo>
+          <w>128.2500000000001</w>
+          <h>43.25</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
       <label text="Ca/CaM complex"/>
       <bbox x="919.6572632393872" y="351.6225809530113" w="148.2500000000001" h="63.25"/>
       <glyph id="glyph40" class="macromolecule">
@@ -290,6 +457,18 @@
       <port id="glyph65.2" x="560" y="462.5625"/>
     </glyph>
     <glyph id="glyph8" class="complex" compartmentRef="glyph0">
+      <extension>
+        <extraInfo>
+          <w>142.5</w>
+          <h>116</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
       <label text="Ca/Cam/gCaMKII complex"/>
       <bbox x="283.75" y="391.25" w="162.5" h="136"/>
       <glyph id="glyph23" class="macromolecule">
@@ -306,8 +485,7 @@
       </glyph>
       <glyph id="glyph13" class="complex">
         <extension>
-          <nwt:extraInfo 
-            xmlns:nwt="https://newteditor.org/">
+          <extraInfo>
             <w>119.25</w>
             <h>43.25</h>
             <minW>0</minW>
@@ -316,7 +494,7 @@
             <WRBias>0</WRBias>
             <HTBias>0</HTBias>
             <HBBias>0</HBBias>
-          </nwt:extraInfo>
+          </extraInfo>
         </extension>
         <label text="Ca/CaM complex"/>
         <bbox x="295.375" y="452.375" w="139.25" h="63.25"/>
@@ -336,6 +514,18 @@
       <port id="glyph58.2" x="365" y="611"/>
     </glyph>
     <glyph id="glyph5" class="complex" compartmentRef="glyph0">
+      <extension>
+        <extraInfo>
+          <w>143.5</w>
+          <h>116</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
       <label text="Ca/Cam/gCaMKII complex"/>
       <bbox x="627.75" y="391.25" w="163.5" h="136"/>
       <glyph id="glyph20" class="macromolecule">
@@ -352,8 +542,7 @@
       </glyph>
       <glyph id="glyph18" class="complex">
         <extension>
-          <nwt:extraInfo 
-            xmlns:nwt="https://newteditor.org/">
+          <extraInfo>
             <w>120.25</w>
             <h>43.25</h>
             <minW>0</minW>
@@ -362,7 +551,7 @@
             <WRBias>0</WRBias>
             <HTBias>0</HTBias>
             <HBBias>0</HBBias>
-          </nwt:extraInfo>
+          </extraInfo>
         </extension>
         <label text="Ca/CaM complex"/>
         <bbox x="639.375" y="452.375" w="140.25" h="63.25"/>
@@ -377,12 +566,23 @@
       </glyph>
     </glyph>
     <glyph id="glyph7" class="complex" compartmentRef="glyph0">
+      <extension>
+        <extraInfo>
+          <w>143.5</w>
+          <h>119</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
       <label text="Ca/Cam/gCaMKII complex"/>
       <bbox x="364.75" y="187.25" w="163.5" h="139"/>
       <glyph id="glyph16" class="complex">
         <extension>
-          <nwt:extraInfo 
-            xmlns:nwt="https://newteditor.org/">
+          <extraInfo>
             <w>120.25</w>
             <h>43.25</h>
             <minW>0</minW>
@@ -391,7 +591,7 @@
             <WRBias>0</WRBias>
             <HTBias>0</HTBias>
             <HBBias>0</HBBias>
-          </nwt:extraInfo>
+          </extraInfo>
         </extension>
         <label text="Ca/CaM complex"/>
         <bbox x="376.375" y="251.375" w="140.25" h="63.25"/>
@@ -460,149 +660,257 @@
       <port id="glyph69.1" x="927" y="139"/>
       <port id="glyph69.2" x="927" y="169"/>
     </glyph>
-    <arc id="arc13" class="catalysis" source="glyph31" target="glyph65">
-      <start x="545.3578183068255" y="408.88051187558693"/>
-      <end x="545.0729036503403" y="451.6250694182217"/>
-    </arc>
     <arc id="arc31" class="production" source="glyph68.1" target="glyph7">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="640" y="304.375"/>
       <end x="531.8453414832748" y="284.64712066572156"/>
     </arc>
     <arc id="nwtE_2228e5b5-771e-402b-b16e-85358c7b9999" class="catalysis" source="glyph6" target="4ba1b666-0578-952d-af1f-df5986a11cc0">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="994.5" y="1113.3728746770742"/>
       <end x="994.5" y="1177.5316972897863"/>
     </arc>
     <arc id="nwtE_9ba5e16e-98ca-4066-be1a-cc272f59a28f" class="stimulation" source="364697a4-255c-6c48-1fed-a8e91a24fc67" target="glyph69">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="837.9258014066335" y="163.40296014821496"/>
       <end x="916.0797676833589" y="155.15277499999056"/>
     </arc>
     <arc id="arc32" class="catalysis" source="glyph27" target="glyph68">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="704.116530119893" y="270.9207753568925"/>
       <end x="650.2939540386109" y="312.12029593956373"/>
     </arc>
     <arc id="arc34" class="production" source="glyph60.2" target="glyph6">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="854.6004103538849" y="986.5460162674967"/>
       <end x="908.2032715018514" y="1012.8147742755434"/>
     </arc>
     <arc id="arc33" class="consumption" source="glyph4" target="glyph60.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="741.011211133063" y="1026.252353177417"/>
       <end x="823.3504103538849" y="986.5460162674967"/>
     </arc>
     <arc id="nwtE_bc4239e4-7e0c-41ad-8556-fa994251bbe4" class="consumption" source="b6769d7e-7ff6-11a0-2620-b71d9cf91ded" target="glyph67.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="615.920935898724" y="162.7271600783452"/>
       <end x="670.375" y="154"/>
     </arc>
     <arc id="nwtE_26d7e29f-37d7-4bc8-9607-d28b1932ef52" class="production" source="glyph67.2" target="364697a4-255c-6c48-1fed-a8e91a24fc67">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="701.625" y="154"/>
       <end x="763.5706284854614" y="162.77992764649622"/>
     </arc>
     <arc id="arc2" class="necessary stimulation" source="glyph19" target="glyph67">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="686" y="96.125"/>
       <end x="686" y="143.0625"/>
     </arc>
     <arc id="arc3" class="consumption" source="glyph48" target="glyph69.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="927" y="101.125"/>
       <end x="927" y="138.375"/>
     </arc>
     <arc id="arc4" class="production" source="glyph69.2" target="glyph55">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="927" y="169.625"/>
       <end x="927" y="218.25"/>
     </arc>
     <arc id="arc5" class="consumption" source="glyph55" target="glyph63.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="942.3938079844498" y="255.7266638604538"/>
       <end x="993.6406295841157" y="285.79847226067875"/>
     </arc>
     <arc id="arc6" class="consumption" source="glyph41" target="glyph63.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="1050.4825168570076" y="260.125"/>
       <end x="993.6406295841157" y="285.79847226067875"/>
     </arc>
     <arc id="arc7" class="production" source="glyph63.2" target="glyph10">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="993.6406295841157" y="317.04847226067875"/>
       <end x="993.7210307985792" y="347.87258563455856"/>
     </arc>
     <arc id="arc8" class="consumption" source="glyph24" target="glyph62.2">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="966.951677032963" y="520.4918132336828"/>
       <end x="896.8234393725336" y="462.56249999999994"/>
     </arc>
     <arc id="arc9" class="consumption" source="glyph10" target="glyph62.2">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="948.0048941979461" y="415.4975809530113"/>
       <end x="896.8234393725336" y="462.56249999999994"/>
     </arc>
     <arc id="arc10" class="production" source="glyph62.1" target="glyph5">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="865.5734393725336" y="462.56249999999994"/>
       <end x="794.9994185961664" y="460.8995014464593"/>
     </arc>
     <arc id="arc11" class="production" source="glyph65.1" target="glyph8">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="529.375" y="462.5625"/>
       <end x="449.99947097463263" y="460.81422637557483"/>
     </arc>
     <arc id="arc12" class="consumption" source="glyph5" target="glyph65.2">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="627.125" y="460.90876709726444"/>
       <end x="560.625" y="462.5625"/>
     </arc>
-    <arc id="arc30" class="consumption" source="glyph5" target="glyph68.2">
-      <start x="675.2491023339318" y="390.625"/>
-      <end x="640" y="335.625"/>
+    <arc id="arc13" class="catalysis" source="glyph31" target="glyph65">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="545.3578183068255" y="408.88051187558693"/>
+      <end x="545.0729036503403" y="451.6250694182217"/>
     </arc>
     <arc id="arc14" class="consumption" source="glyph8" target="glyph58.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="365" y="527.875"/>
       <end x="365" y="580.375"/>
     </arc>
     <arc id="arc15" class="production" source="glyph58.2" target="glyph3">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="365" y="611.625"/>
       <end x="365" y="682.5"/>
     </arc>
     <arc id="arc16" class="consumption" source="glyph3" target="glyph61.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="451.375" y="756.02397476865"/>
       <end x="510.66093966291146" y="757.5625"/>
     </arc>
     <arc id="arc17" class="production" source="glyph61.2" target="glyph22">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="541.9109396629115" y="757.5625"/>
       <end x="594.5549852263729" y="711.8633453132849"/>
     </arc>
     <arc id="arc18" class="production" source="glyph61.2" target="glyph17">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="541.9109396629115" y="757.5625"/>
       <end x="594.5311268578055" y="788.9072828430059"/>
     </arc>
     <arc id="arc19" class="consumption" source="glyph35" target="glyph66.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="764.5872259294566" y="710.125"/>
       <end x="792.375" y="757.5625"/>
     </arc>
     <arc id="arc20" class="consumption" source="glyph17" target="glyph66.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="723.0659689657159" y="792.3760531263123"/>
       <end x="792.375" y="757.5625"/>
     </arc>
     <arc id="arc21" class="production" source="glyph66.2" target="glyph2">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="823.625" y="757.5625"/>
       <end x="908" y="757.5625"/>
     </arc>
     <arc id="arc22" class="consumption" source="glyph17" target="glyph59.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="659.136211133063" y="850.8301787701424"/>
       <end x="659.136211133063" y="903.375"/>
     </arc>
+    <arc id="arc23" class="consumption" source="glyph33" target="glyph59.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="554.3015843748929" y="883.8397268786191"/>
+      <end x="659.136211133063" y="903.375"/>
+    </arc>
     <arc id="arc24" class="production" source="glyph59.2" target="glyph4">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="659.136211133063" y="934.625"/>
       <end x="659.136211133063" y="990"/>
     </arc>
     <arc id="arc25" class="catalysis" source="glyph30" target="glyph60">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="948.5704508552702" y="812.75"/>
       <end x="845.5688101307315" y="976.0901908064852"/>
     </arc>
     <arc id="nwtE_ebc64e3c-e4b6-4858-8a73-ce7c423e835d" class="consumption" source="glyph32" target="4ba1b666-0578-952d-af1f-df5986a11cc0.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="883.8741938838532" y="1188.4691972897863"/>
       <end x="978.875" y="1188.4691972897863"/>
     </arc>
     <arc id="nwtE_eef9ec0e-9cf7-4257-88c3-58bfd65ef170" class="production" source="4ba1b666-0578-952d-af1f-df5986a11cc0.2" target="glyph28">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
       <start x="1010.125" y="1188.4691972897863"/>
       <end x="1102.4991938838532" y="1188.4691972897863"/>
     </arc>
-    <arc id="nwtE_6559403d-2d48-4965-92d0-0bb93479b16b" class="stimulation" source="4ba1b666-0578-952d-af1f-df5986a11cc0.2" target="glyph9">
-      <start x="1010.125" y="1188.4691972897863"/>
-      <end x="1118.9141636651761" y="1288.5097557688343"/>
+    <arc id="arc29" class="stimulation" source="glyph28" target="glyph9">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="1141.2491938838532" y="1206.5941972897863"/>
+      <end x="1141.2491938838532" y="1285.2191972897863"/>
     </arc>
-    <arc id="nwtE_a856aa09-0e8f-4016-a6a2-0c1d610fc7fd" class="consumption" source="glyph33" target="glyph61.2">
-      <start x="520.153971874519" y="853.875"/>
-      <end x="541.9109396629115" y="757.5625"/>
+    <arc id="arc30" class="consumption" source="glyph5" target="glyph68.2">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="675.2491023339318" y="390.625"/>
+      <end x="640" y="335.625"/>
     </arc>
   </map>
 </sbgn>
