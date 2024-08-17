@@ -624,7 +624,7 @@ $("body").on("change", "#file-input", function (e, fileObject) {
 		let isSBGNML = (graphData.search("sbgn") == -1) ? 0 : 1;
 		if (isSBGNML) {
 			fileType = "sbgnml";
-			$("#file-type").html("SBGNML file is detected! <br> Now you can apply validation.");
+			$("#file-type").html("SBGNML file is detected! <br> Now you can apply validation/resolve errors.");
 			document.getElementById("errorsField").innerText = "Errors";
 	        $('#errorsField').css({ width: '50px' });
 			$("#colorScheme").attr("disabled", false);
