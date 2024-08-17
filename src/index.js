@@ -48,7 +48,7 @@ let imageOptions = {
   height: 720,
   color: 'greyscale',
   highlightColor: '#ff0000',
-  highlightWidth: 30,
+  highlightWidth: 10,
   autoSize: true
 };
 
@@ -1069,7 +1069,7 @@ app.use(async (req, res, next) => {
         height: 720,
         color: 'greyscale',
         highlightColor: '#ff0000',
-        highlightWidth: 30,
+        highlightWidth: 10,
         autoSize: true
       };      
       next();
@@ -1259,7 +1259,7 @@ app.post('/fixError', (req, res) => {
     height: 720,
     color: 'greyscale',
     highlightColor: '#ff0000',
-    highlightWidth: 30
+    highlightWidth: 10
   };*/
 
   if (options.imageOptions) {
