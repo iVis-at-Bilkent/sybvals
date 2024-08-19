@@ -206,7 +206,7 @@ let applyErrorFix = async function () {
 				const errorString = "#errorNo" + error.errorNo;
 				$("#errorsArea").append(errorRectangle);
 				let resolutionAlternative;
-				if( showResolutionAlternatives && error.status !== "solved" && error.fixCandidate !== undefined && error.fixCandidate.length > 0){
+				if( showResolutionAlternatives && error.status !== "solved"){
 					}
 					$('.ui.accordion').accordion();
 					$('.ui.radio.checkbox').checkbox();
@@ -214,7 +214,9 @@ let applyErrorFix = async function () {
 					$('.ui.accordion').accordion();
 					$('.ui.radio.checkbox').checkbox();
 					$('.ui.checkbox').checkbox();
-					for( let i = 0; i < error.fixCandidate.length; i++){
+					$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + "-1" + '"name="'+ 'fixFor' + error.errorNo + '" value="' + -1 + '"><label style = "font-size:1em !important;margin-top:0px">' + "None" +'</label></div></div>');
+
+					for( let i = 0; error.fixCandidate && i < error.fixCandidate.length; i++){
 					$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + i + '"name="'+ 'fixFor' + error.errorNo + '" value="' + i+ '"><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
 					if( (error.selectedOption  ) === i){
 						console.log( error.errorNo + " " + error.selectedOption + " " + i);
@@ -418,7 +420,7 @@ let processValidation = async function () {
 				//list.append(errorPattern);
 				list.append(errorText);
 				console.log( showResolutionAlternatives);
-				if( showResolutionAlternatives && error.fixCandidate !== undefined && error.fixCandidate.length > 0)
+				//if( showResolutionAlternatives && error.fixCandidate !== undefined && error.fixCandidate.length > 0)
 				list.append( accordion);
 				errorRectangle.append(list);
 				errorRectangle.append('</div>');
@@ -427,8 +429,10 @@ let processValidation = async function () {
 				errorRectangle.css({ 'margin-top': '2px' });
 				$("#errorsArea").append(errorRectangle);
 				
-				if( showResolutionAlternatives && error.fixCandidate !== undefined && error.fixCandidate.length > 0){
-				for( let i = 0; i < error.fixCandidate.length; i++){
+				if( showResolutionAlternatives){
+					$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-:1'  + '"name="'+ 'fixFor' + error.errorNo + '" value="' + "-1" + '"><label style = "font-size:1em !important;margin-top:0px">' + "None" +'</label></div></div>');
+
+				for( let i = 0; error.fixCandidate && i < error.fixCandidate.length; i++){
 				//$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" name="fixFor' + error.errorNo + '" value="' + error.fixCandidate[i].id+ '"><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
 				$( `#solutionField${error.errorNo}` ).append('<div class="active field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + i + '"name="'+ 'fixFor' + error.errorNo + '" value="' + i + '" clicked ><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
 					if( (error.selectedOption  ) === i){
@@ -460,7 +464,7 @@ let processValidation = async function () {
 					event.currentTarget.style.checked = true;
 				}
 				event.currentTarget.style.checked = true;
-;			 });
+;			 });   
              // get image info
 		blobData = saveImage(res["image"], imageFormat, document.getElementById("file-name").innerHTML);
 		let urlCreator = window.URL || window.webkitURL;

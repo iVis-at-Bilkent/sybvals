@@ -93,6 +93,7 @@ function findCandidatesOrFix( errors, cy, isFix){
       check++;
       continue;
     }
+    currentErrors[check].selectedOption = "default";
     currentErrors[check].status = "unsolved";
     let errorFixParam = {};
     if( isFix === false ){
@@ -140,6 +141,10 @@ function findCandidatesOrFix( errors, cy, isFix){
                 currentErrors[check].selectedOption = i;
               }
         }
+        let temp = currentErrors[check].fixCandidate[0];
+        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+        currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
+        currentErrors[check].selectedOption = 0;
         check++;
         continue;
       }
@@ -190,6 +195,10 @@ function findCandidatesOrFix( errors, cy, isFix){
               currentErrors[check].selectedOption = i;
              }
         }
+          let temp = currentErrors[check].fixCandidate[0];
+        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+        currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
+        currentErrors[check].selectedOption = 0;
         check++;
         continue;
       }
@@ -222,6 +231,10 @@ function findCandidatesOrFix( errors, cy, isFix){
             currentErrors[check].selectedOption = i;
           }
         }
+          let temp = currentErrors[check].fixCandidate[0];
+        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+        currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
+        currentErrors[check].selectedOption = 0;
         check++;
         continue;
       }
@@ -251,6 +264,11 @@ function findCandidatesOrFix( errors, cy, isFix){
           currentErrors[check].selectedOption = i;
         }
       }
+      let temp = currentErrors[check].fixCandidate[0];
+        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+        currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
+        currentErrors[check].selectedOption = 0;
+      
       check++;
       continue;
     }
@@ -283,6 +301,10 @@ function findCandidatesOrFix( errors, cy, isFix){
                 currentErrors[check].selectedOption = i;
               }
             }
+            let temp = currentErrors[check].fixCandidate[0];
+        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+        currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
+        currentErrors[check].selectedOption = 0;      
             check++;
             continue;
           errorFixParam.newEdges.push({ source: selectedNode.id(), target: ele.id()});
@@ -309,6 +331,11 @@ function findCandidatesOrFix( errors, cy, isFix){
               }
             }
           }
+          let temp = currentErrors[check].fixCandidate[0];
+        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+        currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
+        currentErrors[check].selectedOption = 0;
+      
           check++;
           continue;
 
@@ -460,6 +487,11 @@ function findCandidatesOrFix( errors, cy, isFix){
              }
 
         }
+        let temp = currentErrors[check].fixCandidate[0];
+        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+        currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
+        currentErrors[check].selectedOption = 0;
+      
         check++;
         continue;
       }
@@ -520,6 +552,10 @@ function findCandidatesOrFix( errors, cy, isFix){
                 currentErrors[check].selectedOption = i;
               }
         }
+        let temp = currentErrors[check].fixCandidate[0];
+        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+        currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
+        currentErrors[check].selectedOption = 0;
         check++;
         continue;
       }
@@ -548,6 +584,12 @@ function findCandidatesOrFix( errors, cy, isFix){
               if( connectedEdges[i].id() == selectedEdge.id()){
                 currentErrors[check].selectedOption = i;
               }
+        }
+        if( connectedEdges.length > 0){
+        let temp = currentErrors[check].fixCandidate[0];
+        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+        currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
+        currentErrors[check].selectedOption = 0;
         }
         check++;
         continue;
@@ -594,18 +636,26 @@ function findCandidatesOrFix( errors, cy, isFix){
             }
           }
       }
+      let selectedNode = closestNodeForEdges( ele.target(), listedNodes );
+
       if( isFix === false ){
         currentErrors[check].fixCandidate = [];
         for( let i = 0; i <  listedNodes.length; i++){
              currentErrors[check].fixCandidate.push( {label: getLabel(listedNodes[i]), id: listedNodes[i].data().id});
+             if( listedNodes[i].id() == selectedNode.id()){
+              currentErrors[check].selectedOption = i;
+            }
         }
+        let temp = currentErrors[check].fixCandidate[0];
+        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+        currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
+        currentErrors[check].selectedOption = 0;
         check++;
         continue;
       }
       // node should be selected here, default is 0.
       if( listedNodes.length > 0){
       //let selectedNode = listedNodes[0];
-      let selectedNode = closestNodeForEdges( ele.target(), listedNodes );
       errorFixParam.newTarget = ele.target().id();
       errorFixParam.newSource = selectedNode.id();
       errorFixParam.edge = ele;
@@ -813,6 +863,7 @@ function reduceErrors(errors,cy){
 // for fcose
 const fcose = require('cytoscape-fcose');
 const { privateDecrypt } = require('crypto');
+const { connected } = require('process');
 cytoscape.use(fcose);
 
 // for logging
@@ -1185,6 +1236,11 @@ app.post('/validation', async (req, res, next) => {
     if( showResolutionAlternatives === "true" ){
       errors = findCandidatesOrFix( errors, cy, false );
     }
+    else {
+      errors.forEach( error => {
+        error.selectedOption = "default";
+      })
+    }
     try {
 
       snap.start().then(function () {
@@ -1246,7 +1302,8 @@ app.post('/fixError', (req, res) => {
   let showResolutionAlternatives = res.locals.showResolutionAlternatives;
   let fixData = {};
   for( let i = 0; i < errors.length; i++){
-      if( errors[i].selectedOption !== undefined ){
+    console.log( i + " " + errors[i].selectedOption);
+      if( errors[i].selectedOption !== undefined && parseInt(errors[i].selectedOption) !== -1 && errors[i].selectedOption !== "default"){
         fixData[errors[i].pattern + errors[i].role] = errors[i].fixCandidate[errors[i].selectedOption].id;
       }
   }
@@ -1307,6 +1364,10 @@ app.post('/fixError', (req, res) => {
   }
   console.log( errors);
   while (check < currentErrors.length) {
+    if( currentErrors[check].selectedOption === undefined || parseInt(currentErrors[check].selectedOption) === - 1){
+      check++;
+      continue;
+    }
     if( errorStillAvailable[ currentErrors[check].pattern + currentErrors[check].role] === undefined ){
       check++;
       continue;
@@ -1803,6 +1864,11 @@ app.post('/fixError', (req, res) => {
   if( showResolutionAlternatives ){
   errors = findCandidatesOrFix( errors, cy, false );
   }
+  else {
+    errors.forEach( error => {
+      error.selectedOption = "default";
+    })
+  }
   //console.log( errors);
   console.log( fixExplanation);
   highlightErrors(errors, cy, imageOptions, false, unsolvedErrorInformation, fixExplanation);
@@ -1886,7 +1952,7 @@ function fixError(errorFixParam) {
   }
   if (errorCode == "pd10108" || errorCode == "pd10104") {
     for (let i = 0; i < errorFixParam.nodes.length; i++) {
-      errorFixParam.nodes[i].remove();
+      //errorFixParam.nodes[i].remove();
     }
     for (let i = 0; i < errorFixParam.edges.length; i++) {
       errorFixParam.edges[i].remove();
