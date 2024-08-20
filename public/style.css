@@ -196,3 +196,6 @@ option {
 .ui.accordion .accordion .active.title .dropdown.icon, .ui.accordion .active.title .icon.small.angle.down{
   transform: rotate(180deg);
 }
+.ui.vertical.menu{
+  width: 45rem;
+}

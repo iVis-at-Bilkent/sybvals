@@ -55,6 +55,24 @@ let imageOptions = {
 const $ = jQuery = require('jquery')(window);
 
 function getLabel(node){
+  if( ( node.data().class === "process"  || node.data().class === "and" || node.data().class === "or" || node.data().class === "not" ) &&  node.connectedEdges().length > 0 ){
+    let labelString = node.data().class +  " with input(s)/output(s) ";
+    let labelStringInitial = labelString;
+    let isFirst = true;
+    node.connectedEdges().forEach(  edge =>{
+       let connectedNode = edge.source().id() === node.id() ? edge.target(): edge.source();
+       if( elementUtilities.isEPNClass( connectedNode.data().class ) ){
+        if( isFirst)
+        labelString += connectedNode.data().label;
+        else 
+        labelString += ", " + connectedNode.data().label;
+        isFirst = false;
+      }
+    });
+    if( labelString !== labelStringInitial) {
+      return labelString;
+    }
+  }
   return node.data().label ? node.data().label : node.data().class;
 }
 

@@ -169,7 +169,7 @@ let applyErrorFix = async function () {
 					list.append(fixExplanation);
 				}
 				let accordion = $('<div id ="rec' + error.errorNo + '"class="ui vertical accordion menu" style = "min-height: 0px !important;">');
-				let item = $('<div id = "item' + error.errorNo + '"  class="field"> <a class="title" style = "background: #efefef; padding : 0; width : inherit !important;display:block;"> <i class="icon small angle down"></i>Resolution Alternative</a><div class="content" style = "padding : 0"><div class="ui form"><div class="grouped fields" id ="solutionField' + error.errorNo + '"> </div></div></div></div>' );
+				let item = $('<div id = "item' + error.errorNo + '"  class="field"> <a class="title" style = "background: #efefef; padding : 0; width : inherit !important;display:block;"> <i class="icon small angle down"></i>Resolution Alternatives</a><div class="content" style = "padding : 0"><div class="ui form"><div class="grouped fields" id ="solutionField' + error.errorNo + '"> </div></div></div></div>' );
 				let option = $('<div class="field"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" name="test" value="ds"><label>Data Structure</label></div></div>');
 				let classItem =  $('<a class="active title">');
 				let str = ("#solutionField" + error.errorNo ).toString();
@@ -192,7 +192,7 @@ let applyErrorFix = async function () {
 				$('.ui.accordion').accordion();
 				$('.ui.radio.checkbox').checkbox();
 				$('.ui.checkbox').checkbox();
-				if( showResolutionAlternatives && error.status !== "solved" && error.fixCandidate !== undefined && error.fixCandidate.length > 0)
+				if( showResolutionAlternatives && error.status !== "solved")
 				list.append( accordion);
 				errorRectangle.append(list);
 				list.css({ 'margin': '2px' });
@@ -207,7 +207,6 @@ let applyErrorFix = async function () {
 				$("#errorsArea").append(errorRectangle);
 				let resolutionAlternative;
 				if( showResolutionAlternatives && error.status !== "solved"){
-					}
 					$('.ui.accordion').accordion();
 					$('.ui.radio.checkbox').checkbox();
 					$('.ui.checkbox').checkbox();
@@ -238,6 +237,8 @@ let applyErrorFix = async function () {
 
 					}
 					}
+					}
+					
 					
 				let uiDivider = $('<div class="ui divider"></div>');
 				uiDivider.css({ 'margin': '0rem 0' });
@@ -420,7 +421,7 @@ let processValidation = async function () {
 				//list.append(errorPattern);
 				list.append(errorText);
 				console.log( showResolutionAlternatives);
-				//if( showResolutionAlternatives && error.fixCandidate !== undefined && error.fixCandidate.length > 0)
+				if( showResolutionAlternatives)
 				list.append( accordion);
 				errorRectangle.append(list);
 				errorRectangle.append('</div>');
