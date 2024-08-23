@@ -54,22 +54,22 @@ let imageOptions = {
 
 const $ = jQuery = require('jquery')(window);
 
-function getLabel(node){
-  if( ( node.data().class === "process"  || node.data().class === "and" || node.data().class === "or" || node.data().class === "not" ) &&  node.connectedEdges().length > 0 ){
-    let labelString = node.data().class +  " with input(s)/output(s) ";
+function getLabel(node) {
+  if ((node.data().class === "process" || node.data().class === "and" || node.data().class === "or" || node.data().class === "not") && node.connectedEdges().length > 0) {
+    let labelString = node.data().class + " with input(s)/output(s) ";
     let labelStringInitial = labelString;
     let isFirst = true;
-    node.connectedEdges().forEach(  edge =>{
-       let connectedNode = edge.source().id() === node.id() ? edge.target(): edge.source();
-       if( elementUtilities.isEPNClass( connectedNode.data().class ) ){
-        if( isFirst)
-        labelString += connectedNode.data().label;
-        else 
-        labelString += ", " + connectedNode.data().label;
+    node.connectedEdges().forEach(edge => {
+      let connectedNode = edge.source().id() === node.id() ? edge.target() : edge.source();
+      if (elementUtilities.isEPNClass(connectedNode.data().class)) {
+        if (isFirst)
+          labelString += connectedNode.data().label;
+        else
+          labelString += ", " + connectedNode.data().label;
         isFirst = false;
       }
     });
-    if( labelString !== labelStringInitial) {
+    if (labelString !== labelStringInitial) {
       return labelString;
     }
   }
@@ -99,22 +99,22 @@ function postProcessForLayouts(cy) {
 
 }
 
-function findCandidatesOrFix( errors, cy, isFix){
+function findCandidatesOrFix(errors, cy, isFix) {
   let currentErrors = errors;
-  let check = 0; 
+  let check = 0;
   let numberOfUnsolvedErrors = 0;
   while (check < currentErrors.length) {
     let currentLength = currentErrors.length;
     previousErrorCode = currentErrors[check].pattern;
     previousErrorRole = currentErrors[check].role;
-    if( currentErrors[check].status === "solved"){
+    if (currentErrors[check].status === "solved") {
       check++;
       continue;
     }
     currentErrors[check].selectedOption = "default";
     currentErrors[check].status = "unsolved";
     let errorFixParam = {};
-    if( isFix === false ){
+    if (isFix === false) {
       currentErrors[check].fixCandidate = [];
     }
     errorFixParam.errorCode = currentErrors[check].pattern;
@@ -123,17 +123,17 @@ function findCandidatesOrFix( errors, cy, isFix){
       var compartments = cy.nodes('[class= "compartment"]');
       var listedNodes = [];
       for (var i = 0; i < compartments.length; i++) {
-        if (compartments[i].parent().length == 0){
-           if( isFix === false ){
-               currentErrors[check].fixCandidate.push( {label : getLabel(compartments[i]), id : compartments[i].data().id});
-               currentErrors[check].selectedOption = 0;
-           }
-           else {
-          listedNodes.push(compartments[i]);
+        if (compartments[i].parent().length == 0) {
+          if (isFix === false) {
+            currentErrors[check].fixCandidate.push({ label: getLabel(compartments[i]), id: compartments[i].data().id });
+            currentErrors[check].selectedOption = 0;
+          }
+          else {
+            listedNodes.push(compartments[i]);
           }
         }
       }
-      if( isFix === false ){
+      if (isFix === false) {
         check++;
         continue;
       }
@@ -142,7 +142,7 @@ function findCandidatesOrFix( errors, cy, isFix){
       }
       else {
         ele.move({ "parent": listedNodes[0].data().id });
-        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Fixed by moving " + " inside " + listedNodes[0].data().id + ".";
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Fixed by moving " + " inside " + getLabel(listedNodes[0]) + ".";
       }
     }
     else if (currentErrors[check].pattern == "pd10126") {
@@ -150,17 +150,19 @@ function findCandidatesOrFix( errors, cy, isFix){
       let selectedEdge = connectedEdges[check]; // 0 is default, it should be decided later.
       selectedEdge = findClosestNode(ele, connectedEdges);
 
-      if( isFix === false ){
+      if (isFix === false) {
         currentErrors[check].fixCandidate = [];
-        for( let i = 0; i <  connectedEdges.length; i++){
-             currentErrors[check].fixCandidate.push( {label:(getLabel(connectedEdges[i].source())
-              + " - " + getLabel(connectedEdges[i].target())), id: connectedEdges[i].data().id});
-              if( selectedEdge.data().id === connectedEdges[i].data().id ){
-                currentErrors[check].selectedOption = i;
-              }
+        for (let i = 0; i < connectedEdges.length; i++) {
+          currentErrors[check].fixCandidate.push({
+            label: (getLabel(connectedEdges[i].source())
+              + " - " + getLabel(connectedEdges[i].target())), id: connectedEdges[i].data().id
+          });
+          if (selectedEdge.data().id === connectedEdges[i].data().id) {
+            currentErrors[check].selectedOption = i;
+          }
         }
         let temp = currentErrors[check].fixCandidate[0];
-        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+        currentErrors[check].fixCandidate[0] = currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
         currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
         currentErrors[check].selectedOption = 0;
         check++;
@@ -176,7 +178,7 @@ function findCandidatesOrFix( errors, cy, isFix){
         }
       }
       if (connectedEdges.length !== 0) {
-        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Edge between this node and " + selectedEdge.source().id() + " is kept.";
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Edge between this node and " + getLabel(selectedEdge.source()) + " is kept.";
         fixError(errorFixParam);
       }
       else
@@ -204,17 +206,17 @@ function findCandidatesOrFix( errors, cy, isFix){
             }
           }
       }
-      let selectedNode = closestNodeForEdges(ele.target(), listedNodes );
-      if( isFix === false ){
+      let selectedNode = closestNodeForEdges(ele.target(), listedNodes);
+      if (isFix === false) {
         currentErrors[check].fixCandidate = [];
-        for( let i = 0; i <  listedNodes.length; i++){
-             currentErrors[check].fixCandidate.push( {label: getLabel(listedNodes[i]), id: listedNodes[i].data().id});
-             if( listedNodes[i].data().id === selectedNode.data().id){
-              currentErrors[check].selectedOption = i;
-             }
+        for (let i = 0; i < listedNodes.length; i++) {
+          currentErrors[check].fixCandidate.push({ label: getLabel(listedNodes[i]), id: listedNodes[i].data().id });
+          if (listedNodes[i].data().id === selectedNode.data().id) {
+            currentErrors[check].selectedOption = i;
+          }
         }
-          let temp = currentErrors[check].fixCandidate[0];
-        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+        let temp = currentErrors[check].fixCandidate[0];
+        currentErrors[check].fixCandidate[0] = currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
         currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
         currentErrors[check].selectedOption = 0;
         check++;
@@ -225,150 +227,150 @@ function findCandidatesOrFix( errors, cy, isFix){
         errorFixParam.newSource = selectedNode.id();
         errorFixParam.edge = ele;
         errorFixParam.portsource = selectedNode.id();
-        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Arc is connected to " + selectedNode.id() + ".";
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Arc is connected to " + getLabel(selectedNode) + ".";
         fixError(errorFixParam);
       }
       else
         numberOfUnsolvedErrors++;
     }
-    else if (currentErrors[check].pattern == "pd10127"){
+    else if (currentErrors[check].pattern == "pd10127") {
       let ele = cy.getElementById(currentErrors[check].role);
       let nodes = cy.nodes();
       let listedNodes = [];
-      nodes.forEach( node => {
-        if( elementUtilities.isEPNClass( node.data().class ) ) {
-            listedNodes.push( node );
+      nodes.forEach(node => {
+        if (elementUtilities.isEPNClass(node.data().class)) {
+          listedNodes.push(node);
         }
       });
       let closestNode = closestNodeForEdges(ele.target(), listedNodes);
       currentErrors[check].fixCandidate = [];
-      if( isFix === false){
-        for( let i = 0; i < listedNodes.length; i++){
-          currentErrors[check].fixCandidate.push( {label: getLabel(listedNodes[i]), id: listedNodes[i].data().id});
-          if( closestNode.data().id == listedNodes[i].data().id){
+      if (isFix === false) {
+        for (let i = 0; i < listedNodes.length; i++) {
+          currentErrors[check].fixCandidate.push({ label: getLabel(listedNodes[i]), id: listedNodes[i].data().id });
+          if (closestNode.data().id == listedNodes[i].data().id) {
             currentErrors[check].selectedOption = i;
           }
         }
-          let temp = currentErrors[check].fixCandidate[0];
-        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+        let temp = currentErrors[check].fixCandidate[0];
+        currentErrors[check].fixCandidate[0] = currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
         currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
         currentErrors[check].selectedOption = 0;
         check++;
         continue;
       }
-      let newSource = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):closestNodeForEdges(ele.target(), listedNodes);
+      let newSource = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : closestNodeForEdges(ele.target(), listedNodes);
       errorFixParam.edge = ele;
-      errorFixParam.newEdge = {source: newSource.id(), target: ele.target().id()};
-      fixError( errorFixParam);
-  }
-  else if (currentErrors[check].pattern == "pd10128" || currentErrors[check].pattern == "pd10110"){
-    let ele = cy.getElementById(currentErrors[check].role);
-    let nodes = cy.nodes();
-    let listedNodes = [];
-    nodes.forEach( node => {
-      if( currentErrors[check].pattern == "pd10128" && (node.data().class == "submap" || node.data().class == "terminal" || node.data().class == "tag" )) {
-          listedNodes.push( node );
-      }
-      if( currentErrors[check].pattern == "pd10110" && ( elementUtilities.isPNClass( node.data().class )) ) {
-          listedNodes.push( node );
-      }
-    });
-    let closestNode = closestNodeForEdges(ele.target(), listedNodes);
-    currentErrors[check].fixCandidate = [];
-    if( isFix === false){
-      for( let i = 0; i < listedNodes.length; i++){
-        currentErrors[check].fixCandidate.push( {label: getLabel(listedNodes[i]), id: listedNodes[i].data().id});
-        if( closestNode.data().id == listedNodes[i].data().id){
-          currentErrors[check].selectedOption = i;
+      errorFixParam.newEdge = { source: newSource.id(), target: ele.target().id() };
+      fixError(errorFixParam);
+    }
+    else if (currentErrors[check].pattern == "pd10128" || currentErrors[check].pattern == "pd10110") {
+      let ele = cy.getElementById(currentErrors[check].role);
+      let nodes = cy.nodes();
+      let listedNodes = [];
+      nodes.forEach(node => {
+        if (currentErrors[check].pattern == "pd10128" && (node.data().class == "submap" || node.data().class == "terminal" || node.data().class == "tag")) {
+          listedNodes.push(node);
         }
-      }
-      let temp = currentErrors[check].fixCandidate[0];
-        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+        if (currentErrors[check].pattern == "pd10110" && (elementUtilities.isPNClass(node.data().class))) {
+          listedNodes.push(node);
+        }
+      });
+      let closestNode = closestNodeForEdges(ele.target(), listedNodes);
+      currentErrors[check].fixCandidate = [];
+      if (isFix === false) {
+        for (let i = 0; i < listedNodes.length; i++) {
+          currentErrors[check].fixCandidate.push({ label: getLabel(listedNodes[i]), id: listedNodes[i].data().id });
+          if (closestNode.data().id == listedNodes[i].data().id) {
+            currentErrors[check].selectedOption = i;
+          }
+        }
+        let temp = currentErrors[check].fixCandidate[0];
+        currentErrors[check].fixCandidate[0] = currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
         currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
         currentErrors[check].selectedOption = 0;
-      
-      check++;
-      continue;
-    }
-    let newTarget = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):closestNodeForEdges(ele.target(), listedNodes);
-    errorFixParam.edge = ele;
-    errorFixParam.newEdge = {source: ele.source().id(), target: newTarget.id()};
-    fixError( errorFixParam);
-}
-    else if( currentErrors[check].pattern == "pd10141"){
-      let ele = cy.getElementById( currentErrors[check].role);
-      errorFixParam.newEdges = [];
-      console.log( check + " " + currentErrors[check].role);
-      
-      if( ele.incomers().length === 0){
-          let nodes = cy.nodes();
-          let listedNodes = [];
-          for( let i = 0; i < nodes.length; i++){
-            if( elementUtilities.isEPNClass(nodes[i].data().class)){
-              listedNodes.push( nodes[i]);
-            }
-          }
-          let selectedNode = closestNodeForEdges( ele, listedNodes);
-            currentErrors[check].fixCandidate = [];
 
-            for( let i = 0; i  < listedNodes.length; i++){
-              if( listedNodes[i].data().id != ele.id() ){
-                currentErrors[check].fixCandidate.push( {label: getLabel(listedNodes[i]), id: listedNodes[i].data().id} );
-              }
-              if( selectedNode.id() === nodes[i].data().id){
-                currentErrors[check].selectedOption = i;
-              }
-            }
-            let temp = currentErrors[check].fixCandidate[0];
-        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+        check++;
+        continue;
+      }
+      let newTarget = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : closestNodeForEdges(ele.target(), listedNodes);
+      errorFixParam.edge = ele;
+      errorFixParam.newEdge = { source: ele.source().id(), target: newTarget.id() };
+      fixError(errorFixParam);
+    }
+    else if (currentErrors[check].pattern == "pd10141") {
+      let ele = cy.getElementById(currentErrors[check].role);
+      errorFixParam.newEdges = [];
+      console.log(check + " " + currentErrors[check].role);
+
+      if (ele.incomers().length === 0) {
+        let nodes = cy.nodes();
+        let listedNodes = [];
+        for (let i = 0; i < nodes.length; i++) {
+          if (elementUtilities.isEPNClass(nodes[i].data().class)) {
+            listedNodes.push(nodes[i]);
+          }
+        }
+        let selectedNode = closestNodeForEdges(ele, listedNodes);
+        currentErrors[check].fixCandidate = [];
+
+        for (let i = 0; i < listedNodes.length; i++) {
+          if (listedNodes[i].data().id != ele.id()) {
+            currentErrors[check].fixCandidate.push({ label: getLabel(listedNodes[i]), id: listedNodes[i].data().id });
+          }
+          if (selectedNode.id() === nodes[i].data().id) {
+            currentErrors[check].selectedOption = i;
+          }
+        }
+        let temp = currentErrors[check].fixCandidate[0];
+        currentErrors[check].fixCandidate[0] = currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
         currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
-        currentErrors[check].selectedOption = 0;      
-            check++;
-            continue;
-          errorFixParam.newEdges.push({ source: selectedNode.id(), target: ele.id()});
-          fixError( errorFixParam);
+        currentErrors[check].selectedOption = 0;
+        check++;
+        continue;
+        errorFixParam.newEdges.push({ source: selectedNode.id(), target: ele.id() });
+        fixError(errorFixParam);
 
       }
       else {
         let nodes = cy.nodes();
         let listedNodes = [];
-        for( let i = 0; i < nodes.length; i++){
-          if( elementUtilities.isEPNClass(nodes[i].data().class)){
-            listedNodes.push( nodes[i]);
+        for (let i = 0; i < nodes.length; i++) {
+          if (elementUtilities.isEPNClass(nodes[i].data().class)) {
+            listedNodes.push(nodes[i]);
           }
         }
-        let selectedNode = closestNodeForEdges( ele, listedNodes);
+        let selectedNode = closestNodeForEdges(ele, listedNodes);
         nodes = listedNodes;
-        if( isFix === false ){
+        if (isFix === false) {
           currentErrors[check].fixCandidate = [];
-          for( let i = 0; i  < nodes.length; i++){
-            if( nodes[i].data().id != ele.id() && elementUtilities.isEPNClass( nodes[i].data().class )){
-              currentErrors[check].fixCandidate.push( {label: getLabel(nodes[i]), id: nodes[i].data().id} );
-              if( selectedNode.id() === nodes[i].data().id){
+          for (let i = 0; i < nodes.length; i++) {
+            if (nodes[i].data().id != ele.id() && elementUtilities.isEPNClass(nodes[i].data().class)) {
+              currentErrors[check].fixCandidate.push({ label: getLabel(nodes[i]), id: nodes[i].data().id });
+              if (selectedNode.id() === nodes[i].data().id) {
                 currentErrors[check].selectedOption = i;
               }
             }
           }
           let temp = currentErrors[check].fixCandidate[0];
-        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
-        currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
-        currentErrors[check].selectedOption = 0;
-      
+          currentErrors[check].fixCandidate[0] = currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+          currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
+          currentErrors[check].selectedOption = 0;
+
           check++;
           continue;
 
         }
-        errorFixParam.newEdges.push({ source: selectedNode.id(), target: ele.id()});
-        fixError( errorFixParam);
+        errorFixParam.newEdges.push({ source: selectedNode.id(), target: ele.id() });
+        fixError(errorFixParam);
       }
     }
     else if (currentErrors[check].pattern == "pd10103" || currentErrors[check].pattern == "pd10107") {
-      if( isFix === false ){
+      if (isFix === false) {
         check++;
         continue;
         currentErrors[check].fixCandidate = [];
-        for( let i = 0; i <  connectedEdges.length; i++){
-             currentErrors[check].fixCandidate.push( {label:connectedEdges[i].data().label, id: connectedEdges[i].data().id});
+        for (let i = 0; i < connectedEdges.length; i++) {
+          currentErrors[check].fixCandidate.push({ label: connectedEdges[i].data().label, id: connectedEdges[i].data().id });
         }
         check++;
         continue;
@@ -443,12 +445,12 @@ function findCandidatesOrFix( errors, cy, isFix){
     else if (currentErrors[check].pattern == "pd10101" || currentErrors[check].pattern == "pd10102") {
       let targetTmp = ele.target();
       let sourceTmp = ele.source();
-      if( isFix === false ){
+      if (isFix === false) {
         check++;
         continue;
         currentErrors[check].fixCandidate = [];
-        for( let i = 0; i <  connectedEdges.length; i++){
-             currentErrors[check].fixCandidate.push( {label:connectedEdges[i].data().label, id: connectedEdges[i].data().id});
+        for (let i = 0; i < connectedEdges.length; i++) {
+          currentErrors[check].fixCandidate.push({ label: connectedEdges[i].data().label, id: connectedEdges[i].data().id });
         }
         check++;
         continue;
@@ -495,51 +497,53 @@ function findCandidatesOrFix( errors, cy, isFix){
             listedNodes.push(nodes[i]);
       }
 
-      if( isFix === false ){
+      if (isFix === false) {
         currentErrors[check].fixCandidate = [];
-        let selectedNode = closestNodeForEdges( ele.source(), listedNodes);
-        for( let i = 0; i <  listedNodes.length; i++){
-             currentErrors[check].fixCandidate.push( {label:getLabel(listedNodes[i]), id: listedNodes[i].data().id});
-             if( selectedNode.id() === listedNodes[i].id()){
-              currentErrors[check].selectedOption = i;
-             }
+        let selectedNode = closestNodeForEdges(ele.source(), listedNodes);
+        for (let i = 0; i < listedNodes.length; i++) {
+          currentErrors[check].fixCandidate.push({ label: getLabel(listedNodes[i]), id: listedNodes[i].data().id });
+          if (selectedNode.id() === listedNodes[i].id()) {
+            currentErrors[check].selectedOption = i;
+          }
 
         }
         let temp = currentErrors[check].fixCandidate[0];
-        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+        currentErrors[check].fixCandidate[0] = currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
         currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
         currentErrors[check].selectedOption = 0;
-      
+
         check++;
         continue;
       }
 
       // node should be selected here, default is 0.
-      if( listedNodes.length > 0 ){
-      let selectedNode = closestNodeForEdges( ele.source(), listedNodes);
-      //selectedNode = findClosest( )
-      var source = ele.source();
-      var target = selectedNode;
-      errorFixParam.edge = ele;
-      errorFixParam.newEdge = { source: source.id(), target: target.id(), edgeParams: edgeParams };
-      fixError(errorFixParam);
-      fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc has a target reference to " + target.id() + ".";
+      if (listedNodes.length > 0) {
+        let selectedNode = closestNodeForEdges(ele.source(), listedNodes);
+        //selectedNode = findClosest( )
+        var source = ele.source();
+        var target = selectedNode;
+        errorFixParam.edge = ele;
+        errorFixParam.newEdge = { source: source.id(), target: target.id(), edgeParams: edgeParams };
+        fixError(errorFixParam);
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc has a target reference to " + getLabel(target) + ".";
       }
     }
 
     else if (currentErrors[check].pattern == "pd10111") {
-      let ele = cy.getElementById( currentErrors[check].role );
+      let ele = cy.getElementById(currentErrors[check].role);
       errorFixParam.edges = [];
       let connectedEdges = cy.edges('[source =  "' + ele.id() + '"]');
-      if( isFix === false ){
+      if (isFix === false) {
         currentErrors[check].fixCandidate = [];
         let selectedEdge = findClosestNode(ele, connectedEdges); // default , the selection of edge will be determined later.
-        for( let i = 0; i <  connectedEdges.length; i++){
-             currentErrors[check].fixCandidate.push( {label:(getLabel(connectedEdges[i].source())
-              + " - " + getLabel(connectedEdges[i].target())), id: connectedEdges[i].data().id});
-              if( connectedEdges[i].id() == selectedEdge.id()){
-                currentErrors[check].selectedOption = i;
-              }
+        for (let i = 0; i < connectedEdges.length; i++) {
+          currentErrors[check].fixCandidate.push({
+            label: (getLabel(connectedEdges[i].source())
+              + " - " + getLabel(connectedEdges[i].target())), id: connectedEdges[i].data().id
+          });
+          if (connectedEdges[i].id() == selectedEdge.id()) {
+            currentErrors[check].selectedOption = i;
+          }
         }
         check++;
         continue;
@@ -553,25 +557,27 @@ function findCandidatesOrFix( errors, cy, isFix){
         }
         fixError(errorFixParam);
         //errors[check].status = "solved";
-        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Arc between this node and " + selectedEdge.target().id() + " is kept.";
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Arc between this node and " + getLabel(selectedEdge.target()) + " is kept.";
       }
       else
         numberOfUnsolvedErrors++;
     }
     else if (currentErrors[check].pattern == "pd10104") {
       var connectedEdges = ele.connectedEdges().filter('[class="consumption"]');
-      if( isFix === false ){
+      if (isFix === false) {
         currentErrors[check].fixCandidate = [];
         let selectedEdge = findClosestNode(ele, connectedEdges); // default selection, it will be determined. closest one will be kept. 
-        for( let i = 0; i <  connectedEdges.length; i++){
-             currentErrors[check].fixCandidate.push( {label:(getLabel(connectedEdges[i].source())
-              + " - " + getLabel(connectedEdges[i].target())), id: connectedEdges[i].data().id});
-              if( connectedEdges[i].id() == selectedEdge.id()){
-                currentErrors[check].selectedOption = i;
-              }
+        for (let i = 0; i < connectedEdges.length; i++) {
+          currentErrors[check].fixCandidate.push({
+            label: (getLabel(connectedEdges[i].source())
+              + " - " + getLabel(connectedEdges[i].target())), id: connectedEdges[i].data().id
+          });
+          if (connectedEdges[i].id() == selectedEdge.id()) {
+            currentErrors[check].selectedOption = i;
+          }
         }
         let temp = currentErrors[check].fixCandidate[0];
-        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+        currentErrors[check].fixCandidate[0] = currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
         currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
         currentErrors[check].selectedOption = 0;
         check++;
@@ -588,26 +594,28 @@ function findCandidatesOrFix( errors, cy, isFix){
       }
       fixError(errorFixParam);
       fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc between dissocation glyph and consumption glyph(" + (selectedEdge.source().id() === ele.id() ?
-        selectedEdge.target().id() : selectedEdge.source().id()) + ") is kept.";
+        getLabel(selectedEdge.target()) : getLabel(selectedEdge.source())) + ") is kept.";
       // errors[check].status = "solved";
     }
     else if (currentErrors[check].pattern == "pd10108") {
       let connectedEdges = ele.connectedEdges().filter('[class = "production"]');
-      if( isFix === false ){
+      if (isFix === false) {
         currentErrors[check].fixCandidate = [];
         let selectedEdge = findClosestNode(ele, connectedEdges); // default selection, it will be determined. closest one will be kept. 
-        for( let i = 0; i <  connectedEdges.length; i++){
-             currentErrors[check].fixCandidate.push( {label:(getLabel(connectedEdges[i].source())
-              + " - " + getLabel(connectedEdges[i].target())), id: connectedEdges[i].data().id});
-              if( connectedEdges[i].id() == selectedEdge.id()){
-                currentErrors[check].selectedOption = i;
-              }
+        for (let i = 0; i < connectedEdges.length; i++) {
+          currentErrors[check].fixCandidate.push({
+            label: (getLabel(connectedEdges[i].source())
+              + " - " + getLabel(connectedEdges[i].target())), id: connectedEdges[i].data().id
+          });
+          if (connectedEdges[i].id() == selectedEdge.id()) {
+            currentErrors[check].selectedOption = i;
+          }
         }
-        if( connectedEdges.length > 0){
-        let temp = currentErrors[check].fixCandidate[0];
-        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
-        currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
-        currentErrors[check].selectedOption = 0;
+        if (connectedEdges.length > 0) {
+          let temp = currentErrors[check].fixCandidate[0];
+          currentErrors[check].fixCandidate[0] = currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+          currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
+          currentErrors[check].selectedOption = 0;
         }
         check++;
         continue;
@@ -623,7 +631,7 @@ function findCandidatesOrFix( errors, cy, isFix){
         }
         fixError(errorFixParam);
         fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc between assocation glyph and production glyph(" + (selectedEdge.source().id() === ele.id() ?
-          selectedEdge.target().id() : selectedEdge.source().id()) + ") is kept.";
+          getLabel(selectedEdge.target()) : getLabel(selectedEdge.source())) + ") is kept.";
       }
     }
     else if (currentErrors[check].pattern == "pd10109") {
@@ -631,15 +639,15 @@ function findCandidatesOrFix( errors, cy, isFix){
       var targetPosX = ele.target().position().x;
       var sourcePosY = ele.source().position().y;
       var targetPosY = ele.target().position().y;
-     /* var minX = Math.min(sourcePosX, targetPosX) - 150;
-      var maxX = Math.max(sourcePosX, targetPosX) + 150;
-      var minY = Math.min(sourcePosY, targetPosY) - 150;
-      var maxY = Math.max(sourcePosY, targetPosY) + 150;*/
-      var minX =-15000000000;
+      /* var minX = Math.min(sourcePosX, targetPosX) - 150;
+       var maxX = Math.max(sourcePosX, targetPosX) + 150;
+       var minY = Math.min(sourcePosY, targetPosY) - 150;
+       var maxY = Math.max(sourcePosY, targetPosY) + 150;*/
+      var minX = -15000000000;
       var maxX = 15000000000;
-      var minY =-15000000000;
+      var minY = -15000000000;
       var maxY = 15000000000;
-      
+
 
       var nodes = cy.nodes();
       var listedNodes = [];
@@ -654,33 +662,33 @@ function findCandidatesOrFix( errors, cy, isFix){
             }
           }
       }
-      let selectedNode = closestNodeForEdges( ele.target(), listedNodes );
+      let selectedNode = closestNodeForEdges(ele.target(), listedNodes);
 
-      if( isFix === false ){
+      if (isFix === false) {
         currentErrors[check].fixCandidate = [];
-        for( let i = 0; i <  listedNodes.length; i++){
-             currentErrors[check].fixCandidate.push( {label: getLabel(listedNodes[i]), id: listedNodes[i].data().id});
-             if( listedNodes[i].id() == selectedNode.id()){
-              currentErrors[check].selectedOption = i;
-            }
+        for (let i = 0; i < listedNodes.length; i++) {
+          currentErrors[check].fixCandidate.push({ label: getLabel(listedNodes[i]), id: listedNodes[i].data().id });
+          if (listedNodes[i].id() == selectedNode.id()) {
+            currentErrors[check].selectedOption = i;
+          }
         }
         let temp = currentErrors[check].fixCandidate[0];
-        currentErrors[check].fixCandidate[0] =  currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
+        currentErrors[check].fixCandidate[0] = currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
         currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
         currentErrors[check].selectedOption = 0;
         check++;
         continue;
       }
       // node should be selected here, default is 0.
-      if( listedNodes.length > 0){
-      //let selectedNode = listedNodes[0];
-      errorFixParam.newTarget = ele.target().id();
-      errorFixParam.newSource = selectedNode.id();
-      errorFixParam.edge = ele;
-      errorFixParam.portsource = selectedNode.id();
-      fixError(errorFixParam);
-      //errors[check].status = "solved";
-      fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Modulation arc has a source reference to " + selectedNode.id() + ".";
+      if (listedNodes.length > 0) {
+        //let selectedNode = listedNodes[0];
+        errorFixParam.newTarget = ele.target().id();
+        errorFixParam.newSource = selectedNode.id();
+        errorFixParam.edge = ele;
+        errorFixParam.portsource = selectedNode.id();
+        fixError(errorFixParam);
+        //errors[check].status = "solved";
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Modulation arc has a source reference to " + getLabel(selectedNode) + ".";
       }
 
     }
@@ -688,12 +696,12 @@ function findCandidatesOrFix( errors, cy, isFix){
     else if (currentErrors[check].pattern == "pd10105" || currentErrors[check].pattern == "pd10106") {
       let sourceNode = ele.source();
       let targetNode = ele.target();
-      if( isFix === false ){
+      if (isFix === false) {
         check++;
         continue;
         currentErrors[check].fixCandidate = [];
-        for( let i = 0; i <  connectedEdges.length; i++){
-             currentErrors[check].fixCandidate.push( {label:connectedEdges[i].data().label, id: connectedEdges[i].data().id});
+        for (let i = 0; i < connectedEdges.length; i++) {
+          currentErrors[check].fixCandidate.push({ label: connectedEdges[i].data().label, id: connectedEdges[i].data().id });
         }
         check++;
         continue;
@@ -710,11 +718,11 @@ function findCandidatesOrFix( errors, cy, isFix){
     else {
       numberOfUnsolvedErrors++;
     }
-    if( isFix === false ){
+    if (isFix === false) {
       check++;
       continue;
     }
-    console.log( "one fix step is completed");
+    console.log("one fix step is completed");
     let currentErrorRole = currentErrors[check].role;
     let currentErrorPattern = currentErrors[check].pattern;
     let isSolved = true;
@@ -743,140 +751,136 @@ function findCandidatesOrFix( errors, cy, isFix){
         error.setText(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:text"]);
         error.setPattern(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["$"]["id"]);
         error.setRole(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:diagnostic-reference"][0]["_"]);
-        if( currentErrorPattern === error.pattern && currentErrorRole === error.role){
+        if (currentErrorPattern === error.pattern && currentErrorRole === error.role) {
           isSolved = false;
         }
         currentErrors.push(error);
       }
     }
-   
-    currentErrors = reduceErrors( currentErrors, cy);
-    if ( !isSolved) {
+
+    currentErrors = reduceErrors(currentErrors, cy);
+    if (!isSolved) {
       check++;
       unsolvedErrorInformation[previousErrorCode + previousErrorRole] = true;
     }
   }
-  if( isFix === false ){
+  if (isFix === false) {
     return currentErrors;
   }
 
 }
 
-function reduceErrors(errors,cy){
+function reduceErrors(errors, cy) {
   let reducedErrors = [];
   let errorInfo = {};
   //console.log( "Errors length : " + errors.length);
-  for( let i = 0; i < errors.length;i++){
-    if( errors[i].pattern != "pd10125" && errors[i].pattern != "pd10142" && 
-    errors[i].pattern != "pd10109" && errors[i].pattern != "pd10124" 
-    && errors[i].pattern != "pd10111" && errors[i].pattern != "pd10126" && errors[i].pattern != "pd10141"){
-      reducedErrors.push( errors[i]);
+  for (let i = 0; i < errors.length; i++) {
+    if (errors[i].pattern != "pd10125" && errors[i].pattern != "pd10142" &&
+      errors[i].pattern != "pd10109" && errors[i].pattern != "pd10124"
+      && errors[i].pattern != "pd10111" && errors[i].pattern != "pd10126" && errors[i].pattern != "pd10141") {
+      reducedErrors.push(errors[i]);
       continue;
     }
     var ele = cy.getElementById(errors[i].role);
-    if( (errors[i].pattern == "pd10125" || errors[i].pattern == "pd10142" )  && (ele.target().data().class == "and" || ele.target().data().class == "or" || ele.target().data().class == "not" ) ) {
+    if ((errors[i].pattern == "pd10125" || errors[i].pattern == "pd10142") && (ele.target().data().class == "and" || ele.target().data().class == "or" || ele.target().data().class == "not")) {
       continue;
     }
-    else if( (errors[i].pattern == "pd10124" || errors[i].pattern == "pd10109" ) && (ele.source().data().class == "and" || ele.source().data().class == "or" || ele.source().data().class == "not" ) ){
+    else if ((errors[i].pattern == "pd10124" || errors[i].pattern == "pd10109") && (ele.source().data().class == "and" || ele.source().data().class == "or" || ele.source().data().class == "not")) {
       continue;
     }
-    else if( (errors[i].pattern == "pd10111")){
+    else if ((errors[i].pattern == "pd10111")) {
       var connectedEdges = cy.edges('[source =  "' + ele.id() + '"]');
-      if( connectedEdges.length == 1 ) {
+      if (connectedEdges.length == 1) {
         continue;
-       }
+      }
     }
-    else if( errors[i].pattern == "pd10141"){
-      if( ele.incomers().length > 0 && ele.outgoers().length > 0){
+    else if (errors[i].pattern == "pd10141") {
+      if (ele.incomers().length > 0 && ele.outgoers().length > 0) {
         continue;
       }
     }
     else {
       let connectedEdges = ele.connectedEdges().filter('[class="logic arc"]');
-      if( connectedEdges.length == 1 ){
+      if (connectedEdges.length == 1) {
         continue;
       }
     }
-    errorInfo [ errors[i].pattern + errors[i].role] = true;
+    errorInfo[errors[i].pattern + errors[i].role] = true;
     reducedErrors.push(errors[i]);
   }
   let logicalOperators = cy.nodes();
   logicalOperators.forEach(node => {
-    if( node.data().class === "and"){
+    if (node.data().class === "and") {
 
-    //console.log( node.data());
-    var edges = node.incomers();
-   
-    var edgess = node.outgoers();
-    console.log( "outgoers " + node.data().id + " " + node.data().class + " " + edgess.size());
-    edgess.forEach( edge => {
-     // console.log( edge.data());
-    });
-    let error = new Issue();
-    error.setText("'and', 'or', and 'not' glyphs must be the source for exactly one arc");
-    error.setPattern("pd10111");
-    error.setRole(node.data().id);
-    if( edgess.length > 2 && errorInfo["pd10111" + node.data().id] !== true)
-    reducedErrors.push(error);
-    
-  }
-  else if( node.data().class === "or"){
+      //console.log( node.data());
+      var edges = node.incomers();
 
-    //console.log( node.data());
-    var edges = node.incomers();
-   
-    var edgess = node.outgoers();
-    //console.log( "outgoers " + node.data().id + " " + node.data().class + " " + edgess.size());
-    edgess.forEach( edge => {
-      //console.log( edge.data());
-    });
-    let error = new Issue();
-    error.setText("'and', 'or', and 'not' glyphs must be the source for exactly one arc");
-    error.setPattern("pd10111");
-    error.setRole(node.data().id);
-    if( edgess.length > 2 && errorInfo["pd10111" + node.data().id] !== true)
-    reducedErrors.push(error);
-    
-  }
-  else if( node.data().class === "not"){
-      
-    //console.log( node.data());
-    var edges = node.incomers();
-    console.log( "incomers " + node.data().id + " " + node.data().class + " " + edges.size());
-    edges.forEach( edge => {
-     // console.log( edge.data());
-    });
-    if( edges.size() > 2 && errorInfo[ "pd10126" + node.data().id] !== true){
-      let error = new Issue();
-      error.setText("The 'not' glyph can only be the target of one logic arc glyph");
-      error.setPattern("pd10126");
-      error.setRole(node.data().id);
-      reducedErrors.push(error);
-    }
-    var edgess = node.outgoers();
-    //console.log( "outgoers " + node.data().id + " " + node.data().class + " " + edgess.size());
-    edgess.forEach( edge => {
-      //console.log( edge.data());
-    });
-    if( edgess.size() > 2 && errorInfo[ "pd10111" + node.data().id] !== true){
+      var edgess = node.outgoers();
+      console.log("outgoers " + node.data().id + " " + node.data().class + " " + edgess.size());
+      edgess.forEach(edge => {
+        // console.log( edge.data());
+      });
       let error = new Issue();
       error.setText("'and', 'or', and 'not' glyphs must be the source for exactly one arc");
       error.setPattern("pd10111");
       error.setRole(node.data().id);
-      reducedErrors.push(error);
+      if (edgess.length > 2 && errorInfo["pd10111" + node.data().id] !== true)
+        reducedErrors.push(error);
+
     }
-  }
+    else if (node.data().class === "or") {
+
+      //console.log( node.data());
+      var edges = node.incomers();
+
+      var edgess = node.outgoers();
+      //console.log( "outgoers " + node.data().id + " " + node.data().class + " " + edgess.size());
+      edgess.forEach(edge => {
+        //console.log( edge.data());
+      });
+      let error = new Issue();
+      error.setText("'and', 'or', and 'not' glyphs must be the source for exactly one arc");
+      error.setPattern("pd10111");
+      error.setRole(node.data().id);
+      if (edgess.length > 2 && errorInfo["pd10111" + node.data().id] !== true)
+        reducedErrors.push(error);
+
+    }
+    else if (node.data().class === "not") {
+
+      //console.log( node.data());
+      var edges = node.incomers();
+      console.log("incomers " + node.data().id + " " + node.data().class + " " + edges.size());
+      edges.forEach(edge => {
+        // console.log( edge.data());
+      });
+      if (edges.size() > 2 && errorInfo["pd10126" + node.data().id] !== true) {
+        let error = new Issue();
+        error.setText("The 'not' glyph can only be the target of one logic arc glyph");
+        error.setPattern("pd10126");
+        error.setRole(node.data().id);
+        reducedErrors.push(error);
+      }
+      var edgess = node.outgoers();
+      //console.log( "outgoers " + node.data().id + " " + node.data().class + " " + edgess.size());
+      edgess.forEach(edge => {
+        //console.log( edge.data());
+      });
+      if (edgess.size() > 2 && errorInfo["pd10111" + node.data().id] !== true) {
+        let error = new Issue();
+        error.setText("'and', 'or', and 'not' glyphs must be the source for exactly one arc");
+        error.setPattern("pd10111");
+        error.setRole(node.data().id);
+        reducedErrors.push(error);
+      }
+    }
   })
 
 
-  
+
   return reducedErrors;
   errors = reducedErrors;
 }
-
-
-
-
 
 // for fcose
 const fcose = require('cytoscape-fcose');
@@ -900,8 +904,8 @@ function distanceBetween(a, b) {
   let xDiff;
   let yDiff;
   try {
-  xDiff = a.position().x - b.position().x;
-  yDiff = a.position().y - b.position().y;
+    xDiff = a.position().x - b.position().x;
+    yDiff = a.position().y - b.position().y;
   }
   catch {
     throw Error;
@@ -913,9 +917,9 @@ function findClosestNode(ele, connectedEdges) {
   let shortestDistance = 10000000000.0;
   let closestEdge;
   for (let i = 0; i < connectedEdges.length; i++) {
-    let distance = ( ele.data().id == connectedEdges.source().id ? distanceBetween(ele, connectedEdges[i].target() ) : 
-    distanceBetween(ele, connectedEdges[i].source() ) );
-    if ( distance < shortestDistance) {
+    let distance = (ele.data().id == connectedEdges.source().id ? distanceBetween(ele, connectedEdges[i].target()) :
+      distanceBetween(ele, connectedEdges[i].source()));
+    if (distance < shortestDistance) {
       shortestDistance = distance;
       closestEdge = connectedEdges[i];
     }
@@ -929,11 +933,11 @@ function closestNodeForEdges(ele, nodes) {
     /*let distance = ( ele.data().id == connectedEdges.source().id ? distanceBetween(ele, connectedEdges[i].target() ) : 
     distanceBetween(ele, connectedEdges[i].source() ) );*/
     try {
-    distance = distanceBetween( ele, nodes[i]);
+      distance = distanceBetween(ele, nodes[i]);
     }
     catch {
     }
-    if ( distance < shortestDistance) {
+    if (distance < shortestDistance) {
       shortestDistance = distance;
       closestNode = nodes[i];
     }
@@ -946,12 +950,12 @@ app.use(cors());
 
 // middleware to manage the formats of files
 app.use(async (req, res, next) => {
-  
+
   if (req.method === "POST") {
-    console.log( "request started");
+    console.log("request started");
     let showResolutionAlternatives = req.query.showResolutionAlternatives;
-    console.log( req.query.showResolutionAlternatives);
-   //let showFix = false;
+    console.log(req.query.showResolutionAlternatives);
+    //let showFix = false;
 
     let body = '';
     let isJson = false;
@@ -964,16 +968,15 @@ app.use(async (req, res, next) => {
     })
 
     req.on('end', () => {
-      console.log( body);
-     // while(1);
+      // while(1);
       let indexOfOptions = Math.min(body.includes("layoutOptions") ? body.indexOf("layoutOptions") : Number.MAX_SAFE_INTEGER,
         body.includes("imageOptions") ? body.indexOf("imageOptions") : Number.MAX_SAFE_INTEGER,
         body.includes("queryOptions") ? body.indexOf("queryOptions") : Number.MAX_SAFE_INTEGER);
       let indexOfOptionsStart;
       let indexOfErrorsStart = body.includes("</sbgn>[") ? (body.lastIndexOf("</sbgn>[") + 7) : Number.MAX_SAFE_INTEGER;
-      if( indexOfErrorsStart !== Number.MAX_SAFE_INTEGER){
-        console.log( indexOfErrorsStart);
-        console.log( body[indexOfErrorsStart]);
+      if (indexOfErrorsStart !== Number.MAX_SAFE_INTEGER) {
+        console.log(indexOfErrorsStart);
+        console.log(body[indexOfErrorsStart]);
       }
       if (indexOfOptions != Number.MAX_SAFE_INTEGER) {
         indexOfOptionsStart = body.substring(0, indexOfOptions).lastIndexOf("{");
@@ -985,27 +988,27 @@ app.use(async (req, res, next) => {
         data = body;
         options = "";
       }
-      if( indexOfErrorsStart === Number.MAX_SAFE_INTEGER ){
+      if (indexOfErrorsStart === Number.MAX_SAFE_INTEGER) {
         errors = "";
       }
       else {
-        errors = indexOfOptionsStart !== Number.MAX_SAFE_INTEGER ? body.substring( indexOfErrorsStart, (indexOfOptionsStart))
-        : body.substring( indexOfErrorsStart);
+        errors = indexOfOptionsStart !== Number.MAX_SAFE_INTEGER ? body.substring(indexOfErrorsStart, (indexOfOptionsStart))
+          : body.substring(indexOfErrorsStart);
         data = body.substring(0, indexOfErrorsStart);
       }
-      data = data.replace( /\n/g, "");
-      console.log( data);
-         /* lengthOfData= Math.min(lengthOfData, indexOfOptionsStart);
-      data = lengthOfData === Number.MAX_SAFE_INTEGER ? body : body.substring(0, lengthOfData);
-      errors = indexOfErrorsStart == Number.MAX_SAFE_INTEGER ? [] : ( indexOfOptionsStart < Number.MAX_SAFE_INTEGER ? body.substring( indexOfErrorsStart,(indexOfOptionsStart- indexOfErrorsStart) ): 
-      body.substring( indexOfErrorsStart ));*/
+      data = data.replace(/\n/g, "");
+
+      /* lengthOfData= Math.min(lengthOfData, indexOfOptionsStart);
+   data = lengthOfData === Number.MAX_SAFE_INTEGER ? body : body.substring(0, lengthOfData);
+   errors = indexOfErrorsStart == Number.MAX_SAFE_INTEGER ? [] : ( indexOfOptionsStart < Number.MAX_SAFE_INTEGER ? body.substring( indexOfErrorsStart,(indexOfOptionsStart- indexOfErrorsStart) ): 
+   body.substring( indexOfErrorsStart ));*/
 
       try {
-        if( errors !== "" )
-        errors = JSON.parse(errors);
+        if (errors !== "")
+          errors = JSON.parse(errors);
         else {
           errors = [];
-        } 
+        }
         options = JSON.parse(options);
       }
       catch (e) {
@@ -1027,38 +1030,38 @@ app.use(async (req, res, next) => {
       currentSbgn = data;
       let duplicatedIds = [];
       let preValidationData = {};
-      if( errors.length === 0){
-      fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
-      let result = SaxonJS.transform({
-        stylesheetFileName: './src/templatelibsbgn.sef.json',
-        sourceFileName: "./src/sbgnFile.sbgn",
-        destination: "serialized"
-      }).principalResult;
-      fs.unlinkSync('./src/sbgnFile.sbgn');
-      let parseString = xml2js.parseString;
-      let parsedResult;
-      parseString(result, function (err, data) {
-        parsedResult = data;
-      });
-      if (parsedResult["svrl:schematron-output"]["svrl:failed-assert"] == undefined) {
-      }
-      else {
-        let errCount = parsedResult["svrl:schematron-output"]["svrl:failed-assert"].length;
-        for (let i = 0; i < errCount; i++) {
-          let error = new Issue();
-          error.setText(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:text"]);
-          error.setPattern(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["$"]["id"]);
-          error.setRole(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:diagnostic-reference"][0]["_"]);
-          if( (error.pattern == "00001" || error.pattern == "00002" ) && preValidationData[ error.pattern + error.role] === undefined ){
-            preValidationData[error.pattern + error.role] = 1;
-            let ret ={};
-        //    ret['errorMessage'] = "ID needs to be unique and an arc target should be a glyph defined in the diagram";
-         //   return res.status(200).send(ret);
-         errors.push(error);
-          }
-          //errors.push(error);
+      if (errors.length === 0) {
+        fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
+        let result = SaxonJS.transform({
+          stylesheetFileName: './src/templatelibsbgn.sef.json',
+          sourceFileName: "./src/sbgnFile.sbgn",
+          destination: "serialized"
+        }).principalResult;
+        fs.unlinkSync('./src/sbgnFile.sbgn');
+        let parseString = xml2js.parseString;
+        let parsedResult;
+        parseString(result, function (err, data) {
+          parsedResult = data;
+        });
+        if (parsedResult["svrl:schematron-output"]["svrl:failed-assert"] == undefined) {
         }
-      }
+        else {
+          let errCount = parsedResult["svrl:schematron-output"]["svrl:failed-assert"].length;
+          for (let i = 0; i < errCount; i++) {
+            let error = new Issue();
+            error.setText(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:text"]);
+            error.setPattern(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["$"]["id"]);
+            error.setRole(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:diagnostic-reference"][0]["_"]);
+            if ((error.pattern == "00001" || error.pattern == "00002") && preValidationData[error.pattern + error.role] === undefined) {
+              preValidationData[error.pattern + error.role] = 1;
+              let ret = {};
+              //    ret['errorMessage'] = "ID needs to be unique and an arc target should be a glyph defined in the diagram";
+              //   return res.status(200).send(ret);
+              errors.push(error);
+            }
+            //errors.push(error);
+          }
+        }
       }
       //errors = [];
       let cyJsonData = sbgnmlToJson.convert(xml, data);
@@ -1088,31 +1091,31 @@ app.use(async (req, res, next) => {
       data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
       currentSbgn = data;
       fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
-      if( isErrorsEmpty){
-      let result = SaxonJS.transform({
-        stylesheetFileName: './src/templatelibsbgn.sef.json',
-        sourceFileName: "./src/sbgnFile.sbgn",
-        destination: "serialized"
-      }).principalResult;
-      fs.unlinkSync('./src/sbgnFile.sbgn');
-      let parseString = xml2js.parseString;
-      let parsedResult;
-      parseString(result, function (err, data) {
-        parsedResult = data;
-      });
-      if (parsedResult["svrl:schematron-output"]["svrl:failed-assert"] == undefined) {
-      }
-      else {
-        let errCount = parsedResult["svrl:schematron-output"]["svrl:failed-assert"].length;
-        for (let i = 0; i < errCount; i++) {
-          let error = new Issue();
-          error.setText(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:text"]);
-          error.setPattern(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["$"]["id"]);
-          error.setRole(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:diagnostic-reference"][0]["_"]);
-          errors.push(error);
+      if (isErrorsEmpty) {
+        let result = SaxonJS.transform({
+          stylesheetFileName: './src/templatelibsbgn.sef.json',
+          sourceFileName: "./src/sbgnFile.sbgn",
+          destination: "serialized"
+        }).principalResult;
+        fs.unlinkSync('./src/sbgnFile.sbgn');
+        let parseString = xml2js.parseString;
+        let parsedResult;
+        parseString(result, function (err, data) {
+          parsedResult = data;
+        });
+        if (parsedResult["svrl:schematron-output"]["svrl:failed-assert"] == undefined) {
         }
-      }
-      errors = reduceErrors(errors,cy);
+        else {
+          let errCount = parsedResult["svrl:schematron-output"]["svrl:failed-assert"].length;
+          for (let i = 0; i < errCount; i++) {
+            let error = new Issue();
+            error.setText(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:text"]);
+            error.setPattern(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["$"]["id"]);
+            error.setRole(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:diagnostic-reference"][0]["_"]);
+            errors.push(error);
+          }
+        }
+        errors = reduceErrors(errors, cy);
       }
       data = cyJsonData;
       let unsolvedErrorInformation = {};
@@ -1120,12 +1123,12 @@ app.use(async (req, res, next) => {
       errors.forEach(error => {
         unsolvedErrorInformation[error.pattern + error.role] = true;
       })
-      res.locals.body =  body;
+      res.locals.body = body;
       res.locals.unsolvedErrorInformation = unsolvedErrorInformation;
       res.locals.fixExplanation = {};
       res.locals.isJson = isJson;
       res.locals.options = options;
-      res.locals.data = data ;
+      res.locals.data = data;
       res.locals.errorMessage = errorMessage;
       res.locals.currentSbgn = currentSbgn;
       res.locals.cy = cy;
@@ -1140,12 +1143,12 @@ app.use(async (req, res, next) => {
         highlightColor: '#ff0000',
         highlightWidth: 10,
         autoSize: true
-      };      
+      };
       next();
     });
   }
   else
-   next();
+    next();
   ;
 });
 
@@ -1158,14 +1161,14 @@ app.post('/validation', async (req, res, next) => {
   let options = res.locals.options;
   let data = res.locals.data;
   let currentSbgn = res.locals.currentSbgn;
-  let cy= res.locals.cy;
-  let imageOptions = res.locals.imageOptions; 
+  let cy = res.locals.cy;
+  let imageOptions = res.locals.imageOptions;
   let errors = res.locals.errors;
   let unsolvedErrorInformation = res.locals.unsolvedErrorInformation;
   let fixExplanation = res.locals.fixExplanation;
   let showResolutionAlternatives = res.locals.showResolutionAlternatives;
 
-  
+
   fixExplanation = {};
   if (req.query.errorFixing !== undefined && req.query.errorFixing === true) {
     return next();
@@ -1250,12 +1253,12 @@ app.post('/validation', async (req, res, next) => {
     data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
     data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
     currentSbgn = data;
-    highlightErrors(errors, cy, imageOptions, true,unsolvedErrorInformation, fixExplanation);
-    if( showResolutionAlternatives === "true" ){
-      errors = findCandidatesOrFix( errors, cy, false );
+    highlightErrors(errors, cy, imageOptions, true, unsolvedErrorInformation, fixExplanation);
+    if (showResolutionAlternatives === "true") {
+      errors = findCandidatesOrFix(errors, cy, false);
     }
     else {
-      errors.forEach( error => {
+      errors.forEach(error => {
         error.selectedOption = "default";
       })
     }
@@ -1283,7 +1286,7 @@ app.post('/validation', async (req, res, next) => {
           ret['errors'] = errors;
           ret['sbgn'] = currentSbgn;
           fs.writeFileSync('./src/sbgnFile.sbgn', data);
-          console.log( "before response");
+          console.log("before response");
           return res.status(200).send(ret);
         }).then(function () {
           snap.stop();
@@ -1313,17 +1316,17 @@ app.post('/fixError', (req, res) => {
   let options = res.locals.options;
   let data = res.locals.data;
   let currentSbgn = res.locals.currentSbgn;
-  let cy= res.locals.cy;
-  let imageOptions = res.locals.imageOptions; 
+  let cy = res.locals.cy;
+  let imageOptions = res.locals.imageOptions;
   let errors = res.locals.errors;
   let unsolvedErrorInformation = res.locals.unsolvedErrorInformation;
   let showResolutionAlternatives = res.locals.showResolutionAlternatives;
   let fixData = {};
-  for( let i = 0; i < errors.length; i++){
-    console.log( i + " " + errors[i].selectedOption);
-      if( errors[i].selectedOption !== undefined && parseInt(errors[i].selectedOption) !== -1 && errors[i].selectedOption !== "default"){
-        fixData[errors[i].pattern + errors[i].role] = errors[i].fixCandidate[errors[i].selectedOption].id;
-      }
+  for (let i = 0; i < errors.length; i++) {
+    console.log(i + " " + errors[i].selectedOption);
+    if (errors[i].selectedOption !== undefined && parseInt(errors[i].selectedOption) !== -1 && errors[i].selectedOption !== "default") {
+      fixData[errors[i].pattern + errors[i].role] = errors[i].fixCandidate[errors[i].selectedOption].id;
+    }
   }
   //while(1);
 
@@ -1377,16 +1380,16 @@ app.post('/fixError', (req, res) => {
   let count = 0;
   let errorsAfterFix = [];
   let errorStillAvailable = {};
-  for( let i = 0; i < currentErrors.length; i++){
-    errorStillAvailable[ currentErrors[i].pattern + currentErrors[i].role] = true;
+  for (let i = 0; i < currentErrors.length; i++) {
+    errorStillAvailable[currentErrors[i].pattern + currentErrors[i].role] = true;
   }
-  console.log( errors);
+  console.log(errors);
   while (check < currentErrors.length) {
-    if( currentErrors[check].selectedOption === undefined || parseInt(currentErrors[check].selectedOption) === - 1){
+    if (currentErrors[check].selectedOption === undefined || parseInt(currentErrors[check].selectedOption) === - 1) {
       check++;
       continue;
     }
-    if( errorStillAvailable[ currentErrors[check].pattern + currentErrors[check].role] === undefined ){
+    if (errorStillAvailable[currentErrors[check].pattern + currentErrors[check].role] === undefined) {
       check++;
       continue;
     }
@@ -1400,31 +1403,31 @@ app.post('/fixError', (req, res) => {
     if (currentErrors[check].pattern == "pd10112") {
       var compartments = cy.nodes('[class= "compartment"]');
       var listedNodes = [];
-      if( fixData[previousErrorCode + previousErrorRole] !== undefined ){
-        let node = cy.getElementById( fixData[previousErrorCode + previousErrorRole]);
+      if (fixData[previousErrorCode + previousErrorRole] !== undefined) {
+        let node = cy.getElementById(fixData[previousErrorCode + previousErrorRole]);
         ele.move({ "parent": node.data().id });
-        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Fixed by moving " + " inside " + node.data().id + ".";
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Fixed by moving " + " inside " + getLabel(node) + ".";
       }
       else {
-      for (var i = 0; i < compartments.length; i++) {
-        if (compartments[i].parent().length == 0)
-          listedNodes.push(compartments[i]);
+        for (var i = 0; i < compartments.length; i++) {
+          if (compartments[i].parent().length == 0)
+            listedNodes.push(compartments[i]);
+        }
+        if (listedNodes.length === 0) {
+          numberOfUnsolvedErrors++;
+        }
+        else {
+          ele.move({ "parent": listedNodes[0].data().id });
+          fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Fixed by moving inside " + getLabel(listedNodes[0]) + ".";
+        }
       }
-      if (listedNodes.length === 0) {
-        numberOfUnsolvedErrors++;
-      }
-      else {
-        ele.move({ "parent": listedNodes[0].data().id });
-        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Fixed by moving inside " + listedNodes[0].data().id + ".";
-      }
-    }
     }
     else if (currentErrors[check].pattern == "pd10126") {
       let connectedEdges = ele.connectedEdges().filter('[class="logic arc"]');
       errorFixParam.edges = [];
       errorFixParam.nodes = [];
       let selectedEdge = connectedEdges[check]; // 0 is default, it should be decided later.
-      selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):
+      selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) :
         findClosestNode(ele, connectedEdges);
       //console.log("closest edge selected : " + selectedEdge);
       for (let i = 0; i < connectedEdges.size(); i++) {
@@ -1434,7 +1437,7 @@ app.post('/fixError', (req, res) => {
         }
       }
       if (connectedEdges.length !== 0) {
-        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Edge between this node and " + selectedEdge.source().id() + " is kept.";
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Edge between this node and " + getLabel(selectedEdge.source()) + " is kept.";
         fixError(errorFixParam);
       }
       else
@@ -1463,13 +1466,13 @@ app.post('/fixError', (req, res) => {
           }
       }
       if (listedNodes.length !== 0) {
-        let selectedNode = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):closestNodeForEdges(ele.target(), listedNodes );
+        let selectedNode = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : closestNodeForEdges(ele.target(), listedNodes);
         errorFixParam.newTarget = ele.target().id();
         errorFixParam.newSource = selectedNode.id();
         errorFixParam.edge = ele;
         errorFixParam.portsource = selectedNode.id();
-        console.log( "fix operation for pd10124");
-        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Arc is connected to " + selectedNode.id() + ".";
+        console.log("fix operation for pd10124");
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Arc is connected to " + getLabel(selectedNode) + ".";
         fixError(errorFixParam);
       }
       else
@@ -1589,33 +1592,33 @@ app.post('/fixError', (req, res) => {
       }
 
       // node should be selected here, default is 0.
-      if( listedNodes.length > 0 ){
-      let selectedNode = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):losestNodeForEdges( ele.source(), listedNodes);
-      //selectedNode = findClosest( )
-      var source = ele.source();
-      var target = selectedNode;
-      errorFixParam.edge = ele;
-      errorFixParam.newEdge = { source: source.id(), target: target.id(), edgeParams: edgeParams };
-      fixError(errorFixParam);
-      fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc has a target reference to " + target.id() + ".";
+      if (listedNodes.length > 0) {
+        let selectedNode = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : losestNodeForEdges(ele.source(), listedNodes);
+        //selectedNode = findClosest( )
+        var source = ele.source();
+        var target = selectedNode;
+        errorFixParam.edge = ele;
+        errorFixParam.newEdge = { source: source.id(), target: target.id(), edgeParams: edgeParams };
+        fixError(errorFixParam);
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc has a target reference to " + getLabel(target) + ".";
       }
     }
 
     else if (currentErrors[check].pattern == "pd10111") {
-      let ele = cy.getElementById( currentErrors[check].role );
+      let ele = cy.getElementById(currentErrors[check].role);
       errorFixParam.edges = [];
       let connectedEdges = cy.edges('[source =  "' + ele.id() + '"]');
       if (connectedEdges.length !== 0) {
-        let selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):findClosestNode(ele, connectedEdges); // default , the selection of edge will be determined later.
+        let selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : findClosestNode(ele, connectedEdges); // default , the selection of edge will be determined later.
         for (let i = 0; i < connectedEdges.size(); i++) {
           if (connectedEdges[i].id() != selectedEdge.id()) {
             errorFixParam.edges.push(connectedEdges[i]);
           }
         }
-        console.log( "pd10111 fix")
+        console.log("pd10111 fix")
         fixError(errorFixParam);
         //errors[check].status = "solved";
-        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Arc between this node and " + selectedEdge.target().id() + " is kept.";
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Arc between this node and " + getLabel(selectedEdge.target()) + " is kept.";
       }
       else
         numberOfUnsolvedErrors++;
@@ -1624,7 +1627,7 @@ app.post('/fixError', (req, res) => {
       var connectedEdges = ele.connectedEdges().filter('[class="consumption"]');
       errorFixParam.nodes = [];
       errorFixParam.edges = [];
-      selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):closestNode(ele, connectedEdges); // default selection, it will be determined. closest one will be kept. 
+      selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : closestNode(ele, connectedEdges); // default selection, it will be determined. closest one will be kept. 
       for (let i = 0; i < connectedEdges.size(); i++) {
         if (connectedEdges[i].id() != selectedEdge.id()) {
           errorFixParam.nodes.push(connectedEdges[i].source().id() == ele.id() ? connectedEdges[i].target() : connectedEdges[i].source());
@@ -1633,51 +1636,51 @@ app.post('/fixError', (req, res) => {
       }
       fixError(errorFixParam);
       fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc between dissocation glyph and consumption glyph(" + (selectedEdge.source().id() === ele.id() ?
-        selectedEdge.target().id() : selectedEdge.source().id()) + ") is kept.";
+        getLabel(selectedEdge.target().id()) : getLabel(selectedEdge.source())) + ") is kept.";
       // errors[check].status = "solved";
     }
-    else if (currentErrors[check].pattern == "pd10127"){
-        let ele = cy.getElementById(currentErrors[check].role);
-        let nodes = cy.nodes();
-        let listedNodes = [];
-        nodes.forEach( node => {
-          if( elementUtilities.isEPNClass( node.data().class ) ) {
-              listedNodes.push( node );
-          }
-        });
-        if( listedNodes.length > 0){
-        let newSource = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):closestNodeForEdges(ele.target(), listedNodes);
-        errorFixParam.edge = ele;
-        errorFixParam.newEdge = {source: newSource.id(), target: ele.target().id()};
-        fixError( errorFixParam);
-        fixExplanation[ currentErrors[check].pattern + currentErrors[check].role ] = "Equivalence arc has a source reference to " + newSource.id() ;
-        }
-    }
-    else if (currentErrors[check].pattern == "pd10128" || currentErrors[check].pattern == "pd10110"){
+    else if (currentErrors[check].pattern == "pd10127") {
       let ele = cy.getElementById(currentErrors[check].role);
       let nodes = cy.nodes();
-       let listedNodes = [];
-    nodes.forEach( node => {
-      if( currentErrors[check].pattern == "pd10128" && (node.data().class == "submap" || node.data().class == "terminal" || node.data().class == "tag" )) {
-          listedNodes.push( node );
+      let listedNodes = [];
+      nodes.forEach(node => {
+        if (elementUtilities.isEPNClass(node.data().class)) {
+          listedNodes.push(node);
+        }
+      });
+      if (listedNodes.length > 0) {
+        let newSource = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : closestNodeForEdges(ele.target(), listedNodes);
+        errorFixParam.edge = ele;
+        errorFixParam.newEdge = { source: newSource.id(), target: ele.target().id() };
+        fixError(errorFixParam);
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Equivalence arc has a source reference to " + getLabel(newSource);
       }
-      if( currentErrors[check].pattern == "pd10110" && ( elementUtilities.isPNClass( node.data().class )) ) {
-          listedNodes.push( node );
+    }
+    else if (currentErrors[check].pattern == "pd10128" || currentErrors[check].pattern == "pd10110") {
+      let ele = cy.getElementById(currentErrors[check].role);
+      let nodes = cy.nodes();
+      let listedNodes = [];
+      nodes.forEach(node => {
+        if (currentErrors[check].pattern == "pd10128" && (node.data().class == "submap" || node.data().class == "terminal" || node.data().class == "tag")) {
+          listedNodes.push(node);
+        }
+        if (currentErrors[check].pattern == "pd10110" && (elementUtilities.isPNClass(node.data().class))) {
+          listedNodes.push(node);
+        }
+      });
+      if (listedNodes.length > 0) {
+        let newTarget = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : closestNodeForEdges(ele.source(), listedNodes);
+        errorFixParam.edge = ele;
+        errorFixParam.newEdge = { source: ele.source().id(), target: newTarget.id() };
+        fixError(errorFixParam);
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = (currentErrors[check].pattern == "pd10128" ? "Equivalence" : "Modulation") +
+          " arc has a target reference to " + getLabel(newTarget);
       }
-    });
-      if( listedNodes.length > 0) {
-      let newTarget = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):closestNodeForEdges(ele.source(), listedNodes);
-      errorFixParam.edge = ele;
-      errorFixParam.newEdge = {source: ele.source().id(), target: newTarget.id()};
-      fixError( errorFixParam);
-      fixExplanation[ currentErrors[check].pattern + currentErrors[check].role ] = (currentErrors[check].pattern == "pd10128" ?"Equivalence": "Modulation") +  
-      " arc has a target reference to " + newTarget.id() ;
-      }
-  }
+    }
     else if (currentErrors[check].pattern == "pd10108") {
       let connectedEdges = ele.connectedEdges().filter('[class = "production"]');
       // choose deleted edges and nodes each here when the deletion method is determined
-      let selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):findClosestNode(ele, connectedEdges);
+      let selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : findClosestNode(ele, connectedEdges);
       errorFixParam.edges = [];
       errorFixParam.nodes = [];
       for (let i = 0; i < connectedEdges.size(); i++) {
@@ -1687,7 +1690,7 @@ app.post('/fixError', (req, res) => {
         }
         fixError(errorFixParam);
         fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc between assocation glyph and production glyph(" + (selectedEdge.source().id() === ele.id() ?
-          selectedEdge.target().id() : selectedEdge.source().id()) + ") is kept.";
+          getLabel(selectedEdge.target()) : getLabel(selectedEdge.source())) + ") is kept.";
       }
     }
     else if (currentErrors[check].pattern == "pd10109") {
@@ -1695,15 +1698,15 @@ app.post('/fixError', (req, res) => {
       var targetPosX = ele.target().position().x;
       var sourcePosY = ele.source().position().y;
       var targetPosY = ele.target().position().y;
-     /* var minX = Math.min(sourcePosX, targetPosX) - 150;
-      var maxX = Math.max(sourcePosX, targetPosX) + 150;
-      var minY = Math.min(sourcePosY, targetPosY) - 150;
-      var maxY = Math.max(sourcePosY, targetPosY) + 150;*/
-      var minX =-15000000000;
+      /* var minX = Math.min(sourcePosX, targetPosX) - 150;
+       var maxX = Math.max(sourcePosX, targetPosX) + 150;
+       var minY = Math.min(sourcePosY, targetPosY) - 150;
+       var maxY = Math.max(sourcePosY, targetPosY) + 150;*/
+      var minX = -15000000000;
       var maxX = 15000000000;
-      var minY =-15000000000;
+      var minY = -15000000000;
       var maxY = 15000000000;
-      
+
 
       var nodes = cy.nodes();
       var listedNodes = [];
@@ -1719,16 +1722,16 @@ app.post('/fixError', (req, res) => {
           }
       }
       // node should be selected here, default is 0.
-      if( listedNodes.length > 0){
-      //let selectedNode = listedNodes[0];
-      let selectedNode = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):closestNodeForEdges( ele.target(), listedNodes );
-      errorFixParam.newTarget = ele.target().id();
-      errorFixParam.newSource = selectedNode.id();
-      errorFixParam.edge = ele;
-      errorFixParam.portsource = selectedNode.id();
-      fixError(errorFixParam);
-      //errors[check].status = "solved";
-      fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Modulation arc has a source reference to " + selectedNode.id() + ".";
+      if (listedNodes.length > 0) {
+        //let selectedNode = listedNodes[0];
+        let selectedNode = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : closestNodeForEdges(ele.target(), listedNodes);
+        errorFixParam.newTarget = ele.target().id();
+        errorFixParam.newSource = selectedNode.id();
+        errorFixParam.edge = ele;
+        errorFixParam.portsource = selectedNode.id();
+        fixError(errorFixParam);
+        //errors[check].status = "solved";
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Modulation arc has a source reference to " + getLabel(selectedNode) + ".";
       }
 
     }
@@ -1745,41 +1748,41 @@ app.post('/fixError', (req, res) => {
         numberOfUnsolvedErrors++;
       }
     }
-    else if( currentErrors[check].pattern == "pd10141"){
-      let ele = cy.getElementById( currentErrors[check].role);
+    else if (currentErrors[check].pattern == "pd10141") {
+      let ele = cy.getElementById(currentErrors[check].role);
       errorFixParam.newEdges = [];
-      if( ele.incomers().length === 0){
-          let nodes = cy.nodes();
-          let listedNodes = [];
-          nodes.forEach( node => {
-            if( elementUtilities.isEPNClass(node.data().class) ){
-              listedNodes.push(node);
-            }
-          });
-          let selectedNode = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):closestNodeForEdges( ele, listedNodes);
-          errorFixParam.newEdges.push({ source: selectedNode.id(), target: ele.id(), edgeClass : "consumption"});
-          fixExplanation[ currentErrors[check].pattern + currentErrors[check].role ] = "Process node has input from " + selectedNode.id() ;
-          fixError( errorFixParam);
+      if (ele.incomers().length === 0) {
+        let nodes = cy.nodes();
+        let listedNodes = [];
+        nodes.forEach(node => {
+          if (elementUtilities.isEPNClass(node.data().class)) {
+            listedNodes.push(node);
+          }
+        });
+        let selectedNode = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : closestNodeForEdges(ele, listedNodes);
+        errorFixParam.newEdges.push({ source: selectedNode.id(), target: ele.id(), edgeClass: "consumption" });
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Process node has input from " + getLabel(selectedNode) + ".";
+        fixError(errorFixParam);
 
       }
       else {
         let nodes = cy.nodes();
         let listedNodes = [];
-          nodes.forEach( node => {
-            if( elementUtilities.isEPNClass(node.data().class) ){
-              listedNodes.push(node);
-            }
-          });
-        let selectedNode = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]):closestNodeForEdges( ele, listedNodes);
-        errorFixParam.newEdges.push({ source: ele.id(), target: selectedNode.id(), edgeClass: "production"});
-        fixError( errorFixParam);
-        fixExplanation[ currentErrors[check].pattern + currentErrors[check].role ] = "Process node has output to " + selectedNode.id() ;
+        nodes.forEach(node => {
+          if (elementUtilities.isEPNClass(node.data().class)) {
+            listedNodes.push(node);
+          }
+        });
+        let selectedNode = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : closestNodeForEdges(ele, listedNodes);
+        errorFixParam.newEdges.push({ source: ele.id(), target: selectedNode.id(), edgeClass: "production" });
+        fixError(errorFixParam);
+        fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Process node has output to " + getLabel(selectedNode) + ".";
       }
     }
     else {
       numberOfUnsolvedErrors++;
     }
-    console.log( "one fix step is completed");
+    console.log("one fix step is completed");
     let currentErrorRole = currentErrors[check].role;
     let currentErrorPattern = currentErrors[check].pattern;
     let isSolved = true;
@@ -1810,21 +1813,21 @@ app.post('/fixError', (req, res) => {
         error.setPattern(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["$"]["id"]);
         error.setRole(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:diagnostic-reference"][0]["_"]);
         //console.log( error.pattern + " " + error.role) ;
-       
+
         errorsAfterFix.push(error);
       }
     }
-    errorsAfterFix = reduceErrors( errorsAfterFix, cy);
-    for( let i = 0; i < errorsAfterFix.length; i++){
-      errorStillAvailable[ errorsAfterFix[i].pattern + errorsAfterFix[i].role] = true; 
-      if( currentErrorPattern === errorsAfterFix[i].pattern && currentErrorRole === errorsAfterFix[i].role){
+    errorsAfterFix = reduceErrors(errorsAfterFix, cy);
+    for (let i = 0; i < errorsAfterFix.length; i++) {
+      errorStillAvailable[errorsAfterFix[i].pattern + errorsAfterFix[i].role] = true;
+      if (currentErrorPattern === errorsAfterFix[i].pattern && currentErrorRole === errorsAfterFix[i].role) {
         isSolved = false;
       }
     }
-   // console.log( check + " " + "is Solved" + isSolved);
-    if ( !isSolved) {
+    // console.log( check + " " + "is Solved" + isSolved);
+    if (!isSolved) {
       //check++;
-    //  console.log( previousErrorCode + " " + previousErrorRole);
+      //  console.log( previousErrorCode + " " + previousErrorRole);
       unsolvedErrorInformation[previousErrorCode + previousErrorRole] = true;
     }
     else {
@@ -1862,35 +1865,35 @@ app.post('/fixError', (req, res) => {
       errorsAfterFix.push(error);
     }
   }
-  errorsAfterFix = reduceErrors( errorsAfterFix,cy);
+  errorsAfterFix = reduceErrors(errorsAfterFix, cy);
   //console.log( errorsAfterFix);
   let indexesOfErrors = {};
-  for( let i = 0; i < currentErrors.length; i++){
-    indexesOfErrors[ currentErrors[i].pattern + currentErrors[i].role ] = i;
+  for (let i = 0; i < currentErrors.length; i++) {
+    indexesOfErrors[currentErrors[i].pattern + currentErrors[i].role] = i;
   }
   let counter = 1;
   unsolvedErrorInformation = {};
-  for( let i = 0; i < errorsAfterFix.length; i++){
+  for (let i = 0; i < errorsAfterFix.length; i++) {
     //console.log( )
-    unsolvedErrorInformation[ errorsAfterFix[i].pattern + errorsAfterFix[i].role] = true;
-    if( indexesOfErrors[errorsAfterFix[i].pattern  + errorsAfterFix[i].role] === undefined ){
+    unsolvedErrorInformation[errorsAfterFix[i].pattern + errorsAfterFix[i].role] = true;
+    if (indexesOfErrors[errorsAfterFix[i].pattern + errorsAfterFix[i].role] === undefined) {
       errorsAfterFix[i].errorNo = currentErrors.length + 1;
       currentErrors.push(errorsAfterFix[i]);
     }
   }
   errors = currentErrors;
-  if( showResolutionAlternatives ){
-  errors = findCandidatesOrFix( errors, cy, false );
+  if (showResolutionAlternatives) {
+    errors = findCandidatesOrFix(errors, cy, false);
   }
   else {
-    errors.forEach( error => {
+    errors.forEach(error => {
       error.selectedOption = "default";
     })
   }
   //console.log( errors);
-  console.log( fixExplanation);
+  console.log(fixExplanation);
   highlightErrors(errors, cy, imageOptions, false, unsolvedErrorInformation, fixExplanation);
-  console.log( errors);
+  console.log(errors);
   let colorScheme = imageOptions.color || "white";
   let stylesheet = adjustStylesheet('sbgnml', colorScheme);
   postProcessForLayouts(cy);
@@ -1959,9 +1962,9 @@ function fixError(errorFixParam) {
     });
     errorFixParam.node.remove();
   }
-  if( errorCode == "pd10141" ){
+  if (errorCode == "pd10141") {
     errorFixParam.newEdges.forEach(function (newEdge) {
-      var newwEdge = elementUtilities.addEdge(newEdge.source, newEdge.target, newEdge.edgeClass,cy);
+      var newwEdge = elementUtilities.addEdge(newEdge.source, newEdge.target, newEdge.edgeClass, cy);
       // elementUtilities.reverseEdge(newwEdge);
     });
   }
@@ -1989,13 +1992,13 @@ function fixError(errorFixParam) {
     return result;
   }
 
-  if( errorCode == "pd10127"){
+  if (errorCode == "pd10127") {
     var clonedEdge = errorFixParam.edge.clone();
     var edgeParams = { class: clonedEdge.data().class, language: clonedEdge.data().language };
     cy.remove(errorFixParam.edge);
     elementUtilities.addEdge(errorFixParam.newEdge.source, errorFixParam.newEdge.target, edgeParams, cy, clonedEdge.data().id);
   }
-  if( errorCode == "pd10128" || errorCode == "pd10110"){
+  if (errorCode == "pd10128" || errorCode == "pd10110") {
     var clonedEdge = errorFixParam.edge.clone();
     var edgeParams = { class: clonedEdge.data().class, language: clonedEdge.data().language };
     cy.remove(errorFixParam.edge);
@@ -2131,7 +2134,7 @@ function addNode(x, y, nodeParams, id, parent, visibility) {
   return newNode;
 }
 
-function highlightErrors(errors, cy, imageOptions, isValidation,unsolvedErrorInformation, fixExplanation) {
+function highlightErrors(errors, cy, imageOptions, isValidation, unsolvedErrorInformation, fixExplanation) {
   let errorColor = {};
   let counter = 0;
   let labels = {};
@@ -2140,7 +2143,7 @@ function highlightErrors(errors, cy, imageOptions, isValidation,unsolvedErrorInf
   cy.edges().forEach((edge) => { edge.removeData('highlightColor'); edge.removeClass('path');/*edge.removeData('label');*/ });
   errors.forEach((errorData, i) => {
     let ele = cy.getElementById(errorData.role);
-    if (ele.isNode() ) {
+    if (ele.isNode()) {
       errorData.label = ele.data('label') ? ele.data('label') : ele.data().class;
     }
     else if (ele.isEdge()) {
@@ -2151,10 +2154,10 @@ function highlightErrors(errors, cy, imageOptions, isValidation,unsolvedErrorInf
   errors.forEach((errorData, i) => {
     let ele = cy.getElementById(errorData.role);
     //console.log( errorData);
-    if (unsolvedErrorInformation[errorData.pattern + errorData.role] !== true && !isValidation && errorData.pattern !== "00001" && 
-    errorData.pattern !== "00002") {
-      if( errorData.explanation === undefined )
-      errorData.explanation = fixExplanation[errorData.pattern + errorData.role] ? fixExplanation[errorData.pattern + errorData.role] : "Fix of another error resolved this error.";
+    if (unsolvedErrorInformation[errorData.pattern + errorData.role] !== true && !isValidation && errorData.pattern !== "00001" &&
+      errorData.pattern !== "00002") {
+      if (errorData.explanation === undefined)
+        errorData.explanation = fixExplanation[errorData.pattern + errorData.role] ? fixExplanation[errorData.pattern + errorData.role] : "Fix of another error resolved this error.";
       errorData.status = "solved";
       errorData.colorCode = "#808080";
       //ele.data('highlightColor', "#808080");
@@ -2170,19 +2173,19 @@ function highlightErrors(errors, cy, imageOptions, isValidation,unsolvedErrorInf
       else {
         ele.addClass('path');
       }
-      console.log( errorData.errorNo + " " + errorData.role );
-      if( errorData.colorCode !== undefined && errorData.colorCode !== "#808080"){
-          console.log( "1 " + errorData.errorNo + " " + errorData.colorCode );
-          errorColor[errorData.role] = errorData.colorCode;
-          ele.data('highlightColor', errorData.colorCode);
+      console.log(errorData.errorNo + " " + errorData.role);
+      if (errorData.colorCode !== undefined && errorData.colorCode !== "#808080") {
+        console.log("1 " + errorData.errorNo + " " + errorData.colorCode);
+        errorColor[errorData.role] = errorData.colorCode;
+        ele.data('highlightColor', errorData.colorCode);
       }
       else if (errorColor[errorData.role] !== undefined) {
-                  console.log( "2 " + errorData.errorNo + " " + errorData.colorCode );
+        console.log("2 " + errorData.errorNo + " " + errorData.colorCode);
         ele.data('highlightColor', errorColor[errorData.role]);
         errorData.colorCode = errorColor[errorData.role];
       }
       else {
-                  console.log( "3 " + errorData.errorNo + " " + errorData.colorCode );
+        console.log("3 " + errorData.errorNo + " " + errorData.colorCode);
         ele.data('highlightColor', errorHighlightColors[errorData.errorNo % 8]);
         errorData.colorCode = errorHighlightColors[errorData.errorNo % 8];
         errorColor[errorData.role] = errorHighlightColors[errorData.errorNo % 8];
