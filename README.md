@@ -1,6 +1,10 @@
 # SyBValS
 **Sy**stems **B**iology **Val**idation **S**ervice (SyBValS) is a web service that validates maps in SBGNML format and produces graphical images of the map with an option to highlight errors. After validating maps, if desired, SyBValS will resolve these errors when possible, reproducing the image after any fixes and returning the corrected SBGN file. During the resolution of errors, the user is also provided with possible choices when applicable, or the errors are resolved with default choices.
 
+Please cite the following when you use SyBValS:
+
+&nbsp;&nbsp;Y.Z. Ozgul, U. Dogrusoz and H. Balci, "SyBValS: a validation and error resolution service for biological pathways", under review, 2024.
+
 Here is an example from our simple demo on a sample deployment. Below is a list of errors found by the service for the map provided by the user upon **Validate**:
 
 ![A screenshot from the sample deployment of SyBValS for validation](img/sybvals-ss-validation.png)
