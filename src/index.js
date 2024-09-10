@@ -267,12 +267,22 @@ function findCandidatesOrFix(errors, cy, isFix) {
       let ele = cy.getElementById(currentErrors[check].role);
       let nodes = cy.nodes();
       let listedNodes = [];
+      var sourcePosX = ele.source().position().x;
+      var targetPosX = ele.target().position().x;
+      var sourcePosY = ele.source().position().y;
+      var targetPosY = ele.target().position().y;
+      var minX = Math.min(sourcePosX, targetPosX) - 150;
+      var maxX = Math.max(sourcePosX, targetPosX) + 150;
+      var minY = Math.min(sourcePosY, targetPosY) - 150;
+      var maxY = Math.max(sourcePosY, targetPosY) + 150;
       nodes.forEach(node => {
+        if (node.position().x >= minX && node.position().x <= maxX && node.position().y >= minY && node.position().y <= maxY){
         if (currentErrors[check].pattern == "pd10128" && (node.data().class == "submap" || node.data().class == "terminal" || node.data().class == "tag")) {
           listedNodes.push(node);
         }
         if (currentErrors[check].pattern == "pd10110" && (elementUtilities.isPNClass(node.data().class))) {
           listedNodes.push(node);
+        }
         }
       });
       let closestNode = closestNodeForEdges(ele.target(), listedNodes);
@@ -639,14 +649,14 @@ function findCandidatesOrFix(errors, cy, isFix) {
       var targetPosX = ele.target().position().x;
       var sourcePosY = ele.source().position().y;
       var targetPosY = ele.target().position().y;
-      /* var minX = Math.min(sourcePosX, targetPosX) - 150;
+       var minX = Math.min(sourcePosX, targetPosX) - 150;
        var maxX = Math.max(sourcePosX, targetPosX) + 150;
        var minY = Math.min(sourcePosY, targetPosY) - 150;
-       var maxY = Math.max(sourcePosY, targetPosY) + 150;*/
-      var minX = -15000000000;
+       var maxY = Math.max(sourcePosY, targetPosY) + 150;
+      /*var minX = -15000000000;
       var maxX = 15000000000;
       var minY = -15000000000;
-      var maxY = 15000000000;
+      var maxY = 15000000000;*/
 
 
       var nodes = cy.nodes();
@@ -1635,7 +1645,7 @@ app.post('/fixError', (req, res) => {
 
       // node should be selected here, default is 0.
       if (listedNodes.length > 0) {
-        let selectedNode = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : losestNodeForEdges(ele.source(), listedNodes);
+        let selectedNode = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : closestNodeForEdges(ele.source(), listedNodes);
         //selectedNode = findClosest( )
         var source = ele.source();
         var target = selectedNode;
@@ -1702,12 +1712,23 @@ app.post('/fixError', (req, res) => {
       let ele = cy.getElementById(currentErrors[check].role);
       let nodes = cy.nodes();
       let listedNodes = [];
+      var sourcePosX = ele.source().position().x;
+      var targetPosX = ele.target().position().x;
+      var sourcePosY = ele.source().position().y;
+      var targetPosY = ele.target().position().y;
+       var minX = Math.min(sourcePosX, targetPosX) - 150;
+       var maxX = Math.max(sourcePosX, targetPosX) + 150;
+       var minY = Math.min(sourcePosY, targetPosY) - 150;
+       var maxY = Math.max(sourcePosY, targetPosY) + 150;
       nodes.forEach(node => {
+        console.log( "pd10110 " + node.position().x + " " + node.position().y);
+        if (node.position().x >= minX && node.position().x <= maxX && node.position().y >= minY && node.position().y <= maxY){
         if (currentErrors[check].pattern == "pd10128" && (node.data().class == "submap" || node.data().class == "terminal" || node.data().class == "tag")) {
           listedNodes.push(node);
         }
         if (currentErrors[check].pattern == "pd10110" && (elementUtilities.isPNClass(node.data().class))) {
           listedNodes.push(node);
+        }
         }
       });
       if (listedNodes.length > 0) {
@@ -1740,14 +1761,14 @@ app.post('/fixError', (req, res) => {
       var targetPosX = ele.target().position().x;
       var sourcePosY = ele.source().position().y;
       var targetPosY = ele.target().position().y;
-      /* var minX = Math.min(sourcePosX, targetPosX) - 150;
+       var minX = Math.min(sourcePosX, targetPosX) - 150;
        var maxX = Math.max(sourcePosX, targetPosX) + 150;
        var minY = Math.min(sourcePosY, targetPosY) - 150;
-       var maxY = Math.max(sourcePosY, targetPosY) + 150;*/
-      var minX = -15000000000;
+       var maxY = Math.max(sourcePosY, targetPosY) + 150;
+     /* var minX = -15000000000;
       var maxX = 15000000000;
       var minY = -15000000000;
-      var maxY = 15000000000;
+      var maxY = 15000000000;*/
 
 
       var nodes = cy.nodes();
