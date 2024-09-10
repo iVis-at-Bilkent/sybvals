@@ -293,6 +293,8 @@ let applyErrorFix = async function () {
 			let errorContent = document.getElementById("errorContent");
 			errorContent.innerHTML = res.errorMessage;
 			$('#errorModal').modal({ inverted: true }).modal('show');
+			$("#applyValidation").prop('disabled', false);
+	$("#fixFormatErrors").removeClass("loading");
 		}
 		else {
 			let errorContent = document.getElementById("errorContent");
@@ -349,7 +351,7 @@ let processValidation = async function () {
 			errorContent.innerHTML = "<b>Sorry! Cannot process the given file!</b><br><br>Error detail:<br>" + e;
 			$('#errorModal').modal({ inverted: true }).modal('show');
 		});
-		console.log( res.errors[0]);
+		console.log( res);
 	$("#applyValidation").removeClass("loading");
 	$("#applyValidation").css("background-color", "#d67664");
 	if (res.errors && res.errors.length > 0) {
@@ -504,8 +506,10 @@ let processValidation = async function () {
 	else {
 		if (res.errorMessage) {
 			let errorContent = document.getElementById("errorContent");
-			errorContent.innerHTML = res.errorMessage;
+			errorContent.innerHTML = "<b>" + res.errorMessage + "</b>";
 			$('#errorModal').modal({ inverted: true }).modal('show');
+			$("#applyValidation").prop('disabled', false);
+	        $("#fixFormatErrors").removeClass("loading");
 		}
 		else {
 			let errorContent = document.getElementById("errorContent");

@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cytoscape = require('cytoscape');
 const fs = require('fs');
-//const { Console } = require('node:console');
+//const { console } = require('console');
 const cors = require('cors');
 const convertSBGNtoCytoscape = require('sbgnml-to-cytoscape'); // to support sbgnml type of input
 const { adjustStylesheet } = require('./stylesheet');
@@ -654,14 +654,17 @@ function findCandidatesOrFix(errors, cy, isFix) {
       for (let i = 0; i < nodes.length; i++) {
         if (nodes[i].position().x >= minX && nodes[i].position().x <= maxX && nodes[i].position().y >= minY && nodes[i].position().y <= maxY)
           if (ele.target().data().id != nodes[i].data().id) {
-            if (elementUtilities.isEPNClass(nodes[i])) {
+            if (elementUtilities.isEPNClass(nodes[i].data().class)) {
+              console.log( "pd10109 " +  i + " " + nodes[i].data().class);
               listedNodes.unshift(nodes[i]);
             }
-            else if (elementUtilities.isLogicalOperator(nodes[i])) {
+            else if (elementUtilities.isLogicalOperator(nodes[i].data().class)) {
+              console.log( "pd10109 " +  i + " " + nodes[i].data().class);
               listedNodes.push(nodes[i]);
             }
           }
       }
+      console.log( "pd10109 " + nodes.length + " " + listedNodes.length);
       let selectedNode = closestNodeForEdges(ele.target(), listedNodes);
 
       if (isFix === false) {
@@ -891,7 +894,7 @@ cytoscape.use(fcose);
 // for logging
 const errorOutput = fs.createWriteStream('./syblars_error.log');
 // Custom simple logger
-//const logger = new Console({ stdout: errorOutput });
+//const logger = new console({ stdout: errorOutput });
 
 let cy;
 let options;
@@ -1012,13 +1015,22 @@ app.use(async (req, res, next) => {
         options = JSON.parse(options);
       }
       catch (e) {
-        let date = new Date()
+        let date = new Date();
         errorMessage = "<b>Sorry! Cannot process the given file!</b><br><br>There is something wrong with the format of the options!<br><br>Error detail: <br>" + e;
+        errorMessage = "Invalid map or unsupported content!";
+        console.log( e);
+        console.log( "dsdsdsdsds");
         //logger.log('---- %s', date + ": \n" + errorMessage.replace(/<br\s*[\/]?>/gi, "\n").replace(/<b\s*\/?>/mg, "") + "\n");
       }
       /*if (req.query.errorFixing === "true") {
         return next();
       }*/
+        if(errorMessage) {
+          console.log( "error found ");
+          return res.status(500).send({
+            errorMessage: errorMessage
+          });
+        }
 
       // convert sbgn data to json for cytoscape
 
@@ -1031,18 +1043,35 @@ app.use(async (req, res, next) => {
       let duplicatedIds = [];
       let preValidationData = {};
       if (errors.length === 0) {
+        let result ;
+        try {
         fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
-        let result = SaxonJS.transform({
+        result = SaxonJS.transform({
           stylesheetFileName: './src/templatelibsbgn.sef.json',
           sourceFileName: "./src/sbgnFile.sbgn",
           destination: "serialized"
         }).principalResult;
         fs.unlinkSync('./src/sbgnFile.sbgn');
+        }
+        catch {
+          console.log( "error on Saxon Js");
+          errorMessage = "Invalid map or unsupported content!";
+          
+        }
+        if(errorMessage) {
+          console.log( "error found ");
+          return res.status(500).send({
+            errorMessage: errorMessage
+          });
+        }
         let parseString = xml2js.parseString;
         let parsedResult;
         parseString(result, function (err, data) {
           parsedResult = data;
         });
+        
+       
+
         if (parsedResult["svrl:schematron-output"]["svrl:failed-assert"] == undefined) {
         }
         else {
@@ -1062,6 +1091,7 @@ app.use(async (req, res, next) => {
             //errors.push(error);
           }
         }
+       
       }
       //errors = [];
       let cyJsonData = sbgnmlToJson.convert(xml, data);
@@ -1086,6 +1116,17 @@ app.use(async (req, res, next) => {
       try {
         cy.add(data);
       } catch (err) { };
+      cy.nodes().forEach( node => {
+        if( node.data().class === "submap" ){
+          errorMessage = "Invalid map or unsupported content!";
+        }
+      });
+       if(errorMessage) {
+      console.log( "error found ");
+      return res.status(500).send({
+        errorMessage: errorMessage
+      });
+    }
       postProcessForLayouts(cy);
       data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
       data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
@@ -1494,15 +1535,16 @@ app.post('/fixError', (req, res) => {
         var shiftY = 22;
         var target = edges[i].target();
         var source = edges[i].source();
-        var x = edges[i].source().x; // endpoint are removed
-        var y = edges[i].source().y;
+        var x = edges[i].source().data().bbox.x; // endpoint are removed
+        var y = edges[i].source().data().bbox.y;
+        console.log( "pd10103 " + edges[i].source().data().bbox.x + " " + edges[i].target().data().bbox.y );
         if (edges[i].data().class != 'consumption') {
-          x = edges[i].target().x;
-          y = edges[i].target().y;
+          x = edges[i].target().data().bbox.x;
+          y = edges[i].target().data().bbox.y;
         }
 
-        var xdiff = Math.abs(edges[i].target().x - edges[i].source().x);
-        var ydiff = Math.abs(edges[i].target().y - edges[i].source().y);
+        var xdiff = Math.abs(edges[i].target().data().bbox.x - edges[i].source().data().bbox.x);
+        var ydiff = Math.abs(edges[i].target().data().bbox.y - edges[i].source().data().bbox.y);
         var ratio = ydiff / xdiff;
         if (xdiff == 0) {
           shiftX = 0;
@@ -1627,7 +1669,7 @@ app.post('/fixError', (req, res) => {
       var connectedEdges = ele.connectedEdges().filter('[class="consumption"]');
       errorFixParam.nodes = [];
       errorFixParam.edges = [];
-      selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : closestNode(ele, connectedEdges); // default selection, it will be determined. closest one will be kept. 
+      selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : findClosestNode(ele, connectedEdges); // default selection, it will be determined. closest one will be kept. 
       for (let i = 0; i < connectedEdges.size(); i++) {
         if (connectedEdges[i].id() != selectedEdge.id()) {
           errorFixParam.nodes.push(connectedEdges[i].source().id() == ele.id() ? connectedEdges[i].target() : connectedEdges[i].source());

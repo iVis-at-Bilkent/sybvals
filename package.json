@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/iVis-at-Bilkent/sybvals#readme",
   "dependencies": {
+    "console": "^0.7.2",
     "cors": "^2.8.5",
     "cytoscape": "^3.23.0",
     "cytoscape-fcose": "github:iVis-at-Bilkent/cytoscape.js-fcose#unstable",
