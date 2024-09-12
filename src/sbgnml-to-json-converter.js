@@ -2,7 +2,6 @@ var libsbgnjs = require('libsbgn.js');
 var parseString = require('xml2js').parseString;
 const { elementUtilities } = require('./element-utilities.js');
 const { optionUtilities } = require('./option-utilities');
-const  sbgnmlToCytoscape  = require('sbgnml-to-cytoscape');
 const c = require('saxon-js');
 
 // var classes = require('./classes');
@@ -456,7 +455,6 @@ sbgnmlToJson.addCytoscapeJsNode = function (ele, jsonArray, parent, compartments
   // add node bounding box information
   nodeObj.bbox = self.bboxProp(ele);
   //nodeObj.unitsOfInformation = [];
-  //nodeObj.stateVariables = sbgnmlToCytoscape.getStateVars(nodeObj);
 
 
   if (ele.minWidth) {
