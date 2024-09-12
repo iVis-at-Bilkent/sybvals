@@ -403,9 +403,6 @@ sbgnmlToJson.getDefaultStateAndInfoStyle = function (gylph, parentClass) {
 sbgnmlToJson.addParentInfoToNode = function (ele, nodeObj, parent, compartments) {
   var self = this;
   var compartmentRef = ele.compartmentRef;
-  //if( nodeObj.label === "Ca2+")
-  //console.log(nodeObj  + " par " + parent + " ref " + compartmentRef);
-
   var inferNestingOnLoad = options.inferNestingOnLoad;
   inferNestingOnLoad = typeof inferNestingOnLoad === 'function' ? inferNestingOnLoad.call() : inferNestingOnLoad;
 
@@ -447,27 +444,18 @@ sbgnmlToJson.addCytoscapeJsNode = function (ele, jsonArray, parent, compartments
   nodeObj.stateVariables = [];
   var childNodes = ele.glyphMembers;
 
-  /*if( ele.id === "glyph25")
-  console.log( ele );*/
-  //while(1);
 
   for( let i = 0; i < childNodes.length; i++){
-    /*if( ele.id === "glyph25")
-        console.log( "child " + childNodes[i]);*/
     if( childNodes[i].class_ === "state variable"){
         nodeObj.stateVariables.push(childNodes[i]);
-        //console.log(childNodes[i]);
-        //while(1);
     }
     if( childNodes[i].class_ === "unit of information"){
         nodeObj.unitsOfInformation.push(childNodes[i]);
-        //while(1);
     }
   }
   // add node bounding box information
   nodeObj.bbox = self.bboxProp(ele);
   //nodeObj.unitsOfInformation = [];
-  //console.log(sbgnmlToCytoscape);
   //nodeObj.stateVariables = sbgnmlToCytoscape.getStateVars(nodeObj);
 
 
@@ -1098,7 +1086,6 @@ sbgnmlToJson.mapPropertiesToObj = function () {
     parseString(xml, function (err, result) {
       obj = result;
     });
-    //console.log( "parsed obj \n" + obj);
     return obj;
   } else {
 
@@ -1115,11 +1102,7 @@ sbgnmlToJson.convert = function (xmlObject, xmlString, urlParams) {
   var sbgn;
   try {
      //var xmlString = new XMLSerializer().serializeToString(xmlObject);
-   console.log( "sbgnml conversion ");
     sbgn = libsbgnjs.Sbgn.fromXML(xmlString);
-    console.log( "sbgnml conversion finished ");
-
-
   }
   catch (err) {
     throw new Error("Could not parse sbgnml. " + err);
@@ -1314,14 +1297,7 @@ sbgnmlToJson.convert = function (xmlObject, xmlString, urlParams) {
   if (shouldDisablePorts) {
     sbgnmlToJson.disablePorts();
   }
-  //getDefaultProperties
-  //elementUtilities.nodeTypes.forEach(function(type){
-  //  console.log(elementUtilities.getDefaultProperties(type));
-  //});
 
-  //console.log(cytoscapeJsGraph);
-  //cytoscapeJsGraph.nodes.forEach(node => {console.log(node.data);});
-  //console.log( elementUtilities.nodeTypes);
   return cytoscapeJsGraph;
 };
 

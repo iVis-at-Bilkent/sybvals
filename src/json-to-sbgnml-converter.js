@@ -34,7 +34,6 @@ const jsonToSbgnml = {};
     var mapType = ( mapProperties && mapProperties.mapType ) || elementUtilities.mapType;
     this.nodes = nodes || cy.nodes();
     this.edges = edges || cy.edges();
-    //console.log( mapProperties[0]);
 
 /*     var collapsedChildren = elementUtilities.getAllCollapsedChildrenRecursively(this.nodes);
     this.allCollapsedNodes = collapsedChildren.filter("node");
@@ -92,9 +91,6 @@ const jsonToSbgnml = {};
            xml = xml.substring( 0, xml.length-16);
            xml= xml.replace( /&lt;/g, "<");
            xml = xml.replace( /&gt;/g, ">");
-
-           //console.log(xml);
-
            map.extension.add(xml);
        }
 
@@ -139,8 +135,6 @@ const jsonToSbgnml = {};
   };
 
   jsonToSbgnml.createSbgnml = function(filename, version, renderInfo, mapProperties, nodes, edges, cy) {
-    //console.log( renderInfo);
-  //console.log( mapProperties);
     var jsObj = jsonToSbgnml.buildJsObj(filename, version, renderInfo, mapProperties, nodes, edges, cy);
     return jsonToSbgnml.buildString({sbgn: jsObj});
   }

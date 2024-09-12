@@ -301,7 +301,6 @@ elementUtilities.isAFArcClass = function (ele) {
       var targetclass = target.data('class');
       var mapType = elementUtilities.getMapType();
       //console.log(mapType);
-      //console.log(elementUtilities[mapType]);
       var edgeConstraints = elementUtilities[mapType].connectivityConstraints[edgeclass];
 
       if (mapType == "AF"){
@@ -455,7 +454,6 @@ elementUtilities.reverseEdge = function(edge){
   var oldPortSource = edge.data("portsource");
   var oldPortTarget = edge.data("porttarget");
   // var segmentPoints = edge.segmentPoints();
-  //console.log( oldSource + " " + oldTarget + " " + oldPortSource + " " + oldPortTarget );
 
   edge.data().source = oldTarget;
   edge.data().target = oldSource;
@@ -467,15 +465,9 @@ elementUtilities.reverseEdge = function(edge){
      source: oldTarget,
      target: oldSource
   });
-  //console.log("Fixed edge after fixing");
-  //console.log(edge.data());
 
-/*   if(Array.isArray(segmentPoints)){
-    segmentPoints.reverse();
-    edge.data().bendPointPositions = segmentPoints;
-    var edgeEditing = cy.edgeEditing('get');
-    edgeEditing.initBendPoints(edge);
-  } */
+
+
 
   return edge;
 }
@@ -703,7 +695,6 @@ elementUtilities.canHaveSBGNCardinality = function (ele) {
 };
 
 elementUtilities.addNode = function (x, y, nodeParams, id, parent, visibility,cy) {
-  //console.log("new node");
   if (typeof nodeParams != 'object'){
     var sbgnclass = nodeParams;
   } else {

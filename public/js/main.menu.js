@@ -104,11 +104,9 @@ let applyErrorFix = async function () {
 			errorContent.innerHTML = "<b>Sorry! Cannot process the given file!</b><br><br>Error detail:<br>" + e;
 			$('#errorModal').modal({ inverted: true }).modal('show');
 		});
-	console.log( res);
 	currentSbgn = res.sbgn;
 	$("#applyValidation").prop('disabled', false);
 	$("#fixFormatErrors").removeClass("loading");
-	//$("#fixFormatErrors").prop('disabled', true);
 	if (!res.errorMessage && (res.errors !== undefined || res.image !== undefined)) {
 		errors = res.errors;
 		let remainingErrors = 0;
@@ -125,10 +123,8 @@ let applyErrorFix = async function () {
 		$('#errorsField').css({ width: errorWidth + 'px' });
 		$("#errorsArea").empty();
 		let numberOfUnsolvedErrors = 0;
-		$('.ui.radio.checkbox').on('click', event =>{
-				
+		$('.ui.radio.checkbox').on('click', event =>{				
 			try {
-			console.log( "format or alternative" + " "  + event.currentTarget.parentElement.id);
 			let errorId = event.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
 			errorId = errorId.replace("rec", "");
 			errorId = parseInt( errorId ) - 1;
@@ -170,13 +166,7 @@ let applyErrorFix = async function () {
 				}
 				let accordion = $('<div id ="rec' + error.errorNo + '"class="ui vertical accordion menu" style = "min-height: 0px !important;">');
 				let item = $('<div id = "item' + error.errorNo + '"  class="field"> <a class="title" style = "background: #efefef; padding : 0; width : inherit !important;display:block;"> <i class="icon small angle down"></i>Resolution Alternatives</a><div class="content" style = "padding : 0"><div class="ui form"><div class="grouped fields" id ="solutionField' + error.errorNo + '"> </div></div></div></div>' );
-				let option = $('<div class="field"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" name="test" value="ds"><label>Data Structure</label></div></div>');
-				let classItem =  $('<a class="active title">');
-				let str = ("#solutionField" + error.errorNo ).toString();
-				//let str = document.getElementById(accordion[0].id).firstChild.children[1].children[0].children[0].id;
-				//str += error.errorNo;
 				let id = error.errorNo;
-				let element = $( `#solutionField${id}` );
 				$('.ui.accordion').accordion();
 				$('.ui.radio.checkbox').checkbox();
 				$('.ui.checkbox').checkbox();
@@ -184,7 +174,6 @@ let applyErrorFix = async function () {
 				$('.ui.radio.checkbox').checkbox();
 				$('.ui.checkbox').checkbox();
 
-				//$( `#solutionField${1}` ).append('<div class="field"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" name="test" value="ds"><label>Data Structure</label></div></div>');
 				accordion.append( item);
 				$('.ui.accordion').accordion();
 				$('.ui.radio.checkbox').checkbox();
@@ -205,7 +194,6 @@ let applyErrorFix = async function () {
 				errorRectangle.append('</div>');
 				const errorString = "#errorNo" + error.errorNo;
 				$("#errorsArea").append(errorRectangle);
-				let resolutionAlternative;
 				if( showResolutionAlternatives && error.status !== "solved"){
 					$('.ui.accordion').accordion();
 					$('.ui.radio.checkbox').checkbox();
@@ -218,11 +206,9 @@ let applyErrorFix = async function () {
 					for( let i = 0; error.fixCandidate && i < error.fixCandidate.length; i++){
 					$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + i + '"name="'+ 'fixFor' + error.errorNo + '" value="' + i+ '"><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
 					if( (error.selectedOption  ) === i){
-						console.log( error.errorNo + " " + error.selectedOption + " " + i);
 						$('.ui.radio.checkbox').on('click', event =>{
 				
 				try {
-				console.log( "format or alternative event " + " "  + event.currentTarget.parentElement.id);
 				let errorId = event.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
 				errorId = errorId.replace("rec", "");
 				errorId = parseInt( errorId ) - 1;
@@ -254,7 +240,6 @@ let applyErrorFix = async function () {
 			$('.ui.radio.checkbox').on('click', event =>{
 				
 				try {
-				console.log( "format or alternative event " + " "  + event.currentTarget.parentElement.id);
 				let errorId = event.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
 				errorId = errorId.replace("rec", "");
 				errorId = parseInt( errorId ) - 1;
@@ -283,7 +268,6 @@ let applyErrorFix = async function () {
 		blobData = saveImage(res["image"], imageFormat, document.getElementById("file-name").innerHTML);
 		let urlCreator = window.URL || window.webkitURL;
 		let imageUrl = urlCreator.createObjectURL(blobData);
-		//$("#imageArea").css("height", parseInt($('#imageHeight').val()) * parseInt($('#imageArea').css('width')) / (parseInt($('#imageWidth').val())));
 		$("#resultImage").attr("src", imageUrl);
 		$("#resultImage1").attr("src", imageUrl);
 
@@ -310,7 +294,6 @@ let processValidation = async function () {
 	document.getElementById("sbgnImageUI").style.display = "inline";
 	errors = undefined;
 	if (!syblars) {
-		//console.log( "request  " + port );
 		url = "http://localhost:" + port + "/validation?showResolutionAlternatives=" + showResolutionAlternatives;
 	} else { // NOTE: If you are using the service with a different hostname, please change below accordingly
 		url = "http://sybvals.cs.bilkent.edu.tr/validation?showResolutionAlternatives=" + showResolutionAlternatives;
@@ -342,16 +325,13 @@ let processValidation = async function () {
 	let res = await fetch(url, settings)
 		.then(response => response.json())
 		.then(result => {
-			console.log( "result of one is come");
 			return result;
 		})
 		.catch(e => {
-			console.log( "result error");
 			let errorContent = document.getElementById("errorContent");
 			errorContent.innerHTML = "<b>Sorry! Cannot process the given file!</b><br><br>Error detail:<br>" + e;
 			$('#errorModal').modal({ inverted: true }).modal('show');
 		});
-		console.log( res);
 	$("#applyValidation").removeClass("loading");
 	$("#applyValidation").css("background-color", "#d67664");
 	if (res.errors && res.errors.length > 0) {
@@ -378,7 +358,6 @@ let processValidation = async function () {
 		if (errors.length > 0) {
 			res.errors.forEach((error) => {
 				let errorNo = $('<div class="ui item"> <b>Error </b> ' + error.errorNo + '&nbsp &nbsp &nbsp &nbsp <b>Pattern:</b> ' + error.pattern + '</div>');
-				let errorPattern = $('<div class="ui item"> <b>Pattern:</b> ' + error.pattern + '</div>');
 				let errorRole = $('<div class="ui item"> <b>Role:</b> ' + error.role + '</div>');
 				let errorLabel = $('<div class="ui item"> <b>Label:</b> ' + error.label + '&nbsp &nbsp &nbsp &nbsp <b>Role:</b> ' + error.role + '</div>');
 				let errorText = $('<div class="ui item"> <b>Message:</b> ' + error.text + '</div>');
@@ -386,13 +365,6 @@ let processValidation = async function () {
 				let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo + '">');
 				let accordion = $('<div id ="rec' + error.errorNo + '"class="ui vertical accordion menu" style = "min-height: 0px !important;">');
 				let item = $('<div id = "item' + error.errorNo + '"  class="field"> <a class="title" style = "background: #efefef; padding : 0; width : inherit !important;display:block;"> <i class="icon small angle down"></i>Resolution Alternatives</a><div class="content" style = "padding : 0"><div class="ui form"><div class="grouped fields" id ="solutionField' + error.errorNo + '"> </div></div></div></div>' );
-				let option = $('<div class="field"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" name="test" value="ds"><label>Data Structure</label></div></div>');
-				let classItem =  $('<a class="active title">');
-				let str = ("#solutionField" + error.errorNo ).toString();
-				//let str = document.getElementById(accordion[0].id).firstChild.children[1].children[0].children[0].id;
-				//str += error.errorNo;
-				let id = error.errorNo;
-				let element = $( `#solutionField${id}` );
 				$('.ui.accordion').accordion();
 				$('.ui.radio.checkbox').checkbox();
 				$('.ui.checkbox').checkbox();
@@ -400,7 +372,6 @@ let processValidation = async function () {
 				$('.ui.radio.checkbox').checkbox();
 				$('.ui.checkbox').checkbox();
 
-				//$( `#solutionField${1}` ).append('<div class="field"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" name="test" value="ds"><label>Data Structure</label></div></div>');
 				accordion.append( item);
 				$('.ui.accordion').accordion();
 				$('.ui.radio.checkbox').checkbox();
@@ -413,16 +384,13 @@ let processValidation = async function () {
 			
                
 				list.append(errorNo);
-				//list.append(errorRole);
 				if( error.label){
                     list.append(errorLabel);
 				}
 				else {
 					list.append(errorRole);
 				}
-				//list.append(errorPattern);
 				list.append(errorText);
-				console.log( showResolutionAlternatives);
 				if( showResolutionAlternatives)
 				list.append( accordion);
 				errorRectangle.append(list);
@@ -439,8 +407,6 @@ let processValidation = async function () {
 				//$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" name="fixFor' + error.errorNo + '" value="' + error.fixCandidate[i].id+ '"><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
 				$( `#solutionField${error.errorNo}` ).append('<div class="active field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + i + '"name="'+ 'fixFor' + error.errorNo + '" value="' + i + '" clicked ><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
 					if( (error.selectedOption  ) === i){
-						console.log( error.errorNo + " " + error.selectedOption + " " + i);
-						console.log( document.getElementById("resAlt" + error.errorNo + "-" + i));
 						$('#resAlt' + error.errorNo + '-' + i).click();
 
 					}
@@ -455,8 +421,6 @@ let processValidation = async function () {
 				$('.ui.checkbox').checkbox();
 			});
 			$('.ui.radio.checkbox').on('click', event =>{
-				console.log( event);
-				console.log( "format or alternative" + " "  );
 				try {
 				let errorId = event.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
 				errorId = errorId.replace("rec", "");
@@ -479,14 +443,10 @@ let processValidation = async function () {
 		$("#resultImage1").attr("src", imageUrl);
 		}
 		else if( res.message === undefined ){
-			/*$("#errorsArea").css('overflow', 'hidden');
-			document.getElementById("errorsArea").style.overflow = "hidden";*/
 
 			$("#errorsArea").text('Map is valid!');
 		}
 		else {
-			/*$("#errorsArea").css('overflow', 'hidden');
-			document.getElementById("errorsArea").style.overflow = "hidden";*/
 
 			$("#errorsArea").text(res.message);
 		}
@@ -584,7 +544,6 @@ $('#downloadJSON').click(function () {
 	if (errors !== undefined) {
 
 		errors.forEach(error => {
-			console.log( error.text + " " + Array.isArray(error.text));
 			if (Array.isArray(error.text)) {
 				error.text = error.text[0];
 				error.text = error.text.substr(0, error.text.length - 4);
@@ -592,7 +551,6 @@ $('#downloadJSON').click(function () {
 			else {
 				error.text = error.text.substr(0, error.text.length - 1);
 			}
-			console.log( error.text);
 		});
 		if (errors.length > 0) {
 			let jsonText = JSON.stringify(errors, null, 2);
@@ -624,7 +582,6 @@ $("body").on("change", "#file-input", function (e, fileObject) {
 	let reader = new FileReader();
 	$("#fixFormatErrors").prop('disabled', true);
 	setFileContent(file.name);
-	//console.log(file.name);
 	reader.onload = async function (e) {
 		$("#file-type").html('');
 		if (!fileObject)
@@ -787,7 +744,6 @@ function loadXMLDoc(fileName) {
 }
 
 function loadSample(fileName) {
-	//console.log(fileName);
 	let xmlResponse = loadXMLDoc(fileName);
 	let fileObj;
 
@@ -826,9 +782,7 @@ $("#resultImage1").on("click", function (e) {
 	imageContent.src = imageSource;
 	aspectRatio = img.naturalWidth / img.naturalHeight;
 	let imageTitle = document.getElementById("imageTitle");
-	
 	imageTitle.innerHTML = document.getElementById("file-name").innerHTML;
-
 	document.getElementById("draggableImageArea").style.position = "absolute";
 	document.getElementById("draggableImageArea").style.top = "400px";
 	document.getElementById("draggableImageArea").style.left = "850px";
@@ -837,10 +791,6 @@ $("#resultImage1").on("click", function (e) {
 	//document.getElementById("draggableImageArea").style.width = "900px";
 	//document.getElementById("draggableImageArea").style.height = (height) + "px";
 	document.getElementById("imageAreaPopUp").style.height = "500px";
-
-
-	
-	
 	/*document.getElementById("draggableImageArea").style.position = "absolute";
 	document.getElementById("draggableImageArea").style.top = "400px";
 	document.getElementById("draggableImageArea").style.left = "850px";
@@ -852,7 +802,5 @@ $("#resultImage1").on("click", function (e) {
 	document.getElementById("imageAreaPopUp").style.aspectRatio = aspectRatio;
 	document.getElementById("dragRegion").innerHTML = document.getElementById("file-name").innerHTML
 	document.getElementById("draggableImageArea").style.display = "inline";
-	document.getElementById("sbgnImageUI").style.display = "none";
-
-	
+	document.getElementById("sbgnImageUI").style.display = "none";	
 });
