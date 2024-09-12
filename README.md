@@ -296,7 +296,7 @@ let errorInfo = result["errors"];    // [{"text": "If there are compartments def
 let imageInfo = result["image"];     // data:image/png;base64,iVBORw0KGgoAAAANSUhE... (in `base64uri` for `png` and `jpg` and in `xml` for `svg`)
 ```
 Please note that `fixError` option is used instead of `validation` to indicate that error resolving is applied to the map.
-`selectedOption` parameter given above in sample query represents which resolution alternative is used in resolve stage. It is given as index which corresponds to index of desired alternative or it can be given as "default" to apply default resolution alternative in resolution api. If it is not specified, error is not resolve in resolve api. It should be specified seperately for each error.
+`selectedOption` parameter given above in the sample query represents which resolution alternative is used in resolve stage. Its value is given as the index corresponding to index of desired alternative or it can be given as "default" to apply the default resolution alternative. If it is not specified, error is not resolved. It should be specified seperately for each error.
 
 
 ## Credits
