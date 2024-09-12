@@ -41,9 +41,7 @@
 					<h3 class="ui header">File</h3>
 					<div class="ui tiny form">
 						<div class="field">
-							<!--   <label id="load-file" class="underline">Open File...</label> -->
 							<div class="inline fields">
-
 								<label style=" font-size: 14px !important;">Open Sample:</label>
 								<div class="six wide field" style="width: 50%!important;">
 									<select required id="sampleType">
@@ -61,11 +59,6 @@
 									Open File...
 								</a>
 							</div>
-							<!-- <div class="ui labeled button" id="save-sbgn" tabindex="0">
-                  <a class="ui basic label">
-                    Save Sbgn...
-                  </a>
-                </div>    -->
 						</div>
 					</div>
 					<input id="file-input" type="file" style="display:none" />
@@ -97,10 +90,6 @@
 									<label class="radio-label">SVG</label>
 								</div>
 							</div>
-							
-						<!--</div>
-						 <div class="inline fields"> -->
-
 							<span style = "margin-left: 60px;"class="add-on layout-text option-label" title="Desired image width"> Width: </span>
 							<div class="two wide field">
 								<input type="number" id="imageWidth"
@@ -114,7 +103,6 @@
 									value="720" min="1" disabled>
 							</div>
 							<input type="checkbox" id='auto-size-graph' checked>
-							<!-- <label class="radio-label">Transparent</label> -->
 							<span class="add-on layout-text option-label" style="margin-left: 6px;"> Auto </span>
 
 							<img class="ui image" id="imageSettingsDefault" title="Reset to default" src="img/settings.svg"
@@ -123,14 +111,8 @@
 
 						<div class="inline fields">
 							<span class="add-on layout-text option-label" title="Node color"> Color: </span>
-							<!--                 <div class="two wide field">
-                  <input type="color" id="color" value="#9ecae1">
-                </div>
-                <span class="add-on layout-text option-label"> or </span> -->
-							<!--<div class="seven wide field">-->
 								<div class="field">
 									<select id="colorScheme" class = "ui dropdown icon" <i class="icon small angle down"></i> >
-										<!-- <i class = "dropdown icon"> </i> -->
 										<option value="greyscale">Greyscale</option>
 										<option value="bluescale">Bluescale</option>
 										<option value="red_blue">Red-Blue</option>
@@ -141,25 +123,12 @@
 										<option value="black_white">Black-White</option>
 									</select>
 								</div>
-								
-							<!--/div> -->
-						<!--</div>
-						<div class="inline fields"> -->
 							<span style="margin-left: 60px;" class="add-on layout-text option-label" title="Image background color"> Background: </span>
 							<div class="two wide field">
 								<input type="color" disabled id="imageBackground" value="#ffffff">
 							</div>
-							<!-- <div class="ui checkbox" style="margin-left: 5px;"> -->
 							<input type="checkbox" id='transparent' checked>
-							<!-- <label class="radio-label">Transparent</label> -->
 							<span class="add-on layout-text option-label" style="margin-left: 6px;"> Transparent </span>
-							<!-- </div> -->
-						<!--</div>
-						<div class="inline fields"> -->
-							<!--<span class="add-on layout-text option-label" title="Error highlight color"> Highlight: </span>
-                <div class="two wide field">
-                  <input type="color" id="highlightColor" value="#ff0000">
-                </div> -->
 							<span class="add-on layout-text option-label" title="Underlay padding used to highlight elements" style ="margin-left: 60px;">
 								Highlight Width: </span>
 							<div class="two wide field">
@@ -175,15 +144,11 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div class="ui divider"></div> -->
 			<div class="row" style="padding-bottom: 0; padding-top: 20px">
 				<div class="center aligned column">
 					<button id="applyValidation" class="ui primary button">Validate Map</button>
 					<button id="fixFormatErrors" class="ui primary button" disabled="true">Resolve Errors</button>
 				</div>
-				<!--<div class="center aligned column">
-            <button id="fixFormatErrors" class="ui primary button">Validate</button>
-          </div> -->
 			</div>
 			<div class="ui divider"></div>
 			<div class="two column row" style="padding-bottom: 0; padding-top: 0">
@@ -197,16 +162,7 @@
 										Errors</h3>
 									<img class="ui image" id="downloadJSON" src="img/download.svg" title="Download as JSON file"
 										style="height: 25px; width: 25px; padding: 2.5px" />
-									<!--<img class="ui image" id="downloadJSON" src="img/download.svg" title="Download JSON file" style="height: 25px; width: 25px; padding: 2.5px" />
-                  <div style="margin-bottom: -10px; margin-right: 7.5px">Errors</div> -->
-
-
-									<!--<img class="ui image" id="downloadSBGN" src="img/download.svg" title="Download JSON file" style="height: 25px; width: 25px; padding: 2.5px" />
-                  <label class="ui header" style="margin-bottom: 0px; margin-left: 7.5px; font-size: 14px;">SBGNML</label> -->
-
-
 								</div>
-								<!-- <div class="field"  style = "display: flex; margin-bottom: 10px; margin-left: 312px;right: 0px;">  -->
 								<div class="inline fields"
 									style="left : 230px;float : right;align-items: right; position: relative;text-align: right;">
 									<img class="ui image" id="downloadSBGN" src="img/download.svg" title="Download map as SBGNML file"
@@ -214,25 +170,10 @@
 
 									<label class="ui header"
 										style="margin-bottom: 1px !important; margin-left: 7.5px; font-size: 14px;">SBGNML</label>
-
-									<!--<img class="ui image" id="downloadSBGN" src="img/download.svg" title="Download JSON file" style="height: 25px; width: 25px; padding: 2.5px" />
-                <!-- <label class="ui header" style="margin-bottom: 0px; margin-left: 7.5px; font-size: 14px;">SBGNML</label> -->
-									<!--<div style="margin-bottom: -10px; margin-right: 7.5px">Errors</div> -->
-
 								</div>
 							</div>
 						</div>
 					</div>
-					<!-- <div class = "ui form" style ="right:0px;">
-                <div class = "field" >
-                <div class="inline fields"> 
-                <igmg  id="downloadSBGN" src="img/download.svg" title="Download SBGN file" style="height: 25px; width: 25px; padding: 2.5px" />
-                <h3  style="margin-bottom: -3px; margin-left: 7.5px; margin-right: 7.5px;" >SBGNML</h3>
-                <img  id="downloadSBGN" src="img/download.svg" title="Download SBGN file" style="height: 25px; width: 25px; padding: 2.5px" />
-
-               </div>
-              </div>
-              </div> -->
 					<div class="ui divider"></div>
 
 					<div id="errorsArea" style="overflow:auto; max-height: 348px;z-index: 1000;"></div>
@@ -288,8 +229,6 @@
 				<div id="dragRegion"
 					style="text-align: center; color:white; border-radius: 5px; background-color: #d67664;padding-left:6px;padding-right: 6px; margin-left: 3px;z-index: 5000;opacity:1;">
 					abc </div>
-				<!-- <img class="ui image" src="img/drag-and-drop.png" title="Download map as image" style="margin-left: 30px; height: 45px; width: 45px; padding: 2.5px;"> 
-      -->
 			</div>
 			<div id="imageAreaPopUp" class="ui segment"
 				style="  margin: 3px;; overflow: hidden; padding: 0px;resize: both;">
@@ -329,7 +268,6 @@
 				Here is the notation used:
 				<div class="ui accordion">
 					<div class="title">
-						<!--<i class="dropdown icon"></i> -->
 						&nbsp;SBGNML Stylesheet
 					</div>
 					<div class="content">
@@ -366,27 +304,17 @@
 		let port = window.location.port;
 		$('.ui.dropdown').dropdown(); 
 	</script>
-
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-
 	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.1/underscore-min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.0/backbone-min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
 	<script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
-
 	<script src="js/queries.js"></script>
 	<script src="js/layouts.js"></script>
 	<script src="js/main.menu.js"></script>
-	<script>
-		/*  $( function() {
-						 $( "#draggableImageArea" ).resizable();
-						 handle: "#resultImage"
-					 } );*/
-	</script>
 
 </body>
 

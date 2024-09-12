@@ -2,14 +2,11 @@ const express = require('express');
 const app = express();
 const cytoscape = require('cytoscape');
 const fs = require('fs');
-//const { console } = require('console');
 const cors = require('cors');
 const { adjustStylesheet } = require('./stylesheet');
 const { jsonToSbgnml } = require('./json-to-sbgnml-converter');
 const { sbgnmlToJson } = require('./sbgnml-to-json-converter');
 const { elementUtilities } = require('./element-utilities');
-
-
 const cytosnap = require('cytosnap');
 cytosnap.use(['cytoscape-fcose'], { sbgnStylesheet: 'cytoscape-sbgn-stylesheet', layoutUtilities: 'cytoscape-layout-utilities', svg: 'cytoscape-svg' });
 let currentSbgn;    
@@ -281,7 +278,6 @@ function findCandidatesOrFix(errors, cy, isFix) {
         currentErrors[check].fixCandidate[0] = currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
         currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
         currentErrors[check].selectedOption = 0;
-
         check++;
         continue;
       }
@@ -293,7 +289,6 @@ function findCandidatesOrFix(errors, cy, isFix) {
     else if (currentErrors[check].pattern == "pd10141") {
       let ele = cy.getElementById(currentErrors[check].role);
       errorFixParam.newEdges = [];
-
       if (ele.incomers().length === 0) {
         let nodes = cy.nodes();
         let listedNodes = [];
@@ -304,7 +299,6 @@ function findCandidatesOrFix(errors, cy, isFix) {
         }
         let selectedNode = closestNodeForEdges(ele, listedNodes);
         currentErrors[check].fixCandidate = [];
-
         for (let i = 0; i < listedNodes.length; i++) {
           if (listedNodes[i].data().id != ele.id()) {
             currentErrors[check].fixCandidate.push({ label: getLabel(listedNodes[i]), id: listedNodes[i].data().id });
@@ -319,9 +313,6 @@ function findCandidatesOrFix(errors, cy, isFix) {
         currentErrors[check].selectedOption = 0;
         check++;
         continue;
-        errorFixParam.newEdges.push({ source: selectedNode.id(), target: ele.id() });
-        fixError(errorFixParam);
-
       }
       else {
         let nodes = cy.nodes();
@@ -347,10 +338,8 @@ function findCandidatesOrFix(errors, cy, isFix) {
           currentErrors[check].fixCandidate[0] = currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
           currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
           currentErrors[check].selectedOption = 0;
-
           check++;
           continue;
-
         }
         errorFixParam.newEdges.push({ source: selectedNode.id(), target: ele.id() });
         fixError(errorFixParam);
@@ -440,7 +429,6 @@ function findCandidatesOrFix(errors, cy, isFix) {
         fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Source and target of consumption arc have been swapped.";
       }
       else {
-        //errors[check].status = "unsolved";
         numberOfUnsolvedErrors++;
       }
     }
@@ -470,21 +458,16 @@ function findCandidatesOrFix(errors, cy, isFix) {
           if (selectedNode.id() === listedNodes[i].id()) {
             currentErrors[check].selectedOption = i;
           }
-
         }
         let temp = currentErrors[check].fixCandidate[0];
         currentErrors[check].fixCandidate[0] = currentErrors[check].fixCandidate[currentErrors[check].selectedOption];
         currentErrors[check].fixCandidate[currentErrors[check].selectedOption] = temp;
         currentErrors[check].selectedOption = 0;
-
         check++;
         continue;
       }
-
-      // node should be selected here, default is 0.
       if (listedNodes.length > 0) {
         let selectedNode = closestNodeForEdges(ele.source(), listedNodes);
-        //selectedNode = findClosest( )
         var source = ele.source();
         var target = selectedNode;
         errorFixParam.edge = ele;
@@ -521,7 +504,6 @@ function findCandidatesOrFix(errors, cy, isFix) {
           }
         }
         fixError(errorFixParam);
-        //errors[check].status = "solved";
         fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Arc between this node and " + getLabel(selectedEdge.target()) + " is kept.";
       }
       else
@@ -550,7 +532,7 @@ function findCandidatesOrFix(errors, cy, isFix) {
       }
       errorFixParam.nodes = [];
       errorFixParam.edges = [];
-      let selectedEdge = findClosestNode(ele, connectedEdges); // default selection, it will be determined. closest one will be kept. 
+      let selectedEdge = findClosestNode(ele, connectedEdges); 
       for (let i = 0; i < connectedEdges.size(); i++) {
         if (connectedEdges[i].id() != selectedEdge.id()) {
           errorFixParam.nodes.push(connectedEdges[i].source().id() == ele.id() ? connectedEdges[i].target() : connectedEdges[i].source());
@@ -560,13 +542,12 @@ function findCandidatesOrFix(errors, cy, isFix) {
       fixError(errorFixParam);
       fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc between dissocation glyph and consumption glyph(" + (selectedEdge.source().id() === ele.id() ?
         getLabel(selectedEdge.target()) : getLabel(selectedEdge.source())) + ") is kept.";
-      // errors[check].status = "solved";
     }
     else if (currentErrors[check].pattern == "pd10108") {
       let connectedEdges = ele.connectedEdges().filter('[class = "production"]');
       if (isFix === false) {
         currentErrors[check].fixCandidate = [];
-        let selectedEdge = findClosestNode(ele, connectedEdges); // default selection, it will be determined. closest one will be kept. 
+        let selectedEdge = findClosestNode(ele, connectedEdges);  
         for (let i = 0; i < connectedEdges.length; i++) {
           currentErrors[check].fixCandidate.push({
             label: (getLabel(connectedEdges[i].source())
@@ -585,7 +566,6 @@ function findCandidatesOrFix(errors, cy, isFix) {
         check++;
         continue;
       }
-      // choose deleted edges and nodes each here when the deletion method is determined
       let selectedEdge = findClosestNode(ele, connectedEdges);
       errorFixParam.edges = [];
       errorFixParam.nodes = [];
@@ -604,18 +584,13 @@ function findCandidatesOrFix(errors, cy, isFix) {
       var targetPosX = ele.target().position().x;
       var sourcePosY = ele.source().position().y;
       var targetPosY = ele.target().position().y;
-       var minX = Math.min(sourcePosX, targetPosX) - 150;
-       var maxX = Math.max(sourcePosX, targetPosX) + 150;
-       var minY = Math.min(sourcePosY, targetPosY) - 150;
-       var maxY = Math.max(sourcePosY, targetPosY) + 150;
-      /*var minX = -15000000000;
-      var maxX = 15000000000;
-      var minY = -15000000000;
-      var maxY = 15000000000;*/
-
-
+      var minX = Math.min(sourcePosX, targetPosX) - 150;
+      var maxX = Math.max(sourcePosX, targetPosX) + 150;
+      var minY = Math.min(sourcePosY, targetPosY) - 150;
+      var maxY = Math.max(sourcePosY, targetPosY) + 150;
       var nodes = cy.nodes();
       var listedNodes = [];
+
       for (let i = 0; i < nodes.length; i++) {
         if (nodes[i].position().x >= minX && nodes[i].position().x <= maxX && nodes[i].position().y >= minY && nodes[i].position().y <= maxY)
           if (ele.target().data().id != nodes[i].data().id) {
@@ -628,7 +603,6 @@ function findCandidatesOrFix(errors, cy, isFix) {
           }
       }
       let selectedNode = closestNodeForEdges(ele.target(), listedNodes);
-
       if (isFix === false) {
         currentErrors[check].fixCandidate = [];
         for (let i = 0; i < listedNodes.length; i++) {
@@ -644,30 +618,19 @@ function findCandidatesOrFix(errors, cy, isFix) {
         check++;
         continue;
       }
-      // node should be selected here, default is 0.
       if (listedNodes.length > 0) {
-        //let selectedNode = listedNodes[0];
         errorFixParam.newTarget = ele.target().id();
         errorFixParam.newSource = selectedNode.id();
         errorFixParam.edge = ele;
         errorFixParam.portsource = selectedNode.id();
         fixError(errorFixParam);
-        //errors[check].status = "solved";
         fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Modulation arc has a source reference to " + getLabel(selectedNode) + ".";
       }
-
     }
-
     else if (currentErrors[check].pattern == "pd10105" || currentErrors[check].pattern == "pd10106") {
       let sourceNode = ele.source();
       let targetNode = ele.target();
       if (isFix === false) {
-        check++;
-        continue;
-        currentErrors[check].fixCandidate = [];
-        for (let i = 0; i < connectedEdges.length; i++) {
-          currentErrors[check].fixCandidate.push({ label: connectedEdges[i].data().label, id: connectedEdges[i].data().id });
-        }
         check++;
         continue;
       }
@@ -721,7 +684,6 @@ function findCandidatesOrFix(errors, cy, isFix) {
         currentErrors.push(error);
       }
     }
-
     currentErrors = reduceErrors(currentErrors, cy);
     if (!isSolved) {
       check++;
@@ -731,7 +693,6 @@ function findCandidatesOrFix(errors, cy, isFix) {
   if (isFix === false) {
     return currentErrors;
   }
-
 }
 
 function reduceErrors(errors, cy) {
@@ -774,9 +735,7 @@ function reduceErrors(errors, cy) {
   let logicalOperators = cy.nodes();
   logicalOperators.forEach(node => {
     if (node.data().class === "and") {
-
       var edges = node.incomers();
-
       var edgess = node.outgoers();
       let error = new Issue();
       error.setText("'and', 'or', and 'not' glyphs must be the source for exactly one arc");
@@ -784,12 +743,9 @@ function reduceErrors(errors, cy) {
       error.setRole(node.data().id);
       if (edgess.length > 2 && errorInfo["pd10111" + node.data().id] !== true)
         reducedErrors.push(error);
-
     }
     else if (node.data().class === "or") {
-
       var edges = node.incomers();
-
       var edgess = node.outgoers();
       let error = new Issue();
       error.setText("'and', 'or', and 'not' glyphs must be the source for exactly one arc");
@@ -797,10 +753,8 @@ function reduceErrors(errors, cy) {
       error.setRole(node.data().id);
       if (edgess.length > 2 && errorInfo["pd10111" + node.data().id] !== true)
         reducedErrors.push(error);
-
     }
     else if (node.data().class === "not") {
-
       var edges = node.incomers();
       if (edges.size() > 2 && errorInfo["pd10126" + node.data().id] !== true) {
         let error = new Issue();
@@ -824,14 +778,7 @@ function reduceErrors(errors, cy) {
 
 // for fcose
 const fcose = require('cytoscape-fcose');
-const { privateDecrypt } = require('crypto');
-const { connected } = require('process');
 cytoscape.use(fcose);
-
-// for logging
-const errorOutput = fs.createWriteStream('./syblars_error.log');
-// Custom simple logger
-//const logger = new console({ stdout: errorOutput });
 
 let cy;
 let data;
@@ -885,23 +832,20 @@ app.use(cors());
 
 // middleware to manage the formats of files
 app.use(async (req, res, next) => {
-
   if (req.method === "POST") {
     let showResolutionAlternatives = req.query.showResolutionAlternatives;
-    //let showFix = false;
-
     let body = '';
     let isJson = false;
     let options = '';
     let data = '';
     let errorMessage = undefined;
     let errors = [];
+
     req.on('data', chunk => {
       body += chunk;
     })
 
     req.on('end', () => {
-      // while(1);
       let indexOfOptions = Math.min(body.includes("layoutOptions") ? body.indexOf("layoutOptions") : Number.MAX_SAFE_INTEGER,
         body.includes("imageOptions") ? body.indexOf("imageOptions") : Number.MAX_SAFE_INTEGER,
         body.includes("queryOptions") ? body.indexOf("queryOptions") : Number.MAX_SAFE_INTEGER);
@@ -939,26 +883,19 @@ app.use(async (req, res, next) => {
         let date = new Date();
         errorMessage = "<b>Sorry! Cannot process the given file!</b><br><br>There is something wrong with the format of the options!<br><br>Error detail: <br>" + e;
         errorMessage = "Invalid map or unsupported content!";
-        //logger.log('---- %s', date + ": \n" + errorMessage.replace(/<br\s*[\/]?>/gi, "\n").replace(/<b\s*\/?>/mg, "") + "\n");
       }
-      /*if (req.query.errorFixing === "true") {
-        return next();
-      }*/
-        if(errorMessage) {
-          return res.status(500).send({
-            errorMessage: errorMessage
-          });
-        }
-
+      if(errorMessage) {
+        return res.status(500).send({
+        errorMessage: errorMessage
+        });
+      }
       // convert sbgn data to json for cytoscape
-
       var parser = new window.DOMParser;
       var xml = parser.parseFromString(data, 'text/xml');
       data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
       let isErrorsEmpty = errors.length == 0;
 
       currentSbgn = data;
-      let duplicatedIds = [];
       let preValidationData = {};
       if (errors.length === 0) {
         let result ;
@@ -973,7 +910,6 @@ app.use(async (req, res, next) => {
         }
         catch {
           errorMessage = "Invalid map or unsupported content!";
-          
         }
         if(errorMessage) {
           return res.status(500).send({
@@ -985,9 +921,6 @@ app.use(async (req, res, next) => {
         parseString(result, function (err, data) {
           parsedResult = data;
         });
-        
-       
-
         if (parsedResult["svrl:schematron-output"]["svrl:failed-assert"] == undefined) {
         }
         else {
@@ -1003,14 +936,11 @@ app.use(async (req, res, next) => {
             }
           }
         }
-       
       }
       let cyJsonData = sbgnmlToJson.convert(xml, data);
-
       fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
       data = cyJsonData;
       fs.unlinkSync('./src/sbgnFile.sbgn');
-
 
       cy = cytoscape({
         styleEnabled: true,
@@ -1112,14 +1042,10 @@ app.post('/validation', async (req, res, next) => {
   let unsolvedErrorInformation = res.locals.unsolvedErrorInformation;
   let fixExplanation = res.locals.fixExplanation;
   let showResolutionAlternatives = res.locals.showResolutionAlternatives;
-
-
   fixExplanation = {};
   if (req.query.errorFixing !== undefined && req.query.errorFixing === true) {
     return next();
   }
-
-  let imageWanted = true;
   if (req.query.image == "false") {
     imageWanted = false;
   }
@@ -1208,9 +1134,7 @@ app.post('/validation', async (req, res, next) => {
       })
     }
     try {
-
       snap.start().then(function () {
-
         return snap.shot({
           elements: cy.elements().jsons(),
           layout: { name: 'fcose', randomize: false },
@@ -1223,8 +1147,7 @@ app.post('/validation', async (req, res, next) => {
           background: imageOptions.background,
           fullGraph: imageOptions.autoSize
         }).then(function (result) {
-          let image = result.image;
-          ret["image"] = (result.image);
+          ret["image"] = result.image;
           ret['errors'] = errors;
           ret['sbgn'] = currentSbgn;
           fs.writeFileSync('./src/sbgnFile.sbgn', data);
@@ -1290,6 +1213,7 @@ app.post('/fixError', (req, res) => {
     node.css("width", node.data().bbox.w || size);
     node.css("height", node.data().bbox.h || size);
   });
+
   let ret = {};
   ret['errors'] = errors;
   ret["image"] = image;
@@ -1350,7 +1274,7 @@ app.post('/fixError', (req, res) => {
       let connectedEdges = ele.connectedEdges().filter('[class="logic arc"]');
       errorFixParam.edges = [];
       errorFixParam.nodes = [];
-      let selectedEdge = connectedEdges[check]; // 0 is default, it should be decided later.
+      let selectedEdge = connectedEdges[check];
       selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) :
         findClosestNode(ele, connectedEdges);
       for (let i = 0; i < connectedEdges.size(); i++) {
@@ -1416,7 +1340,7 @@ app.post('/fixError', (req, res) => {
         var shiftY = 22;
         var target = edges[i].target();
         var source = edges[i].source();
-        var x = edges[i].source().data().bbox.x; // endpoint are removed
+        var x = edges[i].source().data().bbox.x; 
         var y = edges[i].source().data().bbox.y;
         if (edges[i].data().class != 'consumption') {
           x = edges[i].target().data().bbox.x;
@@ -1497,8 +1421,6 @@ app.post('/fixError', (req, res) => {
           if (elementUtilities.isLogicalOperator(nodes[i]))
             listedNodes.push(nodes[i]);
       }
-
-      // node should be selected here, default is 0.
       if (listedNodes.length > 0) {
         let selectedNode = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : closestNodeForEdges(ele.source(), listedNodes);
         var source = ele.source();
@@ -1509,13 +1431,12 @@ app.post('/fixError', (req, res) => {
         fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc has a target reference to " + getLabel(target) + ".";
       }
     }
-
     else if (currentErrors[check].pattern == "pd10111") {
       let ele = cy.getElementById(currentErrors[check].role);
       errorFixParam.edges = [];
       let connectedEdges = cy.edges('[source =  "' + ele.id() + '"]');
       if (connectedEdges.length !== 0) {
-        let selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : findClosestNode(ele, connectedEdges); // default , the selection of edge will be determined later.
+        let selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : findClosestNode(ele, connectedEdges); 
         for (let i = 0; i < connectedEdges.size(); i++) {
           if (connectedEdges[i].id() != selectedEdge.id()) {
             errorFixParam.edges.push(connectedEdges[i]);
@@ -1531,7 +1452,7 @@ app.post('/fixError', (req, res) => {
       var connectedEdges = ele.connectedEdges().filter('[class="consumption"]');
       errorFixParam.nodes = [];
       errorFixParam.edges = [];
-      selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : findClosestNode(ele, connectedEdges); // default selection, it will be determined. closest one will be kept. 
+      selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : findClosestNode(ele, connectedEdges); 
       for (let i = 0; i < connectedEdges.size(); i++) {
         if (connectedEdges[i].id() != selectedEdge.id()) {
           errorFixParam.nodes.push(connectedEdges[i].source().id() == ele.id() ? connectedEdges[i].target() : connectedEdges[i].source());
@@ -1541,7 +1462,6 @@ app.post('/fixError', (req, res) => {
       fixError(errorFixParam);
       fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc between dissocation glyph and consumption glyph(" + (selectedEdge.source().id() === ele.id() ?
         getLabel(selectedEdge.target().id()) : getLabel(selectedEdge.source())) + ") is kept.";
-      // errors[check].status = "solved";
     }
     else if (currentErrors[check].pattern == "pd10127") {
       let ele = cy.getElementById(currentErrors[check].role);
@@ -1593,7 +1513,6 @@ app.post('/fixError', (req, res) => {
     }
     else if (currentErrors[check].pattern == "pd10108") {
       let connectedEdges = ele.connectedEdges().filter('[class = "production"]');
-      // choose deleted edges and nodes each here when the deletion method is determined
       let selectedEdge = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : findClosestNode(ele, connectedEdges);
       errorFixParam.edges = [];
       errorFixParam.nodes = [];
@@ -1612,12 +1531,10 @@ app.post('/fixError', (req, res) => {
       var targetPosX = ele.target().position().x;
       var sourcePosY = ele.source().position().y;
       var targetPosY = ele.target().position().y;
-       var minX = Math.min(sourcePosX, targetPosX) - 150;
-       var maxX = Math.max(sourcePosX, targetPosX) + 150;
-       var minY = Math.min(sourcePosY, targetPosY) - 150;
-       var maxY = Math.max(sourcePosY, targetPosY) + 150;
-
-
+      var minX = Math.min(sourcePosX, targetPosX) - 150;
+      var maxX = Math.max(sourcePosX, targetPosX) + 150;
+      var minY = Math.min(sourcePosY, targetPosY) - 150;
+      var maxY = Math.max(sourcePosY, targetPosY) + 150;
       var nodes = cy.nodes();
       var listedNodes = [];
       for (let i = 0; i < nodes.length; i++) {
@@ -1631,16 +1548,13 @@ app.post('/fixError', (req, res) => {
             }
           }
       }
-      // node should be selected here, default is 0.
       if (listedNodes.length > 0) {
-        //let selectedNode = listedNodes[0];
         let selectedNode = fixData[previousErrorCode + previousErrorRole] !== undefined ? cy.getElementById(fixData[previousErrorCode + previousErrorRole]) : closestNodeForEdges(ele.target(), listedNodes);
         errorFixParam.newTarget = ele.target().id();
         errorFixParam.newSource = selectedNode.id();
         errorFixParam.edge = ele;
         errorFixParam.portsource = selectedNode.id();
         fixError(errorFixParam);
-        //errors[check].status = "solved";
         fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Modulation arc has a source reference to " + getLabel(selectedNode) + ".";
       }
 
@@ -1673,7 +1587,6 @@ app.post('/fixError', (req, res) => {
         errorFixParam.newEdges.push({ source: selectedNode.id(), target: ele.id(), edgeClass: "consumption" });
         fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Process node has input from " + getLabel(selectedNode) + ".";
         fixError(errorFixParam);
-
       }
       else {
         let nodes = cy.nodes();
@@ -1721,7 +1634,6 @@ app.post('/fixError', (req, res) => {
         error.setText(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:text"]);
         error.setPattern(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["$"]["id"]);
         error.setRole(parsedResult["svrl:schematron-output"]["svrl:failed-assert"][i]["svrl:diagnostic-reference"][0]["_"]);
-
         errorsAfterFix.push(error);
       }
     }
@@ -1750,7 +1662,6 @@ app.post('/fixError', (req, res) => {
     destination: "serialized"
   }).principalResult;
   fs.unlinkSync('./src/sbgnFile.sbgn');
-
   let parseString = xml2js.parseString;
   let parsedResult;
   parseString(result, function (err, data) {
@@ -1838,7 +1749,6 @@ app.post('/fixError', (req, res) => {
       errorMessage: errorMessage
     });
   }
-
 });
 
 function fixError(errorFixParam) {
@@ -1870,9 +1780,6 @@ function fixError(errorFixParam) {
     elementUtilities.reverseEdge(errorFixParam.edge);
   }
   if (errorCode == "pd10108" || errorCode == "pd10104") {
-    for (let i = 0; i < errorFixParam.nodes.length; i++) {
-      //errorFixParam.nodes[i].remove();
-    }
     for (let i = 0; i < errorFixParam.edges.length; i++) {
       errorFixParam.edges[i].remove();
     }
@@ -1889,7 +1796,6 @@ function fixError(errorFixParam) {
     result.edge = elementUtilities.addEdge(errorFixParam.newSource, errorFixParam.newTarget, edgeParams, cy, clonedEdge.data().id);
     return result;
   }
-
   if (errorCode == "pd10127") {
     var clonedEdge = errorFixParam.edge.clone();
     var edgeParams = { class: clonedEdge.data().class, language: clonedEdge.data().language };

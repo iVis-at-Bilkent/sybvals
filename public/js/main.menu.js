@@ -1,6 +1,6 @@
 
 // This is for using the service with a hostname other than localhost
-syblars = !(location.hostname === "localhost");
+sybvals = !(location.hostname === "localhost");
 
 ///////////////////// LOAD & SAVE //////////////////////////////
 
@@ -29,7 +29,6 @@ let setFileContent = function (fileName) {
 
 $("#save-file-json").on("click", function (e) {
 	let save = [];
-
 	cy.filter((element, i) => {
 		return true;
 	}).forEach((ele) => {
@@ -47,9 +46,7 @@ $("#save-file-json").on("click", function (e) {
 			save.push(saveObj);
 		}
 	})
-
 	let jsonText = JSON.stringify(save, null, 4);
-
 	let blob = new Blob([jsonText], {
 		type: "application/json;charset=utf-8;",
 	});
@@ -60,16 +57,14 @@ $("#save-file-json").on("click", function (e) {
 let applyErrorFix = async function () {
 	document.getElementById("draggableImageArea").style.display = "none";
 	document.getElementById("sbgnImageUI").style.display = "inline";
-	//errors = undefined;
 	let url = "";
-	if (!syblars) {
+	if (!sybvals) {
 		url = "http://localhost:" + port + "/fixError?errorFixing=true&showResolutionAlternatives=" + showResolutionAlternatives;
 	}
 	else {
 		url = "http://sybvals.cs.bilkent.edu.tr/fixError?errorFixing=true&showResolutionAlternatives=" + showResolutionAlternatives;
 	}
 	imageFormat = $('#formatRadios').find('[name="format"]:checked').val();
-
 	let options = {
 		imageOptions: {
 			format: imageFormat,
@@ -84,7 +79,6 @@ let applyErrorFix = async function () {
 	};
 
 	let data = currentSbgn  + JSON.stringify(errors) + JSON.stringify(options);
-
 	const settings = {
 		method: 'POST',
 		headers: {
@@ -141,39 +135,32 @@ let applyErrorFix = async function () {
 				let errorNo = $('<div style = "display : flex;" />');
 				errorNo.append('<img src = "' + imgSource + '" style=" height: 20px; width: 20px;" />');
 				errorNo.append('<div class="ui item" style = "margin-left : 5px;"> <b>Error </b> ' + error.errorNo + '&nbsp &nbsp &nbsp &nbsp <b>Pattern:</b> ' + error.pattern + '</div>');
-				let errorPattern = $('<div class="ui item"> <b>Pattern:</b> ' + error.pattern + '</div>');
 				let errorRole = $('<div class="ui item"> <b>Role:</b> ' + error.role + '</div>');
 				let errorLabel = $('<div class="ui item"> <b>Label:</b> ' + error.label + '&nbsp &nbsp &nbsp &nbsp <b>Role:</b> ' + error.role +'</div>');
 				let errorText = $('<div class="ui item"> <b>Message:</b> ' + error.text + '</div>');
-				let errorStatus = $('<div class="ui item"> <b>Status:</b> ' + (error.status !== undefined ? error.status : "unknown") + '</div>');
 				let list = $('<div class="ui list">');
 				let fixExplanation = $('<div class="ui item"> <b>Fix explanation:</b> ' + (error.explanation !== undefined ?
 				error.explanation : "-") + '</div>');
 				let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo + '">');
 				list.append(errorNo);
-				//list.append(errorRole);
 				if( error.label){
 				   list.append(errorLabel);
 				}
 				else {
 					list.append(errorRole);
 				}
-				//list.append(errorPattern);
 				list.append(errorText);
-				//list.append(errorStatus);
 				if (error.explanation !== undefined) {
 					list.append(fixExplanation);
 				}
 				let accordion = $('<div id ="rec' + error.errorNo + '"class="ui vertical accordion menu" style = "min-height: 0px !important;">');
 				let item = $('<div id = "item' + error.errorNo + '"  class="field"> <a class="title" style = "background: #efefef; padding : 0; width : inherit !important;display:block;"> <i class="icon small angle down"></i>Resolution Alternatives</a><div class="content" style = "padding : 0"><div class="ui form"><div class="grouped fields" id ="solutionField' + error.errorNo + '"> </div></div></div></div>' );
-				let id = error.errorNo;
 				$('.ui.accordion').accordion();
 				$('.ui.radio.checkbox').checkbox();
 				$('.ui.checkbox').checkbox();
 				$('.ui.accordion').accordion();
 				$('.ui.radio.checkbox').checkbox();
 				$('.ui.checkbox').checkbox();
-
 				accordion.append( item);
 				$('.ui.accordion').accordion();
 				$('.ui.radio.checkbox').checkbox();
@@ -202,7 +189,6 @@ let applyErrorFix = async function () {
 					$('.ui.radio.checkbox').checkbox();
 					$('.ui.checkbox').checkbox();
 					$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + "-1" + '"name="'+ 'fixFor' + error.errorNo + '" value="' + -1 + '"><label style = "font-size:1em !important;margin-top:0px">' + "None" +'</label></div></div>');
-
 					for( let i = 0; error.fixCandidate && i < error.fixCandidate.length; i++){
 					$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + i + '"name="'+ 'fixFor' + error.errorNo + '" value="' + i+ '"><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
 					if( (error.selectedOption  ) === i){
@@ -263,7 +249,6 @@ let applyErrorFix = async function () {
 
 			$("#errorsArea").text(res.message);
 		}
-
 		// get image info
 		blobData = saveImage(res["image"], imageFormat, document.getElementById("file-name").innerHTML);
 		let urlCreator = window.URL || window.webkitURL;
@@ -286,14 +271,13 @@ let applyErrorFix = async function () {
 			$('#errorModal').modal({ inverted: true }).modal('show');
 		}
 	}
-
 }
 
 let processValidation = async function () {
 	document.getElementById("draggableImageArea").style.display = "none";
 	document.getElementById("sbgnImageUI").style.display = "inline";
 	errors = undefined;
-	if (!syblars) {
+	if (!sybvals) {
 		url = "http://localhost:" + port + "/validation?showResolutionAlternatives=" + showResolutionAlternatives;
 	} else { // NOTE: If you are using the service with a different hostname, please change below accordingly
 		url = "http://sybvals.cs.bilkent.edu.tr/validation?showResolutionAlternatives=" + showResolutionAlternatives;
@@ -371,7 +355,6 @@ let processValidation = async function () {
 				$('.ui.accordion').accordion();
 				$('.ui.radio.checkbox').checkbox();
 				$('.ui.checkbox').checkbox();
-
 				accordion.append( item);
 				$('.ui.accordion').accordion();
 				$('.ui.radio.checkbox').checkbox();
@@ -379,10 +362,6 @@ let processValidation = async function () {
 				$('.ui.accordion').accordion();
 				$('.ui.radio.checkbox').checkbox();
 				$('.ui.checkbox').checkbox();
-				
-
-			
-               
 				list.append(errorNo);
 				if( error.label){
                     list.append(errorLabel);
@@ -447,7 +426,6 @@ let processValidation = async function () {
 			$("#errorsArea").text('Map is valid!');
 		}
 		else {
-
 			$("#errorsArea").text(res.message);
 		}
 		if( res["image"] ){
@@ -460,8 +438,6 @@ let processValidation = async function () {
 		$("#resultImage").attr("src", imageUrl);
 		$("#resultImage1").attr("src", imageUrl);
 		}
-
-		
 	}
 	else {
 		if (res.errorMessage) {
@@ -573,7 +549,6 @@ $('#downloadImage').click(function () {
 		filename = filename.substring(0, filename.lastIndexOf('.')) + "." + imageFormat;
 		saveAs(blobData, filename);
 	}
-
 });
 
 $("body").on("change", "#file-input", function (e, fileObject) {
@@ -615,7 +590,6 @@ $("body").on("change", "#file-input", function (e, fileObject) {
 		$("#resultImage").attr("src", null);
 		document.getElementById("draggableImageArea").style.display = "none";
 		document.getElementById("sbgnImageUI").style.display = "inline";
-
 		$("#layoutTab").css("pointer-events", "all");
 		$("#layoutTab").removeClass("disabled");
 		$("#imageTab").css("pointer-events", "all");
@@ -684,7 +658,6 @@ $("#resolution-alternatives-checkbox").change( function (){
 $("#fixFormatErrors").click(function () {
 	$("#applyValidation").prop('disabled', true);
 	$("#fixFormatErrors").addClass("loading");
-	//$("#fixFormatErrors").css("background-color", "#d67664");
 	applyErrorFix();
 });
 
@@ -746,7 +719,6 @@ function loadXMLDoc(fileName) {
 function loadSample(fileName) {
 	let xmlResponse = loadXMLDoc(fileName);
 	let fileObj;
-
 	if (fileName.split('.').pop() == 'json') {
 		fileObj = new File([xmlResponse], fileName, {
 			type: "application/json"
@@ -786,18 +758,7 @@ $("#resultImage1").on("click", function (e) {
 	document.getElementById("draggableImageArea").style.position = "absolute";
 	document.getElementById("draggableImageArea").style.top = "400px";
 	document.getElementById("draggableImageArea").style.left = "850px";
-	//document.getElementById("draggableImageArea").style.aspectRatio = aspectRatio;
-	let height = ( 900/aspectRatio > 800 ? 800 : 900/aspectRatio);
-	//document.getElementById("draggableImageArea").style.width = "900px";
-	//document.getElementById("draggableImageArea").style.height = (height) + "px";
 	document.getElementById("imageAreaPopUp").style.height = "500px";
-	/*document.getElementById("draggableImageArea").style.position = "absolute";
-	document.getElementById("draggableImageArea").style.top = "400px";
-	document.getElementById("draggableImageArea").style.left = "850px";
-	//document.getElementById("imageAreaPopUp").style.height = "500px";
-	//document.getElementById("imageAreaPopUp").style.width= "auto";	
-	//document.getElementById("imageAreaPopUp").style.aspectRatio = aspectRatio;
-	document.getElementById("resultImage").style.aspectRatio = aspectRatio;*/
 	document.getElementById("imageAreaPopUp").style.width= "auto";	
 	document.getElementById("imageAreaPopUp").style.aspectRatio = aspectRatio;
 	document.getElementById("dragRegion").innerHTML = document.getElementById("file-name").innerHTML
