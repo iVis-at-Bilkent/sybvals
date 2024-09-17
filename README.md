@@ -206,7 +206,7 @@ let settings = {
   body: {imageOptions":{"format":"png","background":"transparent","width":1280,"height":720,"color":"bluescale","highlightWidth":10}} // file_content + JSON.stringfy(options)
 };
 
-let result = await fetch("http://sybvals.cs.bilkent.edu.tr/validation=showResolutionAlternatives=true, settings)
+let result = await fetch("http://sybvals.cs.bilkent.edu.tr/validation?showResolutionAlternatives=true, settings)
   .then(response => response.json())
   .then(res => {
     return res;
