@@ -203,7 +203,7 @@ let settings = {
     Accept: 'application/json',
     'Content-Type': 'text/plain'
   },
-  body: {imageOptions":{"format":"png","background":"transparent","width":1280,"height":720,"color":"bluescale","highlightWidth":10}} // file_content + JSON.stringfy(options)
+  body: file_content + {"imageOptions":{"format":"png","background":"transparent","width":1280,"height":720,"color":"bluescale","highlightWidth":10}} // file_content + JSON.stringfy(options)
 };
 
 let result = await fetch("http://sybvals.cs.bilkent.edu.tr/validation?showResolutionAlternatives=true, settings)
