@@ -62,7 +62,7 @@ let applyErrorFix = async function () {
 		url = "http://localhost:" + port + "/fixError?errorFixing=true&showResolutionAlternatives=" + showResolutionAlternatives;
 	}
 	else {
-		url = "http://sybvals.cs.bilkent.edu.tr/fixError?errorFixing=true&showResolutionAlternatives=" + showResolutionAlternatives;
+		url = "https://sybvals.cs.bilkent.edu.tr/fixError?errorFixing=true&showResolutionAlternatives=" + showResolutionAlternatives;
 	}
 	imageFormat = $('#formatRadios').find('[name="format"]:checked').val();
 	let options = {
@@ -280,7 +280,7 @@ let processValidation = async function () {
 	if (!sybvals) {
 		url = "http://localhost:" + port + "/validation?showResolutionAlternatives=" + showResolutionAlternatives;
 	} else { // NOTE: If you are using the service with a different hostname, please change below accordingly
-		url = "http://sybvals.cs.bilkent.edu.tr/validation?showResolutionAlternatives=" + showResolutionAlternatives;
+		url = "https://sybvals.cs.bilkent.edu.tr/validation?showResolutionAlternatives=" + showResolutionAlternatives;
 	}
 
 	imageFormat = $('#formatRadios').find('[name="format"]:checked').val();
