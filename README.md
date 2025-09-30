@@ -39,6 +39,20 @@ Here is a sample server deployment along with a simple client-side demo:
 <a href="http://sybvals.cs.bilkent.edu.tr"><img src="https://www.cs.bilkent.edu.tr/~ivis/images/demo1.png" height=42px></a>
 </p>
 
+Sample maps used in the demo are taken from:
+- Systems Biology Graphical Notation: PD Level 1 examples - IFN regulation.
+https://sbgn.github.io/examples#ifn-regulation.
+- McCormick, D.B., Chen, H.: Update on interconversions of vitamin b-6 with its
+coenzyme. J Nutr. 129(2), 325–7 (1999) https://doi.org/10.1093/jn/129.2.325
+- Van Wijk, R., Van Solinge, W.W.: The energy-less red blood cell is lost: erythrocyte enzyme abnormalities of glycolysis. Blood 106(13), 4034–4042 (2005)
+https://doi.org/10.1182/blood-2005-04-1622
+- Ma, H., Groth, R.D., Cohen, S.M., Emery, J.F., Li, B., Hoedt, E., Zhang, G.,
+Neubert, T.A., Tsien, R.W.: γcamkii shuttles ca2+/cam to the nucleus to trigger
+creb phosphorylation and gene expression. Cell 159(2), 281–294 (2014)
+https://doi.org/0.1016/j.cell.2014.09.019
+- Systems Biology Graphical Notation: PD Level 1 examples - Neuro-muscular
+junction. https://sbgn.github.io/examples#neuro-muscular-junction.
+
 <!--
 A video tutorial for using this demo is below:
 [![SyBValS](https://i.ytimg.com/vi/Hc79sDi3f0U/maxresdefault.jpg)](https://www.youtube.com/watch?v=arK32LKHxzM "SyBValS")
