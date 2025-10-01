@@ -118,19 +118,19 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
   </tr></thead>
 <tbody>
   <tr>
-    <td>00001</td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;00001</td>
     <td>ID needs to be unique</td>
     <td>Incorrect file format (glyph/arc with non-unique ID will be ignored)</td>
     <td>-</td>
   </tr>
   <tr>
-    <td>00002</td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;00002</td>
     <td>An arc source/target should be a glyph defined in the diagram</td>
     <td>Incorrect file format (arc with non-existent source/target will be ignored)</td>
     <td>-</td>
   </tr>
   <tr>
-    <td rowspan="2">pd10101</td>
+    <td rowspan="2">&nbsp;&nbsp;pd10101&nbsp;&nbsp;</td>
     <td>Arc with class consumption must have source reference to glyph of EPN classes</td>
     <td>Highlight consumption arc that does not comply with the rule</td>
     <td>Swap the source and target of the arc if they seem to be reversed</td>
@@ -140,7 +140,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
 </details></td>
   </tr>
   <tr>
-    <td rowspan="2">pd10102</td>
+    <td rowspan="2">&nbsp;&nbsp;pd10102</td>
     <td>Arc with class consumption must have target reference to port on glyph with PN classes</td>
     <td>Highlight consumption arc that does not comply with the rule</td>
     <td>Swap the source and target of the arc if they seem to be reversed</td>
@@ -150,7 +150,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
 </details></td>
   </tr>
   <tr>
-    <td rowspan="2">pd10103</td>
+    <td rowspan="2">&nbsp;&nbsp;pd10103</td>
     <td>The 'source and sink' glyph can be connected to at most one consumption arc</td>
     <td>Highlight 'source and sink' glyph that does not comply with the rule</td>
     <td>Split the 'source and sink' glyph for each consumption arc</td>
@@ -160,7 +160,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
 </details></td>
   </tr>
   <tr>
-    <td rowspan="2">pd10104</td>
+    <td rowspan="2">&nbsp;&nbsp;pd10104</td>
     <td>The 'dissociation' glyph can only be connected to one consumption arc</td>
     <td>Highlight multiple consumption arcs connected to the dissociation</td>
     <td>List all such consumption arcs and ask to identify the correct one and remove the others</td>
@@ -170,7 +170,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
 </details></td>
   </tr>
   <tr>
-    <td rowspan="2">pd10105</td>
+    <td rowspan="2">&nbsp;&nbsp;pd10105</td>
     <td>Arc with class production must have source reference to port on glyph with PN classes</td>
     <td>Highlight production arcs that do not comply with the rule</td>
     <td>Swap the source and target of the arc if that looks like fixing the problem</td>
@@ -180,7 +180,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
 </details></td>
   </tr>
   <tr>
-    <td rowspan="2">pd10106</td>
+    <td rowspan="2">&nbsp;&nbsp;pd10106</td>
     <td>Arc with class production must have target reference to glyph of EPN classes</td>
     <td>Highlight production arcs that do not comply with the rule</td>
     <td>Swap the source and target of the arc if that looks like fixing the problem</td>
@@ -190,7 +190,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
 </details></td>
   </tr>
   <tr>
-    <td rowspan="2">pd10107</td>
+    <td rowspan="2">&nbsp;&nbsp;pd10107</td>
     <td>The 'source and sink' glyph can be connected to at most one production glyph</td>
     <td>Highlight 'source and sink' glyphs that do not comply with the rule as well as the connected arcs</td>
     <td>Split the 'source and sink' glyph for each production arc</td>
@@ -200,7 +200,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
 </details></td>
   </tr>
   <tr>
-    <td rowspan="2">pd10108</td>
+    <td rowspan="2">&nbsp;&nbsp;pd10108</td>
     <td>The association glyph can only be connected to one production glyph</td>
     <td>Highlight the association glyph connected to multiple production glyphs</td>
     <td>List all such production arcs and ask to identify the correct one and remove the others</td>
@@ -210,7 +210,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
 </details></td>
   </tr>
   <tr>
-    <td rowspan="2">pd10109</td>
+    <td rowspan="2">&nbsp;&nbsp;pd10109</td>
     <td>Modulation arc must have source reference to glyph of EPN classes or a logical operator</td>
     <td>Highlight modulation arcs that do not comply with the rule</td>
     <td>List nearby EPNs and logical operators and ask to choose the right source</td>
@@ -220,7 +220,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
 </details></td>
   </tr>
   <tr>
-    <td rowspan="2">pd10110</td>
+    <td rowspan="2">&nbsp;&nbsp;pd10110</td>
     <td>Modulation arc must have target reference to PN classes</td>
     <td>Highlight modulation arcs that do not comply with the rule</td>
     <td>List nearby PNs and ask to choose the right target</td>
@@ -231,7 +231,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
 </details></td>
   </tr>
   <tr>
-    <td rowspan="2">pd10111</td>
+    <td rowspan="2">&nbsp;&nbsp;pd10111</td>
     <td>and', 'or', and 'not' glyphs must be the source for exactly one arc</td>
     <td>Highlight multiple outgoing arcs</td>
     <td>List all such arcs and ask which to keep and remove the others</td>
@@ -241,7 +241,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
 </details></td>
   </tr>
   <tr>
-    <td rowspan="2">pd10112</td>
+    <td rowspan="2">&nbsp;&nbsp;pd10112</td>
     <td>If there are compartments defined, top-level glyphs must have a compartmentRef</td>
     <td>Highlight any such glyph(s) not having a compartmentRef</td>
     <td>List top-level compartments, ask to select one of listed compartments and place the glyph inside the selected compartment</td>
@@ -251,7 +251,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
 </details></td>
   </tr>
   <tr>
-    <td rowspan="2">pd10124</td>
+    <td rowspan="2">&nbsp;&nbsp;pd10124</td>
     <td>Arc with class logic arc must have source reference to glyph of EPN classes, or logic gates</td>
     <td>Highlight logic arcs that do not comply with the rule</td>
     <td>List nearby glyphs that are valid sources for the problematic logic arc and ask to choose the right one, and connect the logic arc to it instead</td>
@@ -261,124 +261,91 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
 </details></td>
   </tr>
   <tr>
-    <td>pd10125</td>
+    <td>&nbsp;&nbsp;pd10125</td>
     <td>Arc with class logic arc must have target reference to a logical operator</td>
     <td>Highlight logic arcs that do not comply with the rule</td>
     <td>List nearby logical operators that are valid targets for the problematic logic arc and ask to choose the right one, and connect the logic arc to it instead</td>
   </tr>
   <tr>
-    <td>pd10126</td>
+    <td>&nbsp;&nbsp;pd10126</td>
     <td>The 'not' glyph can only be the target of one logic arc glyph</td>
     <td>Highlight multiple incoming arcs</td>
     <td>List all logic arcs connected to the problematic ‘not’ glyph, and ask to choose the right one to keep and remove the others</td>
   </tr>
   <tr>
-    <td>pd10127</td>
+    <td>&nbsp;&nbsp;pd10127</td>
     <td>Arc with class equivalence arc must have source reference to glyph of EPN classes</td>
     <td>Highlight equivalence arcs that do not comply with the rule</td>
     <td>List nearby EPNs and ask to choose the right source for the problematic equivalence arc</td>
   </tr>
   <tr>
-    <td>pd10128</td>
+    <td>&nbsp;&nbsp;pd10128</td>
     <td>Arc with class equivalence arc must have target reference to glyph of classes 'tag', 'submap' or 'terminal'</td>
     <td>Highlight equivalence arcs that do not comply with the rule</td>
     <td>List nearby glyphs that are valid (‘tag’, ‘submap’ or ‘terminal’) and ask to choose the right one to connect the problematic equivalence arc to.</td>
   </tr>
   <tr>
-    <td>pd10129</td>
+    <td>&nbsp;&nbsp;pd10129</td>
     <td>All state variables associated with a Stateful Entity Pool Node should be unique and not duplicated within that node</td>
     <td>Highlight duplicate state variables</td>
     <td>-</td>
   </tr>
   <tr>
-    <td>pd10131</td>
+    <td>&nbsp;&nbsp;pd10131</td>
     <td>EPNs should not be orphaned (i.e. they must be associated with at least one arc)</td>
     <td>Highlight orphaned EPNs</td>
     <td>-</td>
   </tr>
   <tr>
-    <td>pd10132</td>
+    <td>&nbsp;&nbsp;pd10132</td>
     <td>All process nodes (with the exception of phenotype) must have an LHS and RHS</td>
     <td>Highlight processes without LHS/RHS</td>
     <td>-</td>
   </tr>
   <tr>
-    <td>pd10133</td>
+    <td>&nbsp;&nbsp;pd10133</td>
     <td>All EPNs on the LHS of a process must be unique</td>
     <td>Highlight EPNs with the same name/ID (not just cloned EPNs but also same EPNs in different compartments)</td>
     <td>-</td>
   </tr>
   <tr>
-    <td>pd10134</td>
+    <td>&nbsp;&nbsp;pd10134</td>
     <td>If more than one set of stoichiometries can be applied to the flux arcs of the process then the stoichiometry of the flux arcs must be displayed</td>
     <td>-</td>
     <td>-</td>
   </tr>
   <tr>
-    <td>pd10135</td>
+    <td>&nbsp;&nbsp;pd10135</td>
     <td>If the stoichiometry is undefined or unknown this should be indicated by the use of a question mark ("?")</td>
     <td>-</td>
     <td>-</td>
   </tr>
   <tr>
-    <td>pd10140</td>
+    <td>&nbsp;&nbsp;pd10140</td>
     <td>This 'glyph class' is not allowed in Process Description</td>
     <td>The glyph with invalid 'glyph class' will be ignored</td>
     <td>-</td>
   </tr>
   <tr>
-    <td>pd10141</td>
+    <td>&nbsp;&nbsp;pd10141</td>
     <td>All process nodes should have at least one input and at least one output pointing to the arcs</td>
     <td>Highlight processes with missing arcs</td>
     <td>List nearby EPNs and ask to choose the right input/output if the input/output is missing and add the appropriate edge (consumption/production) between selected node and process</td>
   </tr>
   <tr>
-    <td>pd10142</td>
+    <td>&nbsp;&nbsp;pd10142</td>
     <td>Logic arc must be connected to either 'OR', 'AND' or 'NOT'</td>
     <td>Highlight logic arcs that are not connected to either 'OR', 'AND' or 'NOT'</td>
     <td>-</td>
   </tr>
   <tr>
-    <td>pd10142</td>
+    <td>&nbsp;&nbsp;pd10142</td>
     <td>Logic arc must be connected to either 'OR', 'AND' or 'NOT'</td>
     <td>Highlight logic arcs that are not connected to either 'OR', 'AND' or 'NOT'</td>
     <td>-</td>
   </tr>
 </tbody></table>
 
-
-
-  
-| Error&nbsp;Code	| Associated Message                                                                                                                               	| Highlight Action                                                                                         	|                                                                          Fix Action                                                                         	|
-|:----------:	|--------------------------------------------------------------------------------------------------------------------------------------------------	|----------------------------------------------------------------------------------------------------------	|-----------------------------------------------------------------------------------------------------------------------------------------------------------	|
-|   00001  	| ID needs to be unique                                                                    	| Incorrect file format (glyph/arc with non-unique ID will be ignored)                                             	| -                                                                                         	|
-|   00002  	| An arc source/target should be a glyph defined in the diagram                                                           	| Incorrect file format (arc with non-existent source/target will be ignored)                                             	| -
-|   pd10101  	| Arc with class consumption must have source reference to glyph of EPN classes                                                                    	| Highlight consumption arc that does not comply with the rule                                             	| Swap the source and target of the arc if they seem to be reversed                                                                                         	|
-|   pd10102  	| Arc with class consumption must have target reference to port on glyph with PN classes                                                           	| Highlight consumption arc that does not comply with the rule                                             	| Swap the source and target of the arc if they seem to be reversed                                                                                               	|
-|   pd10103  	| The 'source and sink' glyph can be connected to at most one consumption arc                                                                      	| Highlight 'source and sink' glyph that does not comply with the rule                                     	| Split the 'source and sink' glyph for each consumption arc                                                                                                  	|
-|   pd10104  	| The 'dissociation' glyph can only be connected to one consumption arc                                                                          	| Highlight multiple consumption arcs connected to the dissociation                                      	| List all such consumption arcs and ask to identify the correct one and remove the others                                                                 	|
-|   pd10105  	| Arc with class production must have source reference to port on glyph with PN classes                                                            	| Highlight production arcs that do not comply with the rule                                               	| Swap the source and target of the arc if that looks like fixing the problem                                                                                 	|
-|   pd10106  	| Arc with class production must have target reference to glyph of EPN classes                                                                     	| Highlight production arcs that do not comply with the rule                                               	| Swap the source and target of the arc if that looks like fixing the problem                                                                                	|
-|   pd10107  	| The 'source and sink' glyph can be connected to at most one production glyph                                                                     	| Highlight 'source and sink' glyphs that do not comply with the rule as well as the connected arcs        	| Split the 'source and sink' glyph for each production arc                                                                                                    	|
-|   pd10108  	| The association glyph can only be connected to one production glyph                                                                              	| Highlight the association glyph connected to multiple production glyphs                                  	| List all such production arcs and ask to identify the correct one and remove the others                                                                 	|
-|   pd10109  	| Modulation arc must have source reference to glyph of EPN classes or a logical operator                                                          	| Highlight modulation arcs that do not comply with the rule                                               	| List nearby EPNs and logical operators and ask to choose the right source                                                                                  	|
-|   pd10110  	| Modulation arc must have target reference to PN classes                                                                                          	| Highlight modulation arcs that do not comply with the rule                                               	| List nearby PNs and ask to choose the right target                                                                                                         	|
-|   pd10111  	| and', 'or', and 'not' glyphs must be the source for exactly one arc                                                                              	| Highlight multiple outgoing arcs                                                                         	| List all such arcs and ask which to keep and remove the others                                                                                   	|
-|   pd10112  	| If there are compartments defined, top-level glyphs must have a compartmentRef                                                                   	| Highlight any such glyph(s) not having a compartmentRef                                                  	| List top-level compartments, ask to select one of listed compartments and place the glyph inside the selected compartment                                      	|
-|   pd10124  	| Arc with class logic arc must have source reference to glyph of EPN classes, or logic gates                                                      	| Highlight logic arcs that do not comply with the rule                                                    	| List nearby glyphs that are valid sources for the problematic logic arc and ask to choose the right one, and connect the logic arc to it instead             	|
-|   pd10125  	| Arc with class logic arc must have target reference to a logical operator                                                                        	| Highlight logic arcs that do not comply with the rule                                                    	| List nearby logical operators that are valid targets for the problematic logic arc and ask to choose the right one, and connect the logic arc to it instead 	|
-|   pd10126  	| The 'not' glyph can only be the target of one logic arc glyph                                                                                    	| Highlight multiple incoming arcs                                                                         	| List all logic arcs connected to the problematic ‘not’ glyph, and ask to choose the right one to keep and remove the others                                 	|
-|   pd10127  	| Arc with class equivalence arc must have source reference to glyph of EPN classes                                                                	| Highlight equivalence arcs that do not comply with the rule                                              	| List nearby EPNs and ask to choose the right source for the problematic equivalence arc                                                                      |
-|   pd10128  	| Arc with class equivalence arc must have target reference to glyph of classes 'tag', 'submap' or 'terminal'                                      	| Highlight equivalence arcs that do not comply with the rule                                              	| List nearby glyphs that are valid (‘tag’, ‘submap’ or ‘terminal’) and ask to choose the right one to connect the problematic equivalence arc to.                                                                                                                                                        	|
-|   pd10129  	| All state variables associated with a Stateful Entity Pool Node should be unique and not duplicated within that node                             	| Highlight duplicate state variables                                                                      	|                                                                              -                                                                              	|
-|   pd10131  	| EPNs should not be orphaned (i.e. they must be associated with at least one arc)                                                                 	| Highlight orphaned EPNs                                                                                  	|                                                                              -                                                                              	|
-|   pd10132  	| All process nodes (with the exception of phenotype) must have an LHS and RHS                                                                     	| Highlight processes without LHS/RHS                                                                      	|                                                                              -                                                                              	|
-|   pd10133  	| All EPNs on the LHS of a process must be unique                                                                                                  	| Highlight EPNs with the same name/ID (not just cloned EPNs but also same EPNs in different compartments) 	|                                                                              -                                                                              	|
-|   pd10134  	| If more than one set of stoichiometries can be applied to the flux arcs of the process then the stoichiometry of the flux arcs must be displayed 	|                                                                              -                                  	|                                                                              -                                                                              	|
-|   pd10135  	| If the stoichiometry is undefined or unknown this should be indicated by the use of a question mark ("?")                                        	|                                                                                                        - 	|                                                                              -                                                                              	|
-|   pd10140  	| This 'glyph class' is not allowed in Process Description                                                                                         	| The glyph with invalid  'glyph class' will be ignored                                                       	|                                                                              -                                                                              	|
-|   pd10141  	| All process nodes should have at least one input and at least one output pointing to the arcs                                                    	| Highlight processes with missing arcs                                                                    	| List nearby EPNs and ask to choose the right input/output if the input/output is missing and add the appropriate edge (consumption/production) between selected node and process                                                                                                                                                             	|
-|   pd10142  	| Logic arc must be connected to either 'OR', 'AND' or 'NOT'                                                                                       	| Highlight logic arcs that are not connected to either 'OR', 'AND' or 'NOT'                               	|                                                                              -                                                                              	|
 </details>
 
 ## Usage
