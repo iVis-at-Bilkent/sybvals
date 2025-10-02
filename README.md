@@ -136,7 +136,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>Swap the source and target of the arc if they seem to be reversed</td>
   </tr>
   <tr>
-    <td colspan="3"><details><summary>Show Example</summary><img width="591" height="156" alt="01_02" src="https://github.com/user-attachments/assets/73f64752-2fda-4aaf-9bb5-872cd58b23dd" />
+    <td colspan="3"><details><summary>Show Example</summary><img width="500" alt="01_02" src="https://github.com/user-attachments/assets/73f64752-2fda-4aaf-9bb5-872cd58b23dd" />
 </details></td>
   </tr>
   <tr>
@@ -146,7 +146,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>Swap the source and target of the arc if they seem to be reversed</td>
   </tr>
   <tr>
-    <td colspan="3"><details><summary>Show Example</summary><img width="591" height="156" alt="01_02" src="https://github.com/user-attachments/assets/73f64752-2fda-4aaf-9bb5-872cd58b23dd" />
+    <td colspan="3"><details><summary>Show Example</summary><img width="500" alt="01_02" src="https://github.com/user-attachments/assets/73f64752-2fda-4aaf-9bb5-872cd58b23dd" />
 </details></td>
   </tr>
   <tr>
@@ -156,7 +156,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>Split the 'source and sink' glyph for each consumption arc</td>
   </tr>
   <tr>
-    <td colspan="3"><details><summary>Show Example</summary><img width="656" height="136" alt="03" src="https://github.com/user-attachments/assets/20275e67-3fd8-441c-801d-ba1412a94d95" />
+    <td colspan="3"><details><summary>Show Example</summary><img width="520" alt="03" src="https://github.com/user-attachments/assets/20275e67-3fd8-441c-801d-ba1412a94d95" />
 </details></td>
   </tr>
   <tr>
@@ -166,7 +166,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>List all such consumption arcs and ask to identify the correct one and remove the others</td>
   </tr>
   <tr>
-    <td colspan="3"><details><summary>Show Example</summary><img width="717" height="230" alt="04" src="https://github.com/user-attachments/assets/af9b6a07-6994-4f22-9b9e-457dca1270f0" />
+    <td colspan="3"><details><summary>Show Example</summary><img width="560" alt="04" src="https://github.com/user-attachments/assets/af9b6a07-6994-4f22-9b9e-457dca1270f0" />
 </details></td>
   </tr>
   <tr>
@@ -176,7 +176,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>Swap the source and target of the arc if that looks like fixing the problem</td>
   </tr>
   <tr>
-    <td colspan="3"><details><summary>Show Example</summary><img width="591" height="156" alt="05_06" src="https://github.com/user-attachments/assets/deedf65f-d8d4-4c73-88e2-d44d69b80946" />
+    <td colspan="3"><details><summary>Show Example</summary><img width="500" alt="05_06" src="https://github.com/user-attachments/assets/deedf65f-d8d4-4c73-88e2-d44d69b80946" />
 </details></td>
   </tr>
   <tr>
@@ -186,7 +186,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>Swap the source and target of the arc if that looks like fixing the problem</td>
   </tr>
   <tr>
-    <td colspan="3"><details><summary>Show Example</summary><img width="591" height="156" alt="05_06" src="https://github.com/user-attachments/assets/deedf65f-d8d4-4c73-88e2-d44d69b80946" />
+    <td colspan="3"><details><summary>Show Example</summary><img width="500" alt="05_06" src="https://github.com/user-attachments/assets/deedf65f-d8d4-4c73-88e2-d44d69b80946" />
 </details></td>
   </tr>
   <tr>
@@ -196,7 +196,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>Split the 'source and sink' glyph for each production arc</td>
   </tr>
   <tr>
-    <td colspan="3"><details><summary>Show Example</summary><img width="523" height="222" alt="07" src="https://github.com/user-attachments/assets/2db54c2d-5429-49b3-8d17-033301d3da09" />
+    <td colspan="3"><details><summary>Show Example</summary><img width="480" alt="07" src="https://github.com/user-attachments/assets/2db54c2d-5429-49b3-8d17-033301d3da09" />
 </details></td>
   </tr>
   <tr>
@@ -206,7 +206,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>List all such production arcs and ask to identify the correct one and remove the others</td>
   </tr>
   <tr>
-    <td colspan="3"><details><summary>Show Example</summary><img width="590" height="230" alt="08" src="https://github.com/user-attachments/assets/af5d3210-2c65-4d41-bf21-b2266a5b2dd3" />
+    <td colspan="3"><details><summary>Show Example</summary><img width="500" alt="08" src="https://github.com/user-attachments/assets/af5d3210-2c65-4d41-bf21-b2266a5b2dd3" />
 </details></td>
   </tr>
   <tr>
@@ -216,7 +216,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>List nearby EPNs and logical operators and ask to choose the right source</td>
   </tr>
   <tr>
-    <td colspan="3"><details><summary>Show Example</summary><img width="696" height="258" alt="09" src="https://github.com/user-attachments/assets/0ff873e9-0b61-4ba3-a2a4-079d39f8b61c" />
+    <td colspan="3"><details><summary>Show Example</summary><img width="560" alt="09" src="https://github.com/user-attachments/assets/0ff873e9-0b61-4ba3-a2a4-079d39f8b61c" />
 </details></td>
   </tr>
   <tr>
@@ -226,7 +226,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>List nearby PNs and ask to choose the right target</td>
   </tr>
   <tr>
-    <td colspan="3"><details><summary>Show Example</summary><img width="685" height="194" alt="10" src="https://github.com/user-attachments/assets/a7a85d96-8af9-4fab-85cd-e74a09d01928" />
+    <td colspan="3"><details><summary>Show Example</summary><img width="560" alt="10" src="https://github.com/user-attachments/assets/a7a85d96-8af9-4fab-85cd-e74a09d01928" />
 
 </details></td>
   </tr>
@@ -237,7 +237,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>List all such arcs and ask which to keep and remove the others</td>
   </tr>
   <tr>
-    <td colspan="3"><details><summary>Show Example</summary><img width="815" height="204" alt="11" src="https://github.com/user-attachments/assets/f3863d3e-e511-4859-82fb-5f8c412c414b" />
+    <td colspan="3"><details><summary>Show Example</summary><img width="600" alt="11" src="https://github.com/user-attachments/assets/f3863d3e-e511-4859-82fb-5f8c412c414b" />
 </details></td>
   </tr>
   <tr>
@@ -247,7 +247,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>List top-level compartments, ask to select one of listed compartments and place the glyph inside the selected compartment</td>
   </tr>
   <tr>
-    <td colspan="3"><details><summary>Show Example</summary><img width="1165" height="85" alt="12" src="https://github.com/user-attachments/assets/ec13e858-b6da-48f7-be74-82b2055ce3c2" />
+    <td colspan="3"><details><summary>Show Example</summary><img width="800" alt="12" src="https://github.com/user-attachments/assets/ec13e858-b6da-48f7-be74-82b2055ce3c2" />
 </details></td>
   </tr>
   <tr>
@@ -257,7 +257,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>List nearby glyphs that are valid sources for the problematic logic arc and ask to choose the right one, and connect the logic arc to it instead</td>
   </tr>
   <tr>
-    <td colspan="3"><details><summary>Show Example</summary><img width="632" height="157" alt="24" src="https://github.com/user-attachments/assets/e3786f0c-ba5d-4791-b267-84678d34c668" />
+    <td colspan="3"><details><summary>Show Example</summary><img width="520" alt="24" src="https://github.com/user-attachments/assets/e3786f0c-ba5d-4791-b267-84678d34c668" />
 </details></td>
   </tr>
   <tr>
@@ -267,7 +267,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>List nearby logical operators that are valid targets for the problematic logic arc and ask to choose the right one, and connect the logic arc to it instead</td>
   </tr>
   <tr>
-    <td colspan="3"><details><summary>Show Example</summary><img width="632" height="157" alt="25" src="https://github.com/user-attachments/assets/df1f6de5-5664-49ad-91a3-6e2706f5c794" />
+    <td colspan="3"><details><summary>Show Example</summary><img width="510" alt="25" src="https://github.com/user-attachments/assets/df1f6de5-5664-49ad-91a3-6e2706f5c794" />
 </details></td>
   </tr>
   <tr>
@@ -277,7 +277,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>List all logic arcs connected to the problematic ‘not’ glyph, and ask to choose the right one to keep and remove the others</td>
   </tr>
   <tr>
-    <td colspan="3"><details><summary>Show Example</summary><img width="444" height="121" alt="26" src="https://github.com/user-attachments/assets/635589ca-dca4-436a-b2ef-0cba47e76634" />
+    <td colspan="3"><details><summary>Show Example</summary><img width="400" alt="26" src="https://github.com/user-attachments/assets/635589ca-dca4-436a-b2ef-0cba47e76634" />
 </details></td>
   </tr>
   <tr>
@@ -287,7 +287,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>List nearby EPNs and ask to choose the right source for the problematic equivalence arc</td>
   </tr>
   <tr>
-    <td colspan="3"><details><summary>Show Example</summary><img width="437" height="150" alt="27" src="https://github.com/user-attachments/assets/1f98c6cc-67cb-4fc7-8094-a3f669e044f0" />
+    <td colspan="3"><details><summary>Show Example</summary><img width="400" alt="27" src="https://github.com/user-attachments/assets/1f98c6cc-67cb-4fc7-8094-a3f669e044f0" />
 </details></td>
   </tr>
   <tr>
@@ -297,7 +297,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>List nearby glyphs that are valid (‘tag’, ‘submap’ or ‘terminal’) and ask to choose the right one to connect the problematic equivalence arc to.</td>
   </tr>
   <tr>
-    <td colspan="3"><details><summary>Show Example</summary><img width="441" height="150" alt="28" src="https://github.com/user-attachments/assets/d9566c09-60af-43dc-b93a-667eeaa44f84" />
+    <td colspan="3"><details><summary>Show Example</summary><img width="400" alt="28" src="https://github.com/user-attachments/assets/d9566c09-60af-43dc-b93a-667eeaa44f84" />
 </details></td>
   </tr>
   <tr>
@@ -349,7 +349,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>List nearby EPNs and ask to choose the right input/output if the input/output is missing and add the appropriate edge (consumption/production) between selected node and process</td>
   </tr>
     <tr>
-    <td colspan="3"><details><summary>Show Example</summary><img width="479" height="150" alt="41" src="https://github.com/user-attachments/assets/3db6e937-beb5-4181-bb34-6e13ac9ee89d" />
+    <td colspan="3"><details><summary>Show Example</summary><img width="430" alt="41" src="https://github.com/user-attachments/assets/3db6e937-beb5-4181-bb34-6e13ac9ee89d" />
 
 </details></td>
   </tr>
