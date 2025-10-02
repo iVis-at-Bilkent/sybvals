@@ -261,28 +261,44 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
 </details></td>
   </tr>
   <tr>
-    <td>&nbsp;&nbsp;pd10125</td>
+    <td rowspan="2">&nbsp;&nbsp;pd10125</td>
     <td>Arc with class logic arc must have target reference to a logical operator</td>
     <td>Highlight logic arcs that do not comply with the rule</td>
     <td>List nearby logical operators that are valid targets for the problematic logic arc and ask to choose the right one, and connect the logic arc to it instead</td>
   </tr>
   <tr>
-    <td>&nbsp;&nbsp;pd10126</td>
+    <td colspan="3"><details><summary>Show Example</summary><img width="632" height="157" alt="25" src="https://github.com/user-attachments/assets/df1f6de5-5664-49ad-91a3-6e2706f5c794" />
+</details></td>
+  </tr>
+  <tr>
+    <td rowspan="2">&nbsp;&nbsp;pd10126</td>
     <td>The 'not' glyph can only be the target of one logic arc glyph</td>
     <td>Highlight multiple incoming arcs</td>
     <td>List all logic arcs connected to the problematic ‘not’ glyph, and ask to choose the right one to keep and remove the others</td>
   </tr>
   <tr>
-    <td>&nbsp;&nbsp;pd10127</td>
+    <td colspan="3"><details><summary>Show Example</summary><img width="444" height="121" alt="26" src="https://github.com/user-attachments/assets/635589ca-dca4-436a-b2ef-0cba47e76634" />
+</details></td>
+  </tr>
+  <tr>
+    <td rowspan="2">&nbsp;&nbsp;pd10127</td>
     <td>Arc with class equivalence arc must have source reference to glyph of EPN classes</td>
     <td>Highlight equivalence arcs that do not comply with the rule</td>
     <td>List nearby EPNs and ask to choose the right source for the problematic equivalence arc</td>
   </tr>
   <tr>
-    <td>&nbsp;&nbsp;pd10128</td>
+    <td colspan="3"><details><summary>Show Example</summary><img width="437" height="150" alt="27" src="https://github.com/user-attachments/assets/1f98c6cc-67cb-4fc7-8094-a3f669e044f0" />
+</details></td>
+  </tr>
+  <tr>
+    <td rowspan="2">&nbsp;&nbsp;pd10128</td>
     <td>Arc with class equivalence arc must have target reference to glyph of classes 'tag', 'submap' or 'terminal'</td>
     <td>Highlight equivalence arcs that do not comply with the rule</td>
     <td>List nearby glyphs that are valid (‘tag’, ‘submap’ or ‘terminal’) and ask to choose the right one to connect the problematic equivalence arc to.</td>
+  </tr>
+  <tr>
+    <td colspan="3"><details><summary>Show Example</summary><img width="441" height="150" alt="28" src="https://github.com/user-attachments/assets/d9566c09-60af-43dc-b93a-667eeaa44f84" />
+</details></td>
   </tr>
   <tr>
     <td>&nbsp;&nbsp;pd10129</td>
@@ -327,10 +343,15 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
     <td>-</td>
   </tr>
   <tr>
-    <td>&nbsp;&nbsp;pd10141</td>
+    <td rowspan="2">&nbsp;&nbsp;pd10141</td>
     <td>All process nodes should have at least one input and at least one output pointing to the arcs</td>
     <td>Highlight processes with missing arcs</td>
     <td>List nearby EPNs and ask to choose the right input/output if the input/output is missing and add the appropriate edge (consumption/production) between selected node and process</td>
+  </tr>
+    <tr>
+    <td colspan="3"><details><summary>Show Example</summary><img width="479" height="150" alt="41" src="https://github.com/user-attachments/assets/3db6e937-beb5-4181-bb34-6e13ac9ee89d" />
+
+</details></td>
   </tr>
   <tr>
     <td>&nbsp;&nbsp;pd10142</td>
