@@ -1,5 +1,7 @@
 ### Batch Processing
 
+The files used in batch processing test can be found in *test-batch* folder.
+
 The *pc-hgnc.gmt* file includes information of pathways in Pathway Commons v14, available from https://download.baderlab.org/PathwayCommons/PC2/v14/.
 
 The *config.json* file includes image options used by SyBValS.
@@ -10,6 +12,8 @@ Please note that this script processes only pathways with identifier links from 
 - a PNG image highlighting the errors in the pathway.
 
 #### How to run
+While inside the *test-batch* folder:
+
 - Create a folder named *Batch* to store the resulting files.
 - Run the service locally at http://localhost:3400.
 - Execute the script using the command:
