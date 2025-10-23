@@ -1,0 +1,11 @@
+{
+    "imageOptions": {
+        "format": "png",
+        "background": "white",
+        "width": 1280, 
+        "height": 1280, 
+        "color": "bluescale",
+        "autoSize": true,
+	"highlightWidth": 10
+    }
+}
