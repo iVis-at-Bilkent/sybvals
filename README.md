@@ -350,14 +350,7 @@ SyBValS uses the validation rules defined in [libSBGN](https://github.com/sbgn/l
   </tr>
     <tr>
     <td colspan="3"><details><summary>Show Example</summary><img width="430" alt="41" src="https://github.com/user-attachments/assets/3db6e937-beb5-4181-bb34-6e13ac9ee89d" />
-
 </details></td>
-  </tr>
-  <tr>
-    <td>&nbsp;&nbsp;pd10142</td>
-    <td>Logic arc must be connected to either 'OR', 'AND' or 'NOT'</td>
-    <td>Highlight logic arcs that are not connected to either 'OR', 'AND' or 'NOT'</td>
-    <td>-</td>
   </tr>
   <tr>
     <td>&nbsp;&nbsp;pd10142</td>
