@@ -1,0 +1,280 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+  <map language="process description">
+    <extension>
+      <renderInformation 
+        xmlns="http://www.sbml.org/sbml/level3/version1/render/version1" id="renderInformation" program-name="sbgnviz" program-version="6.1.0" background-color="#00000000">
+        <listOfColorDefinitions>
+          <colorDefinition id="color_1" value="#f7f7f77f"/>
+          <colorDefinition id="color_2" value="#555555"/>
+          <colorDefinition id="color_3" value="#d1e5f07f"/>
+          <colorDefinition id="color_4" value="#92c5deff"/>
+          <colorDefinition id="color_5" value="#ffffffff"/>
+          <colorDefinition id="color_6" value="#f7f7f7ff"/>
+        </listOfColorDefinitions>
+        <listOfBackgroundImages/>
+        <listOfStyles>
+          <style id="nodef7f7f75555553.2514normalnormalHelvetica0000.5" idList="compartmentVertex_70101_1 compartmentVertex_7660_443">
+            <g font-size="14" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="3.25" fill="color_1" background-opacity="0.5"/>
+          </style>
+          <style id="noded1e5f05555551.2511normalnormalHelvetica0000.5" idList="entityVertex_8848808_1593 entityVertex_879850_2768 entityVertex_8856931_2769">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="1.25" fill="color_3" background-opacity="0.5"/>
+          </style>
+          <style id="node92c5de5555551.2511normalnormalHelvetica0001" idList="entityVertex_452560_2765 entityVertex_8848000_1639 entityVertex_3826531_2767">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="1.25" fill="color_4" background-opacity="1"/>
+          </style>
+          <style id="nodeffffff5555551.251" idList="reactionVertex_8856930_2764 reactionVertex_8848804_1638 reactionVertex_8848812_1590">
+            <g stroke="color_2" stroke-width="1.25" fill="color_5" background-opacity="1"/>
+          </style>
+          <style id="nodef7f7f75555551.2511normalnormalHelvetica0001" idList="entityVertex_8848802_1592 entityVertex_8848797_1591">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="1.25" fill="color_6" background-opacity="1"/>
+          </style>
+          <style id="edge5555551.25" idList="arc_2767_input_2764 arc_2765_input_2764 arc_1592_input_1590 arc_1593_activator_1638 arc_2768_input_2764 arc_1591_input_2764 arc_1593_output_1590 arc_1639_output_1638 arc_2769_activator_1638 arc_1591_input_1590 arc_2769_output_2764 arc_1591_input_1638">
+            <g stroke="color_2" stroke-width="1.25"/>
+          </style>
+        </listOfStyles>
+      </renderInformation>
+      <nwt:mapProperties 
+        xmlns:nwt="https://newteditor.org/">
+        <compoundPadding>0</compoundPadding>
+        <extraCompartmentPadding>14</extraCompartmentPadding>
+        <extraComplexPadding>10</extraComplexPadding>
+        <arrowScale>1.25</arrowScale>
+        <showComplexName>true</showComplexName>
+        <dynamicLabelSize>regular</dynamicLabelSize>
+        <inferNestingOnLoad>true</inferNestingOnLoad>
+        <fitLabelsToNodes>true</fitLabelsToNodes>
+        <fitLabelsToInfoboxes>false</fitLabelsToInfoboxes>
+        <recalculateLayoutOnComplexityManagement>true</recalculateLayoutOnComplexityManagement>
+        <rearrangeOnComplexityManagement>true</rearrangeOnComplexityManagement>
+        <animateOnDrawingChanges>true</animateOnDrawingChanges>
+        <adjustNodeLabelFontSizeAutomatically>false</adjustNodeLabelFontSizeAutomatically>
+        <enablePorts>true</enablePorts>
+        <enableSIFTopologyGrouping>false</enableSIFTopologyGrouping>
+        <allowCompoundNodeResize>true</allowCompoundNodeResize>
+        <mapColorScheme>opposed_red_blue</mapColorScheme>
+        <mapColorSchemeStyle>solid</mapColorSchemeStyle>
+        <mapName>Pathway #sbgn-network-container-0</mapName>
+        <mapDescription/>
+        <highlightColor>#0B9BCD</highlightColor>
+        <extraHighlightThickness>2</extraHighlightThickness>
+        <mapPD2AFConverted>false</mapPD2AFConverted>
+      </nwt:mapProperties>
+    </extension>
+    <glyph id="compartmentVertex_70101_1" class="compartment">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>1329.875</w>
+          <h>307.875</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="cytosol"/>
+      <bbox x="423.375" y="975.375" w="1357.875" h="335.875"/>
+    </glyph>
+    <glyph id="compartmentVertex_7660_443" class="compartment" compartmentRef="compartmentVertex_70101_1">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>441.25</w>
+          <h>252.25</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="nucleoplasm"/>
+      <bbox x="1295.375" y="1014.375" w="469.25" h="280.25"/>
+    </glyph>
+    <glyph id="entityVertex_8848808_1593" class="complex" compartmentRef="compartmentVertex_7660_443">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>97</w>
+          <h>37</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="HIF1A,EPAS1:PTK6 Gene"/>
+      <bbox x="1320" y="1047" w="97" h="37"/>
+    </glyph>
+    <glyph id="entityVertex_452560_2765" class="macromolecule" compartmentRef="compartmentVertex_7660_443">
+      <label text="EPAS1"/>
+      <bbox x="1530" y="1141" w="47" h="22"/>
+    </glyph>
+    <glyph id="reactionVertex_8856930_2764" class="association" compartmentRef="compartmentVertex_7660_443">
+      <label text="EPAS1 (HIF2A) and activated NR3C1 (GCR) bind PTK6 gene"/>
+      <bbox x="1462" y="1184" w="10" h="10"/>
+      <port id="reactionVertex_8856930.1" x="1458.6666" y="1189"/>
+      <port id="reactionVertex_8856930.2" x="1467" y="1197.3334"/>
+    </glyph>
+    <glyph id="reactionVertex_8848804_1638" class="omitted process" compartmentRef="compartmentVertex_7660_443">
+      <label text="HIF1A,EPAS1 promote PTK6 gene expression"/>
+      <bbox x="1362" y="1120" w="12" h="12"/>
+      <port id="reactionVertex_8848804.1" x="1368" y="1113"/>
+      <port id="reactionVertex_8848804.2" x="1368" y="1113"/>
+    </glyph>
+    <glyph id="reactionVertex_8848812_1590" class="association" compartmentRef="compartmentVertex_7660_443">
+      <label text="HIF1A,EPAS1 bind PTK6 gene"/>
+      <bbox x="1458" y="1032" w="10" h="10"/>
+      <port id="reactionVertex_8848812.1" x="1463" y="1044"/>
+      <port id="reactionVertex_8848812.2" x="1463" y="1044"/>
+    </glyph>
+    <glyph id="entityVertex_8856931_2769" class="complex" compartmentRef="compartmentVertex_7660_443">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>153</w>
+          <h>52</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="PTK6 Gene:EPAS1:NR3C1:Glucocorticoid ligand:PELP1"/>
+      <bbox x="1311" y="1211" w="153" h="52"/>
+    </glyph>
+    <glyph id="entityVertex_8848797_1591" class="unspecified entity" compartmentRef="compartmentVertex_7660_443">
+      <label text="PTK6 Gene"/>
+      <bbox x="1416" y="1111" w="46" h="51"/>
+    </glyph>
+    <glyph id="entityVertex_3826531_2767" class="macromolecule" compartmentRef="compartmentVertex_7660_443">
+      <label text="PELP1"/>
+      <bbox x="1624" y="1182" w="48" h="20"/>
+    </glyph>
+    <glyph id="entityVertex_879850_2768" class="complex" compartmentRef="compartmentVertex_7660_443">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>123</w>
+          <h>49</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="NR3C1:(ALDO,11DCORST,CORST,CORT) dimer"/>
+      <bbox x="1626" y="1230" w="123" h="49"/>
+    </glyph>
+    <glyph id="entityVertex_8848802_1592" class="unspecified entity" compartmentRef="compartmentVertex_7660_443">
+      <label text="HIF1A,EPAS1"/>
+      <bbox x="1536" y="1083" w="87" h="26"/>
+    </glyph>
+    <glyph id="entityVertex_8848000_1639" class="macromolecule" compartmentRef="compartmentVertex_70101_1">
+      <label text="PTK6"/>
+      <bbox x="439" y="991" w="40" h="22"/>
+    </glyph>
+    <arc id="arc_2767_input_2764" class="consumption" source="entityVertex_3826531_2767" target="reactionVertex_8856930.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="1623.375" y="1191.6694630872482"/>
+      <next x="1499.0000000000002" y="1190"/>
+      <end x="1458.0416" y="1189"/>
+    </arc>
+    <arc id="arc_2765_input_2764" class="consumption" source="entityVertex_452560_2765" target="reactionVertex_8856930.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="1536.827302631579" y="1163.625"/>
+      <next x="1499.0000000000002" y="1190"/>
+      <end x="1458.0416" y="1189"/>
+    </arc>
+    <arc id="arc_1592_input_1590" class="consumption" source="entityVertex_8848802_1592" target="reactionVertex_8848812.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="1556.2152325084921" y="1084.4265060988955"/>
+      <next x="1495" y="1054"/>
+      <end x="1463" y="1044.625"/>
+    </arc>
+    <arc id="arc_1593_activator_1638" class="stimulation" source="entityVertex_8848808_1593" target="reactionVertex_8848804_1638">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="1368.3143203883496" y="1084.625"/>
+      <next x="1368" y="1117.000000000009"/>
+      <end/>
+    </arc>
+    <arc id="arc_2768_input_2764" class="consumption" source="entityVertex_879850_2768" target="reactionVertex_8856930.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="1631.7070670540825" y="1235.409049469434"/>
+      <next x="1499.0000000000002" y="1190"/>
+      <end x="1458.0416" y="1189"/>
+    </arc>
+    <arc id="arc_1591_input_2764" class="consumption" source="entityVertex_8848797_1591" target="reactionVertex_8856930.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="1457.3910136360469" y="1152.898653825475"/>
+      <next x="1498.9999999999998" y="1190"/>
+      <end x="1458.0416" y="1189"/>
+    </arc>
+    <arc id="arc_1593_output_1590" class="production" source="reactionVertex_8848812.2" target="entityVertex_8848808_1593">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="1463" y="1044.625"/>
+      <end x="1415.7138620228757" y="1051.2608987550057"/>
+    </arc>
+    <arc id="arc_1639_output_1638" class="production" source="reactionVertex_8848804.2" target="entityVertex_8848000_1639">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="1368" y="1112.375"/>
+      <end x="482.7213235434366" y="1005.235912122537"/>
+    </arc>
+    <arc id="arc_2769_activator_1638" class="stimulation" source="entityVertex_8856931_2769" target="reactionVertex_8848804_1638">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="1382.9319852941176" y="1210.375"/>
+      <next x="1370" y="1135.0000000000005"/>
+      <end x="1369.999993974359" y="1134.9999728846158"/>
+    </arc>
+    <arc id="arc_1591_input_1590" class="consumption" source="entityVertex_8848797_1591" target="reactionVertex_8848812.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="1453.1824633488766" y="1115.6061923878156"/>
+      <next x="1495" y="1054.0000000000002"/>
+      <end x="1463" y="1044.625"/>
+    </arc>
+    <arc id="arc_2769_output_2764" class="production" source="reactionVertex_8856930.2" target="entityVertex_8856931_2769">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="1467" y="1197.9584"/>
+      <end x="1434.272857641484" y="1208.759784065519"/>
+    </arc>
+    <arc id="arc_1591_input_1638" class="consumption" source="entityVertex_8848797_1591" target="reactionVertex_8848804.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="1415.5834761628707" y="1133.036992953664"/>
+      <end x="1368" y="1112.375"/>
+    </arc>
+  </map>
+</sbgn>

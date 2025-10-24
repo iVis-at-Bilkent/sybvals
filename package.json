@@ -31,15 +31,18 @@
     "cytoscape-sbgn-stylesheet": "github:iVis-at-Bilkent/cytoscape-sbgn-stylesheet#master",
     "cytoscape-svg": "^0.3.1",
     "cytosnap": "github:iVis-at-Bilkent/cytosnap#3052cdd",
+    "diff": "^8.0.2",
     "express": "^4.17.1",
     "file-saver": "^2.0.5",
     "jquery": "^3.6.0",
     "jsdom": "^16.5.3",
     "libsbgn.js": "github:sbgn/libsbgn.js#develop",
+    "node-fetch": "^2.7.0",
     "nodemon": "^2.0.7",
     "pretty-data": "^0.40.0",
     "saxon-js": "^2.5.0",
     "tippy.js": "^6.3.7",
+    "xlsx": "^0.18.5",
     "xml2js": "^0.4.23"
   },
   "devDependencies": {

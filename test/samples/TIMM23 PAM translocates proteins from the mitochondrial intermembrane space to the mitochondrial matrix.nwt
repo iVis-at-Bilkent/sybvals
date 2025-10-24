@@ -1,0 +1,230 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+  <map language="process description">
+    <extension>
+      <renderInformation 
+        xmlns="http://www.sbml.org/sbml/level3/version1/render/version1" id="renderInformation" program-name="sbgnviz" program-version="6.1.0" background-color="#00000000">
+        <listOfColorDefinitions>
+          <colorDefinition id="color_1" value="#f7f7f77f"/>
+          <colorDefinition id="color_2" value="#555555"/>
+          <colorDefinition id="color_3" value="#d1e5f07f"/>
+          <colorDefinition id="color_4" value="#fddbc7ff"/>
+          <colorDefinition id="color_5" value="#f7f7f7ff"/>
+          <colorDefinition id="color_6" value="#ffffffff"/>
+        </listOfColorDefinitions>
+        <listOfBackgroundImages/>
+        <listOfStyles>
+          <style id="nodef7f7f75555553.2514normalnormalHelvetica0000.5" idList="compartmentVertex_70101_1 compartmentVertex_17927_3 compartmentVertex_5460_2">
+            <g font-size="14" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="3.25" fill="color_1" background-opacity="0.5"/>
+          </style>
+          <style id="noded1e5f05555551.2511normalnormalHelvetica0000.5" idList="entityVertex_1252242_64 entityVertex_1299474_31">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="1.25" fill="color_3" background-opacity="0.5"/>
+          </style>
+          <style id="nodefddbc75555551.2511normalnormalHelvetica0001" idList="entityVertex_113593_61 entityVertex_113548_62 entityVertex_113581_63">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="1.25" fill="color_4" background-opacity="1"/>
+          </style>
+          <style id="nodef7f7f75555551.2511normalnormalHelvetica0001" idList="entityVertex_1299460_33">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="1.25" fill="color_5" background-opacity="1"/>
+          </style>
+          <style id="nodeffffff5555551.251" idList="reactionVertex_1299475_32">
+            <g stroke="color_2" stroke-width="1.25" fill="color_6" background-opacity="1"/>
+          </style>
+          <style id="edge5555551.25" idList="arc_33_output_32 arc_31_catalyst_32 arc_61_input_32 arc_64_output_32 arc_63_output_32 arc_62_output_32 arc_31_input_32">
+            <g stroke="color_2" stroke-width="1.25"/>
+          </style>
+        </listOfStyles>
+      </renderInformation>
+      <nwt:mapProperties 
+        xmlns:nwt="https://newteditor.org/">
+        <compoundPadding>0</compoundPadding>
+        <extraCompartmentPadding>14</extraCompartmentPadding>
+        <extraComplexPadding>10</extraComplexPadding>
+        <arrowScale>1.25</arrowScale>
+        <showComplexName>true</showComplexName>
+        <dynamicLabelSize>regular</dynamicLabelSize>
+        <inferNestingOnLoad>true</inferNestingOnLoad>
+        <fitLabelsToNodes>true</fitLabelsToNodes>
+        <fitLabelsToInfoboxes>false</fitLabelsToInfoboxes>
+        <recalculateLayoutOnComplexityManagement>true</recalculateLayoutOnComplexityManagement>
+        <rearrangeOnComplexityManagement>true</rearrangeOnComplexityManagement>
+        <animateOnDrawingChanges>true</animateOnDrawingChanges>
+        <adjustNodeLabelFontSizeAutomatically>false</adjustNodeLabelFontSizeAutomatically>
+        <enablePorts>true</enablePorts>
+        <enableSIFTopologyGrouping>false</enableSIFTopologyGrouping>
+        <allowCompoundNodeResize>true</allowCompoundNodeResize>
+        <mapColorScheme>opposed_red_blue</mapColorScheme>
+        <mapColorSchemeStyle>solid</mapColorSchemeStyle>
+        <mapName>Pathway #sbgn-network-container-0</mapName>
+        <mapDescription/>
+        <highlightColor>#0B9BCD</highlightColor>
+        <extraHighlightThickness>2</extraHighlightThickness>
+        <mapPD2AFConverted>false</mapPD2AFConverted>
+      </nwt:mapProperties>
+    </extension>
+    <glyph id="compartmentVertex_70101_1" class="compartment">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>257.75</w>
+          <h>421.12499999999955</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="cytosol"/>
+      <bbox x="100.8997456526493" y="264.78212633850865" w="285.75" h="449.12499999999955"/>
+    </glyph>
+    <glyph id="compartmentVertex_17927_3" class="compartment" compartmentRef="compartmentVertex_70101_1">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>224.5</w>
+          <h>387.8749999999996</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="mitochondrial intermembrane space"/>
+      <bbox x="117.5247456526493" y="281.40712633850865" w="252.5" h="415.8749999999996"/>
+    </glyph>
+    <glyph id="entityVertex_1252242_64" class="complex" compartmentRef="compartmentVertex_17927_3">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>118</w>
+          <h>22</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="TIMM23 Complex"/>
+      <bbox x="218.7747456526493" y="297.0321263385086" w="118" h="22"/>
+    </glyph>
+    <glyph id="compartmentVertex_5460_2" class="compartment" compartmentRef="compartmentVertex_17927_3">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>191.25</w>
+          <h>200.24999999999983</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="mitochondrial matrix"/>
+      <bbox x="134.1497456526493" y="452.4071263385084" w="219.25" h="228.24999999999983"/>
+    </glyph>
+    <glyph id="entityVertex_113593_61" class="simple chemical" compartmentRef="compartmentVertex_5460_2">
+      <label text="ATP"/>
+      <bbox x="149.7747456526493" y="498.0321263385084" w="40" h="30"/>
+    </glyph>
+    <glyph id="entityVertex_1299460_33" class="unspecified entity" compartmentRef="compartmentVertex_5460_2">
+      <label text="Cargo of TIMM23 PAM"/>
+      <bbox x="159.7747456526493" y="635.0321263385082" w="155" h="30"/>
+    </glyph>
+    <glyph id="entityVertex_113548_62" class="simple chemical" compartmentRef="compartmentVertex_5460_2">
+      <label text="Pi"/>
+      <bbox x="287.7747456526493" y="573.0321263385082" w="27" h="30"/>
+    </glyph>
+    <glyph id="reactionVertex_1299475_32" class="process" compartmentRef="compartmentVertex_5460_2">
+      <label text="TIMM23 PAM translocates proteins from the mitochondrial intermembrane space to the mitochondrial matrix"/>
+      <bbox x="246.7747456526493" y="525.0321263385082" w="12" h="12"/>
+      <port id="reactionVertex_1299475.1" x="252.7747456526493" y="515.0321263385082"/>
+      <port id="reactionVertex_1299475.2" x="252.7747456526493" y="547.0321263385082"/>
+    </glyph>
+    <glyph id="entityVertex_113581_63" class="simple chemical" compartmentRef="compartmentVertex_5460_2">
+      <label text="ADP"/>
+      <bbox x="294.7747456526493" y="529.0321263385082" w="41" h="30"/>
+    </glyph>
+    <glyph id="entityVertex_1299474_31" class="complex" compartmentRef="compartmentVertex_5460_2">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>138</w>
+          <h>25</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="TIMM23 PAM:Cargo"/>
+      <bbox x="199.7747456526493" y="468.03212633850836" w="138" h="25"/>
+    </glyph>
+    <arc id="arc_33_output_32" class="production" source="reactionVertex_1299475.2" target="entityVertex_1299460_33">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="252.7747456526493" y="547.6571263385082"/>
+      <next x="253.7747456526493" y="563.032126338508"/>
+      <end x="240.81827089068605" y="631.3480841743145"/>
+    </arc>
+    <arc id="arc_31_catalyst_32" class="catalysis" source="entityVertex_1299474_31" target="reactionVertex_1299475_32">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="264.7078442441986" y="493.65712633850836"/>
+      <next x="257.77474565264936" y="516.0321263385082"/>
+      <end x="255.84108242145194" y="521.8331160321003"/>
+    </arc>
+    <arc id="arc_61_input_32" class="consumption" source="entityVertex_113593_61" target="reactionVertex_1299475.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="190.3846657987957" y="513.6295153282517"/>
+      <next x="238.77474565264924" y="515.0321263385083"/>
+      <end x="252.7747456526493" y="514.4071263385082"/>
+    </arc>
+    <arc id="arc_64_output_32" class="production" source="reactionVertex_1299475.2" target="entityVertex_1252242_64">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="252.7747456526493" y="547.6571263385082"/>
+      <next x="253.7747456526493" y="563.0321263385081"/>
+      <next x="131.77474565264936" y="578.0321263385079"/>
+      <next x="128.77474565264933" y="336.0321263385081"/>
+      <end x="223.2852559189824" y="318.2717619931572"/>
+    </arc>
+    <arc id="arc_63_output_32" class="production" source="reactionVertex_1299475.2" target="entityVertex_113581_63">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="252.7747456526493" y="547.6571263385082"/>
+      <next x="253.77474565264933" y="563.0321263385082"/>
+      <end x="292.79608467911424" y="550.9767533059418"/>
+    </arc>
+    <arc id="arc_62_output_32" class="production" source="reactionVertex_1299475.2" target="entityVertex_113548_62">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="252.7747456526493" y="547.6571263385082"/>
+      <next x="253.77474565264933" y="563.0321263385082"/>
+      <end x="285.75448667091086" y="579.8635689796985"/>
+    </arc>
+    <arc id="arc_31_input_32" class="consumption" source="entityVertex_1299474_31" target="reactionVertex_1299475.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="257.36170217438837" y="493.65712633850836"/>
+      <next x="238.77474565264933" y="515.0321263385082"/>
+      <end x="252.7747456526493" y="514.4071263385082"/>
+    </arc>
+  </map>
+</sbgn>

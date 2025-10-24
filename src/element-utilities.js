@@ -455,16 +455,16 @@ elementUtilities.reverseEdge = function(edge){
   var oldPortTarget = edge.data("porttarget");
   // var segmentPoints = edge.segmentPoints();
 
-  edge.data().source = oldTarget;
-  edge.data().target = oldSource;
+  //edge.data().source = oldTarget;
+  //edge.data().target = oldSource;
   edge.data().portsource = oldPortTarget;
   edge.data().porttarget = oldPortSource;
-  edge = edge.move({
-     //porttarget: oldPortSource,
-     //portsource : oldPortTarget,
+  /*edge = edge.move({
+     porttarget: oldPortSource,
+     portsource : oldPortTarget,
      source: oldTarget,
      target: oldSource
-  });
+  });*/
 
 
 
@@ -479,7 +479,6 @@ elementUtilities.addEdge = function (source, target, edgeParams,cy, id, visibili
       var sbgnclass = edgeParams.class;
       var language = edgeParams.language;
   }
-
   var css = {};
 
   if (visibility) {

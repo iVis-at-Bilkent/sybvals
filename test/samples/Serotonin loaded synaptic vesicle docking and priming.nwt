@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+  <map language="process description">
+    <extension>
+      <renderInformation 
+        xmlns="http://www.sbml.org/sbml/level3/version1/render/version1" id="renderInformation" program-name="sbgnviz" program-version="6.1.0" background-color="#00000000">
+        <listOfColorDefinitions>
+          <colorDefinition id="color_1" value="#92c5deff"/>
+          <colorDefinition id="color_2" value="#555555"/>
+          <colorDefinition id="color_3" value="#d1e5f07f"/>
+          <colorDefinition id="color_4" value="#f7f7f7ff"/>
+          <colorDefinition id="color_5" value="#f7f7f77f"/>
+          <colorDefinition id="color_6" value="#ffffffff"/>
+          <colorDefinition id="color_7" value="#ffffff"/>
+        </listOfColorDefinitions>
+        <listOfBackgroundImages/>
+        <listOfStyles>
+          <style id="node92c5de5555551.2511normalnormalHelvetica0001" idList="entityVertex_210514_64 entityVertex_449128_216 entityVertex_210385_13 entityVertex_2029017_2438">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="1.25" fill="color_1" background-opacity="1"/>
+          </style>
+          <style id="noded1e5f05555551.2511normalnormalHelvetica0000.5" idList="entityVertex_380903_52 entityVertex_380900_53 entityVertex_210374_2596">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="1.25" fill="color_3" background-opacity="0.5"/>
+          </style>
+          <style id="nodef7f7f75555551.2511normalnormalHelvetica0001" idList="entityVertex_380576_2609">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="1.25" fill="color_4" background-opacity="1"/>
+          </style>
+          <style id="nodef7f7f75555553.2514normalnormalHelvetica0000.5" idList="compartmentVertex_70101_43">
+            <g font-size="14" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="3.25" fill="color_5" background-opacity="0.5"/>
+          </style>
+          <style id="nodeffffff5555551.251" idList="reactionVertex_380905_50">
+            <g stroke="color_2" stroke-width="1.25" fill="color_6" background-opacity="1"/>
+          </style>
+          <style id="infoboxffffff55555519normalnormalArial0f0f0frectangle" idList="entityVertex_5244496_1_mt entityVertex_5244508_2_mt entityVertex_5244495_3_mt entityVertex_5244510_4_mt">
+            <g font-size="9" font-family="Arial" font-weight="normal" font-style="normal" font-color="#0f0f0f" stroke="color_2" stroke-width="1" fill="color_7"/>
+          </style>
+          <style id="edge5555551.25" idList="arc_2438_input_50 arc_2609_input_50 arc_64_input_50 arc_52_input_50 arc_53_output_50 arc_13_input_50 arc_2596_input_50 arc_52_catalyst_50 arc_216_input_50">
+            <g stroke="color_2" stroke-width="1.25"/>
+          </style>
+        </listOfStyles>
+      </renderInformation>
+      <nwt:mapProperties 
+        xmlns:nwt="https://newteditor.org/">
+        <compoundPadding>0</compoundPadding>
+        <extraCompartmentPadding>14</extraCompartmentPadding>
+        <extraComplexPadding>10</extraComplexPadding>
+        <arrowScale>1.25</arrowScale>
+        <showComplexName>true</showComplexName>
+        <dynamicLabelSize>regular</dynamicLabelSize>
+        <inferNestingOnLoad>true</inferNestingOnLoad>
+        <fitLabelsToNodes>true</fitLabelsToNodes>
+        <fitLabelsToInfoboxes>false</fitLabelsToInfoboxes>
+        <recalculateLayoutOnComplexityManagement>true</recalculateLayoutOnComplexityManagement>
+        <rearrangeOnComplexityManagement>true</rearrangeOnComplexityManagement>
+        <animateOnDrawingChanges>true</animateOnDrawingChanges>
+        <adjustNodeLabelFontSizeAutomatically>false</adjustNodeLabelFontSizeAutomatically>
+        <enablePorts>true</enablePorts>
+        <enableSIFTopologyGrouping>false</enableSIFTopologyGrouping>
+        <allowCompoundNodeResize>true</allowCompoundNodeResize>
+        <mapColorScheme>opposed_red_blue</mapColorScheme>
+        <mapColorSchemeStyle>solid</mapColorSchemeStyle>
+        <mapName>Pathway #sbgn-network-container-0</mapName>
+        <mapDescription/>
+        <highlightColor>#0B9BCD</highlightColor>
+        <extraHighlightThickness>2</extraHighlightThickness>
+        <mapPD2AFConverted>false</mapPD2AFConverted>
+      </nwt:mapProperties>
+    </extension>
+    <glyph id="entityVertex_380900_53" class="complex">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>134</w>
+          <h>50</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="Docked serotonin loaded synaptic vesicle"/>
+      <bbox x="1006" y="786" w="134" h="50"/>
+    </glyph>
+    <glyph id="entityVertex_449128_216" class="macromolecule">
+      <label text="STX1A"/>
+      <bbox x="1040" y="953" w="47" h="22"/>
+    </glyph>
+    <glyph id="compartmentVertex_70101_43" class="compartment">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>627.3515595440152</w>
+          <h>246.13284230916236</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="cytosol"/>
+      <bbox x="448.2734404559847" y="767.1171576908378" w="655.3515595440152" h="274.13284230916236"/>
+    </glyph>
+    <glyph id="entityVertex_210385_13" class="macromolecule" compartmentRef="compartmentVertex_70101_43">
+      <label text="CPLX1"/>
+      <bbox x="847.8984404559866" y="882.7421576908386" w="46" h="22"/>
+    </glyph>
+    <glyph id="reactionVertex_380905_50" class="process" compartmentRef="compartmentVertex_70101_43">
+      <label text="Serotonin loaded synaptic vesicle docking and priming"/>
+      <bbox x="739.8984404559857" y="793.7421576908376" w="12" h="12"/>
+      <port id="reactionVertex_380905.1" x="735.8984404559857" y="799.7421576908376"/>
+      <port id="reactionVertex_380905.2" x="745.8984404559857" y="809.7421576908376"/>
+    </glyph>
+    <glyph id="entityVertex_380903_52" class="complex" compartmentRef="compartmentVertex_70101_43">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>121</w>
+          <h>36</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="Serotonin loaded synaptic vesicle"/>
+      <bbox x="463.89844045598477" y="782.7421576908376" w="121" h="36"/>
+    </glyph>
+    <glyph id="entityVertex_210514_64" class="macromolecule" compartmentRef="compartmentVertex_70101_43">
+      <label text="STXBP1-1"/>
+      <bbox x="802.8984404559857" y="839.7421576908374" w="67" h="22"/>
+    </glyph>
+    <glyph id="entityVertex_380576_2609" class="unspecified entity" compartmentRef="compartmentVertex_70101_43">
+      <label text="Synapsin"/>
+      <bbox x="497.89844045598477" y="933.7421576908386" w="65" h="22"/>
+    </glyph>
+    <glyph id="entityVertex_2029017_2438" class="macromolecule" compartmentRef="compartmentVertex_70101_43">
+      <label text="SNAP25"/>
+      <bbox x="1030" y="995" w="58" h="22"/>
+      <glyph id="entityVertex_5244496_1_mt" class="unit of information">
+        <label text="Pa"/>
+        <bbox x="1035" y="987" w="20" h="16"/>
+      </glyph>
+      <glyph id="entityVertex_5244508_2_mt" class="unit of information">
+        <label text="Pa"/>
+        <bbox x="1035" y="1009" w="20" h="16"/>
+      </glyph>
+      <glyph id="entityVertex_5244495_3_mt" class="unit of information">
+        <label text="Pa"/>
+        <bbox x="1060" y="987" w="20" h="16"/>
+      </glyph>
+      <glyph id="entityVertex_5244510_4_mt" class="unit of information">
+        <label text="Pa"/>
+        <bbox x="1060" y="1009" w="20" h="16"/>
+      </glyph>
+    </glyph>
+    <glyph id="entityVertex_210374_2596" class="complex">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>131</w>
+          <h>36</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="RIMS1:UNC13B:BZRAP1:Alpha-liprin"/>
+      <bbox x="997" y="1159" w="131" h="36"/>
+    </glyph>
+    <arc id="arc_2438_input_50" class="consumption" source="entityVertex_2029017_2438" target="reactionVertex_380905.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="1031.6454966055376" y="995.7399129648616"/>
+      <next x="682.8471167885458" y="864.9131279550463"/>
+      <next x="665.7653176368192" y="779.5041321964142"/>
+      <next x="625.602933940683" y="816.8201650939745"/>
+      <end x="735.2734404559857" y="799.7421576908376"/>
+    </arc>
+    <arc id="arc_2609_input_50" class="consumption" source="entityVertex_380576_2609" target="reactionVertex_380905.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="528.7650486368449" y="933.1312992136614"/>
+      <next x="520.5700248471444" y="874.8775107935538"/>
+      <next x="637.8984404559853" y="799.742157690838"/>
+      <end x="735.2734404559857" y="799.7421576908376"/>
+    </arc>
+    <arc id="arc_64_input_50" class="consumption" source="entityVertex_210514_64" target="reactionVertex_380905.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="803.091171470506" y="842.1846225862558"/>
+      <next x="637.8984404559858" y="799.742157690838"/>
+      <end x="735.2734404559857" y="799.7421576908376"/>
+    </arc>
+    <arc id="arc_52_input_50" class="consumption" source="entityVertex_380903_52" target="reactionVertex_380905.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="585.5234404559848" y="800.2036114353311"/>
+      <next x="637.8984404559852" y="799.7421576908378"/>
+      <end x="735.2734404559857" y="799.7421576908376"/>
+    </arc>
+    <arc id="arc_53_output_50" class="production" source="reactionVertex_380905.2" target="entityVertex_380900_53">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="745.8984404559857" y="810.3671576908376"/>
+      <end x="1002.251849181342" y="808.5650635029328"/>
+    </arc>
+    <arc id="arc_13_input_50" class="consumption" source="entityVertex_210385_13" target="reactionVertex_380905.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="848.420298526648" y="884.6737227493886"/>
+      <next x="637.8984404559853" y="799.7421576908372"/>
+      <end x="735.2734404559857" y="799.7421576908376"/>
+    </arc>
+    <arc id="arc_2596_input_50" class="consumption" source="entityVertex_210374_2596" target="reactionVertex_380905.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="1039.9253832288275" y="1158.375"/>
+      <next x="773.9500455977537" y="938.9342576125277"/>
+      <next x="636.855638389554" y="819.2279793287687"/>
+      <end x="735.2734404559857" y="799.7421576908376"/>
+    </arc>
+    <arc id="arc_52_catalyst_50" class="catalysis" source="entityVertex_380903_52" target="reactionVertex_380905_50">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="585.5234404559848" y="793.3579295029183"/>
+      <next x="747.8984404559856" y="773.7421576908378"/>
+      <next x="746.8984404559856" y="783.7421576908378"/>
+      <end x="746.4918101002206" y="790.2482433830786"/>
+    </arc>
+    <arc id="arc_216_input_50" class="consumption" source="entityVertex_449128_216" target="reactionVertex_380905.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="1039.8843184708053" y="956.054648090215"/>
+      <next x="617.9515025269907" y="814.0979274757475"/>
+      <end x="735.2734404559857" y="799.7421576908376"/>
+    </arc>
+  </map>
+</sbgn>

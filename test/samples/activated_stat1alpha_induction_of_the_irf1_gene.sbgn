@@ -1,0 +1,251 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+  <map language="process description">
+    <extension>
+      <renderInformation 
+        xmlns="http://www.sbml.org/sbml/level3/version1/render/version1" id="renderInformation" program-name="sbgnviz" program-version="6.1.0">
+        <listOfColorDefinitions/>
+        <listOfBackgroundImages/>
+        <listOfStyles/>
+      </renderInformation>
+    </extension>
+    <glyph id="glyph8" class="source and sink">
+      <bbox x="366.70424521130934" y="258.6447818429314" w="22" h="22"/>
+    </glyph>
+    <glyph id="glyph6" class="process">
+      <bbox x="250.64122121260613" y="239.6907782035016" w="20" h="20"/>
+      <port id="glyph6.1" x="250.64122121260613" y="249.6907782035016"/>
+      <port id="glyph6.2" x="270.6412212126061" y="249.6907782035016"/>
+    </glyph>
+    <glyph id="glyph3" class="nucleic acid feature">
+      <label text="IRF1"/>
+      <bbox x="314.87649711142956" y="216.1231753789694" w="60" h="30"/>
+      <glyph id="glyph3_0" class="unit of information">
+        <label text="ct:mRNA"/>
+        <bbox x="520.5717040578361" y="329.7292595617973" w="40" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="glyph7" class="source and sink">
+      <bbox x="289.0953767055608" y="268.4053258560146" w="22" h="22"/>
+    </glyph>
+    <glyph id="glyph5" class="process">
+      <bbox x="353.424554049332" y="337.7136990110833" w="20" h="20"/>
+      <port id="glyph5.1" x="353.424554049332" y="347.7136990110833"/>
+      <port id="glyph5.2" x="373.424554049332" y="347.7136990110833"/>
+    </glyph>
+    <glyph id="glyph15" class="macromolecule">
+      <label text="IRF1"/>
+      <bbox x="405.71331056886726" y="399.4191158749863" w="60" h="30"/>
+      <glyph id="glyph15_0" class="unit of information">
+        <label text="mt:prot"/>
+        <bbox x="678.6338375899272" y="534.0081916164" w="31.1181640625" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="glyph14" class="nucleic acid feature">
+      <label text="IRF1"/>
+      <bbox x="162.60843895010981" y="130.6824633970486" w="60" h="30"/>
+      <glyph id="glyph14_0" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="352.126634888346" y="204.61226306411186" w="32.802734375" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="glyph13" class="complex">
+      <extension>
+        <extraInfo>
+          <w>115</w>
+          <h>93.5</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
+      <label text="STAT1α"/>
+      <bbox x="86.53614308673954" y="296.7871313478247" w="135" h="113.5"/>
+      <glyph id="glyph11" class="complex">
+        <extension>
+          <extraInfo>
+            <w>92</w>
+            <h>32</h>
+            <minW>0</minW>
+            <minH>0</minH>
+            <WLBias>0</WLBias>
+            <WRBias>0</WRBias>
+            <HTBias>0</HTBias>
+            <HBBias>0</HBBias>
+          </extraInfo>
+        </extension>
+        <label text="STAT1α"/>
+        <bbox x="98.03614308673954" y="308.2871313478247" w="112" h="52"/>
+        <glyph id="glyph10" class="macromolecule">
+          <label text="STAT1α"/>
+          <bbox x="109.03614308673954" y="319.2871313478247" w="90" h="30"/>
+          <glyph id="glyph10_2" class="unit of information">
+            <label text="mt:prot"/>
+            <bbox x="228.85543146227914" y="372.179118514888" w="31.1181640625" h="12"/>
+          </glyph>
+          <glyph id="glyph10_0" class="state variable">
+            <state value="P" variable="Y701"/>
+            <bbox x="222.74345229561249" y="380.804118514888" w="40.17578125" h="12"/>
+          </glyph>
+          <glyph id="glyph10_1" class="state variable">
+            <state value="P" variable="Y727"/>
+            <bbox x="261.2537875820708" y="380.804118514888" w="40.17578125" h="12"/>
+          </glyph>
+        </glyph>
+      </glyph>
+      <glyph id="glyph12" class="nucleic acid feature">
+        <label text="IRF1-GAS"/>
+        <bbox x="99.03614308673954" y="369.2871313478247" w="60" h="30"/>
+        <glyph id="glyph12_0" class="unit of information">
+          <label text="ct:grr"/>
+          <bbox x="185.3400720523781" y="440.49955390568965" w="22.7783203125" h="12"/>
+        </glyph>
+      </glyph>
+    </glyph>
+    <glyph id="glyph0" class="complex">
+      <extension>
+        <extraInfo>
+          <w>92</w>
+          <h>32</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
+      <label text="STAT1α"/>
+      <bbox x="395.5614461497121" y="309.7464340439119" w="112" h="52"/>
+      <glyph id="glyph1" class="macromolecule">
+        <label text="STAT1α"/>
+        <bbox x="406.5614461497121" y="320.7464340439119" w="90" h="30"/>
+        <glyph id="glyph1_0" class="unit of information">
+          <label text="mt:prot"/>
+          <bbox x="449.63812897615327" y="326.4178123432082" w="31.1181640625" h="12"/>
+        </glyph>
+        <glyph id="glyph1_1" class="state variable">
+          <state value="P" variable="Y701"/>
+          <bbox x="443.5261498094866" y="335.0428123432082" w="40.17578125" h="12"/>
+        </glyph>
+        <glyph id="glyph1_2" class="state variable">
+          <state value="P" variable="Y727"/>
+          <bbox x="482.03648509594495" y="335.0428123432082" w="40.17578125" h="12"/>
+        </glyph>
+      </glyph>
+    </glyph>
+    <glyph id="glyph2" class="nucleic acid feature">
+      <label text="IRF1-GAS"/>
+      <bbox x="315.0523298756151" y="292.81977653253807" w="60" h="30"/>
+      <glyph id="glyph2_0" class="unit of information">
+        <label text="ct:grr"/>
+        <bbox x="438.24578561235137" y="303.88177983183436" w="22.7783203125" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="glyph9" class="association">
+      <bbox x="278.52653204162567" y="335.29846220845707" w="20" h="20"/>
+      <port id="glyph9.1" x="288.52653204162567" y="335.29846220845707"/>
+      <port id="glyph9.2" x="288.52653204162567" y="355.29846220845707"/>
+    </glyph>
+    <glyph id="nwtN_b4078d10-6b7d-456b-a754-5a3975cbe1ac" class="and">
+      <bbox x="165.43078687354685" y="214.89974623570743" w="30" h="29.999999999999996"/>
+      <port id="nwtN_b4078d10-6b7d-456b-a754-5a3975cbe1ac.1" x="180.43078687354685" y="244.89974623570743"/>
+      <port id="nwtN_b4078d10-6b7d-456b-a754-5a3975cbe1ac.2" x="180.43078687354685" y="214.89974623570743"/>
+    </glyph>
+    <arc id="_5491eb3b-6a5f-4f9d-b67d-e922e04d3020" class="consumption" source="glyph2" target="glyph9.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="_0459b128-2bee-44af-8ba9-383b6910c1e1" class="necessary stimulation" source="glyph3" target="glyph5">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="_4ee2bde6-472d-4524-9553-049e291af07d" class="consumption" source="glyph8" target="glyph6.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="_0ad8dcf1-cac1-41b3-95a5-cbf68587f704" class="production" source="glyph6.2" target="glyph3">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="be7ed04d-e856-4c84-b27c-2fa49b5177d6" class="consumption" source="glyph5.1" target="glyph7">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="b4225995-e295-4243-bf85-798329327c1b" class="production" source="glyph5.2" target="glyph15">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="_3efdeb75-2c5a-42cf-983a-e1965f773e4a" class="production" source="glyph13" target="glyph9.2">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_7a07ebe7-6e47-4960-a9ea-cec4309acd73" class="logic arc" source="glyph14" target="nwtN_b4078d10-6b7d-456b-a754-5a3975cbe1ac.2">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_e68abc8b-12b6-4f69-ae3d-395949f338df" class="logic arc" source="glyph13" target="nwtN_b4078d10-6b7d-456b-a754-5a3975cbe1ac.2">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="_4766ca86-a8d5-4b08-adc5-f3cc051ad699" class="consumption" source="glyph0" target="glyph9.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_e03c5f9a-c251-43c8-a559-1b2a93a5ccff" class="necessary stimulation" source="nwtN_b4078d10-6b7d-456b-a754-5a3975cbe1ac.1" target="glyph6">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_73f069ed-f668-4973-96fc-4d73530e9174" class="production" source="glyph6.1" target="glyph9.2">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_83be0a94-97d4-4052-a905-e27db7278ccd" class="consumption" source="glyph7" target="glyph9.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_2f553acf-af93-4d30-b20c-cc6cea55a722" class="consumption" source="glyph6.1" target="glyph7">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_182c8568-4c06-4247-a8a4-12313d1efc72" class="production" source="glyph6.2" target="glyph7">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_525c2f0f-58af-4167-b849-5d32208b585d" class="consumption" source="glyph7" target="glyph5.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_824253c4-85e1-467f-9bd7-fc4e651943d1" class="production" source="glyph5.2" target="glyph7">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_b5775b1b-8e19-49bb-9249-485b6e5b6f75" class="production" source="glyph6.2" target="glyph8">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_7af681c3-17b3-47c0-bffd-af136afd0d15" class="production" source="glyph9.2" target="glyph9.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_e3b5f138-2515-40d2-bdf9-8dc8726fab66" class="consumption" source="glyph7" target="glyph5.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_70dd491d-0838-4159-826d-1a488ca48e80" class="consumption" source="glyph8" target="glyph5.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_d330c3fe-9298-4f97-9cf3-27bf32488ae5" class="production" source="glyph9.2" target="glyph5.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_ee604242-29c4-4b60-b5fa-520410a49c28" class="production" source="glyph6.2" target="glyph7">
+      <start/>
+      <end/>
+    </arc>
+  </map>
+</sbgn>
