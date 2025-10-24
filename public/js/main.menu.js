@@ -455,6 +455,188 @@ let processValidation = async function () {
 	}
 };
 
+let generateErrorsOnMap = async function () {
+	document.getElementById("draggableImageArea").style.display = "none";
+	document.getElementById("sbgnImageUI").style.display = "inline";
+	errors = undefined;
+	if (!sybvals) {
+		url = "http://localhost:" + port + "/validation?showResolutionAlternatives=" + showResolutionAlternatives  + "&generateErrors=true";
+	} else { // NOTE: If you are using the service with a different hostname, please change below accordingly
+		url = "https://sybvals.cs.bilkent.edu.tr/validation?showResolutionAlternatives=" + showResolutionAlternatives + "&generateErrors=true";
+	}
+
+	imageFormat = $('#formatRadios').find('[name="format"]:checked').val();
+
+	let options = {
+		imageOptions: {
+			format: imageFormat,
+			background: !$('#transparent').is(':checked') ? $('#imageBackground').val() : "transparent",
+			width: parseInt($('#imageWidth').val()),
+			height: parseInt($('#imageHeight').val()),
+			color: $('#colorScheme').val(),
+			highlightColor: $('#highlightColor').val(),
+			highlightWidth: $('#highlightWidth').val(),
+			autoSize: autoSize
+		}
+	};
+	let data = graphData + JSON.stringify(options);
+	const settings = {
+		method: 'POST',
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'text/plain'
+		},
+		body: data
+	};
+	let res = await fetch(url, settings)
+		.then(response => response.json())
+		.then(result => {
+			return result;
+		})
+		.catch(e => {
+			let errorContent = document.getElementById("errorContent");
+			errorContent.innerHTML = "<b>Sorry! Cannot process the given file!</b><br><br>Error detail:<br>" + e;
+			$('#errorModal').modal({ inverted: true }).modal('show');
+		});
+	$("#applyValidation").removeClass("loading");
+	$("#applyValidation").css("background-color", "#d67664");
+	if (res.errors && res.errors.length > 0) {
+		$("#fixFormatErrors").prop('disabled', false);
+	}
+	if (!res.errorMessage && (res.errors !== undefined || res.image !== undefined)) {
+		aspectRatio = res.aspectRatio;
+	    currentSbgn = res.sbgn;
+		let remainingErrors = 0;
+		errors = res.errors;
+		errors.forEach( error => {
+			if( error.status !== "solved"){
+				remainingErrors++;
+			}
+		});
+		document.getElementById("errorsField").innerText = remainingErrors > 0 ? "Errors (" + remainingErrors + ")" : "Errors (none)";
+		let errorWidth = 86 - (remainingErrors % 10 === remainingErrors) * 10;
+		if (remainingErrors === 0) {
+			errorWidth = 140;
+		}
+		$('#errorsField').css({ width: errorWidth + 'px' });
+		$("#errorsArea").empty();
+		// get error info
+		if (errors.length > 0) {
+			res.errors.forEach((error) => {
+				let errorNo = $('<div class="ui item"> <b>Error </b> ' + error.errorNo + '&nbsp &nbsp &nbsp &nbsp <b>Pattern:</b> ' + error.pattern + '</div>');
+				let errorRole = $('<div class="ui item"> <b>Role:</b> ' + error.role + '</div>');
+				let errorLabel = $('<div class="ui item"> <b>Label:</b> ' + error.label + '&nbsp &nbsp &nbsp &nbsp <b>Role:</b> ' + error.role + '</div>');
+				let errorText = $('<div class="ui item"> <b>Message:</b> ' + error.text + '</div>');
+				let list = $('<div class="ui list">');
+				let errorRectangle = $('<div class = "ui item" id ="errorNo' + error.errorNo + '">');
+				let accordion = $('<div id ="rec' + error.errorNo + '"class="ui vertical accordion menu" style = "min-height: 0px !important;">');
+				let item = $('<div id = "item' + error.errorNo + '"  class="field"> <a class="title" style = "background: #efefef; padding : 0; width : inherit !important;display:block;"> <i class="icon small angle down"></i>Resolution Alternatives</a><div class="content" style = "padding : 0"><div class="ui form"><div class="grouped fields" id ="solutionField' + error.errorNo + '"> </div></div></div></div>' );
+				$('.ui.accordion').accordion();
+				$('.ui.radio.checkbox').checkbox();
+				$('.ui.checkbox').checkbox();
+				$('.ui.accordion').accordion();
+				$('.ui.radio.checkbox').checkbox();
+				$('.ui.checkbox').checkbox();
+				accordion.append( item);
+				$('.ui.accordion').accordion();
+				$('.ui.radio.checkbox').checkbox();
+				$('.ui.checkbox').checkbox();
+				$('.ui.accordion').accordion();
+				$('.ui.radio.checkbox').checkbox();
+				$('.ui.checkbox').checkbox();
+				list.append(errorNo);
+				if( error.label){
+                    list.append(errorLabel);
+				}
+				else {
+					list.append(errorRole);
+				}
+				list.append(errorText);
+				if( showResolutionAlternatives)
+				list.append( accordion);
+				errorRectangle.append(list);
+				errorRectangle.append('</div>');
+				list.css({ 'margin': '2px' });
+				const errorString = "#errorNo" + error.errorNo;
+				errorRectangle.css({ 'margin-top': '2px' });
+				$("#errorsArea").append(errorRectangle);
+				
+				if( showResolutionAlternatives){
+					$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-:1'  + '"name="'+ 'fixFor' + error.errorNo + '" value="' + "-1" + '"><label style = "font-size:1em !important;margin-top:0px">' + "None" +'</label></div></div>');
+
+				for( let i = 0; error.fixCandidate && i < error.fixCandidate.length; i++){
+				//$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" name="fixFor' + error.errorNo + '" value="' + error.fixCandidate[i].id+ '"><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
+				$( `#solutionField${error.errorNo}` ).append('<div class="active field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + i + '"name="'+ 'fixFor' + error.errorNo + '" value="' + i + '" clicked ><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
+					if( (error.selectedOption  ) === i){
+						$('#resAlt' + error.errorNo + '-' + i).click();
+
+					}
+				}
+				}
+				let uiDivider = $('<div class="ui divider"></div>');
+				uiDivider.css({ 'margin': '0rem 0' });
+				$(errorString).css({ 'border': '3px solid', 'border-color': error.colorCode /*errorHighlightColors[(error.errorNo - 1) % 8]*/ });
+				$(errorString).css({ 'margin-right': '7px' });
+				$('.ui.accordion').accordion();
+				$('.ui.radio.checkbox').checkbox();
+				$('.ui.checkbox').checkbox();
+			});
+			$('.ui.radio.checkbox').on('click', event =>{
+				try {
+				let errorId = event.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
+				errorId = errorId.replace("rec", "");
+				errorId = parseInt( errorId ) - 1;
+				errors[errorId].selectedOption = event.delegateTarget.firstChild.value;
+				}
+				catch {
+					event.currentTarget.style.checked = true;
+				}
+				event.currentTarget.style.checked = true;
+;			 });   
+             // get image info
+		blobData = saveImage(res["image"], imageFormat, document.getElementById("file-name").innerHTML);
+		let urlCreator = window.URL || window.webkitURL;
+		let imageUrl = urlCreator.createObjectURL(blobData);
+		var img = new Image();
+		img.src = imageUrl;
+		aspectRatio = img.naturalWidth / img.naturalHeight;
+		$("#resultImage").attr("src", imageUrl);
+		$("#resultImage1").attr("src", imageUrl);
+		}
+		else if( res.message === undefined ){
+
+			$("#errorsArea").text('Map is valid!');
+		}
+		else {
+			$("#errorsArea").text(res.message);
+		}
+		if( res["image"] ){
+		blobData = saveImage(res["image"], imageFormat, document.getElementById("file-name").innerHTML);
+		let urlCreator = window.URL || window.webkitURL;
+		let imageUrl = urlCreator.createObjectURL(blobData);
+		var img = new Image();
+		img.src = imageUrl;
+		aspectRatio = img.naturalWidth / img.naturalHeight;
+		$("#resultImage").attr("src", imageUrl);
+		$("#resultImage1").attr("src", imageUrl);
+		}
+	}
+	else {
+		if (res.errorMessage) {
+			let errorContent = document.getElementById("errorContent");
+			errorContent.innerHTML = "<b>" + res.errorMessage + "</b>";
+			$('#errorModal').modal({ inverted: true }).modal('show');
+			$("#applyValidation").prop('disabled', false);
+	        $("#fixFormatErrors").removeClass("loading");
+		}
+		else {
+			let errorContent = document.getElementById("errorContent");
+			errorContent.innerHTML = "<b>Sorry! Cannot process the given file!</b>";
+			$('#errorModal').modal({ inverted: true }).modal('show');
+		}
+	}
+};
+
 function dragElement(elmnt) {
 	var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 	document.getElementById("dragImage").onmousedown = dragMouseDown;
@@ -490,11 +672,23 @@ function dragElement(elmnt) {
 $('#draggableImageArea').mouseenter(function () {
 	dragElement(document.getElementById("draggableImageArea"));
 });
+
 $('#applyValidation').click(function () {
 	if (graphData !== undefined && !areNodesInProcess) {
+		console.log( graphData );
 		$("#applyValidation").addClass("loading");
 		$("#applyValidation").css("background-color", "#f2711c");
 		processValidation();
+	}
+	else {
+		$("#file-type").html("You must first load an SBGNML file!");
+	}
+});
+$('#generateErrors').click(function () {
+	if (graphData !== undefined && !areNodesInProcess) {
+		//$("#applyValidation").addClass("loading");
+		//$("#applyValidation").css("background-color", "#f2711c");
+		generateErrorsOnMap();
 	}
 	else {
 		$("#file-type").html("You must first load an SBGNML file!");
@@ -559,6 +753,7 @@ $("body").on("change", "#file-input", function (e, fileObject) {
 	setFileContent(file.name);
 	reader.onload = async function (e) {
 		$("#file-type").html('');
+		console.log( this );
 		if (!fileObject)
 			$("#sampleType").val('');
 		graphData = this.result;

@@ -1,0 +1,985 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+  <map language="process description">
+    <extension>
+      <renderInformation 
+        xmlns="http://www.sbml.org/sbml/level3/version1/render/version1" id="renderInformation" program-name="sbgnviz" program-version="6.1.0" background-color="#00000000">
+        <listOfColorDefinitions>
+          <colorDefinition id="color_1" value="#f7f7f77f"/>
+          <colorDefinition id="color_2" value="#555555"/>
+          <colorDefinition id="color_3" value="#d1e5f07f"/>
+          <colorDefinition id="color_4" value="#92c5deff"/>
+          <colorDefinition id="color_5" value="#f7f7f7ff"/>
+          <colorDefinition id="color_6" value="#ffffffff"/>
+          <colorDefinition id="color_7" value="#fddbc7ff"/>
+        </listOfColorDefinitions>
+        <listOfBackgroundImages/>
+        <listOfStyles>
+          <style id="nodef7f7f75555553.2514normalnormalHelvetica0000.5" idList="compartmentVertex_70101_13 compartmentVertex_7660_5">
+            <g font-size="14" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="3.25" fill="color_1" background-opacity="0.5"/>
+          </style>
+          <style id="noded1e5f05555551.2511normalnormalHelvetica0000.5" idList="entityVertex_1013836_187 entityVertex_1013858_192 entityVertex_4657016_1007 entityVertex_992748_22 entityVertex_3209194_1006 entityVertex_983270_8 entityVertex_983240_4 entityVertex_1008229_100 entityVertex_994100_36 entityVertex_996764_62 entityVertex_996751_78 entityVertex_996761_60 entityVertex_1008206_103">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="1.25" fill="color_3" background-opacity="0.5"/>
+          </style>
+          <style id="node92c5de5555551.2511normalnormalHelvetica0001" idList="entityVertex_1008221_98 entityVertex_1008254_109 entityVertex_375987_185 entityVertex_983271_2 entityVertex_1008215_111 entityVertex_994031_31 entityVertex_992697_19 entityVertex_1008218_107 entityVertex_68365_191 entityVertex_180064_184 entityVertex_994093_34 entityVertex_1013870_190 entityVertex_983456_26 entityVertex_1008211_110 entityVertex_997258_86 entityVertex_1008196_108 entityVertex_351657_20 entityVertex_217039_3 entityVertex_69253_189">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="1.25" fill="color_4" background-opacity="1"/>
+          </style>
+          <style id="nodef7f7f75555551.2511normalnormalHelvetica0001" idList="entityVertex_996770_76 entityVertex_427391_35 entityVertex_9605269_1022 entityVertex_1008228_102 entityVertex_1008247_27 entityVertex_1018386_193 entityVertex_1008234_99 entityVertex_1027363_1017 entityVertex_997233_85 entityVertex_9038684_1018 entityVertex_1013880_186 entityVertex_997256_84 entityVertex_996742_77 entityVertex_909690_29 entityVertex_9038682_1020">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="1.25" fill="color_5" background-opacity="1"/>
+          </style>
+          <style id="nodeffffff5555551.251" idList="reactionVertex_994106_33 reactionVertex_996755_75 reactionVertex_1013833_183 reactionVertex_994020_23 reactionVertex_983285_1 reactionVertex_994034_28 reactionVertex_1013881_188 reactionVertex_992696_18 reactionVertex_983218_6 reactionVertex_996727_59 reactionVertex_1008200_101 reactionVertex_994038_30 reactionVertex_1008220_106 reactionVertex_1008240_97 reactionVertex_997263_83">
+            <g stroke="color_2" stroke-width="1.25" fill="color_6" background-opacity="1"/>
+          </style>
+          <style id="nodefddbc75555551.2511normalnormalHelvetica0001" idList="entityVertex_29868_7">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="1.25" fill="color_7" background-opacity="1"/>
+          </style>
+          <style id="edge5555551.25" idList="arc_100_output_97 arc_84_input_83 arc_110_output_106 arc_86_catalyst_83 arc_103_activator_106 arc_103_output_101 arc_108_output_106 arc_1020_input_30 arc_1018_input_30 arc_189_input_188 arc_20_input_18 arc_190_input_188 arc_85_output_83 arc_191_input_188 arc_29_output_28 arc_1017_input_28 arc_107_output_106 arc_4_output_1 arc_19_input_18 arc_3_input_1 arc_31_input_30 arc_111_output_106 arc_2_input_1 arc_7_input_6 arc_99_input_97 arc_1006_input_18 arc_1018_input_23 arc_26_input_23 arc_1020_input_23 arc_184_input_183 arc_22_output_18 arc_186_input_183 arc_193_output_30 arc_193_inhibitor_28 arc_185_input_183 arc_77_input_75 arc_78_output_75 arc_27_output_23 arc_27_activator_28 arc_34_input_33 arc_1007_input_59 arc_109_output_106 arc_36_output_33 arc_102_input_101 arc_76_input_75 arc_35_input_33 arc_1022_input_106 arc_192_output_188 arc_187_output_183 arc_98_input_97 arc_100_input_101 arc_62_output_59 arc_60_input_59 arc_4_input_6 arc_8_output_6">
+            <g stroke="color_2" stroke-width="1.25"/>
+          </style>
+        </listOfStyles>
+      </renderInformation>
+      <nwt:mapProperties 
+        xmlns:nwt="https://newteditor.org/">
+        <compoundPadding>0</compoundPadding>
+        <extraCompartmentPadding>14</extraCompartmentPadding>
+        <extraComplexPadding>10</extraComplexPadding>
+        <arrowScale>1.25</arrowScale>
+        <showComplexName>true</showComplexName>
+        <dynamicLabelSize>regular</dynamicLabelSize>
+        <inferNestingOnLoad>true</inferNestingOnLoad>
+        <fitLabelsToNodes>true</fitLabelsToNodes>
+        <fitLabelsToInfoboxes>false</fitLabelsToInfoboxes>
+        <recalculateLayoutOnComplexityManagement>true</recalculateLayoutOnComplexityManagement>
+        <rearrangeOnComplexityManagement>true</rearrangeOnComplexityManagement>
+        <animateOnDrawingChanges>true</animateOnDrawingChanges>
+        <adjustNodeLabelFontSizeAutomatically>false</adjustNodeLabelFontSizeAutomatically>
+        <enablePorts>true</enablePorts>
+        <enableSIFTopologyGrouping>false</enableSIFTopologyGrouping>
+        <allowCompoundNodeResize>true</allowCompoundNodeResize>
+        <mapColorScheme>opposed_red_blue</mapColorScheme>
+        <mapColorSchemeStyle>solid</mapColorSchemeStyle>
+        <mapName>Pathway #sbgn-network-container-0</mapName>
+        <mapDescription/>
+        <highlightColor>#0B9BCD</highlightColor>
+        <extraHighlightThickness>2</extraHighlightThickness>
+        <mapPD2AFConverted>false</mapPD2AFConverted>
+      </nwt:mapProperties>
+    </extension>
+    <glyph id="compartmentVertex_70101_13" class="compartment">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>976.5</w>
+          <h>921.5</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="cytosol"/>
+      <bbox x="16.75" y="22.75" w="1004.5" h="949.5"/>
+    </glyph>
+    <glyph id="compartmentVertex_7660_5" class="compartment" compartmentRef="compartmentVertex_70101_13">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>943.25</w>
+          <h>888.25</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="nucleoplasm"/>
+      <bbox x="33.375" y="39.375" w="971.25" h="916.25"/>
+    </glyph>
+    <glyph id="entityVertex_1013836_187" class="complex" compartmentRef="compartmentVertex_7660_5">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>117</w>
+          <h>27</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="CDK5:CABLES:ABL"/>
+      <bbox x="811" y="372" w="117" h="27"/>
+    </glyph>
+    <glyph id="entityVertex_1008221_98" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="NFE2"/>
+      <bbox x="636" y="539" w="57" h="25"/>
+    </glyph>
+    <glyph id="entityVertex_1013858_192" class="complex" compartmentRef="compartmentVertex_7660_5">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>126</w>
+          <h>35</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="CDK2:CABLES1:WEE1"/>
+      <bbox x="813" y="252" w="126" h="35"/>
+    </glyph>
+    <glyph id="entityVertex_996770_76" class="unspecified entity" compartmentRef="compartmentVertex_7660_5">
+      <label text="GATA proteins"/>
+      <bbox x="392" y="907" w="109" h="26"/>
+    </glyph>
+    <glyph id="entityVertex_427391_35" class="unspecified entity" compartmentRef="compartmentVertex_7660_5">
+      <label text="Histone H3 methylated at lysine-9"/>
+      <bbox x="101" y="564" w="91" h="49"/>
+    </glyph>
+    <glyph id="entityVertex_9605269_1022" class="unspecified entity" compartmentRef="compartmentVertex_7660_5">
+      <label text="Globin genes"/>
+      <bbox x="720" y="603" w="84" h="22"/>
+    </glyph>
+    <glyph id="entityVertex_1008228_102" class="unspecified entity" compartmentRef="compartmentVertex_7660_5">
+      <label text="Promotor region of beta-globin"/>
+      <bbox x="871" y="502" w="118" h="35"/>
+    </glyph>
+    <glyph id="entityVertex_4657016_1007" class="complex" compartmentRef="compartmentVertex_7660_5">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>89</w>
+          <h>22</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="BHC complex"/>
+      <bbox x="72" y="918" w="89" h="22"/>
+    </glyph>
+    <glyph id="entityVertex_1008254_109" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="HBG2"/>
+      <bbox x="727" y="829" w="76" h="23"/>
+    </glyph>
+    <glyph id="reactionVertex_994106_33" class="association" compartmentRef="compartmentVertex_7660_5">
+      <label text="HP1 alpha binds Histone H3K9(me)3"/>
+      <bbox x="246" y="548" w="10" h="10"/>
+      <port id="reactionVertex_994106.1" x="242.66667" y="553"/>
+      <port id="reactionVertex_994106.2" x="259.33333" y="553"/>
+    </glyph>
+    <glyph id="entityVertex_1008247_27" class="unspecified entity" compartmentRef="compartmentVertex_7660_5">
+      <label text="IRF1:Promotors of IFN alpha, IFN beta"/>
+      <bbox x="315" y="247" w="114" h="52"/>
+    </glyph>
+    <glyph id="reactionVertex_996755_75" class="association" compartmentRef="compartmentVertex_7660_5">
+      <label text="ZFPM proteins bind GATA proteins"/>
+      <bbox x="510" y="886" w="10" h="10"/>
+      <port id="reactionVertex_996755.1" x="506.66666" y="891"/>
+      <port id="reactionVertex_996755.2" x="523.33334" y="891"/>
+    </glyph>
+    <glyph id="entityVertex_375987_185" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="ABL1"/>
+      <bbox x="632" y="419" w="48" h="21"/>
+    </glyph>
+    <glyph id="entityVertex_1018386_193" class="unspecified entity" compartmentRef="compartmentVertex_7660_5">
+      <label text="IRF2:promoters of INF alpha, INF beta"/>
+      <bbox x="309" y="381" w="127" h="36"/>
+    </glyph>
+    <glyph id="reactionVertex_1013833_183" class="association" compartmentRef="compartmentVertex_7660_5">
+      <label text="Cables link CDK5 and ABL1"/>
+      <bbox x="762" y="378" w="10" h="10"/>
+      <port id="reactionVertex_1013833.1" x="758.6667" y="383"/>
+      <port id="reactionVertex_1013833.2" x="775.3333" y="383"/>
+    </glyph>
+    <glyph id="entityVertex_992748_22" class="complex" compartmentRef="compartmentVertex_7660_5">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>91</w>
+          <h>32</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="p53:MYB:SIN3A"/>
+      <bbox x="245" y="92" w="91" h="32"/>
+    </glyph>
+    <glyph id="reactionVertex_994020_23" class="process" compartmentRef="compartmentVertex_7660_5">
+      <label text="IRF1 binds the promoters of Interferon alpha and beta"/>
+      <bbox x="269" y="286" w="11.999999999999998" h="11.999999999999998"/>
+      <port id="reactionVertex_994020.1" x="275" y="283.6"/>
+      <port id="reactionVertex_994020.2" x="283.4" y="292"/>
+    </glyph>
+    <glyph id="entityVertex_3209194_1006" class="complex" compartmentRef="compartmentVertex_7660_5">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>101</w>
+          <h>22</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="TP53 Tetramer"/>
+      <bbox x="49" y="96" w="101" h="22"/>
+    </glyph>
+    <glyph id="entityVertex_1008234_99" class="unspecified entity" compartmentRef="compartmentVertex_7660_5">
+      <label text="Small Maf family members"/>
+      <bbox x="602" y="480" w="108" h="35"/>
+    </glyph>
+    <glyph id="entityVertex_29868_7" class="simple chemical" compartmentRef="compartmentVertex_7660_5">
+      <label text="Single-stranded DNA"/>
+      <bbox x="500" y="157" w="130" h="28"/>
+    </glyph>
+    <glyph id="entityVertex_983271_2" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="RAD51B"/>
+      <bbox x="370" y="111" w="58" h="21"/>
+    </glyph>
+    <glyph id="entityVertex_1008215_111" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="HBE1"/>
+      <bbox x="830" y="728" w="67" h="26"/>
+    </glyph>
+    <glyph id="entityVertex_994031_31" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="IRF2"/>
+      <bbox x="129" y="420" w="63" h="22"/>
+    </glyph>
+    <glyph id="reactionVertex_983285_1" class="association" compartmentRef="compartmentVertex_7660_5">
+      <label text="RAD51B binds RAD51C"/>
+      <bbox x="468" y="88" w="10" h="10"/>
+      <port id="reactionVertex_983285.1" x="464.66666" y="93"/>
+      <port id="reactionVertex_983285.2" x="481.33334" y="93"/>
+    </glyph>
+    <glyph id="entityVertex_992697_19" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="MYB"/>
+      <bbox x="108" y="55" w="39" h="21"/>
+    </glyph>
+    <glyph id="entityVertex_1008218_107" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="HBD"/>
+      <bbox x="637" y="721" w="58" h="25"/>
+    </glyph>
+    <glyph id="entityVertex_1027363_1017" class="unspecified entity" compartmentRef="compartmentVertex_7660_5">
+      <label text="Type-I IFN genes"/>
+      <bbox x="226" y="325" w="108" h="22"/>
+    </glyph>
+    <glyph id="reactionVertex_994034_28" class="omitted process" compartmentRef="compartmentVertex_7660_5">
+      <label text="Expression of Interferon-alpha and beta"/>
+      <bbox x="366" y="340" w="12" h="12"/>
+      <port id="reactionVertex_994034.1" x="362" y="346"/>
+      <port id="reactionVertex_994034.2" x="382" y="346"/>
+    </glyph>
+    <glyph id="entityVertex_68365_191" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="CDK2"/>
+      <bbox x="628" y="255" w="45" h="20"/>
+    </glyph>
+    <glyph id="entityVertex_997233_85" class="unspecified entity" compartmentRef="compartmentVertex_7660_5">
+      <label text="Histone H3 mono- or unmethylated at K9"/>
+      <bbox x="269" y="642" w="137" h="42"/>
+    </glyph>
+    <glyph id="reactionVertex_1013881_188" class="association" compartmentRef="compartmentVertex_7660_5">
+      <label text="Cables1 links CDK2 and WEE1"/>
+      <bbox x="758" y="262" w="10" h="10"/>
+      <port id="reactionVertex_1013881.1" x="754.6667" y="267"/>
+      <port id="reactionVertex_1013881.2" x="771.3333" y="267"/>
+    </glyph>
+    <glyph id="reactionVertex_992696_18" class="association" compartmentRef="compartmentVertex_7660_5">
+      <label text="p53, SIN3A and MYB form a complex"/>
+      <bbox x="199" y="103" w="10" h="10"/>
+      <port id="reactionVertex_992696.1" x="195.66667" y="108"/>
+      <port id="reactionVertex_992696.2" x="212.33333" y="108"/>
+    </glyph>
+    <glyph id="entityVertex_9038684_1018" class="unspecified entity" compartmentRef="compartmentVertex_7660_5">
+      <label text="IFNB1 gene"/>
+      <bbox x="52" y="259" w="51" h="51"/>
+    </glyph>
+    <glyph id="entityVertex_983270_8" class="complex" compartmentRef="compartmentVertex_7660_5">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>124</w>
+          <h>54</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="RAD51B:RAD51C:Single-stranded DNA"/>
+      <bbox x="745" y="119" w="124" h="54"/>
+    </glyph>
+    <glyph id="entityVertex_180064_184" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="CDK5"/>
+      <bbox x="628" y="377" w="47" h="23"/>
+    </glyph>
+    <glyph id="entityVertex_983240_4" class="complex" compartmentRef="compartmentVertex_7660_5">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>85</w>
+          <h>34</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="RAD51B:RAD51C"/>
+      <bbox x="514" y="75" w="85" h="34"/>
+    </glyph>
+    <glyph id="reactionVertex_983218_6" class="association" compartmentRef="compartmentVertex_7660_5">
+      <label text="RAD51B:RAD51C binds single-stranded DNA"/>
+      <bbox x="688" y="142" w="10" h="10"/>
+      <port id="reactionVertex_983218.1" x="684.6667" y="147"/>
+      <port id="reactionVertex_983218.2" x="701.3333" y="147"/>
+    </glyph>
+    <glyph id="entityVertex_994093_34" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="CBX5"/>
+      <bbox x="125" y="502" w="60" h="25"/>
+    </glyph>
+    <glyph id="entityVertex_1013870_190" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="CABLES1"/>
+      <bbox x="619" y="297" w="63" h="22"/>
+    </glyph>
+    <glyph id="reactionVertex_996727_59" class="association" compartmentRef="compartmentVertex_7660_5">
+      <label text="REST recruits the BHC complex"/>
+      <bbox x="190" y="890" w="10" h="10"/>
+      <port id="reactionVertex_996727.1" x="186.66667" y="895"/>
+      <port id="reactionVertex_996727.2" x="203.33333" y="895"/>
+    </glyph>
+    <glyph id="entityVertex_1013880_186" class="unspecified entity" compartmentRef="compartmentVertex_7660_5">
+      <label text="CABLES"/>
+      <bbox x="625" y="332" w="55" h="22"/>
+    </glyph>
+    <glyph id="entityVertex_983456_26" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="IRF1"/>
+      <bbox x="131" y="219" w="63" h="23"/>
+    </glyph>
+    <glyph id="entityVertex_1008229_100" class="complex" compartmentRef="compartmentVertex_7660_5">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>57</w>
+          <h>23</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="NF-E2"/>
+      <bbox x="797" y="506" w="57" h="23"/>
+    </glyph>
+    <glyph id="entityVertex_997256_84" class="unspecified entity" compartmentRef="compartmentVertex_7660_5">
+      <label text="Histone H3 mono or di-methylated at K9"/>
+      <bbox x="80" y="643" w="133" h="41"/>
+    </glyph>
+    <glyph id="entityVertex_1008211_110" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="HBG1"/>
+      <bbox x="788" y="778" w="60" h="24"/>
+    </glyph>
+    <glyph id="entityVertex_997258_86" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="JMJD1C"/>
+      <bbox x="201" y="709" w="76" h="23"/>
+    </glyph>
+    <glyph id="entityVertex_994100_36" class="complex" compartmentRef="compartmentVertex_7660_5">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>127</w>
+          <h>51</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="HP1alpha:Histone H3 methylated at K9"/>
+      <bbox x="314" y="526" w="127" h="51"/>
+    </glyph>
+    <glyph id="entityVertex_996764_62" class="complex" compartmentRef="compartmentVertex_7660_5">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>116</w>
+          <h>49</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="BHC complex:REST:REST DNA binding sites"/>
+      <bbox x="237" y="871" w="116" h="49"/>
+    </glyph>
+    <glyph id="entityVertex_996751_78" class="complex" compartmentRef="compartmentVertex_7660_5">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>126</w>
+          <h>35</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="ZFPM proteins:GATA proteins"/>
+      <bbox x="554" y="875" w="126" h="35"/>
+    </glyph>
+    <glyph id="entityVertex_996761_60" class="complex" compartmentRef="compartmentVertex_7660_5">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>94</w>
+          <h>51</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="REST:REST DNA binding sites"/>
+      <bbox x="73" y="833" w="94" h="51"/>
+    </glyph>
+    <glyph id="entityVertex_996742_77" class="unspecified entity" compartmentRef="compartmentVertex_7660_5">
+      <label text="ZFPM1, ZFPM2"/>
+      <bbox x="394" y="856" w="103" h="21"/>
+    </glyph>
+    <glyph id="entityVertex_1008206_103" class="complex" compartmentRef="compartmentVertex_7660_5">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>126</w>
+          <h>51</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="NF-E2:Promoter region of beta-globin"/>
+      <bbox x="820" y="655" w="126" h="51"/>
+    </glyph>
+    <glyph id="entityVertex_909690_29" class="unspecified entity" compartmentRef="compartmentVertex_7660_5">
+      <label text="IFN alpha/beta (IFNA/B)"/>
+      <bbox x="434" y="327" w="104" h="36"/>
+    </glyph>
+    <glyph id="reactionVertex_1008200_101" class="association" compartmentRef="compartmentVertex_7660_5">
+      <label text="NFE2 binds the beta globin locus control region"/>
+      <bbox x="876" y="610" w="10" h="10"/>
+      <port id="reactionVertex_1008200.1" x="881" y="623.3333"/>
+      <port id="reactionVertex_1008200.2" x="881" y="606.6667"/>
+    </glyph>
+    <glyph id="entityVertex_1008196_108" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="HBB"/>
+      <bbox x="683" y="778" w="53" h="25"/>
+    </glyph>
+    <glyph id="entityVertex_351657_20" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="SIN3A"/>
+      <bbox x="99" y="140" w="49" h="20"/>
+    </glyph>
+    <glyph id="reactionVertex_994038_30" class="process" compartmentRef="compartmentVertex_7660_5">
+      <label text="IRF2 binds the promoters of Interferon alpha and beta"/>
+      <bbox x="251" y="358" w="11.999999999999998" h="11.999999999999998"/>
+      <port id="reactionVertex_994038.1" x="257" y="372.4"/>
+      <port id="reactionVertex_994038.2" x="257" y="372.4"/>
+    </glyph>
+    <glyph id="entityVertex_217039_3" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="RAD51C"/>
+      <bbox x="367" y="60" w="60" h="20"/>
+    </glyph>
+    <glyph id="reactionVertex_1008220_106" class="omitted process" compartmentRef="compartmentVertex_7660_5">
+      <label text="Expression of globin genes under control of the beta globin control region"/>
+      <bbox x="756" y="679" w="12" h="12"/>
+      <port id="reactionVertex_1008220.1" x="762" y="695"/>
+      <port id="reactionVertex_1008220.2" x="762" y="675"/>
+    </glyph>
+    <glyph id="reactionVertex_1008240_97" class="association" compartmentRef="compartmentVertex_7660_5">
+      <label text="NFE2 is a heterodimer"/>
+      <bbox x="760" y="513" w="10" h="10"/>
+      <port id="reactionVertex_1008240.1" x="756.6667" y="518"/>
+      <port id="reactionVertex_1008240.2" x="773.3333" y="518"/>
+    </glyph>
+    <glyph id="entityVertex_9038682_1020" class="unspecified entity" compartmentRef="compartmentVertex_7660_5">
+      <label text="IFNA genes"/>
+      <bbox x="61" y="345" w="57" h="32"/>
+    </glyph>
+    <glyph id="reactionVertex_997263_83" class="process" compartmentRef="compartmentVertex_7660_5">
+      <label text="JMJD1C demethylates H3K9 mono- and di-methylation"/>
+      <bbox x="233" y="657" w="12" h="12"/>
+      <port id="reactionVertex_997263.1" x="229" y="663"/>
+      <port id="reactionVertex_997263.2" x="249" y="663"/>
+    </glyph>
+    <glyph id="entityVertex_69253_189" class="macromolecule" compartmentRef="compartmentVertex_7660_5">
+      <label text="WEE1"/>
+      <bbox x="624" y="213" w="48" h="21"/>
+    </glyph>
+    <arc id="arc_100_output_97" class="production" source="reactionVertex_1008240.2" target="entityVertex_1008229_100">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="773.9583" y="518"/>
+      <end x="793.2501067153859" y="517.7665280436745"/>
+    </arc>
+    <arc id="arc_84_input_83" class="consumption" source="entityVertex_997256_84" target="reactionVertex_997263.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="213.61510103174305" y="663.1372156700987"/>
+      <end x="228.375" y="663"/>
+    </arc>
+    <arc id="arc_110_output_106" class="production" source="reactionVertex_1008220.2" target="entityVertex_1008211_110">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="762" y="674.375"/>
+      <next x="762" y="709"/>
+      <end x="807.4944743140219" y="774.8045074899246"/>
+    </arc>
+    <arc id="arc_86_catalyst_83" class="catalysis" source="entityVertex_997258_86" target="reactionVertex_997263_83">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="239" y="708.375"/>
+      <next x="239" y="679"/>
+      <end x="239" y="672.5"/>
+    </arc>
+    <arc id="arc_103_activator_106" class="stimulation" source="entityVertex_1008206_103" target="reactionVertex_1008220_106">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="819.375" y="683.0563616071429"/>
+      <next x="770.9999999999999" y="685"/>
+      <end x="770.9999737499999" y="685"/>
+    </arc>
+    <arc id="arc_103_output_101" class="production" source="reactionVertex_1008200.2" target="entityVertex_1008206_103">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="881" y="606.0417"/>
+      <end x="882.1069146801123" y="651.2514557736771"/>
+    </arc>
+    <arc id="arc_108_output_106" class="production" source="reactionVertex_1008220.2" target="entityVertex_1008196_108">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="762" y="674.375"/>
+      <next x="762.0000000000002" y="708.9999999999999"/>
+      <end x="719.6470651135323" y="774.7478893951832"/>
+    </arc>
+    <arc id="arc_1020_input_30" class="consumption" source="entityVertex_9038682_1020" target="reactionVertex_994038.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="116.33723715502317" y="367.4587541700886"/>
+      <next x="209.99999999999997" y="390"/>
+      <end x="257" y="373.025"/>
+    </arc>
+    <arc id="arc_1018_input_30" class="consumption" source="entityVertex_9038684_1018" target="reactionVertex_994038.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="97.93776473171793" y="300.7730881448773"/>
+      <next x="209.99999999999997" y="390.00000000000006"/>
+      <end x="257" y="373.025"/>
+    </arc>
+    <arc id="arc_189_input_188" class="consumption" source="entityVertex_69253_189" target="reactionVertex_1013881.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="665.6465517241379" y="234.625"/>
+      <next x="717.0000000000001" y="267.00000000000006"/>
+      <end x="754.0417" y="267"/>
+    </arc>
+    <arc id="arc_20_input_18" class="consumption" source="entityVertex_351657_20" target="reactionVertex_992696.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="138.04613095238096" y="139.375"/>
+      <next x="181" y="108"/>
+      <end x="195.04167" y="108"/>
+    </arc>
+    <arc id="arc_190_input_188" class="consumption" source="entityVertex_1013870_190" target="reactionVertex_1013881.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="669.3551829268292" y="296.375"/>
+      <next x="717" y="267"/>
+      <end x="754.0417" y="267"/>
+    </arc>
+    <arc id="arc_85_output_83" class="production" source="reactionVertex_997263.2" target="entityVertex_997233_85">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="249.625" y="663"/>
+      <end x="265.25" y="663"/>
+    </arc>
+    <arc id="arc_191_input_188" class="consumption" source="entityVertex_68365_191" target="reactionVertex_1013881.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="673.625" y="265.6954887218045"/>
+      <next x="717" y="267"/>
+      <end x="754.0417" y="267"/>
+    </arc>
+    <arc id="arc_29_output_28" class="production" source="reactionVertex_994034.2" target="entityVertex_909690_29">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="382.625" y="346"/>
+      <end x="430.2662766012995" y="345.4888923105149"/>
+    </arc>
+    <arc id="arc_1017_input_28" class="consumption" source="entityVertex_1027363_1017" target="reactionVertex_994034.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="328.64705852110234" y="341.28772375229374"/>
+      <end x="361.375" y="346"/>
+    </arc>
+    <arc id="arc_107_output_106" class="production" source="reactionVertex_1008220.2" target="entityVertex_1008218_107">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="762" y="674.375"/>
+      <next x="762.0000000000001" y="709"/>
+      <end x="698.5327646810927" y="725.1973673470128"/>
+    </arc>
+    <arc id="arc_4_output_1" class="production" source="reactionVertex_983285.2" target="entityVertex_983240_4">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="481.95834" y="93"/>
+      <end x="510.2502240785891" y="92.55388953199295"/>
+    </arc>
+    <arc id="arc_19_input_18" class="consumption" source="entityVertex_992697_19" target="reactionVertex_992696.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="141.50441176470588" y="76.625"/>
+      <next x="181.00000000000003" y="108.00000000000001"/>
+      <end x="195.04167" y="108"/>
+    </arc>
+    <arc id="arc_3_input_1" class="consumption" source="entityVertex_217039_3" target="reactionVertex_983285.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="413.82291666666663" y="80.625"/>
+      <next x="434.99999999999994" y="93.99999999999999"/>
+      <end x="464.04166" y="93"/>
+    </arc>
+    <arc id="arc_31_input_30" class="consumption" source="entityVertex_994031_31" target="reactionVertex_994038.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <glyph id="arc_31_input_30_card" class="stoichiometry">
+        <label text="2"/>
+        <bbox x="183.397414352644" y="389.893050738214" w="10" h="16"/>
+      </glyph>
+      <start x="174.53506097560975" y="419.375"/>
+      <next x="210.00000000000003" y="389.99999999999994"/>
+      <end x="257" y="373.025"/>
+    </arc>
+    <arc id="arc_111_output_106" class="production" source="reactionVertex_1008220.2" target="entityVertex_1008215_111">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="762" y="674.375"/>
+      <next x="762" y="709.0000000000001"/>
+      <end x="827.5525477549694" y="729.6668130853107"/>
+    </arc>
+    <arc id="arc_2_input_1" class="consumption" source="entityVertex_983271_2" target="reactionVertex_983285.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="413.5636363636363" y="110.375"/>
+      <next x="434.99999999999994" y="93.99999999999997"/>
+      <end x="464.04166" y="93"/>
+    </arc>
+    <arc id="arc_7_input_6" class="consumption" source="entityVertex_29868_7" target="reactionVertex_983218.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="609.4448270579295" y="160.23967344913285"/>
+      <next x="660" y="148"/>
+      <end x="684.0417" y="147"/>
+    </arc>
+    <arc id="arc_99_input_97" class="consumption" source="entityVertex_1008234_99" target="reactionVertex_1008240.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="697.8850563544628" y="509.13473787623957"/>
+      <next x="737" y="519.9999999999999"/>
+      <end x="756.0417" y="518"/>
+    </arc>
+    <arc id="arc_1006_input_18" class="consumption" source="entityVertex_3209194_1006" target="reactionVertex_992696.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="150.625" y="107.62730061349693"/>
+      <next x="181" y="108"/>
+      <end x="195.04167" y="108"/>
+    </arc>
+    <arc id="arc_1018_input_23" class="consumption" source="entityVertex_9038684_1018" target="reactionVertex_994020.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="103.46305878673118" y="281.59565783063687"/>
+      <next x="225.00000000000003" y="268"/>
+      <end x="275" y="282.975"/>
+    </arc>
+    <arc id="arc_26_input_23" class="consumption" source="entityVertex_983456_26" target="reactionVertex_994020.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <glyph id="arc_26_input_23_card" class="stoichiometry">
+        <label text="2"/>
+        <bbox x="193.14320599615917" y="233.88592359769547" w="10" h="16"/>
+      </glyph>
+      <start x="182.70833333333337" y="242.625"/>
+      <next x="225.00000000000009" y="268"/>
+      <end x="275" y="282.975"/>
+    </arc>
+    <arc id="arc_1020_input_23" class="consumption" source="entityVertex_9038682_1020" target="reactionVertex_994020.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="108.12340616271108" y="348.2178835931208"/>
+      <next x="225" y="268"/>
+      <end x="275" y="282.975"/>
+    </arc>
+    <arc id="arc_184_input_183" class="consumption" source="entityVertex_180064_184" target="reactionVertex_1013833.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="675.625" y="387.23026315789474"/>
+      <next x="736.9999999999999" y="384"/>
+      <end x="758.0417" y="383"/>
+    </arc>
+    <arc id="arc_22_output_18" class="production" source="reactionVertex_992696.2" target="entityVertex_992748_22">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="212.95833" y="108"/>
+      <end x="241.25" y="108"/>
+    </arc>
+    <arc id="arc_186_input_183" class="consumption" source="entityVertex_1013880_186" target="reactionVertex_1013833.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="670.738343214097" y="351.8493736305086"/>
+      <next x="737" y="384"/>
+      <end x="758.0417" y="383"/>
+    </arc>
+    <arc id="arc_193_output_30" class="production" source="reactionVertex_994038.2" target="entityVertex_1018386_193">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="257" y="373.025"/>
+      <end x="325.1373394370039" y="384.6476786172739"/>
+    </arc>
+    <arc id="arc_193_inhibitor_28" class="inhibition" source="entityVertex_1018386_193" target="reactionVertex_994034_28">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="372.2883534255235" y="380.3751014460636"/>
+      <next x="372.00000000000006" y="354.9999999999997"/>
+      <end x="372.00000000000006" y="353.375"/>
+    </arc>
+    <arc id="arc_185_input_183" class="consumption" source="entityVertex_375987_185" target="reactionVertex_1013833.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="675.6746085429545" y="418.4482137196984"/>
+      <next x="736.9999999999999" y="384"/>
+      <end x="758.0417" y="383"/>
+    </arc>
+    <arc id="arc_77_input_75" class="consumption" source="entityVertex_996742_77" target="reactionVertex_996755.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="463.3327722674424" y="876.953694087811"/>
+      <next x="488.99999999999994" y="891.9999999999998"/>
+      <end x="506.04166" y="891"/>
+    </arc>
+    <arc id="arc_78_output_75" class="production" source="reactionVertex_996755.2" target="entityVertex_996751_78">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="523.95834" y="891"/>
+      <end x="550.2503378561013" y="891.5183873214132"/>
+    </arc>
+    <arc id="arc_27_output_23" class="production" source="reactionVertex_994020.2" target="entityVertex_1008247_27">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="284.025" y="292"/>
+      <end x="315.87896296681726" y="283.9927804497987"/>
+    </arc>
+    <arc id="arc_27_activator_28" class="stimulation" source="entityVertex_1008247_27" target="reactionVertex_994034_28">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="372" y="299.625"/>
+      <next x="372" y="337"/>
+      <end x="372" y="337.00002625"/>
+    </arc>
+    <arc id="arc_34_input_33" class="consumption" source="entityVertex_994093_34" target="reactionVertex_994106.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="177.5949367088608" y="527.625"/>
+      <next x="222.99999999999994" y="553.9999999999999"/>
+      <end x="242.04167" y="553"/>
+    </arc>
+    <arc id="arc_1007_input_59" class="consumption" source="entityVertex_4657016_1007" target="reactionVertex_996727.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="137.8125" y="917.375"/>
+      <next x="177" y="896"/>
+      <end x="186.04167" y="895"/>
+    </arc>
+    <arc id="arc_109_output_106" class="production" source="reactionVertex_1008220.2" target="entityVertex_1008254_109">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="762" y="674.375"/>
+      <next x="762" y="708.9999999999973"/>
+      <end x="764.6521098001888" y="825.2508129082744"/>
+    </arc>
+    <arc id="arc_36_output_33" class="production" source="reactionVertex_994106.2" target="entityVertex_994100_36">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="259.95833" y="553"/>
+      <end x="310.25021967250274" y="552.2974282252272"/>
+    </arc>
+    <arc id="arc_102_input_101" class="consumption" source="entityVertex_1008228_102" target="reactionVertex_1008200.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="915.8582810918049" y="537.1078264837332"/>
+      <next x="879.0000000000001" y="582.9999999999999"/>
+      <end x="881" y="623.9583"/>
+    </arc>
+    <arc id="arc_76_input_75" class="consumption" source="entityVertex_996770_76" target="reactionVertex_996755.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="465.86300851899875" y="907.2431943874832"/>
+      <next x="489" y="892.0000000000001"/>
+      <end x="506.04166" y="891"/>
+    </arc>
+    <arc id="arc_35_input_33" class="consumption" source="entityVertex_427391_35" target="reactionVertex_994106.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="182.0286258610445" y="572.4772863763916"/>
+      <next x="223" y="553.9999999999999"/>
+      <end x="242.04167" y="553"/>
+    </arc>
+    <arc id="arc_1022_input_106" class="consumption" source="entityVertex_9605269_1022" target="reactionVertex_1008220.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="762" y="625.625"/>
+      <end x="762" y="695.625"/>
+    </arc>
+    <arc id="arc_192_output_188" class="production" source="reactionVertex_1013881.2" target="entityVertex_1013858_192">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="771.9583" y="267"/>
+      <end x="809.2507645110425" y="268.0232470024567"/>
+    </arc>
+    <arc id="arc_187_output_183" class="production" source="reactionVertex_1013833.2" target="entityVertex_1013836_187">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="775.9583" y="383"/>
+      <end x="807.2509290917404" y="383.98172997784735"/>
+    </arc>
+    <arc id="arc_98_input_97" class="consumption" source="entityVertex_1008221_98" target="reactionVertex_1008240.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="691.11322929732" y="539.9370107190954"/>
+      <next x="736.9999999999999" y="520"/>
+      <end x="756.0417" y="518"/>
+    </arc>
+    <arc id="arc_100_input_101" class="consumption" source="entityVertex_1008229_100" target="reactionVertex_1008200.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="835.4036259541984" y="529.625"/>
+      <next x="879" y="583"/>
+      <end x="881" y="623.9583"/>
+    </arc>
+    <arc id="arc_62_output_59" class="production" source="reactionVertex_996727.2" target="entityVertex_996764_62">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="203.95833" y="895"/>
+      <end x="233.2500390617676" y="895.1912501953088"/>
+    </arc>
+    <arc id="arc_60_input_59" class="consumption" source="entityVertex_996761_60" target="reactionVertex_996727.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="157.02519955724378" y="882.8586839192394"/>
+      <next x="176.99999999999994" y="896"/>
+      <end x="186.04167" y="895"/>
+    </arc>
+    <arc id="arc_4_input_6" class="consumption" source="entityVertex_983240_4" target="reactionVertex_983218.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="588.01128289072" y="109.04958301333646"/>
+      <next x="660" y="148"/>
+      <end x="684.0417" y="147"/>
+    </arc>
+    <arc id="arc_8_output_6" class="production" source="reactionVertex_983218.2" target="entityVertex_983270_8">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="701.9583" y="147"/>
+      <end x="741.2501202223633" y="146.57675333138278"/>
+    </arc>
+  </map>
+</sbgn>

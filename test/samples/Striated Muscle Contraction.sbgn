@@ -1,0 +1,319 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+  <map language="process description">
+    <extension>
+      <renderInformation 
+        xmlns="http://www.sbml.org/sbml/level3/version1/render/version1" id="renderInformation" program-name="sbgnviz" program-version="6.1.0" background-color="#00000000">
+        <listOfColorDefinitions>
+          <colorDefinition id="color_1" value="#f7f7f77f"/>
+          <colorDefinition id="color_2" value="#555555"/>
+          <colorDefinition id="color_3" value="#d1e5f07f"/>
+          <colorDefinition id="color_4" value="#ffffffff"/>
+          <colorDefinition id="color_5" value="#fddbc7ff"/>
+        </listOfColorDefinitions>
+        <listOfBackgroundImages/>
+        <listOfStyles>
+          <style id="nodef7f7f75555553.2514normalnormalHelvetica0000.5" idList="compartmentVertex_70101_1">
+            <g font-size="14" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="3.25" fill="color_1" background-opacity="0.5"/>
+          </style>
+          <style id="noded1e5f05555551.2511normalnormalHelvetica0000.5" idList="entityVertex_390591_11 entityVertex_390590_3 entityVertex_390596_8 entityVertex_390592_5 entityVertex_390575_12">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="1.25" fill="color_3" background-opacity="0.5"/>
+          </style>
+          <style id="nodeffffff5555551.251" idList="reactionVertex_390595_2 reactionVertex_390597_13 reactionVertex_390593_9 reactionVertex_390598_6">
+            <g stroke="color_2" stroke-width="1.25" fill="color_4" background-opacity="1"/>
+          </style>
+          <style id="nodefddbc75555551.2511normalnormalHelvetica0001" idList="entityVertex_74016_4 entityVertex_29372_10 entityVertex_29370_14 entityVertex_113592_7">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="1.25" fill="color_5" background-opacity="1"/>
+          </style>
+          <style id="edge5555551.25" idList="arc_5_output_2 arc_5_output_13 arc_8_input_9 arc_3_input_2 arc_11_output_9 arc_5_input_6 arc_7_input_6 arc_4_input_2 arc_8_output_6 arc_10_output_9 arc_11_input_13 arc_14_output_13 arc_12_catalyst_9">
+            <g stroke="color_2" stroke-width="1.25"/>
+          </style>
+        </listOfStyles>
+      </renderInformation>
+      <nwt:mapProperties 
+        xmlns:nwt="https://newteditor.org/">
+        <compoundPadding>0</compoundPadding>
+        <extraCompartmentPadding>14</extraCompartmentPadding>
+        <extraComplexPadding>10</extraComplexPadding>
+        <arrowScale>1.25</arrowScale>
+        <showComplexName>true</showComplexName>
+        <dynamicLabelSize>regular</dynamicLabelSize>
+        <inferNestingOnLoad>true</inferNestingOnLoad>
+        <fitLabelsToNodes>true</fitLabelsToNodes>
+        <fitLabelsToInfoboxes>false</fitLabelsToInfoboxes>
+        <recalculateLayoutOnComplexityManagement>true</recalculateLayoutOnComplexityManagement>
+        <rearrangeOnComplexityManagement>true</rearrangeOnComplexityManagement>
+        <animateOnDrawingChanges>true</animateOnDrawingChanges>
+        <adjustNodeLabelFontSizeAutomatically>false</adjustNodeLabelFontSizeAutomatically>
+        <enablePorts>true</enablePorts>
+        <enableSIFTopologyGrouping>false</enableSIFTopologyGrouping>
+        <allowCompoundNodeResize>true</allowCompoundNodeResize>
+        <mapColorScheme>opposed_red_blue</mapColorScheme>
+        <mapColorSchemeStyle>solid</mapColorSchemeStyle>
+        <mapName>Pathway #sbgn-network-container-0</mapName>
+        <mapDescription/>
+        <highlightColor>#0B9BCD</highlightColor>
+        <extraHighlightThickness>2</extraHighlightThickness>
+        <mapPD2AFConverted>false</mapPD2AFConverted>
+      </nwt:mapProperties>
+    </extension>
+    <glyph id="compartmentVertex_70101_1" class="compartment">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>932.25</w>
+          <h>239.25</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="cytosol"/>
+      <bbox x="9.375" y="32.375" w="960.25" h="267.25"/>
+    </glyph>
+    <glyph id="entityVertex_390591_11" class="complex" compartmentRef="compartmentVertex_70101_1">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>125</w>
+          <h>50</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="ADP:Calcium Bound Sarcomere Protein Complex"/>
+      <bbox x="828" y="194" w="125" h="50"/>
+    </glyph>
+    <glyph id="reactionVertex_390595_2" class="association" compartmentRef="compartmentVertex_70101_1">
+      <label text="Calcium Binds Troponin-C"/>
+      <bbox x="224" y="122" w="10" h="10"/>
+      <port id="reactionVertex_390595.1" x="220.66667" y="127"/>
+      <port id="reactionVertex_390595.2" x="237.33333" y="127"/>
+    </glyph>
+    <glyph id="entityVertex_390590_3" class="complex" compartmentRef="compartmentVertex_70101_1">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>120</w>
+          <h>36</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="Inactive Sarcomere Protein Complex"/>
+      <bbox x="25" y="158" w="120" h="36"/>
+    </glyph>
+    <glyph id="reactionVertex_390597_13" class="dissociation" compartmentRef="compartmentVertex_70101_1">
+      <label text="Release Of ADP From Myosin"/>
+      <bbox x="766" y="213" w="10" h="10"/>
+      <port id="reactionVertex_390597.1" x="762.6667" y="218"/>
+      <port id="reactionVertex_390597.2" x="779.3333" y="218"/>
+    </glyph>
+    <glyph id="entityVertex_74016_4" class="simple chemical" compartmentRef="compartmentVertex_70101_1">
+      <label text="Ca2+"/>
+      <bbox x="83" y="55" w="61" h="30"/>
+    </glyph>
+    <glyph id="entityVertex_390596_8" class="complex" compartmentRef="compartmentVertex_70101_1">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>124</w>
+          <h>50</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="ATP:Calcium Bound Sarcomere Protein Complex"/>
+      <bbox x="552" y="109" w="124" h="50"/>
+    </glyph>
+    <glyph id="reactionVertex_390593_9" class="process" compartmentRef="compartmentVertex_70101_1">
+      <label text="ATP Hydrolysis By Myosin"/>
+      <bbox x="756" y="130" w="12" h="12"/>
+      <port id="reactionVertex_390593.1" x="752" y="136"/>
+      <port id="reactionVertex_390593.2" x="772" y="136"/>
+    </glyph>
+    <glyph id="entityVertex_29372_10" class="simple chemical" compartmentRef="compartmentVertex_70101_1">
+      <label text="Pi"/>
+      <bbox x="845" y="81" w="109" h="30"/>
+    </glyph>
+    <glyph id="entityVertex_29370_14" class="simple chemical" compartmentRef="compartmentVertex_70101_1">
+      <label text="ADP"/>
+      <bbox x="450" y="254" w="40" h="30"/>
+    </glyph>
+    <glyph id="reactionVertex_390598_6" class="association" compartmentRef="compartmentVertex_70101_1">
+      <label text="Myosin Binds ATP"/>
+      <bbox x="493" y="124" w="10" h="10"/>
+      <port id="reactionVertex_390598.1" x="489.66666" y="129"/>
+      <port id="reactionVertex_390598.2" x="506.33334" y="129"/>
+    </glyph>
+    <glyph id="entityVertex_113592_7" class="simple chemical" compartmentRef="compartmentVertex_70101_1">
+      <label text="ATP"/>
+      <bbox x="402" y="48" w="39" h="30"/>
+    </glyph>
+    <glyph id="entityVertex_390592_5" class="complex" compartmentRef="compartmentVertex_70101_1">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>117</w>
+          <h>50</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="Calcium Bound Sarcomere Protein Complex"/>
+      <bbox x="283" y="101" w="117" h="50"/>
+    </glyph>
+    <glyph id="entityVertex_390575_12" class="complex" compartmentRef="compartmentVertex_70101_1">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>102</w>
+          <h>22</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="Myosin Complex"/>
+      <bbox x="707" y="52" w="102" h="22"/>
+    </glyph>
+    <arc id="arc_5_output_2" class="production" source="reactionVertex_390595.2" target="entityVertex_390592_5">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="237.95833" y="127"/>
+      <end x="279.25012344947464" y="126.55333223600466"/>
+    </arc>
+    <arc id="arc_5_output_13" class="production" source="reactionVertex_390597.2" target="entityVertex_390592_5">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="779.9583" y="218"/>
+      <next x="527.0000000000001" y="218.00000000000003"/>
+      <end x="392.68594168449965" y="151.38601959554694"/>
+    </arc>
+    <arc id="arc_8_input_9" class="consumption" source="entityVertex_390596_8" target="reactionVertex_390593.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="676.625" y="134.84628378378378"/>
+      <end x="751.375" y="136"/>
+    </arc>
+    <arc id="arc_3_input_2" class="consumption" source="entityVertex_390590_3" target="reactionVertex_390595.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="123.01020408163265" y="157.375"/>
+      <next x="185" y="127"/>
+      <end x="220.04167" y="127"/>
+    </arc>
+    <arc id="arc_11_output_9" class="production" source="reactionVertex_390593.2" target="entityVertex_390591_11">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="772.625" y="136"/>
+      <next x="808" y="139"/>
+      <end x="861.8307800204655" y="191.1995442622695"/>
+    </arc>
+    <arc id="arc_5_input_6" class="consumption" source="entityVertex_390592_5" target="reactionVertex_390598.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="400.625" y="126.54493087557604"/>
+      <next x="450" y="127"/>
+      <end x="489.04166" y="129"/>
+    </arc>
+    <arc id="arc_7_input_6" class="consumption" source="entityVertex_113592_7" target="reactionVertex_390598.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <glyph id="arc_7_input_6_card" class="stoichiometry">
+        <label text="2"/>
+        <bbox x="430.3984720070592" y="76.21060380532569" w="10" h="16"/>
+      </glyph>
+      <start x="428.0760622595257" y="77.7672977056015"/>
+      <next x="450.00000000000017" y="127.00000000000006"/>
+      <end x="489.04166" y="129"/>
+    </arc>
+    <arc id="arc_4_input_2" class="consumption" source="entityVertex_74016_4" target="reactionVertex_390595.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <glyph id="arc_4_input_2_card" class="stoichiometry">
+        <label text="4"/>
+        <bbox x="139.1601863736504" y="76.44238633983316" w="10" h="16"/>
+      </glyph>
+      <start x="130.08536336067917" y="83.2218980637582"/>
+      <next x="185.00000000000003" y="127"/>
+      <end x="220.04167" y="127"/>
+    </arc>
+    <arc id="arc_8_output_6" class="production" source="reactionVertex_390598.2" target="entityVertex_390596_8">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="506.95834" y="129"/>
+      <end x="548.2528989412351" y="131.16607323022563"/>
+    </arc>
+    <arc id="arc_10_output_9" class="production" source="reactionVertex_390593.2" target="entityVertex_29372_10">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <glyph id="arc_10_output_9_card" class="stoichiometry">
+        <label text="2"/>
+        <bbox x="846.910198726202" y="100.36460606309635" w="10" h="16"/>
+      </glyph>
+      <start x="772.625" y="136"/>
+      <next x="808" y="139.00000000000006"/>
+      <end x="868.2009680367761" y="110.70883469309979"/>
+    </arc>
+    <arc id="arc_11_input_13" class="consumption" source="entityVertex_390591_11" target="reactionVertex_390597.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="827.375" y="218.47175732217573"/>
+      <end x="762.0417" y="218"/>
+    </arc>
+    <arc id="arc_14_output_13" class="production" source="reactionVertex_390597.2" target="entityVertex_29370_14">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <glyph id="arc_14_output_13_card" class="stoichiometry">
+        <label text="2"/>
+        <bbox x="494.0708119027387" y="224.9892735607075" w="10" h="16"/>
+      </glyph>
+      <start x="779.9583" y="218"/>
+      <next x="527.0000000000001" y="218"/>
+      <end x="485.6564682592869" y="254.99158103116434"/>
+    </arc>
+    <arc id="arc_12_catalyst_9" class="catalysis" source="entityVertex_390575_12" target="reactionVertex_390593_9">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="758.6118421052632" y="74.625"/>
+      <next x="761.0000000000002" y="120.00000000000212"/>
+      <end x="761.4066303557651" y="126.50608569224097"/>
+    </arc>
+  </map>
+</sbgn>

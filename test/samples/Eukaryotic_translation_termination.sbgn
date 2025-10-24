@@ -1,0 +1,446 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+  <map language="process description">
+    <extension>
+      <renderInformation 
+        xmlns="http://www.sbml.org/sbml/level3/version1/render/version1" id="renderInformation" program-name="sbgnviz" program-version="6.1.0" background-color="#00000000">
+        <listOfColorDefinitions>
+          <colorDefinition id="color_1" value="#f7f7f77f"/>
+          <colorDefinition id="color_2" value="#555555"/>
+          <colorDefinition id="color_3" value="#fddbc7ff"/>
+          <colorDefinition id="color_4" value="#d1e5f07f"/>
+          <colorDefinition id="color_5" value="#ffffffff"/>
+          <colorDefinition id="color_6" value="#92c5deff"/>
+        </listOfColorDefinitions>
+        <listOfBackgroundImages/>
+        <listOfStyles>
+          <style id="nodef7f7f75555553.2514normalnormalHelvetica0000.5" idList="compartmentVertex_70101_12">
+            <g font-size="14" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="3.25" fill="color_1" background-opacity="0.5"/>
+          </style>
+          <style id="nodefddbc75555551.2511normalnormalHelvetica0001" idList="entityVertex_29372_7 entityVertex_6785226_46 entityVertex_5691517_44 entityVertex_29356_118 entityVertex_71284_59 entityVertex_71285_62 entityVertex_29356_42">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="1.25" fill="color_3" background-opacity="1"/>
+          </style>
+          <style id="noded1e5f05555551.2511normalnormalHelvetica0000.5" idList="entityVertex_143396_10 entityVertex_5691496_31 entityVertex_141952_3 entityVertex_143397_5 entityVertex_6800133_63 entityVertex_143381_8 entityVertex_6800154_61 entityVertex_6800132_60">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="1.25" fill="color_4" background-opacity="0.5"/>
+          </style>
+          <style id="nodeffffff5555551.251" idList="reactionVertex_5691512_41 reactionVertex_141673_6 reactionVertex_141691_1 reactionVertex_6800138_58 reactionVertex_141671_9">
+            <g stroke="color_2" stroke-width="1.25" fill="color_5" background-opacity="1"/>
+          </style>
+          <style id="node92c5de5555551.2511normalnormalHelvetica0001" idList="entityVertex_5691510_45">
+            <g font-size="11" font-family="Helvetica" font-weight="normal" font-style="normal" font-color="#000" stroke="color_2" stroke-width="1.25" fill="color_6" background-opacity="1"/>
+          </style>
+          <style id="edge5555551.25" idList="arc_5_input_6 arc_10_output_9 arc_44_output_41 arc_31_output_9 arc_5_output_1 arc_45_catalyst_41 arc_61_input_1 arc_118_input_6 arc_42_input_41 arc_8_output_6 arc_61_output_58 arc_63_catalyst_58 arc_7_output_6 arc_31_input_41 arc_3_input_1 arc_62_output_58 arc_8_input_9 arc_46_output_41 arc_60_input_58 arc_59_input_58">
+            <g stroke="color_2" stroke-width="1.25"/>
+          </style>
+        </listOfStyles>
+      </renderInformation>
+      <nwt:mapProperties 
+        xmlns:nwt="https://newteditor.org/">
+        <compoundPadding>0</compoundPadding>
+        <extraCompartmentPadding>14</extraCompartmentPadding>
+        <extraComplexPadding>10</extraComplexPadding>
+        <arrowScale>1.25</arrowScale>
+        <showComplexName>true</showComplexName>
+        <dynamicLabelSize>regular</dynamicLabelSize>
+        <inferNestingOnLoad>true</inferNestingOnLoad>
+        <fitLabelsToNodes>true</fitLabelsToNodes>
+        <fitLabelsToInfoboxes>false</fitLabelsToInfoboxes>
+        <recalculateLayoutOnComplexityManagement>true</recalculateLayoutOnComplexityManagement>
+        <rearrangeOnComplexityManagement>true</rearrangeOnComplexityManagement>
+        <animateOnDrawingChanges>true</animateOnDrawingChanges>
+        <adjustNodeLabelFontSizeAutomatically>false</adjustNodeLabelFontSizeAutomatically>
+        <enablePorts>true</enablePorts>
+        <enableSIFTopologyGrouping>false</enableSIFTopologyGrouping>
+        <allowCompoundNodeResize>true</allowCompoundNodeResize>
+        <mapColorScheme>opposed_red_blue</mapColorScheme>
+        <mapColorSchemeStyle>solid</mapColorSchemeStyle>
+        <mapName>Pathway #sbgn-network-container-0</mapName>
+        <mapDescription/>
+        <highlightColor>#0B9BCD</highlightColor>
+        <extraHighlightThickness>2</extraHighlightThickness>
+        <mapPD2AFConverted>false</mapPD2AFConverted>
+      </nwt:mapProperties>
+    </extension>
+    <glyph id="compartmentVertex_70101_12" class="compartment">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>1289.25</w>
+          <h>240.25</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="cytosol"/>
+      <bbox x="1.375" y="13.375" w="1317.25" h="268.25"/>
+    </glyph>
+    <glyph id="entityVertex_29372_7" class="simple chemical" compartmentRef="compartmentVertex_70101_12">
+      <label text="Pi"/>
+      <bbox x="737" y="43" w="32" h="29"/>
+    </glyph>
+    <glyph id="entityVertex_143396_10" class="complex" compartmentRef="compartmentVertex_70101_12">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>131</w>
+          <h>72</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="Me-Q185-ETF1 dimer:eRF3:GDP:80S Ribosome:mRNA:tRNA Complex"/>
+      <bbox x="1076" y="73" w="131" h="72"/>
+    </glyph>
+    <glyph id="reactionVertex_5691512_41" class="process" compartmentRef="compartmentVertex_70101_12">
+      <label text="APEH hydrolyses NAc-Ser-protein"/>
+      <bbox x="1120" y="204" w="12" h="12"/>
+      <port id="reactionVertex_5691512.1" x="1116" y="210"/>
+      <port id="reactionVertex_5691512.2" x="1136" y="210"/>
+    </glyph>
+    <glyph id="entityVertex_6785226_46" class="simple chemical" compartmentRef="compartmentVertex_70101_12">
+      <label text="protein"/>
+      <bbox x="1229" y="226" w="58" h="30"/>
+    </glyph>
+    <glyph id="entityVertex_5691496_31" class="complex" compartmentRef="compartmentVertex_70101_12">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>65</w>
+          <h>33</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="NAc-Ser:protein"/>
+      <bbox x="937" y="194" w="65" h="33"/>
+    </glyph>
+    <glyph id="reactionVertex_141673_6" class="process" compartmentRef="compartmentVertex_70101_12">
+      <label text="GTP Hydrolysis by eRF3 bound to the eRF1:mRNA:polypeptide:80S Ribosome complex"/>
+      <bbox x="667" y="102" w="12" h="12"/>
+      <port id="reactionVertex_141673.1" x="663" y="108"/>
+      <port id="reactionVertex_141673.2" x="683" y="108"/>
+    </glyph>
+    <glyph id="entityVertex_5691517_44" class="simple chemical" compartmentRef="compartmentVertex_70101_12">
+      <label text="NAc-Ser residue"/>
+      <bbox x="1239" y="160" w="64" h="37"/>
+    </glyph>
+    <glyph id="entityVertex_29356_118" class="simple chemical" compartmentRef="compartmentVertex_70101_12">
+      <label text="H2O"/>
+      <bbox x="610" y="43" w="43" h="30"/>
+    </glyph>
+    <glyph id="reactionVertex_141691_1" class="association" compartmentRef="compartmentVertex_70101_12">
+      <label text="GTP bound eRF3:eRF1 complex binds the peptidyl tRNA:mRNA:80S Ribosome complex"/>
+      <bbox x="459" y="102" w="10" h="10"/>
+      <port id="reactionVertex_141691.1" x="455.66666" y="107"/>
+      <port id="reactionVertex_141691.2" x="472.33334" y="107"/>
+    </glyph>
+    <glyph id="entityVertex_71284_59" class="simple chemical" compartmentRef="compartmentVertex_70101_12">
+      <label text="AdoMet"/>
+      <bbox x="91" y="152" w="59" h="30"/>
+    </glyph>
+    <glyph id="reactionVertex_6800138_58" class="process" compartmentRef="compartmentVertex_70101_12">
+      <label text="N6AMT1:TRMT112 transfers CH3 group from AdoMet to ETF1 dimer"/>
+      <bbox x="185" y="103" w="12" h="12"/>
+      <port id="reactionVertex_6800138.1" x="181" y="109"/>
+      <port id="reactionVertex_6800138.2" x="201" y="109"/>
+    </glyph>
+    <glyph id="entityVertex_141952_3" class="complex" compartmentRef="compartmentVertex_70101_12">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>121</w>
+          <h>58</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="80S Ribosome:mRNA:peptidyl-tRNA with elongating peptide"/>
+      <bbox x="322" y="151" w="121" h="58"/>
+    </glyph>
+    <glyph id="entityVertex_143397_5" class="complex" compartmentRef="compartmentVertex_70101_12">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>123</w>
+          <h>79</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="Me-Q185-ETF1 dimer:eRF3:GTP:80S Ribosome:mRNA:peptidyl-tRNA"/>
+      <bbox x="489" y="70" w="123" h="79"/>
+    </glyph>
+    <glyph id="entityVertex_6800133_63" class="complex" compartmentRef="compartmentVertex_70101_12">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>83</w>
+          <h>35</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="N6AMT1:TRMT112"/>
+      <bbox x="152" y="29" w="83" h="35"/>
+    </glyph>
+    <glyph id="reactionVertex_141671_9" class="dissociation" compartmentRef="compartmentVertex_70101_12">
+      <label text="Polypeptide release from the eRF3-GDP:eRF1:mRNA:80S Ribosome complex"/>
+      <bbox x="937" y="104" w="10" h="10"/>
+      <port id="reactionVertex_141671.1" x="933.6667" y="109"/>
+      <port id="reactionVertex_141671.2" x="950.3333" y="109"/>
+    </glyph>
+    <glyph id="entityVertex_143381_8" class="complex" compartmentRef="compartmentVertex_70101_12">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>126</w>
+          <h>81</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="Me-Q185-ETF1 dimer:eRF3:GDP:80S Ribosome:mRNA:peptidyl-tRNA Complex"/>
+      <bbox x="770" y="74" w="126" h="81"/>
+    </glyph>
+    <glyph id="entityVertex_71285_62" class="simple chemical" compartmentRef="compartmentVertex_70101_12">
+      <label text="AdoHcy"/>
+      <bbox x="234" y="145" w="59" h="30"/>
+    </glyph>
+    <glyph id="entityVertex_6800154_61" class="complex" compartmentRef="compartmentVertex_70101_12">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>104</w>
+          <h>36</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="Me-Q185-ETF1 dimer:eRF3:GTP"/>
+      <bbox x="293" y="91" w="104" h="36"/>
+    </glyph>
+    <glyph id="entityVertex_5691510_45" class="macromolecule" compartmentRef="compartmentVertex_70101_12">
+      <label text="APEH"/>
+      <bbox x="1104" y="244" w="47" h="22"/>
+    </glyph>
+    <glyph id="entityVertex_6800132_60" class="complex" compartmentRef="compartmentVertex_70101_12">
+      <extension>
+        <nwt:extraInfo 
+          xmlns:nwt="https://newteditor.org/">
+          <w>111</w>
+          <h>36</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </nwt:extraInfo>
+      </extension>
+      <label text="ETF1 dimer:eRF3:GTP"/>
+      <bbox x="17" y="91" w="111" h="36"/>
+    </glyph>
+    <glyph id="entityVertex_29356_42" class="simple chemical" compartmentRef="compartmentVertex_70101_12">
+      <label text="H2O"/>
+      <bbox x="981" y="236" w="39" h="30"/>
+    </glyph>
+    <arc id="arc_5_input_6" class="consumption" source="entityVertex_143397_5" target="reactionVertex_141673.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="612.625" y="108.50334224598932"/>
+      <next x="644" y="108.00000000000001"/>
+      <end x="662.375" y="108"/>
+    </arc>
+    <arc id="arc_10_output_9" class="production" source="reactionVertex_141671.2" target="entityVertex_143396_10">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="950.9583" y="109"/>
+      <next x="1016" y="109"/>
+      <end x="1072.25" y="109"/>
+    </arc>
+    <arc id="arc_44_output_41" class="production" source="reactionVertex_5691512.2" target="entityVertex_5691517_44">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="1136.625" y="210"/>
+      <next x="1176" y="208.99999999999997"/>
+      <end x="1239.4100302185545" y="188.6420429298325"/>
+    </arc>
+    <arc id="arc_31_output_9" class="production" source="reactionVertex_141671.2" target="entityVertex_5691496_31">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="950.9583" y="109"/>
+      <next x="1016" y="109.00000000000018"/>
+      <end x="978.6470073967257" y="190.53395159639442"/>
+    </arc>
+    <arc id="arc_5_output_1" class="production" source="reactionVertex_141691.2" target="entityVertex_143397_5">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="472.95834" y="107"/>
+      <end x="485.25130435514194" y="107.61419954783648"/>
+    </arc>
+    <arc id="arc_45_catalyst_41" class="catalysis" source="entityVertex_5691510_45" target="reactionVertex_5691512_41">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="1126.8987068965516" y="243.375"/>
+      <next x="1126" y="226.00000000000102"/>
+      <end x="1126" y="219.5"/>
+    </arc>
+    <arc id="arc_61_input_1" class="consumption" source="entityVertex_6800154_61" target="reactionVertex_141691.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="397.625" y="107.92602040816327"/>
+      <next x="443" y="107"/>
+      <end x="455.04166" y="107"/>
+    </arc>
+    <arc id="arc_118_input_6" class="consumption" source="entityVertex_29356_118" target="reactionVertex_141673.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="635.3467560667837" y="73.38702426713482"/>
+      <next x="644" y="107.99999999999997"/>
+      <end x="662.375" y="108"/>
+    </arc>
+    <arc id="arc_42_input_41" class="consumption" source="entityVertex_29356_42" target="reactionVertex_5691512.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="1016.3505993095342" y="241.37222856754215"/>
+      <next x="1068" y="210"/>
+      <end x="1115.375" y="210"/>
+    </arc>
+    <arc id="arc_8_output_6" class="production" source="reactionVertex_141673.2" target="entityVertex_143381_8">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="683.625" y="108"/>
+      <next x="708" y="108"/>
+      <end x="766.2542164509616" y="111.02921925545002"/>
+    </arc>
+    <arc id="arc_61_output_58" class="production" source="reactionVertex_6800138.2" target="entityVertex_6800154_61">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="201.625" y="109"/>
+      <next x="231" y="109"/>
+      <end x="289.25" y="109"/>
+    </arc>
+    <arc id="arc_63_catalyst_58" class="catalysis" source="entityVertex_6800133_63" target="reactionVertex_6800138_58">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="192.52553763440858" y="64.625"/>
+      <next x="191" y="92.99999999999955"/>
+      <end x="191" y="99.5"/>
+    </arc>
+    <arc id="arc_7_output_6" class="production" source="reactionVertex_141673.2" target="entityVertex_29372_7">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="683.625" y="108"/>
+      <next x="708" y="108.00000000000006"/>
+      <end x="740.4514800736174" y="71.58222791738493"/>
+    </arc>
+    <arc id="arc_31_input_41" class="consumption" source="entityVertex_5691496_31" target="reactionVertex_5691512.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="1002.625" y="210.33185279187816"/>
+      <next x="1068" y="210"/>
+      <end x="1115.375" y="210"/>
+    </arc>
+    <arc id="arc_3_input_1" class="consumption" source="entityVertex_141952_3" target="reactionVertex_141691.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="407.05222602739724" y="150.375"/>
+      <next x="442.99999999999994" y="107.00000000000003"/>
+      <end x="455.04166" y="107"/>
+    </arc>
+    <arc id="arc_62_output_58" class="production" source="reactionVertex_6800138.2" target="entityVertex_71285_62">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <glyph id="arc_62_output_58_card" class="stoichiometry">
+        <label text="2"/>
+        <bbox x="237.69313328736564" y="109.34922454325068" w="10" h="15.999999999999986"/>
+      </glyph>
+      <start x="201.625" y="109"/>
+      <next x="231" y="109"/>
+      <end x="252.36651981948535" y="142.52900033211546"/>
+    </arc>
+    <arc id="arc_8_input_9" class="consumption" source="entityVertex_143381_8" target="reactionVertex_141671.1">
+      <extension>
+        <curveStyle>bezier</curveStyle>
+      </extension>
+      <start x="896.625" y="111.2895642201835"/>
+      <end x="933.0417" y="109"/>
+    </arc>
+    <arc id="arc_46_output_41" class="production" source="reactionVertex_5691512.2" target="entityVertex_6785226_46">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="1136.625" y="210"/>
+      <next x="1176.0000000000002" y="209.00000000000003"/>
+      <end x="1231.273892762621" y="230.5702996146813"/>
+    </arc>
+    <arc id="arc_60_input_58" class="consumption" source="entityVertex_6800132_60" target="reactionVertex_6800138.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <start x="128.625" y="109"/>
+      <next x="164" y="109"/>
+      <end x="180.375" y="109"/>
+    </arc>
+    <arc id="arc_59_input_58" class="consumption" source="entityVertex_71284_59" target="reactionVertex_6800138.1">
+      <extension>
+        <curveStyle>segments</curveStyle>
+      </extension>
+      <glyph id="arc_59_input_58_card" class="stoichiometry">
+        <label text="2"/>
+        <bbox x="137.2215044591636" y="120.03799405444855" w="10" h="16"/>
+      </glyph>
+      <start x="131.4215044591636" y="152.43799405444855"/>
+      <next x="164" y="109.00000000000003"/>
+      <end x="180.375" y="109"/>
+    </arc>
+  </map>
+</sbgn>

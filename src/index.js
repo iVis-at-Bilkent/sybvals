@@ -367,6 +367,7 @@ function findCandidatesOrFix(errors, cy, isFix) {
         var source = edges[i].source();
         var x = edges[i].source().x; // endpoint are removed
         var y = edges[i].source().y;
+
         if (edges[i].data().class != 'consumption') {
           x = edges[i].target().x;
           y = edges[i].target().y;
@@ -404,12 +405,13 @@ function findCandidatesOrFix(errors, cy, isFix) {
         var cX = x + shiftX;
         var cY = y + shiftY;
 
-        errorFixParam.newNodes.push({ x: cX, y: cY, class: nodeParams, id: "node" + i });
+        errorFixParam.newNodes.push({ x: cX, y: cY, class: nodeParams, id: id + "nodee" + i });
         if (edges[i].data().class == 'consumption') {
-          errorFixParam.newEdges.push({ source: "node" + i, target: target.id(), class: edgeParams, property: 'porttarget', value: edges[i].data().porttarget });
+
+          errorFixParam.newEdges.push({ source: "nodee" + i, target: target.id(), class: edgeParams, property: 'porttarget', value: edges[i].data().porttarget });
         }
         else {
-          errorFixParam.newEdges.push({ source: source.id(), target: "node" + i, class: edgeParams, property: 'portsource', value: edges[i].data().portsource });
+          errorFixParam.newEdges.push({ source: source.id(), target: "nodee" + i, class: edgeParams, property: 'portsource', value: edges[i].data().portsource });
 
         }
         errorFixParam.oldEdges.push(edges[i]);
@@ -433,7 +435,11 @@ function findCandidatesOrFix(errors, cy, isFix) {
       }
     }
     else if (currentErrors[check].pattern == "pd10125") {
-      var edgeParams = { class: ele.data().class, language: ele.data().language };
+      let ele = cy.getElementById(currentErrors[check].role);
+      
+
+
+      var edgeParams = { class: "logic arc" };
       var sourcePosX = ele.source().position().x;
       var targetPosX = ele.target().position().x;
       var sourcePosY = ele.source().position().y;
@@ -827,12 +833,228 @@ function closestNodeForEdges(ele, nodes) {
   return closestNode;
 }
 
+function generateErrorsOnMap(cy){
+  let errorCount = 0;
+  let numberOfErrors = 12;
+  while( errorCount <  30){
+    let errorId = Math.floor( Math.random() * numberOfErrors ) ;
+    if( errorId == 0){   // producing pd10101 and pd10102 errors
+
+      let consumptionEdges = cy.edges().filter('[class = "consumption"]')
+      let numberOfConsumptions = consumptionEdges.length;
+      if( numberOfConsumptions > 0){
+        let edgeNo = Math.floor(Math.random() * numberOfConsumptions) ;
+        let source = consumptionEdges[ edgeNo ].data('source');
+        let target = consumptionEdges[ edgeNo ].data('target');
+        let portsource = consumptionEdges[ edgeNo ].data('portsource');
+        let porttarget = consumptionEdges[ edgeNo ].data('porttarget');
+        consumptionEdges[edgeNo].data().portsource = porttarget;
+        consumptionEdges[edgeNo].data().porttarget = portsource;
+      }
+    }
+    else if( errorId == 3){   // producing pd10105 and pd10106 errors
+
+      let productionEdges = cy.edges().filter('[class = "production"]')
+      let numberOfProductions = productionEdges.length;
+      if( numberOfProductions > 0){
+        let edgeNo = Math.floor(Math.random() * numberOfProductions) ;
+        let portsource = productionEdges[ edgeNo ].data('portsource');
+        let porttarget = productionEdges[ edgeNo ].data('porttarget');
+        productionEdges[edgeNo].data().portsource = porttarget;
+        productionEdges[edgeNo].data().porttarget = portsource;
+
+        
+      
+        
+
+      }
+     // console.log( numberOfConsumptions );
+     
+     // break;
+    }
+    else if( errorId == 4 ){   // producing pd10109 and pd10110 errors
+
+      let consumptionEdges = cy.edges().filter('[class = "modulation"]')
+      let numberOfConsumptions = consumptionEdges.length;
+      if( numberOfConsumptions > 0){
+        let edgeNo = Math.floor(Math.random() * numberOfConsumptions) ;
+        let portsource = consumptionEdges[ edgeNo ].data('portsource');
+        let porttarget = consumptionEdges[ edgeNo ].data('porttarget');
+        consumptionEdges[edgeNo].data().portsource = porttarget;
+        consumptionEdges[edgeNo].data().porttarget = portsource;
+      }
+    }
+    else if( errorId == 8 ){   // producing pd10109 and pd10110 errors
+
+      let consumptionEdges = cy.edges().filter('[class = "logic arc"]');
+      let numberOfConsumptions = consumptionEdges.length;
+      if( numberOfConsumptions > 0){
+        let edgeNo = Math.floor(Math.random() * numberOfConsumptions) ;
+        let portsource = consumptionEdges[ edgeNo ].data('portsource');
+        let porttarget = consumptionEdges[ edgeNo ].data('porttarget');
+        consumptionEdges[edgeNo].data().portsource = porttarget;
+        consumptionEdges[edgeNo].data().porttarget = portsource;
+      }
+    }
+    else if( errorId == 11 ){   // producing pd10109 and pd10110 errors
+
+      let consumptionEdges = cy.edges().filter('[class = "logic arc"]');
+      let numberOfConsumptions = consumptionEdges.length;
+      if( numberOfConsumptions > 0){
+        let epnNodes = cy.nodes().filter(node => { return elementUtilities.isEPNClass( node)});
+        let pnNodes = cy.nodes().filter(node => { return elementUtilities.isPNClass( node)});
+        let epnNode = epnNodes[Math.floor(Math.random() * epnNodes.length) ];
+        let pnNode = pnNodes[Math.floor(Math.random() * pnNodes.length) ];
+        elementUtilities.addEdge( epnNode.id(), pnNode.id(), "logic arc", cy);
+      }
+    }
+    else if( errorId == 6 ){   // producing pd10109 and pd10110 errors
+
+      let sourceAndSinkNodes = cy.nodes().filter('[class = "source and sink"]')
+      let numberOfSss = sourceAndSinkNodes.length;
+      if( numberOfSss > 0){
+        let nodeNo = Math.floor(Math.random() * numberOfSss) ;
+        let source = sourceAndSinkNodes[ nodeNo ];
+        let PNNodes = cy.nodes().filter( node => { return elementUtilities.isPNClass( node );});
+        let target = PNNodes[ Math.floor(Math.random() * PNNodes.length) ]
+        elementUtilities.addEdge( source.id(), target.id(), "consumption", cy);
+
+      }
+    }
+    else if( errorId == 9 ){   // producing pd10109 and pd10110 errors
+
+      let sourceAndSinkNodes = cy.nodes().filter(node => {return elementUtilities.isEPNClass(node)});
+      let numberOfSss = sourceAndSinkNodes.length;
+      if( numberOfSss > 0){
+        let nodeNo = Math.floor(Math.random() * numberOfSss) ;
+        let source = sourceAndSinkNodes[ nodeNo ];
+        let connectedEdges = source.connectedEdges();
+        connectedEdges.forEach( edge =>{edge.remove()});
+      }
+    }
+    else if( errorId == 10 ){   // producing pd10109 and pd10110 errors
+
+      let sourceAndSinkNodes = cy.nodes().filter('[class = "process"]');
+      let numberOfSss = sourceAndSinkNodes.length;
+      if( numberOfSss > 0){
+        let nodeNo = Math.floor(Math.random() * numberOfSss) ;
+        let source = sourceAndSinkNodes[ nodeNo ];
+        let connectedEdges = source.connectedEdges().filter('[class = "consumption"]');
+        if( connectedEdges.length > 0){
+          let edgeNo = Math.floor(Math.random() * connectedEdges.length) ;
+          let edge = connectedEdges[ edgeNo ];
+          let data = Object.assign({}, edge.data());
+
+         // Give the new edge a unique id
+          data.id = edge.id() + '_clone' + errorCount;
+
+// Add the new edge
+          cy.add({
+              group: 'edges',
+              data: data
+          });
+        }
+        }      
+    }
+
+    else if( errorId == 6 ){   // producing pd10109 and pd10110 errors
+
+      let sourceAndSinkNodes = cy.nodes().filter('[class = "source and sink"]')
+      let numberOfSss = sourceAndSinkNodes.length;
+      if( numberOfSss > 0){
+        let nodeNo = Math.floor(Math.random() * numberOfSss) ;
+        let source = sourceAndSinkNodes[ nodeNo ];
+        let PNNodes = cy.nodes().filter( node => { return elementUtilities.isPNClass( node );});
+        let target = PNNodes[ Math.floor(Math.random() * PNNodes.length) ]
+        elementUtilities.addEdge( source.id(), target.id(), "consumption", cy);
+      }
+      
+    } else if( errorId == 7 ){   // producing pd10109 and pd10110 errors
+
+      let sourceAndSinkNodes = cy.nodes().filter('[class = "source and sink"]')
+      let numberOfSss = sourceAndSinkNodes.length;
+      if( numberOfSss > 0){
+        let nodeNo = Math.floor(Math.random() * numberOfSss) ;
+        let target = sourceAndSinkNodes[ nodeNo ];
+        let PNNodes = cy.nodes().filter( node => { return elementUtilities.isPNClass( node );});
+        let source = PNNodes[ Math.floor(Math.random() * PNNodes.length) ]
+        elementUtilities.addEdge( source.id(), target.id(), "production", cy);
+      }
+      
+    }
+
+    else if( errorId == 5 ){   // producing pd10109 and pd10110 errors
+
+
+      let logicNodes = cy.nodes().filter( node => {return node.data().class == "and" || node.data().class == "or" ;});
+
+      let numberOfLogics = logicNodes.length;
+      if( numberOfLogics > 0){
+        let nodeNo = Math.floor(Math.random() * numberOfLogics) ;
+        let logicNode = logicNodes[nodeNo] ;
+        let newNodeId = Math.floor( Math.random() * cy.nodes().length );
+        let newNode = cy.nodes()[newNodeId];
+
+        elementUtilities.addEdge( logicNode.id(), newNode.id(), "production", cy);
+      }
+   
+    }
+
+    else if( errorId == 1 ){ // producing pd10104
+      let dissociationNodes = cy.nodes().filter('[class = "dissociation"]')
+      let numberOfDissociations = dissociationNodes.length;
+      if( numberOfDissociations > 0){
+        let dissociationNode = dissociationNodes[Math.floor(Math.random() * numberOfDissociations)] ;
+        let newNodeId = Math.floor( Math.random() * cy.nodes().length );
+        let newNode = cy.nodes()[newNodeId];
+
+        elementUtilities.addEdge( newNode.id(), dissociationNode.id(), "consumption", cy);
+      }
+    } 
+    else if( errorId == 1 ){ // producing pd10104
+      let dissociationNodes = cy.nodes().filter('[class = "dissociation"]')
+      let numberOfDissociations = dissociationNodes.length;
+      if( numberOfDissociations > 0){
+        let dissociationNode = dissociationNodes[Math.floor(Math.random() * numberOfDissociations)] ;
+        let newNodeId = Math.floor( Math.random() * cy.nodes().length );
+        let newNode = cy.nodes()[newNodeId];
+
+        elementUtilities.addEdge( newNode.id(), dissociationNode.id(), "consumption", cy);
+      }
+    }
+
+    else if( errorId == 2 ){ // producing pd10108
+      let associationNodes = cy.nodes().filter('[class = "association"]')
+      let numberOfAssociations = associationNodes.length;
+      if( numberOfAssociations > 0){
+        let associationNode = associationNodes[Math.floor(Math.random() * numberOfAssociations)] ;
+        let newNodeId = Math.floor( Math.random() * cy.nodes().filter(function (node) { return elementUtilities.isPNClass(node); }).length );
+        let newNode= cy.nodes().filter(function (node) { return elementUtilities.isPNClass(node); })[newNodeId];
+
+        elementUtilities.addEdge( associationNode.id(), newNode.id(), "production", cy);
+
+        
+
+      }
+    
+      
+      
+    }
+
+
+    errorCount++;
+  }
+  return cy;
+
+}
+
 app.use(express.static(path.join(__dirname, "../public/")));
 app.use(cors());
 
 // middleware to manage the formats of files
 app.use(async (req, res, next) => {
   if (req.method === "POST") {
+    //console.log( "request" );
     let showResolutionAlternatives = req.query.showResolutionAlternatives;
     let body = '';
     let isJson = false;
@@ -885,10 +1107,12 @@ app.use(async (req, res, next) => {
         errorMessage = "Invalid map or unsupported content!";
       }
       if(errorMessage) {
+        console.log( errorMessage );
         return res.status(500).send({
         errorMessage: errorMessage
         });
       }
+      //console.log( data );
       // convert sbgn data to json for cytoscape
       var parser = new window.DOMParser;
       var xml = parser.parseFromString(data, 'text/xml');
@@ -896,6 +1120,7 @@ app.use(async (req, res, next) => {
       let isErrorsEmpty = errors.length == 0;
 
       currentSbgn = data;
+      //console.log( currentSbgn );
       let preValidationData = {};
       if (errors.length === 0) {
         let result ;
@@ -908,7 +1133,8 @@ app.use(async (req, res, next) => {
         }).principalResult;
         fs.unlinkSync('./src/sbgnFile.sbgn');
         }
-        catch {
+        catch(e) {
+          console.log( "rror in wrtigin " +  e );
           errorMessage = "Invalid map or unsupported content!";
         }
         if(errorMessage) {
@@ -937,6 +1163,7 @@ app.use(async (req, res, next) => {
           }
         }
       }
+      //console.log( " buraya geldi mi ")
       let cyJsonData = sbgnmlToJson.convert(xml, data);
       fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
       data = cyJsonData;
@@ -966,11 +1193,22 @@ app.use(async (req, res, next) => {
         errorMessage: errorMessage
       });
     }
+      //console.log( "Generate errors : " + req.query.generateErrors );
+      if( req.query.generateErrors ){
+          cy.edges().forEach(edge => {
+             //console.log( edge.data().class +  " " + edge.source().id() + " " + edge.target().id() );
+          });
+          generateErrorsOnMap(cy);
+          cy.edges().forEach(edge => {
+           // console.log( edge.data().class +  " " + edge.source().id() + " " + edge.target().id() );
+         });
+      }
       postProcessForLayouts(cy);
       data = jsonToSbgnml.createSbgnml(undefined, undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('renderInformation') : undefined, sbgnmlToJson.map.extension !== null ? sbgnmlToJson.map.extension.get('mapProperties') : undefined, cy.nodes(), cy.edges(), cy);
       data = data.replace('libsbgn/0.3', 'libsbgn/0.2');
       currentSbgn = data;
       fs.writeFileSync('./src/sbgnFile.sbgn', currentSbgn);
+      //while( 1);
       if (isErrorsEmpty) {
         let result = SaxonJS.transform({
           stylesheetFileName: './src/templatelibsbgn.sef.json',
@@ -995,7 +1233,7 @@ app.use(async (req, res, next) => {
             errors.push(error);
           }
         }
-        errors = reduceErrors(errors, cy);
+        //errors = reduceErrors(errors, cy);
       }
       data = cyJsonData;
       let unsolvedErrorInformation = {};
@@ -1379,12 +1617,15 @@ app.post('/fixError', (req, res) => {
         var cX = x + shiftX;
         var cY = y + shiftY;
 
-        errorFixParam.newNodes.push({ x: cX, y: cY, class: nodeParams, id: "node" + i });
+        errorFixParam.newNodes.push({ x: cX, y: cY, class: nodeParams, id: id + "nodee" + i });
         if (edges[i].data().class == 'consumption') {
-          errorFixParam.newEdges.push({ source: "node" + i, target: target.id(), class: edgeParams, property: 'porttarget', value: edges[i].data().porttarget });
+          console.log( "consumption " + ( id + "noddee " + i ) + " " + target.id());
+          errorFixParam.newEdges.push({ source: id + "nodee" + i, target: target.id(), class: edgeParams, property: 'porttarget', value: edges[i].data().porttarget });
         }
         else {
-          errorFixParam.newEdges.push({ source: source.id(), target: "node" + i, class: edgeParams, property: 'portsource', value: edges[i].data().portsource });
+          console.log( "production " + ( id + "noddee " + i ) + " " + target.id());
+
+          errorFixParam.newEdges.push({ source: source.id(), target: id + "nodee" + i, class: edgeParams, property: 'portsource', value: edges[i].data().portsource });
 
         }
         errorFixParam.oldEdges.push(edges[i]);
@@ -1397,6 +1638,7 @@ app.post('/fixError', (req, res) => {
       let sourceTmp = ele.source();
       if (elementUtilities.isEPNClass(targetTmp)) {
         errorFixParam.edge = ele;
+        console.log("pd10101 explanation");
         fixError(errorFixParam);
         fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "Source and target of consumption arc have been swapped.";
       }
@@ -1461,7 +1703,7 @@ app.post('/fixError', (req, res) => {
       }
       fixError(errorFixParam);
       fixExplanation[currentErrors[check].pattern + currentErrors[check].role] = "The arc between dissocation glyph and consumption glyph(" + (selectedEdge.source().id() === ele.id() ?
-        getLabel(selectedEdge.target().id()) : getLabel(selectedEdge.source())) + ") is kept.";
+        getLabel(selectedEdge.target()) : getLabel(selectedEdge.source())) + ") is kept.";
     }
     else if (currentErrors[check].pattern == "pd10127") {
       let ele = cy.getElementById(currentErrors[check].role);
@@ -1696,7 +1938,8 @@ app.post('/fixError', (req, res) => {
     }
   }
   errors = currentErrors;
-  if (showResolutionAlternatives) {
+  console.log( showResolutionAlternatives);
+  if (showResolutionAlternatives == true) {
     errors = findCandidatesOrFix(errors, cy, false);
   }
   else {
@@ -1756,6 +1999,7 @@ function fixError(errorFixParam) {
   var result = {};
   result.errorCode = errorCode;
   if (errorCode == "pd10101" || errorCode == "pd10102") {
+    console.log("pd10101 explanation");
     elementUtilities.reverseEdge(errorFixParam.edge);
   }
   if (errorCode == "pd10103" || errorCode == "pd10107") {
