@@ -12,8 +12,8 @@
     <glyph id="compartmentVertex_70101_40" class="compartment">
       <extension>
         <extraInfo>
-          <w>779.3424060399811</w>
-          <h>475.20683172949657</h>
+          <w>690.0529500490529</w>
+          <h>452.5613589129074</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -23,13 +23,13 @@
         </extraInfo>
       </extension>
       <label text="cytosol"/>
-      <bbox x="411.32879698000943" y="99.89658413525171" w="799.3424060399811" h="495.20683172949657"/>
+      <bbox x="455.97352497547354" y="111.21932054354625" w="710.0529500490529" h="472.5613589129074"/>
     </glyph>
     <glyph id="compartmentVertex_7660_1" class="compartment" compartmentRef="compartmentVertex_70101_40">
       <extension>
         <extraInfo>
-          <w>756.3424060399811</w>
-          <h>452.20683172949657</h>
+          <w>667.0529500490529</w>
+          <h>429.5613589129074</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -39,37 +39,37 @@
         </extraInfo>
       </extension>
       <label text="nucleoplasm"/>
-      <bbox x="422.82879698000943" y="111.39658413525171" w="776.3424060399811" h="472.20683172949657"/>
+      <bbox x="467.47352497547354" y="122.71932054354625" w="687.0529500490529" h="449.5613589129074"/>
     </glyph>
     <glyph id="reactionVertex_77612_19" class="process" compartmentRef="compartmentVertex_7660_1">
       <label text="Formation of dsRNA structure by looping"/>
-      <bbox x="841.2724454248751" y="211.83025488475505" w="20" h="20"/>
+      <bbox x="984.7578016023408" y="451.55463146523334" w="20" h="20"/>
       <port id="reactionVertex_77612.1"/>
       <port id="reactionVertex_77612.2"/>
     </glyph>
     <glyph id="entityVertex_76230_34" class="simple chemical" compartmentRef="compartmentVertex_7660_1">
       <label text="NH3"/>
-      <bbox x="590.7270118010431" y="506.47157326516344" w="42" h="30"/>
+      <bbox x="595.4610594079691" y="388.0437770970448" w="42" h="30"/>
     </glyph>
     <glyph id="reactionVertex_75090_22" class="association" compartmentRef="compartmentVertex_7660_1">
       <label text="Binding of ADAR1 homodimer to dsRNA duplex"/>
-      <bbox x="888.8123101692968" y="348.38609576146615" w="16.666600000000017" h="16.666600000000017"/>
-      <port id="reactionVertex_75090.1" x="888.8123101692968" y="356.71939576146616"/>
-      <port id="reactionVertex_75090.2" x="905.4789101692968" y="356.71939576146616"/>
+      <bbox x="997.9597587549167" y="381.25791449747345" w="16.666600000000017" h="16.666600000000017"/>
+      <port id="reactionVertex_75090.1" x="997.9597587549167" y="389.59121449747346"/>
+      <port id="reactionVertex_75090.2" x="1014.6263587549167" y="389.59121449747346"/>
     </glyph>
     <glyph id="entityVertex_62915_38" class="macromolecule" compartmentRef="compartmentVertex_7660_1">
       <label text="ADARB1"/>
-      <bbox x="511.5543959231966" y="339.7459004596488" w="94" h="22"/>
+      <bbox x="780.139726159722" y="203.01408794612053" w="94" h="22"/>
     </glyph>
     <glyph id="entityVertex_72084_20" class="unspecified entity" compartmentRef="compartmentVertex_7660_1">
       <label text="nascent pre-mRNA transcript"/>
-      <bbox x="787.3888108004733" y="122.39658413525171" w="123" h="36"/>
+      <bbox x="935.0941411759075" y="525.2806794564536" w="123" h="36"/>
     </glyph>
     <glyph id="reactionVertex_111238_37" class="association" compartmentRef="compartmentVertex_7660_1">
       <label text="Formation of ADAR2  homodimer"/>
-      <bbox x="637.1401143697135" y="386.1386659729314" w="14" h="14"/>
-      <port id="reactionVertex_111238.1" x="644.1401143697135" y="386.1386659729314"/>
-      <port id="reactionVertex_111238.2" x="644.1401143697135" y="400.1386659729314"/>
+      <bbox x="867.9033128079508" y="266.4875492349963" w="14" h="14"/>
+      <port id="reactionVertex_111238.1" x="874.9033128079508" y="266.4875492349963"/>
+      <port id="reactionVertex_111238.2" x="874.9033128079508" y="280.4875492349963"/>
     </glyph>
     <glyph id="entityVertex_75087_24" class="complex" compartmentRef="compartmentVertex_7660_1">
       <extension>
@@ -85,21 +85,21 @@
         </extraInfo>
       </extension>
       <label text="Editosome (ADAR1) complex"/>
-      <bbox x="961.764383072393" y="340.67916092882433" w="125" h="36"/>
+      <bbox x="846.2315159474081" y="330.59281320338584" w="125" h="36"/>
     </glyph>
     <glyph id="reactionVertex_77614_28" class="process" compartmentRef="compartmentVertex_7660_1">
       <label text="Deamination at C6 position of adenosine in Editosome (ADAR1)"/>
-      <bbox x="1054.4423579079282" y="441.9525253035626" w="20" h="20"/>
+      <bbox x="937.2305482629033" y="259.4601821479281" w="20" h="20"/>
       <port id="reactionVertex_77614.1"/>
       <port id="reactionVertex_77614.2"/>
     </glyph>
     <glyph id="entityVertex_76230_18" class="simple chemical" compartmentRef="compartmentVertex_7660_1">
       <label text="NH3"/>
-      <bbox x="1146.1712030199906" y="465.55432745567333" w="42" h="30"/>
+      <bbox x="1006.5299730482634" y="247.80424387632524" w="42" h="30"/>
     </glyph>
     <glyph id="entityVertex_53939_36" class="macromolecule" compartmentRef="compartmentVertex_7660_1">
       <label text="ADAR"/>
-      <bbox x="937.9218011206449" y="451.96304778661147" w="94" h="22"/>
+      <bbox x="1049.5264750245265" y="167.20679777383364" w="94" h="22"/>
     </glyph>
     <glyph id="entityVertex_77610_27" class="complex" compartmentRef="compartmentVertex_7660_1">
       <extension>
@@ -115,25 +115,25 @@
         </extraInfo>
       </extension>
       <label text="Editosome (ADAR2) complex"/>
-      <bbox x="643.4253012448276" y="342.80688904501596" w="125" h="36"/>
+      <bbox x="666.0901090236101" y="407.8552301420926" w="125" h="36"/>
     </glyph>
     <glyph id="reactionVertex_111237_35" class="association" compartmentRef="compartmentVertex_7660_1">
       <label text="Formation of ADAR1 homodimer"/>
-      <bbox x="1052.9542662824194" y="399.52096000636266" w="14" h="14"/>
-      <port id="reactionVertex_111237.1" x="1059.9542662824194" y="413.52096000636266"/>
-      <port id="reactionVertex_111237.2" x="1059.9542662824194" y="399.52096000636266"/>
+      <bbox x="1081.360762134835" y="242.11629063639148" w="20" h="20"/>
+      <port id="reactionVertex_111237.1"/>
+      <port id="reactionVertex_111237.2" x="1091.360762134835" y="242.11629063639148"/>
     </glyph>
     <glyph id="entityVertex_113518_29" class="simple chemical" compartmentRef="compartmentVertex_7660_1">
       <label text="H2O"/>
-      <bbox x="1086.5504335817645" y="502.6756597836131" w="42" h="30"/>
+      <bbox x="967.6086071694856" y="192.71398223906246" w="42" h="30"/>
     </glyph>
     <glyph id="entityVertex_75086_21" class="unspecified entity" compartmentRef="compartmentVertex_7660_1">
       <label text="dsRNA duplex"/>
-      <bbox x="801.1188364680321" y="285.3402364781484" w="91" h="22"/>
+      <bbox x="866.21251493602" y="412.8775403304047" w="91" h="22"/>
     </glyph>
     <glyph id="reactionVertex_77615_31" class="process" compartmentRef="compartmentVertex_7660_1">
       <label text="Deamination at C6 position of adenosine in Editosome (ADAR2)"/>
-      <bbox x="628.9546188350416" y="435.4959130997924" w="20" h="20"/>
+      <bbox x="677.1064906641037" y="330.1966104682273" w="20" h="20"/>
       <port id="reactionVertex_77615.1"/>
       <port id="reactionVertex_77615.2"/>
     </glyph>
@@ -151,17 +151,17 @@
         </extraInfo>
       </extension>
       <label text="A to I edited RNA:Editosome (ADAR1) complex"/>
-      <bbox x="938.322266983531" y="522.6034158647483" w="125" h="50"/>
+      <bbox x="849.3466425964828" y="133.71932054354627" w="125" h="50"/>
     </glyph>
     <glyph id="reactionVertex_77613_25" class="association" compartmentRef="compartmentVertex_7660_1">
       <label text="Binding of ADAR2 homodimer to dsRNA duplex"/>
-      <bbox x="817.5577720960035" y="360.48634665379427" w="16.666600000000017" h="16.666600000000017"/>
-      <port id="reactionVertex_77613.1" x="817.5577720960035" y="368.8196466537943"/>
-      <port id="reactionVertex_77613.2" x="834.2243720960035" y="368.8196466537943"/>
+      <bbox x="814.2122435898519" y="377.30181252943925" w="16.666600000000017" h="16.666600000000017"/>
+      <port id="reactionVertex_77613.1" x="814.2122435898519" y="385.63511252943925"/>
+      <port id="reactionVertex_77613.2" x="830.878843589852" y="385.63511252943925"/>
     </glyph>
     <glyph id="entityVertex_113518_32" class="simple chemical" compartmentRef="compartmentVertex_7660_1">
       <label text="H2O"/>
-      <bbox x="544.9293091266468" y="396.4603082601689" w="42" h="30"/>
+      <bbox x="598.007692741091" y="325.9819516671008" w="42" h="30"/>
     </glyph>
     <glyph id="entityVertex_111236_23" class="complex" compartmentRef="compartmentVertex_7660_1">
       <extension>
@@ -177,7 +177,7 @@
         </extraInfo>
       </extension>
       <label text="ADAR1 homodimer"/>
-      <bbox x="888.3595961793955" y="406.4909361975592" w="119" h="22"/>
+      <bbox x="986.7892485992675" y="307.4050201484429" w="119" h="22"/>
     </glyph>
     <glyph id="entityVertex_77611_33" class="complex" compartmentRef="compartmentVertex_7660_1">
       <extension>
@@ -193,7 +193,7 @@
         </extraInfo>
       </extension>
       <label text="A to I edited RNA:Editosome (ADAR2) complex"/>
-      <bbox x="433.82879698000943" y="446.8955309035254" w="125" h="50"/>
+      <bbox x="478.47352497547354" y="265.4955627376528" w="125" h="50"/>
     </glyph>
     <glyph id="entityVertex_111235_26" class="complex" compartmentRef="compartmentVertex_7660_1">
       <extension>
@@ -209,13 +209,9 @@
         </extraInfo>
       </extension>
       <label text="ADAR2 homodimer"/>
-      <bbox x="697.2080099788268" y="411.0685677060743" w="119" h="22"/>
+      <bbox x="731.6049945931265" y="300.77356001266594" w="119" h="22"/>
     </glyph>
-    <arc id="arc_36_input_35" class="consumption" source="entityVertex_53939_36" target="reactionVertex_111237.1">
-      <glyph id="arc_36_input_35_card" class="stoichiometry">
-        <label text="2"/>
-        <bbox x="0" y="0" w="0" h="0"/>
-      </glyph>
+    <arc id="arc_29_input_28_clone22" class="consumption" source="entityVertex_113518_29" target="reactionVertex_77614.1">
       <start/>
       <end/>
     </arc>
@@ -227,7 +223,11 @@
       <start/>
       <end/>
     </arc>
-    <arc id="arc_34_output_31" class="production" source="reactionVertex_77615.2" target="entityVertex_76230_34">
+    <arc id="arc_38_input_37" class="consumption" source="entityVertex_62915_38" target="reactionVertex_111238.1">
+      <glyph id="arc_38_input_37_card" class="stoichiometry">
+        <label text="2"/>
+        <bbox x="0" y="0" w="0" h="0"/>
+      </glyph>
       <start/>
       <end/>
     </arc>
@@ -251,7 +251,7 @@
       <start/>
       <end/>
     </arc>
-    <arc id="nwtE_4f76ee08-6539-45fb-a646-9107b78fce27" class="production" source="reactionVertex_77613.2" target="reactionVertex_75090.1">
+    <arc id="arc_32_input_31" class="consumption" source="entityVertex_113518_32" target="reactionVertex_77615.1">
       <start/>
       <end/>
     </arc>
@@ -263,11 +263,7 @@
       <start/>
       <end/>
     </arc>
-    <arc id="arc_38_input_37" class="consumption" source="entityVertex_62915_38" target="reactionVertex_111238.1">
-      <glyph id="arc_38_input_37_card" class="stoichiometry">
-        <label text="2"/>
-        <bbox x="0" y="0" w="0" h="0"/>
-      </glyph>
+    <arc id="arc_24_output_22" class="production" source="reactionVertex_75090.2" target="entityVertex_75087_24">
       <start/>
       <end/>
     </arc>
@@ -283,7 +279,7 @@
       <start/>
       <end/>
     </arc>
-    <arc id="arc_27_input_31_clone3" class="consumption" source="entityVertex_77610_27" target="reactionVertex_77615.1">
+    <arc id="arc_24_input_28" class="consumption" source="entityVertex_75087_24" target="reactionVertex_77614.1">
       <start/>
       <end/>
     </arc>
@@ -303,19 +299,23 @@
       <start/>
       <end/>
     </arc>
-    <arc id="arc_20_input_19_clone29" class="consumption" source="entityVertex_72084_20" target="reactionVertex_77612.1">
+    <arc id="nwtE_f54e3e72-f096-48c0-8b04-faa85a480637" class="production" source="reactionVertex_77612.1" target="reactionVertex_75090.2">
       <start/>
       <end/>
     </arc>
-    <arc id="arc_32_input_31" class="consumption" source="entityVertex_113518_32" target="reactionVertex_77615.1">
+    <arc id="arc_34_output_31" class="production" source="reactionVertex_77615.2" target="entityVertex_76230_34">
       <start/>
       <end/>
     </arc>
-    <arc id="arc_24_output_22" class="production" source="reactionVertex_75090.2" target="entityVertex_75087_24">
+    <arc id="arc_32_input_31_clone15" class="consumption" source="entityVertex_113518_32" target="reactionVertex_77615.1">
       <start/>
       <end/>
     </arc>
-    <arc id="arc_24_input_28" class="consumption" source="entityVertex_75087_24" target="reactionVertex_77614.1">
+    <arc id="arc_36_input_35" class="consumption" source="entityVertex_53939_36" target="reactionVertex_111237.1">
+      <glyph id="arc_36_input_35_card" class="stoichiometry">
+        <label text="2"/>
+        <bbox x="0" y="0" w="0" h="0"/>
+      </glyph>
       <start/>
       <end/>
     </arc>
