@@ -19,14 +19,16 @@ While inside the *test-batch* folder:
 - Execute the script using the command:
   ```python3 sybvals_batch.py```
 - The downloaded SBGN files and the generated .txt and .png files will be saved in the *Batch* folder.
-### Reactome Pathways Processing
 
-The files used for testing Reactome Pathways which are valid in terms of SBGN rules can be in *samples* folder.
+### Automated Validation and Resolution
 
-They are tested by introducing errors by randomly violating SBGN rules. Then, they are sent to SyBValS for resolving errors to assess accuracy and efficiency of SyBValS.
-It generates two output files for each pathway:
+A number of Reactome Pathways (that can be found in the *test-resolve/samples* folder) were used for evaluating automated validation and resolution capabilities of SyBVaLS.
+
+First, some errors were randomly introduced to deliberately violate the SBGN rules. Then, each such map was processed by SyBValS to validate and automatically correct those errors. We measured what percentage of the errors were identified, as well as what percentage was correctly fixed by the default fix choice.
+
+The test generates two output files for each pathway:
 - a text file containing error information, and
-- a SBGN file containing information of final map after resolving errors.
+- an SBGN file containing information about the final map after automatic error resolution
 
 #### How to run
 While inside the test folder:
@@ -35,3 +37,4 @@ While inside the test folder:
 - Execute the script using the command:
   ```node validateAndResolveMaps.js```
 - The produced SBGN files and the generated *.txt* files should be saved in a *results* folder.
+
