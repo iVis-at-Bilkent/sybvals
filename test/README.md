@@ -1,8 +1,8 @@
-### Batch Processing
+### Batch Validation
 
-The files used in batch processing test can be found in *test-batch* folder.
+The files used in the batch processing test can be found in the *test-batch* folder.
 
-The *pc-hgnc.gmt* file includes information of pathways in Pathway Commons v14, available from https://download.baderlab.org/PathwayCommons/PC2/v14/.
+The *pc-hgnc.gmt* file includes information on pathways in Pathway Commons v14, available from https://download.baderlab.org/PathwayCommons/PC2/v14/.
 
 The *config.json* file includes image options used by SyBValS.
 
@@ -33,7 +33,5 @@ While inside the test folder:
 
 - Run the service locally at http://localhost:3400.
 - Execute the script using the command:
-  ```node batchReactomeMaps.js```
-- The produced SBGN files and the generated .txt files will be saved in the *results* folder.
-
-I
+  ```node validateAndResolveMaps.js```
+- The produced SBGN files and the generated *.txt* files should be saved in a *results* folder.
