@@ -58,7 +58,7 @@ function getLabel(node) {
 }
 
 function postProcessForLayouts(cy) {
-  let processNodes = cy.nodes('[class = "process",class = "uncertain process"]', '[class = "uncertain process"]');
+  let processNodes = cy.nodes().filter( node => { return elementUtilities.isPNClass( node)});
   for (let i = 0; i < processNodes.length; i++) {
     let compartment;
     let connectedNodes = processNodes[i].connectedEdges().map(edge => (edge.source() == processNodes[i] ? edge.target() : edge.source()));

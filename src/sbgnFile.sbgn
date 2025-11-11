@@ -1,321 +1,194 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <sbgn xmlns="http://sbgn.org/libsbgn/0.2">
   <map language="process description">
-    <extension>
-      <renderInformation 
-        xmlns="http://www.sbml.org/sbml/level3/version1/render/version1" id="renderInformation" program-name="sbgnviz" program-version="6.1.0">
-        <listOfColorDefinitions/>
-        <listOfBackgroundImages/>
-        <listOfStyles/>
-      </renderInformation>
-    </extension>
-    <glyph id="compartmentVertex_70101_40" class="compartment">
-      <extension>
-        <extraInfo>
-          <w>690.0529500490529</w>
-          <h>452.5613589129074</h>
-          <minW>0</minW>
-          <minH>0</minH>
-          <WLBias>0</WLBias>
-          <WRBias>0</WRBias>
-          <HTBias>0</HTBias>
-          <HBBias>0</HBBias>
-        </extraInfo>
-      </extension>
-      <label text="cytosol"/>
-      <bbox x="455.97352497547354" y="111.21932054354625" w="710.0529500490529" h="472.5613589129074"/>
+    <glyph id="glyph8" class="source and sink">
+      <bbox x="291.7804482416809" y="514.7483677938736" w="22" h="22"/>
     </glyph>
-    <glyph id="compartmentVertex_7660_1" class="compartment" compartmentRef="compartmentVertex_70101_40">
-      <extension>
-        <extraInfo>
-          <w>667.0529500490529</w>
-          <h>429.5613589129074</h>
-          <minW>0</minW>
-          <minH>0</minH>
-          <WLBias>0</WLBias>
-          <WRBias>0</WRBias>
-          <HTBias>0</HTBias>
-          <HBBias>0</HBBias>
-        </extraInfo>
-      </extension>
-      <label text="nucleoplasm"/>
-      <bbox x="467.47352497547354" y="122.71932054354625" w="687.0529500490529" h="449.5613589129074"/>
+    <glyph id="glyph6" class="process">
+      <bbox x="348.9700388088881" y="454.140152791243" w="20" h="20"/>
+      <port id="glyph6.1" x="348.9700388088881" y="464.140152791243"/>
+      <port id="glyph6.2" x="368.9700388088881" y="464.140152791243"/>
     </glyph>
-    <glyph id="reactionVertex_77612_19" class="process" compartmentRef="compartmentVertex_7660_1">
-      <label text="Formation of dsRNA structure by looping"/>
-      <bbox x="984.7578016023408" y="451.55463146523334" w="20" h="20"/>
-      <port id="reactionVertex_77612.1"/>
-      <port id="reactionVertex_77612.2"/>
-    </glyph>
-    <glyph id="entityVertex_76230_34" class="simple chemical" compartmentRef="compartmentVertex_7660_1">
-      <label text="NH3"/>
-      <bbox x="595.4610594079691" y="388.0437770970448" w="42" h="30"/>
-    </glyph>
-    <glyph id="reactionVertex_75090_22" class="association" compartmentRef="compartmentVertex_7660_1">
-      <label text="Binding of ADAR1 homodimer to dsRNA duplex"/>
-      <bbox x="997.9597587549167" y="381.25791449747345" w="16.666600000000017" h="16.666600000000017"/>
-      <port id="reactionVertex_75090.1" x="997.9597587549167" y="389.59121449747346"/>
-      <port id="reactionVertex_75090.2" x="1014.6263587549167" y="389.59121449747346"/>
-    </glyph>
-    <glyph id="entityVertex_62915_38" class="macromolecule" compartmentRef="compartmentVertex_7660_1">
-      <label text="ADARB1"/>
-      <bbox x="780.139726159722" y="203.01408794612053" w="94" h="22"/>
-    </glyph>
-    <glyph id="entityVertex_72084_20" class="unspecified entity" compartmentRef="compartmentVertex_7660_1">
-      <label text="nascent pre-mRNA transcript"/>
-      <bbox x="935.0941411759075" y="525.2806794564536" w="123" h="36"/>
-    </glyph>
-    <glyph id="reactionVertex_111238_37" class="association" compartmentRef="compartmentVertex_7660_1">
-      <label text="Formation of ADAR2  homodimer"/>
-      <bbox x="867.9033128079508" y="266.4875492349963" w="14" h="14"/>
-      <port id="reactionVertex_111238.1" x="874.9033128079508" y="266.4875492349963"/>
-      <port id="reactionVertex_111238.2" x="874.9033128079508" y="280.4875492349963"/>
-    </glyph>
-    <glyph id="entityVertex_75087_24" class="complex" compartmentRef="compartmentVertex_7660_1">
-      <extension>
-        <extraInfo>
-          <w>125</w>
-          <h>36</h>
-          <minW>0</minW>
-          <minH>0</minH>
-          <WLBias>0</WLBias>
-          <WRBias>0</WRBias>
-          <HTBias>0</HTBias>
-          <HBBias>0</HBBias>
-        </extraInfo>
-      </extension>
-      <label text="Editosome (ADAR1) complex"/>
-      <bbox x="846.2315159474081" y="330.59281320338584" w="125" h="36"/>
-    </glyph>
-    <glyph id="reactionVertex_77614_28" class="process" compartmentRef="compartmentVertex_7660_1">
-      <label text="Deamination at C6 position of adenosine in Editosome (ADAR1)"/>
-      <bbox x="937.2305482629033" y="259.4601821479281" w="20" h="20"/>
-      <port id="reactionVertex_77614.1"/>
-      <port id="reactionVertex_77614.2"/>
-    </glyph>
-    <glyph id="entityVertex_76230_18" class="simple chemical" compartmentRef="compartmentVertex_7660_1">
-      <label text="NH3"/>
-      <bbox x="1006.5299730482634" y="247.80424387632524" w="42" h="30"/>
-    </glyph>
-    <glyph id="entityVertex_53939_36" class="macromolecule" compartmentRef="compartmentVertex_7660_1">
-      <label text="ADAR"/>
-      <bbox x="1049.5264750245265" y="167.20679777383364" w="94" h="22"/>
-    </glyph>
-    <glyph id="entityVertex_77610_27" class="complex" compartmentRef="compartmentVertex_7660_1">
-      <extension>
-        <extraInfo>
-          <w>125</w>
-          <h>36</h>
-          <minW>0</minW>
-          <minH>0</minH>
-          <WLBias>0</WLBias>
-          <WRBias>0</WRBias>
-          <HTBias>0</HTBias>
-          <HBBias>0</HBBias>
-        </extraInfo>
-      </extension>
-      <label text="Editosome (ADAR2) complex"/>
-      <bbox x="666.0901090236101" y="407.8552301420926" w="125" h="36"/>
-    </glyph>
-    <glyph id="reactionVertex_111237_35" class="association" compartmentRef="compartmentVertex_7660_1">
-      <label text="Formation of ADAR1 homodimer"/>
-      <bbox x="1081.360762134835" y="242.11629063639148" w="20" h="20"/>
-      <port id="reactionVertex_111237.1"/>
-      <port id="reactionVertex_111237.2" x="1091.360762134835" y="242.11629063639148"/>
-    </glyph>
-    <glyph id="entityVertex_113518_29" class="simple chemical" compartmentRef="compartmentVertex_7660_1">
-      <label text="H2O"/>
-      <bbox x="967.6086071694856" y="192.71398223906246" w="42" h="30"/>
-    </glyph>
-    <glyph id="entityVertex_75086_21" class="unspecified entity" compartmentRef="compartmentVertex_7660_1">
-      <label text="dsRNA duplex"/>
-      <bbox x="866.21251493602" y="412.8775403304047" w="91" h="22"/>
-    </glyph>
-    <glyph id="reactionVertex_77615_31" class="process" compartmentRef="compartmentVertex_7660_1">
-      <label text="Deamination at C6 position of adenosine in Editosome (ADAR2)"/>
-      <bbox x="677.1064906641037" y="330.1966104682273" w="20" h="20"/>
-      <port id="reactionVertex_77615.1"/>
-      <port id="reactionVertex_77615.2"/>
-    </glyph>
-    <glyph id="entityVertex_75089_30" class="complex" compartmentRef="compartmentVertex_7660_1">
-      <extension>
-        <extraInfo>
-          <w>125</w>
-          <h>50</h>
-          <minW>0</minW>
-          <minH>0</minH>
-          <WLBias>0</WLBias>
-          <WRBias>0</WRBias>
-          <HTBias>0</HTBias>
-          <HBBias>0</HBBias>
-        </extraInfo>
-      </extension>
-      <label text="A to I edited RNA:Editosome (ADAR1) complex"/>
-      <bbox x="849.3466425964828" y="133.71932054354627" w="125" h="50"/>
-    </glyph>
-    <glyph id="reactionVertex_77613_25" class="association" compartmentRef="compartmentVertex_7660_1">
-      <label text="Binding of ADAR2 homodimer to dsRNA duplex"/>
-      <bbox x="814.2122435898519" y="377.30181252943925" w="16.666600000000017" h="16.666600000000017"/>
-      <port id="reactionVertex_77613.1" x="814.2122435898519" y="385.63511252943925"/>
-      <port id="reactionVertex_77613.2" x="830.878843589852" y="385.63511252943925"/>
-    </glyph>
-    <glyph id="entityVertex_113518_32" class="simple chemical" compartmentRef="compartmentVertex_7660_1">
-      <label text="H2O"/>
-      <bbox x="598.007692741091" y="325.9819516671008" w="42" h="30"/>
-    </glyph>
-    <glyph id="entityVertex_111236_23" class="complex" compartmentRef="compartmentVertex_7660_1">
-      <extension>
-        <extraInfo>
-          <w>119</w>
-          <h>22</h>
-          <minW>0</minW>
-          <minH>0</minH>
-          <WLBias>0</WLBias>
-          <WRBias>0</WRBias>
-          <HTBias>0</HTBias>
-          <HBBias>0</HBBias>
-        </extraInfo>
-      </extension>
-      <label text="ADAR1 homodimer"/>
-      <bbox x="986.7892485992675" y="307.4050201484429" w="119" h="22"/>
-    </glyph>
-    <glyph id="entityVertex_77611_33" class="complex" compartmentRef="compartmentVertex_7660_1">
-      <extension>
-        <extraInfo>
-          <w>125</w>
-          <h>50</h>
-          <minW>0</minW>
-          <minH>0</minH>
-          <WLBias>0</WLBias>
-          <WRBias>0</WRBias>
-          <HTBias>0</HTBias>
-          <HBBias>0</HBBias>
-        </extraInfo>
-      </extension>
-      <label text="A to I edited RNA:Editosome (ADAR2) complex"/>
-      <bbox x="478.47352497547354" y="265.4955627376528" w="125" h="50"/>
-    </glyph>
-    <glyph id="entityVertex_111235_26" class="complex" compartmentRef="compartmentVertex_7660_1">
-      <extension>
-        <extraInfo>
-          <w>119</w>
-          <h>22</h>
-          <minW>0</minW>
-          <minH>0</minH>
-          <WLBias>0</WLBias>
-          <WRBias>0</WRBias>
-          <HTBias>0</HTBias>
-          <HBBias>0</HBBias>
-        </extraInfo>
-      </extension>
-      <label text="ADAR2 homodimer"/>
-      <bbox x="731.6049945931265" y="300.77356001266594" w="119" h="22"/>
-    </glyph>
-    <arc id="arc_29_input_28_clone22" class="consumption" source="entityVertex_113518_29" target="reactionVertex_77614.1">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_26_output_37" class="production" source="reactionVertex_111238.2" target="entityVertex_111235_26">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_26_catalyst_31" class="catalysis" source="entityVertex_111235_26" target="reactionVertex_77615_31">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_38_input_37" class="consumption" source="entityVertex_62915_38" target="reactionVertex_111238.1">
-      <glyph id="arc_38_input_37_card" class="stoichiometry">
-        <label text="2"/>
-        <bbox x="0" y="0" w="0" h="0"/>
+    <glyph id="glyph3" class="nucleic acid feature">
+      <label text="IRF1"/>
+      <bbox x="251.07695434323978" y="397.48607463716644" w="60" h="30"/>
+      <glyph id="glyph3_0" class="unit of information">
+        <label text="ct:mRNA"/>
+        <bbox x="456.7721612896463" y="511.0921588199943" w="40" h="12"/>
       </glyph>
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_23_input_22" class="consumption" source="entityVertex_111236_23" target="reactionVertex_75090.1">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_23_output_35" class="production" source="reactionVertex_111237.2" target="entityVertex_111236_23">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_30_output_28" class="production" source="reactionVertex_77614.2" target="entityVertex_75089_30">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_33_output_31" class="production" source="reactionVertex_77615.2" target="entityVertex_77611_33">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_21_output_19" class="production" source="reactionVertex_77612.2" target="entityVertex_75086_21">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_32_input_31" class="consumption" source="entityVertex_113518_32" target="reactionVertex_77615.1">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_18_output_28" class="production" source="reactionVertex_77614.2" target="entityVertex_76230_18">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_20_input_19" class="consumption" source="entityVertex_72084_20" target="reactionVertex_77612.1">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_24_output_22" class="production" source="reactionVertex_75090.2" target="entityVertex_75087_24">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_21_input_25" class="consumption" source="entityVertex_75086_21" target="reactionVertex_77613.1">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_21_input_22" class="consumption" source="entityVertex_75086_21" target="reactionVertex_75090.1">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_27_input_31" class="consumption" source="entityVertex_77610_27" target="reactionVertex_77615.1">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_24_input_28" class="consumption" source="entityVertex_75087_24" target="reactionVertex_77614.1">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_29_input_28" class="consumption" source="entityVertex_113518_29" target="reactionVertex_77614.1">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_27_output_25" class="production" source="reactionVertex_77613.2" target="entityVertex_77610_27">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_23_catalyst_28" class="catalysis" source="entityVertex_111236_23" target="reactionVertex_77614_28">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_26_input_25" class="consumption" source="entityVertex_111235_26" target="reactionVertex_77613.1">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="nwtE_f54e3e72-f096-48c0-8b04-faa85a480637" class="production" source="reactionVertex_77612.1" target="reactionVertex_75090.2">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_34_output_31" class="production" source="reactionVertex_77615.2" target="entityVertex_76230_34">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_32_input_31_clone15" class="consumption" source="entityVertex_113518_32" target="reactionVertex_77615.1">
-      <start/>
-      <end/>
-    </arc>
-    <arc id="arc_36_input_35" class="consumption" source="entityVertex_53939_36" target="reactionVertex_111237.1">
-      <glyph id="arc_36_input_35_card" class="stoichiometry">
-        <label text="2"/>
-        <bbox x="0" y="0" w="0" h="0"/>
+    </glyph>
+    <glyph id="glyph5" class="process">
+      <bbox x="226.27393976839681" y="472.5538177223549" w="20" h="20"/>
+      <port id="glyph5.1" x="226.27393976839681" y="482.5538177223549"/>
+      <port id="glyph5.2" x="246.27393976839681" y="482.5538177223549"/>
+    </glyph>
+    <glyph id="glyph15" class="macromolecule">
+      <label text="IRF1"/>
+      <bbox x="112.10252839577129" y="466.5462603582387" w="60" h="30"/>
+      <glyph id="glyph15_0" class="unit of information">
+        <label text="mt:prot"/>
+        <bbox x="385.0230554168312" y="601.1353360996525" w="31.1181640625" h="12"/>
       </glyph>
+    </glyph>
+    <glyph id="glyph14" class="nucleic acid feature">
+      <label text="IRF1"/>
+      <bbox x="423.4950608406804" y="455.986385231585" w="60" h="30"/>
+      <glyph id="glyph14_0" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="613.0132567789167" y="529.9161848986482" w="32.802734375" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="glyph13" class="complex">
+      <extension>
+        <extraInfo>
+          <w>115</w>
+          <h>93.5</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
+      <label text="STAT1α"/>
+      <bbox x="314.6608601666182" y="205.89293599975775" w="135" h="113.5"/>
+      <glyph id="glyph11" class="complex">
+        <extension>
+          <extraInfo>
+            <w>92</w>
+            <h>32</h>
+            <minW>0</minW>
+            <minH>0</minH>
+            <WLBias>0</WLBias>
+            <WRBias>0</WRBias>
+            <HTBias>0</HTBias>
+            <HBBias>0</HBBias>
+          </extraInfo>
+        </extension>
+        <label text="STAT1α"/>
+        <bbox x="326.1608601666182" y="217.39293599975775" w="112" h="52"/>
+        <glyph id="glyph10" class="macromolecule">
+          <label text="STAT1α"/>
+          <bbox x="337.1608601666182" y="228.39293599975775" w="90" h="30"/>
+          <glyph id="glyph10_2" class="unit of information">
+            <label text="mt:prot"/>
+            <bbox x="459.65438705729014" y="285.39986060031697" w="31.1181640625" h="12"/>
+          </glyph>
+          <glyph id="glyph10_0" class="state variable">
+            <state value="P" variable="Y701"/>
+            <bbox x="453.54240789062345" y="294.02486060031697" w="40.17578125" h="12"/>
+          </glyph>
+          <glyph id="glyph10_1" class="state variable">
+            <state value="P" variable="Y727"/>
+            <bbox x="492.05274317708177" y="294.02486060031697" w="40.17578125" h="12"/>
+          </glyph>
+        </glyph>
+      </glyph>
+      <glyph id="glyph12" class="nucleic acid feature">
+        <label text="IRF1-GAS"/>
+        <bbox x="327.1608601666182" y="278.39293599975775" w="60" h="30"/>
+        <glyph id="glyph12_0" class="unit of information">
+          <label text="ct:grr"/>
+          <bbox x="415.23505969861196" y="353.72029599111863" w="22.7783203125" h="12"/>
+        </glyph>
+      </glyph>
+    </glyph>
+    <glyph id="glyph0" class="complex">
+      <extension>
+        <extraInfo>
+          <w>92</w>
+          <h>32</h>
+          <minW>0</minW>
+          <minH>0</minH>
+          <WLBias>0</WLBias>
+          <WRBias>0</WRBias>
+          <HTBias>0</HTBias>
+          <HBBias>0</HBBias>
+        </extraInfo>
+      </extension>
+      <label text="STAT1α"/>
+      <bbox x="365.774446695905" y="22.353211478161256" w="112" h="52"/>
+      <glyph id="glyph1" class="macromolecule">
+        <label text="STAT1α"/>
+        <bbox x="376.774446695905" y="33.353211478161256" w="90" h="30"/>
+        <glyph id="glyph1_0" class="unit of information">
+          <label text="mt:prot"/>
+          <bbox x="419.8511295223462" y="39.02458977745752" w="31.1181640625" h="12"/>
+        </glyph>
+        <glyph id="glyph1_1" class="state variable">
+          <state value="P" variable="Y701"/>
+          <bbox x="413.7391503556795" y="47.64958977745752" w="40.17578125" h="12"/>
+        </glyph>
+        <glyph id="glyph1_2" class="state variable">
+          <state value="P" variable="Y727"/>
+          <bbox x="452.24948564213787" y="47.64958977745752" w="40.17578125" h="12"/>
+        </glyph>
+      </glyph>
+    </glyph>
+    <glyph id="glyph2" class="nucleic acid feature">
+      <label text="IRF1-GAS"/>
+      <bbox x="281.5135635532555" y="86.25397633709531" w="60" h="30"/>
+      <glyph id="glyph2_0" class="unit of information">
+        <label text="ct:grr"/>
+        <bbox x="404.70701928999176" y="97.31597963639157" w="22.7783203125" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="glyph9" class="association">
+      <bbox x="391.3344552007184" y="131.82977491784453" w="20" h="20"/>
+      <port id="glyph9.1" x="401.3344552007184" y="131.82977491784453"/>
+      <port id="glyph9.2" x="401.3344552007184" y="151.82977491784453"/>
+    </glyph>
+    <glyph id="nwtN_b4078d10-6b7d-456b-a754-5a3975cbe1ac" class="and">
+      <bbox x="374.8362567713178" y="372.9695173055512" w="30" h="29.999999999999996"/>
+      <port id="nwtN_b4078d10-6b7d-456b-a754-5a3975cbe1ac.1" x="389.8362567713178" y="402.9695173055512"/>
+      <port id="nwtN_b4078d10-6b7d-456b-a754-5a3975cbe1ac.2" x="389.8362567713178" y="372.9695173055512"/>
+    </glyph>
+    <arc id="_4766ca86-a8d5-4b08-adc5-f3cc051ad699" class="consumption" source="glyph0" target="glyph9.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="_5491eb3b-6a5f-4f9d-b67d-e922e04d3020" class="consumption" source="glyph2" target="glyph9.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="_0459b128-2bee-44af-8ba9-383b6910c1e1" class="necessary stimulation" source="glyph3" target="glyph5">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="_4ee2bde6-472d-4524-9553-049e291af07d" class="consumption" source="glyph8" target="glyph6.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="_0ad8dcf1-cac1-41b3-95a5-cbf68587f704" class="production" source="glyph6.2" target="glyph3">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_e03c5f9a-c251-43c8-a559-1b2a93a5ccff" class="necessary stimulation" source="nwtN_b4078d10-6b7d-456b-a754-5a3975cbe1ac.1" target="glyph6">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="b4225995-e295-4243-bf85-798329327c1b" class="production" source="glyph5.2" target="glyph15">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="_3efdeb75-2c5a-42cf-983a-e1965f773e4a" class="production" source="glyph9.2" target="glyph13">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_fcc58f77-4a9a-4e57-b0d4-b81437b1a7f2" class="production" source="glyph9.1" target="glyph13">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_e68abc8b-12b6-4f69-ae3d-395949f338df" class="logic arc" source="glyph13" target="nwtN_b4078d10-6b7d-456b-a754-5a3975cbe1ac.2">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_a15f62c3-ff35-465b-9e9c-6a81ae2a8cb4" class="consumption" source="glyph8" target="glyph5.1">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="nwtE_d8e46d18-1136-4c52-8ff6-2685ef599cf1" class="logic arc" source="glyph14" target="glyph6.1">
       <start/>
       <end/>
     </arc>
