@@ -190,7 +190,13 @@ let applyErrorFix = async function () {
 					$('.ui.checkbox').checkbox();
 					$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + "-1" + '"name="'+ 'fixFor' + error.errorNo + '" value="' + -1 + '"><label style = "font-size:1em !important;margin-top:0px">' + "None" +'</label></div></div>');
 					for( let i = 0; error.fixCandidate && i < error.fixCandidate.length; i++){
+						console.log(error.recommendedCandidate + " " + error.fixCandidate[i]);
+					if(error.recommendedCandidate !== error. fixCandidate[i].id )
 					$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + i + '"name="'+ 'fixFor' + error.errorNo + '" value="' + i+ '"><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
+				    else {
+						$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + i + '"name="'+ 'fixFor' + error.errorNo + '" value="' + i+ '"><label style = "font-size:1em !important;margin-top:0px">' + (error.fixCandidate[i].label + " (Gemini recommends)" ) +'</label></div></div>');
+
+					}
 					if( (error.selectedOption  ) === i){
 						$('.ui.radio.checkbox').on('click', event =>{
 				
@@ -321,6 +327,7 @@ let processValidation = async function () {
 	if (res.errors && res.errors.length > 0) {
 		$("#fixFormatErrors").prop('disabled', false);
 	}
+	console.log(" Recommendations : " + res.recommendations);
 	if (!res.errorMessage && (res.errors !== undefined || res.image !== undefined)) {
 		aspectRatio = res.aspectRatio;
 	    currentSbgn = res.sbgn;
@@ -384,8 +391,14 @@ let processValidation = async function () {
 
 				for( let i = 0; error.fixCandidate && i < error.fixCandidate.length; i++){
 				//$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" name="fixFor' + error.errorNo + '" value="' + error.fixCandidate[i].id+ '"><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
-				$( `#solutionField${error.errorNo}` ).append('<div class="active field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + i + '"name="'+ 'fixFor' + error.errorNo + '" value="' + i + '" clicked ><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
-					if( (error.selectedOption  ) === i){
+				//$( `#solutionField${error.errorNo}` ).append('<div class="active field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + i + '"name="'+ 'fixFor' + error.errorNo + '" value="' + i + '" clicked ><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
+				if(error.recommendedCandidate !== error. fixCandidate[i].id )
+					$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + i + '"name="'+ 'fixFor' + error.errorNo + '" value="' + i+ '"><label style = "font-size:1em !important;margin-top:0px">' + error.fixCandidate[i].label +'</label></div></div>');
+				    else {
+						$( `#solutionField${error.errorNo}` ).append('<div class="field" style = "margin: 0.01em 0;"><div onchange = "" class="ui radio checkbox"><input onclick = "" type="radio" id = "' + 'resAlt' + error.errorNo + '-' + i + '"name="'+ 'fixFor' + error.errorNo + '" value="' + i+ '"><label style = "font-size:1em !important;margin-top:0px">' + (error.fixCandidate[i].label + " (Gemini recommends)" ) +'</label></div></div>');
+
+					}
+				if( (error.selectedOption  ) === i){
 						$('#resAlt' + error.errorNo + '-' + i).click();
 
 					}

@@ -1,48 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <sbgn xmlns="http://sbgn.org/libsbgn/0.2">
   <map language="process description">
-    <glyph id="glyph8" class="source and sink">
-      <bbox x="291.7804482416809" y="514.7483677938736" w="22" h="22"/>
-    </glyph>
-    <glyph id="glyph6" class="process">
-      <bbox x="348.9700388088881" y="454.140152791243" w="20" h="20"/>
-      <port id="glyph6.1" x="348.9700388088881" y="464.140152791243"/>
-      <port id="glyph6.2" x="368.9700388088881" y="464.140152791243"/>
-    </glyph>
-    <glyph id="glyph3" class="nucleic acid feature">
-      <label text="IRF1"/>
-      <bbox x="251.07695434323978" y="397.48607463716644" w="60" h="30"/>
-      <glyph id="glyph3_0" class="unit of information">
-        <label text="ct:mRNA"/>
-        <bbox x="456.7721612896463" y="511.0921588199943" w="40" h="12"/>
-      </glyph>
-    </glyph>
-    <glyph id="glyph5" class="process">
-      <bbox x="226.27393976839681" y="472.5538177223549" w="20" h="20"/>
-      <port id="glyph5.1" x="226.27393976839681" y="482.5538177223549"/>
-      <port id="glyph5.2" x="246.27393976839681" y="482.5538177223549"/>
-    </glyph>
-    <glyph id="glyph15" class="macromolecule">
-      <label text="IRF1"/>
-      <bbox x="112.10252839577129" y="466.5462603582387" w="60" h="30"/>
-      <glyph id="glyph15_0" class="unit of information">
-        <label text="mt:prot"/>
-        <bbox x="385.0230554168312" y="601.1353360996525" w="31.1181640625" h="12"/>
-      </glyph>
-    </glyph>
-    <glyph id="glyph14" class="nucleic acid feature">
-      <label text="IRF1"/>
-      <bbox x="423.4950608406804" y="455.986385231585" w="60" h="30"/>
-      <glyph id="glyph14_0" class="unit of information">
-        <label text="ct:gene"/>
-        <bbox x="613.0132567789167" y="529.9161848986482" w="32.802734375" h="12"/>
-      </glyph>
-    </glyph>
-    <glyph id="glyph13" class="complex">
+    <glyph id="Membrane36.6" class="compartment">
       <extension>
         <extraInfo>
-          <w>115</w>
-          <h>93.5</h>
+          <w>782.6998352952645</w>
+          <h>837.8564195210417</h>
           <minW>0</minW>
           <minH>0</minH>
           <WLBias>0</WLBias>
@@ -51,144 +14,230 @@
           <HBBias>0</HBBias>
         </extraInfo>
       </extension>
-      <label text="STAT1α"/>
-      <bbox x="314.6608601666182" y="205.89293599975775" w="135" h="113.5"/>
-      <glyph id="glyph11" class="complex">
-        <extension>
-          <extraInfo>
-            <w>92</w>
-            <h>32</h>
-            <minW>0</minW>
-            <minH>0</minH>
-            <WLBias>0</WLBias>
-            <WRBias>0</WRBias>
-            <HTBias>0</HTBias>
-            <HBBias>0</HBBias>
-          </extraInfo>
-        </extension>
-        <label text="STAT1α"/>
-        <bbox x="326.1608601666182" y="217.39293599975775" w="112" h="52"/>
-        <glyph id="glyph10" class="macromolecule">
-          <label text="STAT1α"/>
-          <bbox x="337.1608601666182" y="228.39293599975775" w="90" h="30"/>
-          <glyph id="glyph10_2" class="unit of information">
-            <label text="mt:prot"/>
-            <bbox x="459.65438705729014" y="285.39986060031697" w="31.1181640625" h="12"/>
-          </glyph>
-          <glyph id="glyph10_0" class="state variable">
-            <state value="P" variable="Y701"/>
-            <bbox x="453.54240789062345" y="294.02486060031697" w="40.17578125" h="12"/>
-          </glyph>
-          <glyph id="glyph10_1" class="state variable">
-            <state value="P" variable="Y727"/>
-            <bbox x="492.05274317708177" y="294.02486060031697" w="40.17578125" h="12"/>
-          </glyph>
-        </glyph>
-      </glyph>
-      <glyph id="glyph12" class="nucleic acid feature">
-        <label text="IRF1-GAS"/>
-        <bbox x="327.1608601666182" y="278.39293599975775" w="60" h="30"/>
-        <glyph id="glyph12_0" class="unit of information">
-          <label text="ct:grr"/>
-          <bbox x="415.23505969861196" y="353.72029599111863" w="22.7783203125" h="12"/>
-        </glyph>
-      </glyph>
+      <label text="Intracellular Space"/>
+      <bbox x="348.8161084768008" y="544.4748110829412" w="802.6998352952645" h="857.8564195210417"/>
     </glyph>
-    <glyph id="glyph0" class="complex">
-      <extension>
-        <extraInfo>
-          <w>92</w>
-          <h>32</h>
-          <minW>0</minW>
-          <minH>0</minH>
-          <WLBias>0</WLBias>
-          <WRBias>0</WRBias>
-          <HTBias>0</HTBias>
-          <HBBias>0</HBBias>
-        </extraInfo>
-      </extension>
-      <label text="STAT1α"/>
-      <bbox x="365.774446695905" y="22.353211478161256" w="112" h="52"/>
-      <glyph id="glyph1" class="macromolecule">
-        <label text="STAT1α"/>
-        <bbox x="376.774446695905" y="33.353211478161256" w="90" h="30"/>
-        <glyph id="glyph1_0" class="unit of information">
-          <label text="mt:prot"/>
-          <bbox x="419.8511295223462" y="39.02458977745752" w="31.1181640625" h="12"/>
-        </glyph>
-        <glyph id="glyph1_1" class="state variable">
-          <state value="P" variable="Y701"/>
-          <bbox x="413.7391503556795" y="47.64958977745752" w="40.17578125" h="12"/>
-        </glyph>
-        <glyph id="glyph1_2" class="state variable">
-          <state value="P" variable="Y727"/>
-          <bbox x="452.24948564213787" y="47.64958977745752" w="40.17578125" h="12"/>
-        </glyph>
-      </glyph>
+    <glyph id="Reaction674.244" class="process" compartmentRef="Membrane36.6">
+      <bbox x="735.5554877927478" y="1148.7357095303332" w="20" h="20"/>
+      <port id="Reaction674.244.1" x="745.5554877927478" y="1148.7357095303332"/>
+      <port id="Reaction674.244.2" x="745.5554877927478" y="1168.7357095303332"/>
     </glyph>
-    <glyph id="glyph2" class="nucleic acid feature">
-      <label text="IRF1-GAS"/>
-      <bbox x="281.5135635532555" y="86.25397633709531" w="60" h="30"/>
-      <glyph id="glyph2_0" class="unit of information">
-        <label text="ct:grr"/>
-        <bbox x="404.70701928999176" y="97.31597963639157" w="22.7783203125" h="12"/>
-      </glyph>
+    <glyph id="Protein488.255" class="macromolecule" compartmentRef="Membrane36.6">
+      <label text="Biotin--protein ligase"/>
+      <clone/>
+      <bbox x="764.567665640908" y="1002.5022615531327" w="150" h="70"/>
+      <port id="Protein488.255.0" x="839.567665640908" y="1002.5022615531327"/>
+      <port id="Protein488.255.1" x="914.567665640908" y="1037.5022615531327"/>
+      <port id="Protein488.255.2" x="839.567665640908" y="1072.5022615531327"/>
+      <port id="Protein488.255.3" x="764.567665640908" y="1037.5022615531327"/>
     </glyph>
-    <glyph id="glyph9" class="association">
-      <bbox x="391.3344552007184" y="131.82977491784453" w="20" h="20"/>
-      <port id="glyph9.1" x="401.3344552007184" y="131.82977491784453"/>
-      <port id="glyph9.2" x="401.3344552007184" y="151.82977491784453"/>
+    <glyph id="Compound414.817" class="simple chemical" compartmentRef="Membrane36.6">
+      <label text="ATP"/>
+      <bbox x="772.4203465196765" y="1085.2430648052327" w="50" h="50"/>
+      <port id="Compound414.817.0" x="797.4203465196765" y="1085.2430648052327"/>
+      <port id="Compound414.817.1" x="822.4203465196765" y="1110.2430648052327"/>
+      <port id="Compound414.817.2" x="797.4203465196765" y="1135.2430648052327"/>
+      <port id="Compound414.817.3" x="772.4203465196765" y="1110.2430648052327"/>
     </glyph>
-    <glyph id="nwtN_b4078d10-6b7d-456b-a754-5a3975cbe1ac" class="and">
-      <bbox x="374.8362567713178" y="372.9695173055512" w="30" h="29.999999999999996"/>
-      <port id="nwtN_b4078d10-6b7d-456b-a754-5a3975cbe1ac.1" x="389.8362567713178" y="402.9695173055512"/>
-      <port id="nwtN_b4078d10-6b7d-456b-a754-5a3975cbe1ac.2" x="389.8362567713178" y="372.9695173055512"/>
+    <glyph id="Compound20.818" class="simple chemical" compartmentRef="Membrane36.6">
+      <label text="Biotin"/>
+      <bbox x="836.2607779067648" y="1136.0565428300315" w="200" h="200"/>
+      <port id="Compound20.818.0" x="936.2607779067648" y="1136.0565428300315"/>
+      <port id="Compound20.818.1" x="1036.2607779067648" y="1236.0565428300315"/>
+      <port id="Compound20.818.2" x="936.2607779067648" y="1336.0565428300315"/>
+      <port id="Compound20.818.3" x="836.2607779067648" y="1236.0565428300315"/>
     </glyph>
-    <arc id="_4766ca86-a8d5-4b08-adc5-f3cc051ad699" class="consumption" source="glyph0" target="glyph9.1">
+    <glyph id="Compound2092.819" class="simple chemical" compartmentRef="Membrane36.6">
+      <label text="Biotinyl-5'-AMP"/>
+      <bbox x="359.8161084768009" y="1005.5154337142019" w="300" h="300"/>
+      <port id="Compound2092.819.0" x="509.8161084768009" y="1005.5154337142019"/>
+      <port id="Compound2092.819.1" x="659.8161084768009" y="1155.515433714202"/>
+      <port id="Compound2092.819.2" x="509.8161084768009" y="1305.515433714202"/>
+      <port id="Compound2092.819.3" x="359.8161084768009" y="1155.515433714202"/>
+    </glyph>
+    <glyph id="Compound170.820" class="simple chemical" compartmentRef="Membrane36.6">
+      <label text="PPi"/>
+      <bbox x="677.1134588643226" y="1026.7881500178864" w="64" h="64"/>
+      <port id="Compound170.820.0" x="709.1134588643226" y="1026.7881500178864"/>
+      <port id="Compound170.820.1" x="741.1134588643226" y="1058.7881500178864"/>
+      <port id="Compound170.820.2" x="709.1134588643226" y="1090.7881500178864"/>
+      <port id="Compound170.820.3" x="677.1134588643226" y="1058.7881500178864"/>
+    </glyph>
+    <glyph id="Reaction676.246" class="process" compartmentRef="Membrane36.6">
+      <bbox x="587.9009989082706" y="927.0114708749416" w="20" h="20"/>
+      <port id="Reaction676.246.1" x="597.9009989082706" y="927.0114708749416"/>
+      <port id="Reaction676.246.2" x="597.9009989082706" y="947.0114708749416"/>
+    </glyph>
+    <glyph id="Protein488.257" class="macromolecule" compartmentRef="Membrane36.6">
+      <label text="Biotin--protein ligase"/>
+      <clone/>
+      <bbox x="388.5223166417054" y="841.6632771976667" w="150" h="70"/>
+      <port id="Protein488.257.0" x="463.5223166417054" y="841.6632771976667"/>
+      <port id="Protein488.257.1" x="538.5223166417054" y="876.6632771976667"/>
+      <port id="Protein488.257.2" x="463.5223166417054" y="911.6632771976667"/>
+      <port id="Protein488.257.3" x="388.5223166417054" y="876.6632771976667"/>
+    </glyph>
+    <glyph id="GenericProteinComplex15.18" class="macromolecule" compartmentRef="Membrane36.6">
+      <label text="Biotin-Carboxyl Carrying Protein"/>
+      <bbox x="636.4202054929378" y="782.0260814455244" w="100" h="100"/>
+      <port id="GenericProteinComplex15.18.0" x="686.4202054929378" y="782.0260814455244"/>
+      <port id="GenericProteinComplex15.18.1" x="736.4202054929378" y="832.0260814455244"/>
+      <port id="GenericProteinComplex15.18.2" x="686.4202054929378" y="882.0260814455244"/>
+      <port id="GenericProteinComplex15.18.3" x="636.4202054929378" y="832.0260814455244"/>
+    </glyph>
+    <glyph id="Reaction677.247" class="process" compartmentRef="Membrane36.6">
+      <bbox x="782.1133616216282" y="894.441873796997" w="20" h="20"/>
+      <port id="Reaction677.247.1" x="802.1133616216282" y="904.441873796997"/>
+      <port id="Reaction677.247.2" x="782.1133616216282" y="904.441873796997"/>
+    </glyph>
+    <glyph id="Protein2180.258" class="macromolecule" compartmentRef="Membrane36.6">
+      <label text="Signal peptidase complex subunit 1"/>
+      <bbox x="855.695680505962" y="902.4023386743049" w="150" h="70"/>
+      <port id="Protein2180.258.0" x="930.695680505962" y="902.4023386743049"/>
+      <port id="Protein2180.258.1" x="1005.695680505962" y="937.4023386743049"/>
+      <port id="Protein2180.258.2" x="930.695680505962" y="972.4023386743049"/>
+      <port id="Protein2180.258.3" x="855.695680505962" y="937.4023386743049"/>
+    </glyph>
+    <glyph id="Compound1785.825" class="simple chemical" compartmentRef="Membrane36.6">
+      <label text="Biocytin"/>
+      <bbox x="840.5159437720655" y="555.4748110829412" w="300" h="300"/>
+      <port id="Compound1785.825.0" x="990.5159437720655" y="555.4748110829412"/>
+      <port id="Compound1785.825.1" x="1140.5159437720654" y="705.4748110829412"/>
+      <port id="Compound1785.825.2" x="990.5159437720655" y="855.4748110829412"/>
+      <port id="Compound1785.825.3" x="840.5159437720655" y="705.4748110829412"/>
+    </glyph>
+    <glyph id="Transport11.21" class="process" compartmentRef="Membrane36.6">
+      <bbox x="819.662112071614" y="1371.331230603983" w="20" h="20"/>
+      <port id="Transport11.21.1" x="839.662112071614" y="1381.331230603983"/>
+      <port id="Transport11.21.2" x="819.662112071614" y="1381.331230603983"/>
+    </glyph>
+    <glyph id="Reaction675.245" class="process">
+      <bbox x="1396.663262636816" y="1137.4595547366935" w="20" h="20"/>
+      <port id="Reaction675.245.1" x="1406.663262636816" y="1137.4595547366935"/>
+      <port id="Reaction675.245.2" x="1406.663262636816" y="1157.4595547366935"/>
+    </glyph>
+    <glyph id="Protein518.256" class="macromolecule">
+      <label text="Biotinidase"/>
+      <bbox x="1215.5489531974727" y="1167.3498338255308" w="150" h="70"/>
+      <port id="Protein518.256.0" x="1290.5489531974727" y="1167.3498338255308"/>
+      <port id="Protein518.256.1" x="1365.5489531974727" y="1202.3498338255308"/>
+      <port id="Protein518.256.2" x="1290.5489531974727" y="1237.3498338255308"/>
+      <port id="Protein518.256.3" x="1215.5489531974727" y="1202.3498338255308"/>
+    </glyph>
+    <glyph id="Compound1785.822" class="simple chemical">
+      <label text="Biocytin"/>
+      <bbox x="1360.6838915231992" y="763.5901274528503" w="300" h="300"/>
+      <port id="Compound1785.822.0" x="1510.6838915231992" y="763.5901274528503"/>
+      <port id="Compound1785.822.1" x="1660.6838915231992" y="913.5901274528503"/>
+      <port id="Compound1785.822.2" x="1510.6838915231992" y="1063.5901274528503"/>
+      <port id="Compound1785.822.3" x="1360.6838915231992" y="913.5901274528503"/>
+    </glyph>
+    <glyph id="Compound1420.823" class="simple chemical">
+      <label text="H2O"/>
+      <bbox x="1263.227952851771" y="1061.3206983044076" w="78" h="78"/>
+      <port id="Compound1420.823.0" x="1302.227952851771" y="1061.3206983044076"/>
+      <port id="Compound1420.823.1" x="1341.227952851771" y="1100.3206983044076"/>
+      <port id="Compound1420.823.2" x="1302.227952851771" y="1139.3206983044076"/>
+      <port id="Compound1420.823.3" x="1263.227952851771" y="1100.3206983044076"/>
+    </glyph>
+    <glyph id="Compound20.821" class="simple chemical">
+      <label text="Biotin"/>
+      <bbox x="1437.2209642128819" y="1190.590667211752" w="200" h="200"/>
+      <port id="Compound20.821.0" x="1537.2209642128819" y="1190.590667211752"/>
+      <port id="Compound20.821.1" x="1637.2209642128819" y="1290.590667211752"/>
+      <port id="Compound20.821.2" x="1537.2209642128819" y="1390.590667211752"/>
+      <port id="Compound20.821.3" x="1437.2209642128819" y="1290.590667211752"/>
+    </glyph>
+    <glyph id="Compound118.824" class="simple chemical">
+      <label text="L-Lysine"/>
+      <bbox x="1221.5160773640976" y="1254.525188917059" w="200" h="200"/>
+      <port id="Compound118.824.0" x="1321.5160773640976" y="1254.525188917059"/>
+      <port id="Compound118.824.1" x="1421.5160773640976" y="1354.525188917059"/>
+      <port id="Compound118.824.2" x="1321.5160773640976" y="1454.525188917059"/>
+      <port id="Compound118.824.3" x="1221.5160773640976" y="1354.525188917059"/>
+    </glyph>
+    <glyph id="Transport12.24" class="process">
+      <bbox x="1531.2343006807669" y="682.5997614141594" w="20" h="20"/>
+      <port id="Transport12.24.1" x="1551.2343006807669" y="692.5997614141594"/>
+      <port id="Transport12.24.2" x="1531.2343006807669" y="692.5997614141594"/>
+    </glyph>
+    <arc id="RightArc.Transport12.24.Compound1785.822" class="production" source="Transport12.24" target="Compound1785.822">
       <start/>
       <end/>
     </arc>
-    <arc id="_5491eb3b-6a5f-4f9d-b67d-e922e04d3020" class="consumption" source="glyph2" target="glyph9.1">
+    <arc id="ReactionEnzymeArc.Reaction674.244.Protein488.255" class="catalysis" source="Protein488.255" target="Reaction674.244">
       <start/>
       <end/>
     </arc>
-    <arc id="_0459b128-2bee-44af-8ba9-383b6910c1e1" class="necessary stimulation" source="glyph3" target="glyph5">
+    <arc id="LeftArc.Reaction674.244.Compound414.817" class="consumption" source="Compound414.817" target="Reaction674.244">
       <start/>
       <end/>
     </arc>
-    <arc id="_4ee2bde6-472d-4524-9553-049e291af07d" class="consumption" source="glyph8" target="glyph6.1">
+    <arc id="LeftArc.Reaction674.244.Compound20.818" class="consumption" source="Compound20.818" target="Reaction674.244">
       <start/>
       <end/>
     </arc>
-    <arc id="_0ad8dcf1-cac1-41b3-95a5-cbf68587f704" class="production" source="glyph6.2" target="glyph3">
+    <arc id="RightArc.Reaction674.244.Compound2092.819" class="production" source="Reaction674.244" target="Compound2092.819">
       <start/>
       <end/>
     </arc>
-    <arc id="nwtE_e03c5f9a-c251-43c8-a559-1b2a93a5ccff" class="necessary stimulation" source="nwtN_b4078d10-6b7d-456b-a754-5a3975cbe1ac.1" target="glyph6">
+    <arc id="RightArc.Reaction674.244.Compound170.820" class="production" source="Reaction674.244" target="Compound170.820">
       <start/>
       <end/>
     </arc>
-    <arc id="b4225995-e295-4243-bf85-798329327c1b" class="production" source="glyph5.2" target="glyph15">
+    <arc id="ReactionEnzymeArc.Reaction675.245.Protein518.256" class="catalysis" source="Protein518.256" target="Reaction675.245">
       <start/>
       <end/>
     </arc>
-    <arc id="_3efdeb75-2c5a-42cf-983a-e1965f773e4a" class="production" source="glyph9.2" target="glyph13">
+    <arc id="LeftArc.Reaction675.245.Compound1785.822" class="consumption" source="Compound1785.822" target="Reaction675.245">
       <start/>
       <end/>
     </arc>
-    <arc id="nwtE_fcc58f77-4a9a-4e57-b0d4-b81437b1a7f2" class="production" source="glyph9.1" target="glyph13">
+    <arc id="LeftArc.Reaction675.245.Compound1420.823" class="consumption" source="Compound1420.823" target="Reaction675.245">
       <start/>
       <end/>
     </arc>
-    <arc id="nwtE_e68abc8b-12b6-4f69-ae3d-395949f338df" class="logic arc" source="glyph13" target="nwtN_b4078d10-6b7d-456b-a754-5a3975cbe1ac.2">
+    <arc id="RightArc.Reaction675.245.Compound20.821" class="production" source="Reaction675.245" target="Compound20.821">
       <start/>
       <end/>
     </arc>
-    <arc id="nwtE_a15f62c3-ff35-465b-9e9c-6a81ae2a8cb4" class="consumption" source="glyph8" target="glyph5.1">
+    <arc id="RightArc.Reaction675.245.Compound118.824" class="production" source="Reaction675.245" target="Compound118.824">
       <start/>
       <end/>
     </arc>
-    <arc id="nwtE_d8e46d18-1136-4c52-8ff6-2685ef599cf1" class="logic arc" source="glyph14" target="glyph6.1">
+    <arc id="ReactionEnzymeArc.Reaction676.246.Protein488.257" class="catalysis" source="Protein488.257" target="Reaction676.246">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="LeftArc.Reaction676.246.Compound2092.819" class="consumption" source="Compound2092.819" target="Reaction676.246">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="RightArc.Reaction676.246.GenericProteinComplex15.18" class="production" source="Reaction676.246" target="GenericProteinComplex15.18">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="ReactionEnzymeArc.Reaction677.247.Protein2180.258" class="catalysis" source="Protein2180.258" target="Reaction677.247">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="RightArc.Reaction677.247.Compound1785.825" class="production" source="Reaction677.247" target="Compound1785.825">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="LeftArc.Reaction677.247.GenericProteinComplex15.18" class="consumption" source="GenericProteinComplex15.18" target="Reaction677.247">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="LeftArc.Transport11.21.Compound20.821" class="consumption" source="Compound20.821" target="Transport11.21">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="RightArc.Transport11.21.Compound20.818" class="production" source="Transport11.21" target="Compound20.818">
+      <start/>
+      <end/>
+    </arc>
+    <arc id="LeftArc.Transport12.24.Compound1785.825" class="consumption" source="Compound1785.825" target="Transport12.24">
       <start/>
       <end/>
     </arc>

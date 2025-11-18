@@ -7,11 +7,13 @@ const { adjustStylesheet } = require('./stylesheet');
 const { jsonToSbgnml } = require('./json-to-sbgnml-converter');
 const { sbgnmlToJson } = require('./sbgnml-to-json-converter');
 const { elementUtilities } = require('./element-utilities');
+const  {GoogleGenAI} = require("@google/genai");
 const cytosnap = require('cytosnap');
 cytosnap.use(['cytoscape-fcose'], { sbgnStylesheet: 'cytoscape-sbgn-stylesheet', layoutUtilities: 'cytoscape-layout-utilities', svg: 'cytoscape-svg' });
 let currentSbgn;    
 
 const port = process.env.PORT || 3400;
+const ai = new GoogleGenAI({apiKey : "AIzaSyDcC7R7DzrtIww7B1SHqgGbfrgl-7lEtK8"});
 
 // to serve the html
 const path = require("path");
@@ -55,6 +57,173 @@ function getLabel(node) {
     }
   }
   return node.data().label ? node.data().label : node.data().class;
+}
+
+function cleanInputIssues(issuesString) {
+  issuesString = JSON.stringify(issuesString, null, 2);
+
+  // 1. Remove 'Issues {' and trailing '},' to isolate individual objects
+  let cleanedString = issuesString.replace(/Issues\s*\{/g, '{') // Fix: Replace "Issues {" with "{"
+  .replace(/,\s*\}\s*$/g, '}')  // Fix: Remove trailing comma before final "}"
+  .replace(/\]\s*,\s*\]\s*$/g, ']]') // Fix: Handle trailing comma inside last fixCandidate array
+  .replace(/(\w+):\s*/g, '"$1": '); // Fix: Quote all unquoted keys (e.g., 'text' -> '"text"')
+
+// 2. Safely wrap the content and parse. If it's an array of objects, this should work:
+  if (!cleanedString.startsWith('[')) {
+     cleanedString = '[' + cleanedString.trim() + ']';
+  }
+  // Remove outer array wrappers if they exist (e.g., [[...]])
+  if (cleanedString.startsWith('[[')) {
+  cleanedString = cleanedString.substring(1, cleanedString.length - 1);
+  }  
+
+  // Note: The logic above is highly dependent on the exact format of the input.
+  // A robust parser (like a regex-based JS parser) would be better, but this 
+  // provides a functional example for your current input pattern.
+  console.log( cleanedString);
+  try {
+      return cleanedString;
+  } catch (e) {
+      console.error("Failed to parse cleaned JSON:", e);
+      console.error("Input string was:", cleanedString);
+      return [];
+  }
+}
+
+function cleanAndParseIssues(issuesString) {
+  let cleanedString = issuesString.trim();
+
+  // 1. Remove non-JSON markers
+  cleanedString = cleanedString.replace(/Issues\s*\{/g, '{') // Replace "Issues {" with "{"
+                               .replace(/,\s*\}\s*$/g, '}')  // Remove trailing comma before final "}"
+                               .replace(/]\s*,\s*$/g, ']'); // Remove trailing comma after last item in arrays
+
+  // 2. Wrap in an array if necessary (handles the full block of objects)
+  if (!cleanedString.startsWith('[')) {
+      cleanedString = '[' + cleanedString.replace(/\}\s*\{/g, '},{') + ']';
+  }
+
+  // 3. Use Function Constructor (the 'dirty' but effective fix)
+  // WARNING: This is often called "eval-like" and has security risks if the input is user-generated and not sanitized, but it reliably parses JS object literals.
+  try {
+      // Evaluate the string as a JavaScript Array of Objects
+      // We use the Function constructor to execute the JS code safely within a scope.
+      // We must quote the entire string to ensure it's valid JS syntax for the function.
+      const arrayResult = (new Function('return ' + cleanedString))();
+      
+      // Final sanity check on the output type
+      if (Array.isArray(arrayResult)) {
+          return arrayResult;
+      } else {
+          throw new Error("Result was not an array.");
+      }
+
+  } catch (e) {
+      console.error("❌ Fatal Parsing Error in cleanAndParseIssues:", e.message);
+      console.error("The issue is complex, likely involving unescaped quotes or colons inside string values (like 'text').");
+      return []; 
+  }
+}
+
+
+const getSBGNFixPrompt = (errorDataString) => {
+  return `
+    You are an **expert Systems Biology Graphical Notation (SBGN)** validator specializing in the Process Description (PD) language, operating as the logic engine for the **SyBValS** tool. Your task is to analyze a single SBGN validation error and recommend the most optimal fix from the available candidates, or specify a superior structural fix.
+
+    --- SBGN PD Core Connectivity Rules ---
+    1.  **Consumption Arc:** Must be connected from an **Entity Pool Node (EPN)** -> **Process Node (PN) Port**.
+    2.  **Production Arc:** Must be connected from a **Process Node (PN) Port** -> **Entity Pool Node (EPN)**.
+    3.  **Modulation Arcs (e.g., Catalysis):** Must be connected from an **EPN** -> the **PN** itself.
+
+    --- Fix Prioritization Logic ---
+    When an arc's class contradicts its structural connectivity:
+    * **Priority 1 (Highest Confidence):** **Reverse the arc direction** (swap source and target) while **preserving the original arc class**. This is the optimal fix for misdirected flux arcs.
+    * **Priority 2:** Select the best provided fix candidate.
+
+    --- Advanced Semantic and Tool Context ---
+    Prioritize fixes that enforce these semantic conventions and tool-specific goals:
+    * **SyBValS Error Documentation:** The model acknowledges that detailed information for error patterns is found in the README section of **https://github.com/iVis-at-Bilkent/sybvals**, and this knowledge guides the detailed error classification and resolution logic.
+    * **Database Common Patterns (Reactome, PathwayCommons, WikiPathways):**
+        * **Enzyme/Catalysis:** Modulators must always target the **Process Node (PN)** they regulate, not an Entity Pool Node (EPN).
+        * **Complex Components:** For a **Complex** glyph, all contained components (internal glyphs) must be **disconnected** from the rest of the map.
+        * **Species-Specific Entities:** Entities in different compartments must be treated as **distinct EPNs**.
+        * **Cloning:** Shared general metabolites should be represented by distinct EPN glyphs with **Clone Markers**.
+    * **SBGN-Bricks Pattern Enforcement:** Ensure map structures conform to the corresponding **SBGN-Bricks template** (www.sbgnbricks.org).
+    * **SyBValS Logic (pd10141 - Missing I/O):** If a Process Node lacks inputs or outputs, recommend adding the missing **Consumption** or **Production** arc to a relevant nearby EPN.
+
+    --- Input Error Data ---
+    The following array contains all the validation errors detected:
+    ${errorDataString}
+
+    --- Task ---
+    1. Select the fix that satisfies the highest priority rule.
+    2. Determine the 'confidence' (**Very High**, **High**, **Medium**).
+
+ Output ONLY a **JSON Array** of objects. Each object in the array must correspond to one input error and contain the recommended fix, justification, and confidence.
+
+**JSON Output Structure (Array of Objects):**
+[
+    {
+      "errorNo": 1, // Must match the input errorNo
+      "recommended_fix_action": "A clear description of the fix.",
+      "recommended_candidate_id": "ID of selected candidate or null.",
+      "justification": "Brief justification citing the SBGN rule.",
+      "confidence": "Very High"
+    },
+    // ... continues for all errors ...
+]
+    `;
+};
+
+async function processAllSBGNErrorsConcurrent(allErrors) {
+  console.log(`\nStarting concurrent analysis for ${allErrors.length} errors...`);
+
+  // Map each error to an asynchronous API call (Promise)
+  const promiseArray = allErrors.map(async (errorData) => {
+    console.log(errorData);
+      const fixResult = await recommendSBGNFix(errorData);
+      
+      // Combine the original error context with the fix result
+      return {
+          errorNo: errorData.errorNo,
+          label: errorData.label,
+          ...fixResult
+      };
+  });
+
+  // Wait for all promises to resolve concurrently
+  const results = await Promise.all(promiseArray);
+  
+  return results;
+}
+
+async function recommendSBGNFix(errorData) {
+  const errorDataString = JSON.stringify(errorData, null, 2);
+
+  const prompt = getSBGNFixPrompt(errorDataString);
+
+  
+
+  console.log("Sending context-aware request to Gemini API...");
+  console.log( prompt );
+  
+
+  try {
+      const response = await ai.models.generateContent({
+          model: "gemini-2.5-flash", // Good balance of speed and reasoning
+          contents: prompt,
+          config: {
+              responseMimeType: "application/json" // Guarantees JSON output
+          }
+      });
+
+      const jsonResponse = JSON.parse(response.text.trim());
+      return jsonResponse;
+
+  } catch (error) {
+      console.error("❌ Gemini API Error:", error.message);
+      return { error: "Failed to get fix recommendation." };
+  }
 }
 
 function postProcessForLayouts(cy) {
@@ -1185,9 +1354,16 @@ app.use(async (req, res, next) => {
       } catch (err) { };
       cy.nodes().forEach( node => {
         if( node.data().class === "submap" ){
-          errorMessage = "Invalid map or unsupported content!";
+         // errorMessage = "Invalid map or unsupported content!";
+          node.remove();
         }
       });
+      cy.nodes().forEach(node => {
+        if( node.data().class === "submap" ){
+            console.log( "submap found");
+          //  while(1);
+         }
+      })
        if(errorMessage) {
       return res.status(500).send({
         errorMessage: errorMessage
@@ -1323,6 +1499,12 @@ app.post('/validation', async (req, res, next) => {
     node.css("width", node.data().bbox.w || size);
     node.css("height", node.data().bbox.h || size);
   });
+  cy.nodes().forEach( node => {
+    if( node.data().class === "submap" ){
+     // errorMessage = "Invalid map or unsupported content!";
+      node.remove();
+    }
+  });
 
   errors.forEach((errorData, i) => {
     if (errorData.pattern == "pd10109" || errorData.pattern == 'pd10110') {
@@ -1355,7 +1537,7 @@ app.post('/validation', async (req, res, next) => {
   postProcessForLayouts(cy);
   var layout = cy.layout({ name: 'fcose' });
   let snap = cytosnap();
-  layout.pon('layoutstop').then(function (event) {
+  layout.pon('layoutstop').then(async function (event) {
     errors.forEach(error => {
       unsolvedErrorInformation[error.pattern + error.role] = true;
     })
@@ -1371,6 +1553,21 @@ app.post('/validation', async (req, res, next) => {
         error.selectedOption = "default";
       })
     }
+
+    const errorsData = cleanAndParseIssues(JSON.stringify(errors, null, 2));
+    console.log( errorsData );
+    console.log( errorsData.length );
+    /*const recommendations  = await recommendSBGNFix(errorsData);
+    for( let i = 0; i < recommendations.length; i++ ){
+      errors[i].recommendedCandidate = recommendations[i].recommended_candidate_id;
+    }*/
+    //ret['recommendations'] = recommendations;
+    ret['errors'] = errors;
+   // console.log( ret['recommendations']);
+  /*processAllSBGNErrorsConcurrent(errorsData).then(finalResult => {
+    console.log("\n--- COMPLETE BATCH RECOMMENDATION ---");
+    console.log(JSON.stringify(finalResult, null, 2));
+});*/
     try {
       snap.start().then(function () {
         return snap.shot({
@@ -1388,6 +1585,7 @@ app.post('/validation', async (req, res, next) => {
           ret["image"] = result.image;
           ret['errors'] = errors;
           ret['sbgn'] = currentSbgn;
+         // ret['recommendations'] = recommendations;
           fs.writeFileSync('./src/sbgnFile.sbgn', data);
           return res.status(200).send(ret);
         }).then(function () {
