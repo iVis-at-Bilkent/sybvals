@@ -10,7 +10,7 @@ Here is a video tutorial:
 
 Please cite the following when you use SyBValS:
 
-&nbsp;&nbsp;Y.Z. Ozgul, U. Dogrusoz and H. Balci, "SyBValS: a validation and error resolution service for biological pathways", under review, 2024.
+&nbsp;&nbsp;Y.Z. Ozgul, U. Dogrusoz and H. Balci, "[SyBValS: a validation and error resolution service for biological pathways](https://doi.org/10.1186/s12864-025-12454-4)", BMC Genomics, 27:106, 2026.
 
 Here is an example from our simple demo on a sample deployment. Below is a list of errors found by the service for the map provided by the user upon **Validate**:
 
