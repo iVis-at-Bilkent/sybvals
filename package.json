@@ -43,7 +43,7 @@
     "pretty-data": "^0.40.0",
     "saxon-js": "^2.5.0",
     "tippy.js": "^6.3.7",
-    "xlsx": "^0.18.5",
+    "xlsx": "npm:@stackline/xlsx@^1.0.6",
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
